@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TProjectValidationResultMap" type="com.dimeng.entity.table.project.TProjectValidation" >
+    <id column="validation_id" property="validationId" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="validation_type" property="validationType" jdbcType="CHAR" />
+    <result column="receive_real_name" property="receiveRealName" jdbcType="VARCHAR" />
+    <result column="receive_id_card" property="receiveIdCard" jdbcType="VARCHAR" />
+    <result column="receive_id_card2" property="receiveIdCard2" jdbcType="VARCHAR" />
+    <result column="receive_phone" property="receivePhone" jdbcType="VARCHAR" />
+    <result column="disease" property="disease" jdbcType="VARCHAR" />
+    <result column="hospital_region_id" property="hospitalRegionId" jdbcType="VARCHAR" />
+    <result column="hospital_name" property="hospitalName" jdbcType="VARCHAR" />
+    <result column="recipient_real_name" property="recipientRealName" jdbcType="VARCHAR" />
+    <result column="recipient" property="recipient" jdbcType="VARCHAR" />
+    <result column="recipient_id_card" property="recipientIdCard" jdbcType="VARCHAR" />
+    <result column="organization_name" property="organizationName" jdbcType="VARCHAR" />
+    <result column="organization_phone" property="organizationPhone" jdbcType="VARCHAR" />
+    <result column="date_create" property="dateCreate" jdbcType="TIMESTAMP" />
+    <result column="date_update" property="dateUpdate" jdbcType="TIMESTAMP" />
+    <result column="audit_status" property="auditStatus" jdbcType="CHAR" />
+     <result column="date_aduit" property="dateAduit" jdbcType="TIMESTAMP" />
+    <result column="aduit_user_id" property="aduitUserId" jdbcType="CHAR" />
+    <result column="receive_card_image_id" property="receiveCardImageId" jdbcType="VARCHAR" />
+    <result column="receive_card_image_url" property="receiveCardImageUrl" jdbcType="VARCHAR" />
+    <result column="recipient_card_image_id" property="recipientCardImageId" jdbcType="VARCHAR" />
+    <result column="recipient_card_image_url" property="recipientCardImageUrl" jdbcType="VARCHAR" />
+    <result column="wedding_picture_id" property="weddingPictureId" jdbcType="VARCHAR" />
+    <result column="wedding_picture_url" property="weddingPictureUrl" jdbcType="VARCHAR" />
+    <result column="organization_aptitude_id" property="organizationAptitudeId" jdbcType="VARCHAR" />
+    <result column="organization_aptitude_url" property="organizationAptitudeUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TProjectValidation_Column_List" >
+    validation_id, project_id, validation_type, receive_real_name, receive_id_card, receive_id_card2, 
+    receive_phone, disease, hospital_region_id, hospital_name, recipient_real_name, recipient, 
+    recipient_id_card, organization_name, organization_phone, date_create, date_update, 
+    audit_status, receive_card_image_id, receive_card_image_url, recipient_card_image_id, 
+    recipient_card_image_url, wedding_picture_id, wedding_picture_url, organization_aptitude_id, 
+    organization_aptitude_url,date_aduit,aduit_user_id
+  </sql>
+  <select id="findByIdTProjectValidation" resultMap="TProjectValidationResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TProjectValidation_Column_List" />
+    from t_project_validation
+    where validation_id = #{validationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTProjectValidation" parameterType="java.lang.String" >
+    delete from t_project_validation
+    where validation_id = #{validationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertTProjectValidation" parameterType="com.dimeng.entity.table.project.TProjectValidation" >
+    insert into t_project_validation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="validationId != null" >
+        validation_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="validationType != null" >
+        validation_type,
+      </if>
+      <if test="receiveRealName != null" >
+        receive_real_name,
+      </if>
+      <if test="receiveIdCard != null" >
+        receive_id_card,
+      </if>
+      <if test="receiveIdCard2 != null" >
+        receive_id_card2,
+      </if>
+      <if test="receivePhone != null" >
+        receive_phone,
+      </if>
+      <if test="disease != null" >
+        disease,
+      </if>
+      <if test="hospitalRegionId != null" >
+        hospital_region_id,
+      </if>
+      <if test="hospitalName != null" >
+        hospital_name,
+      </if>
+      <if test="recipientRealName != null" >
+        recipient_real_name,
+      </if>
+      <if test="recipient != null" >
+        recipient,
+      </if>
+      <if test="recipientIdCard != null" >
+        recipient_id_card,
+      </if>
+      <if test="organizationName != null" >
+        organization_name,
+      </if>
+      <if test="organizationPhone != null" >
+        organization_phone,
+      </if>
+      <if test="dateCreate != null" >
+        date_create,
+      </if>
+      <if test="dateUpdate != null" >
+        date_update,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="receiveCardImageId != null" >
+        receive_card_image_id,
+      </if>
+      <if test="receiveCardImageUrl != null" >
+        receive_card_image_url,
+      </if>
+      <if test="recipientCardImageId != null" >
+        recipient_card_image_id,
+      </if>
+      <if test="recipientCardImageUrl != null" >
+        recipient_card_image_url,
+      </if>
+      <if test="weddingPictureId != null" >
+        wedding_picture_id,
+      </if>
+      <if test="weddingPictureUrl != null" >
+        wedding_picture_url,
+      </if>
+      <if test="organizationAptitudeId != null" >
+        organization_aptitude_id,
+      </if>
+      <if test="organizationAptitudeUrl != null" >
+        organization_aptitude_url,
+      </if>
+      <if test="dateAduit != null" >
+        date_aduit,
+      </if>
+      <if test="aduitUserId != null" >
+        aduit_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="validationId != null" >
+        #{validationId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="validationType != null" >
+        #{validationType,jdbcType=CHAR},
+      </if>
+      <if test="receiveRealName != null" >
+        #{receiveRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveIdCard != null" >
+        #{receiveIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveIdCard2 != null" >
+        #{receiveIdCard2,jdbcType=VARCHAR},
+      </if>
+      <if test="receivePhone != null" >
+        #{receivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="disease != null" >
+        #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalRegionId != null" >
+        #{hospitalRegionId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null" >
+        #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientRealName != null" >
+        #{recipientRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientIdCard != null" >
+        #{recipientIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationName != null" >
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPhone != null" >
+        #{organizationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null" >
+        #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateUpdate != null" >
+        #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=CHAR},
+      </if>
+      <if test="receiveCardImageId != null" >
+        #{receiveCardImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCardImageUrl != null" >
+        #{receiveCardImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCardImageId != null" >
+        #{recipientCardImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCardImageUrl != null" >
+        #{recipientCardImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingPictureId != null" >
+        #{weddingPictureId,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingPictureUrl != null" >
+        #{weddingPictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAptitudeId != null" >
+        #{organizationAptitudeId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAptitudeUrl != null" >
+        #{organizationAptitudeUrl,jdbcType=VARCHAR},
+      </if>
+       <if test="dateAduit != null" >
+        #{dateAduit,jdbcType=VARCHAR},
+      </if>
+      <if test="aduitUserId != null" >
+        #{aduitUserId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTProjectValidation" parameterType="com.dimeng.entity.table.project.TProjectValidation" >
+    update t_project_validation
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="validationType != null" >
+        validation_type = #{validationType,jdbcType=CHAR},
+      </if>
+      <if test="receiveRealName != null" >
+        receive_real_name = #{receiveRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveIdCard != null" >
+        receive_id_card = #{receiveIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveIdCard2 != null" >
+        receive_id_card2 = #{receiveIdCard2,jdbcType=VARCHAR},
+      </if>
+      <if test="receivePhone != null" >
+        receive_phone = #{receivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="disease != null" >
+        disease = #{disease,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalRegionId != null" >
+        hospital_region_id = #{hospitalRegionId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null" >
+        hospital_name = #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientRealName != null" >
+        recipient_real_name = #{recipientRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="recipient != null" >
+        recipient = #{recipient,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientIdCard != null" >
+        recipient_id_card = #{recipientIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationName != null" >
+        organization_name = #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPhone != null" >
+        organization_phone = #{organizationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null" >
+        date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateUpdate != null" >
+        date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=CHAR},
+      </if>
+      <if test="receiveCardImageId != null" >
+        receive_card_image_id = #{receiveCardImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCardImageUrl != null" >
+        receive_card_image_url = #{receiveCardImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCardImageId != null" >
+        recipient_card_image_id = #{recipientCardImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="recipientCardImageUrl != null" >
+        recipient_card_image_url = #{recipientCardImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingPictureId != null" >
+        wedding_picture_id = #{weddingPictureId,jdbcType=VARCHAR},
+      </if>
+      <if test="weddingPictureUrl != null" >
+        wedding_picture_url = #{weddingPictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAptitudeId != null" >
+        organization_aptitude_id = #{organizationAptitudeId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationAptitudeUrl != null" >
+        organization_aptitude_url = #{organizationAptitudeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAduit != null" >
+        date_aduit= #{dateAduit,jdbcType=VARCHAR},
+      </if>
+      <if test="aduitUserId != null" >
+        aduit_user_id= #{aduitUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where validation_id = #{validationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

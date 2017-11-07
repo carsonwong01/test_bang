@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="UserThirdPartyResultMap" type="com.dimeng.entity.ext.user.FindUserThirdPartyResp" >
+    <result column="id" property="id" jdbcType="VARCHAR" /> 
+    <result column="open_id" property="opendId" jdbcType="VARCHAR" /> 
+    <result column="head_img" property="headUrl" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />  
+  </resultMap>
+  <select id="findThirdPartyList" resultMap="UserThirdPartyResultMap" parameterType="com.dimeng.model.user.FindThirdPartyReq" >
+    select id,
+    open_id,head_img, nick_name
+    from t_user_third_party
+    where user_id = #{userId,jdbcType=VARCHAR} and type = #{type,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据用户信息查询第三方信息-->
+ <delete id="deleteTuserThirdInfo"  parameterType="com.dimeng.model.user.FindThirdPartyReq">
+	  DELETE FROM t_user_third_party WHERE user_id = #{userId,jdbcType=VARCHAR}  and 
+      LOCATE(type, (select t1.thtype FROM (select case ty.type   when '5' then  '2,5' else ty.type end as thtype  from t_user_third_party ty where ty.id = #{id,jdbcType=VARCHAR} )as t1)
+      )&gt;0
+ </delete>
+   
+</mapper>

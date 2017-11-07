@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TSiteImageTemplateResultMap" type="com.dimeng.entity.table.site.TSiteImageTemplate" >
+    <id column="template_id" property="templateId" jdbcType="VARCHAR" />
+    <result column="image_type" property="imageType" jdbcType="CHAR" />
+    <result column="image_id" property="imageId" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="date_update" property="dateUpdate" jdbcType="TIMESTAMP" />
+    <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TSiteImageTemplate_Column_List" >
+    template_id, image_type, image_id, image_url, date_update, operator_id
+  </sql>
+  <select id="findByIdTSiteImageTemplate" resultMap="TSiteImageTemplateResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TSiteImageTemplate_Column_List" />
+    from t_site_image_template
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTSiteImageTemplate" parameterType="java.lang.String" >
+    delete from t_site_image_template
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertTSiteImageTemplate" parameterType="com.dimeng.entity.table.site.TSiteImageTemplate" >
+    insert into t_site_image_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="imageType != null" >
+        image_type,
+      </if>
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="dateUpdate != null" >
+        date_update,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageType != null" >
+        #{imageType,jdbcType=CHAR},
+      </if>
+      <if test="imageId != null" >
+        #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dateUpdate != null" >
+        #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTSiteImageTemplate" parameterType="com.dimeng.entity.table.site.TSiteImageTemplate" >
+    update t_site_image_template
+    <set >
+      <if test="imageType != null" >
+        image_type = #{imageType,jdbcType=CHAR},
+      </if>
+      <if test="imageId != null" >
+        image_id = #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="dateUpdate != null" >
+        date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where template_id = #{templateId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="platform-2.0.0">
+        <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="Easy-web-platform-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-web-platform/Easy-web-platform">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-home-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-home/Easy-service-home">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-user-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-user/Easy-service-user">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-stat-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-stat/Easy-service-stat">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-wechat-platform-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-wechat-platform/Easy-wechat-platform">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-bus-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-bus/Easy-service-bus">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-expand-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-expand/Easy-service-expand">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-finance-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-finance/Easy-service-finance">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-service-quartz-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-service-quartz/Easy-service-quartz">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Easy-common-2.0.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Easy-common/Easy-common">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="platform"/>
+        <property name="java-output-path" value="/平台接口子系统-${project.branch}/target/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao">
+
+	<resultMap id="findProjectValidateResultMap" type="com.dimeng.entity.ext.bus.FindProjectValidationResp">
+		<id column="validation_id" property="validationId" />
+		<result column="project_id" property="projectId" />
+		<result column="validation_type" property="validationType" />
+		<result column="receive_real_name" property="receiveRealName" />
+		<result column="receive_id_card2" property="receiveIdCard" />
+		<result column="receive_phone" property="receivePhone" />
+		<result column="receive_card_image_id" property="receiveCardImageId" />
+		<result column="receive_card_image_url" property="receiveCardImageUrl" />
+		<result column="recipient_real_name" property="recipientRealName" />
+		<result column="recipient_id_card" property="recipient" />
+		<result column="recipient_card_image_id" property="recipientCardImageId" />
+		<result column="recipient_card_image_url" property="recipientCardImageUrl" />
+		<result column="organization_name" property="organizationName" />
+		<result column="organization_phone" property="organizationPhone" />
+		<result column="organization_aptitude_id" property="organizationAptitudeId" />
+		<result column="organization_aptitude_url" property="organizationAptitudeUrl" />
+		<result column="disease" property="disease" />
+		<result column="hospital_region_id" property="hospitalRegionId" />
+		<result column="hospital_region_name" property="hospitalRegionName" />
+		<result column="hospital_name" property="hospitalName" />
+		<result column="wedding_picture_id" property="weddingPictureId" />
+		<result column="wedding_picture_url" property="weddingPictureUrl" />
+		<result column="date_create" property="dateCreate" />
+		<result column="audit_status" property="auditStatus" />
+		<result column="project_type" property="projectType" />
+		<result column="project_name" property="projectName" />
+	</resultMap>
+
+	<!-- 查看项目验证详情 -->
+	<select id="findProjectValidate" resultMap="findProjectValidateResultMap" parameterType="com.dimeng.model.bus.FindProjectValidationReq">
+		SELECT
+			tpv.validation_id, tpv.project_id, tpv.validation_type, tpv.receive_real_name, tpv.receive_id_card receive_id_card2,
+			tpv.receive_phone, tpv.disease, tpv.hospital_region_id, tpv.hospital_name, tpv.recipient_real_name,
+			tpv.recipient recipient_id_card, tpv.organization_name, tpv.organization_phone, tpv.audit_status,
+			tpv.receive_card_image_id, tpv.receive_card_image_url, tpv.recipient_card_image_id,
+			tpv.recipient_card_image_url, tpv.wedding_picture_id, tpv.wedding_picture_url,
+			tpv.organization_aptitude_id, tpv.organization_aptitude_url, tpv.audit_status,
+			DATE_FORMAT(tpv.date_create, '%Y-%m-%d %T') date_create, tpi.project_name, tpi.project_type,
+			CONCAT(tsri.province, tsri.city) hospital_region_name
+		FROM
+			t_project_validation tpv
+			LEFT JOIN t_project_info tpi ON tpv.project_id=tpi.project_id
+			LEFT JOIN t_system_region_info tsri ON tsri.region_id=tpv.hospital_region_id
+		WHERE 1=1
+		<if test="validationId != null and validationId != ''">
+			AND	tpv.validation_id = #{validationId,jdbcType=VARCHAR}
+		</if>
+		<if test="projectId != null and projectId != ''">
+			AND tpv.project_id = #{projectId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<!-- 项目验证多张图片附件list -->
+	<select id="findValidationImages" resultMap="findProjectAttachmentListResultMap" parameterType="com.dimeng.model.bus.ProjectAttachmentReq">
+		SELECT
+		<include refid="TProjectAttachment_Column_List" />
+		FROM t_project_attachment
+		WHERE type in ('2','3','4','5','8','9')
+		<if test="associatedId != null and associatedId != ''">
+			AND associated_id=#{associatedId,jdbcType=VARCHAR}
+		</if>
+		<if test="type != null and type != ''">
+			AND type=#{type,jdbcType=VARCHAR}
+		</if>
+		ORDER BY date_create ASC
+	</select>
+	
+	<resultMap id="findProAuthenStatuResultMap" type="com.dimeng.entity.ext.bus.FindProAuthenStatuResp">
+		<id column="validation_id" property="validationId" />
+		<result column="audit_status" property="status" />
+	</resultMap>
+	
+	<!-- 查看项目验证状态 -->
+	<select id="findProAuthenStatu" resultMap="findProAuthenStatuResultMap" parameterType="com.dimeng.model.common.IdReq">
+		SELECT audit_status,validation_id FROM t_project_validation WHERE project_id=#{id,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+	
+	<!-- 收货地址管理-查询 -->
+	<resultMap type="com.dimeng.entity.ext.user.FindAddressResp" id="FindAddressRespResultMap">
+		<result column="addr_id" property="addressId"/>
+		<result column="consignee_name" property="userName"/>
+		<result column="consignee_phone" property="phoneNumber"/>
+		<result column="area" property="area"/>
+		<result column="consignee_address" property="detaileAddress"/>
+		<result column="is_default" property="isDefault"/>
+	</resultMap>
+	
+	<select id="findAddress" resultMap="FindAddressRespResultMap"
+		parameterType="com.dimeng.model.user.NotPageUserIdReq">
+		select tusa.addr_id,tusa.consignee_name,tusa.consignee_phone,concat(tsri.province,tsri.city,tsri.county) area,tusa.consignee_address,tusa.is_default
+		from t_user_shipping_address tusa INNER JOIN t_system_region_info tsri ON tusa.consignee_city=tsri.region_id
+		where tusa.user_id = #{userId,jdbcType=VARCHAR} 
+		order by tusa.is_default asc
+	</select>
+	
+	<!-- 收货地址管理-查看地址详情 -->
+	<resultMap type="com.dimeng.entity.ext.user.FindAddressDetailResp" id="FindAddressDetailRespResultMap">
+		<result column="addr_id" property="addrId"/>
+		<result column="consignee_name" property="consigneeName"/>
+		<result column="consignee_phone" property="consigneePhone"/>
+		<result column="consignee_address" property="consigneeAddress"/>
+		<result column="is_default" property="isDefault"/>
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+		<result column="county" property="county"/>
+		<result column="consignee_city" property="consigneeCity"/>
+	</resultMap>
+	
+	<select id="findAddressDetail" resultMap="FindAddressDetailRespResultMap"
+		parameterType="com.dimeng.model.user.FindAddressDetailReq">
+		select tusa.addr_id,tusa.consignee_name,tusa.consignee_phone,tusa.consignee_city,tusa.consignee_address,tusa.is_default,tsri.province,tsri.city,tsri.county,tusa.consignee_city
+		from t_user_shipping_address tusa INNER JOIN t_system_region_info tsri ON tusa.consignee_city=tsri.region_id
+		where tusa.user_id = #{userId,jdbcType=VARCHAR} 
+		<choose>
+			<when test="isDefault != null and isDefault != ''"> and tusa.is_default=#{isDefault,jdbcType=VARCHAR}</when>
+			<otherwise> and tusa.addr_id = #{id,jdbcType=VARCHAR}</otherwise>
+		</choose>
+	</select>
+	
+	<update id="updateAddressDefaultStatus"
+		parameterType="com.dimeng.model.user.NotPageUserIdReq">
+		update t_user_shipping_address set is_default=2
+		where user_id = #{userId,jdbcType=VARCHAR} and  is_default=1
+	</update>
+	
+	<select id="countUserAddress" resultType="java.lang.Integer"
+		parameterType="com.dimeng.model.user.NotPageUserIdReq">
+		select count(*) from t_user_shipping_address 
+		where user_id = #{userId,jdbcType=VARCHAR} 
+	</select>
+	
+	<update id="updateOneAddressForDefault"
+		parameterType="com.dimeng.model.user.NotPageUserIdReq">
+		update t_user_shipping_address set is_default=1
+		where user_id = #{userId,jdbcType=VARCHAR} limit 1
+	</update>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="true" monitoring="autodetect"
+         dynamicConfig="true">
+   <diskStore path="java.io.tmpdir/tuan-oauth2"/>
+    <!-- 启用分布式 -->
+   <cacheManagerPeerProviderFactory
+	    class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+	    properties="peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,
+        multicastGroupPort=40001, timeToLive=0"
+    />
+                   
+   <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"  />
+    
+    <defaultCache maxElementsInMemory="10000" 
+              eternal="false"
+              timeToIdleSeconds="1800" 
+              timeToLiveSeconds="0" 
+              overflowToDisk="false"
+              diskPersistent="false" 
+              diskExpiryThreadIntervalSeconds="120" 
+              memoryStoreEvictionPolicy="LFU"  >
+              <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" 
+                  properties="replicateAsynchronously=false, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy=true, replicateRemovals=true " />
+ 	    	<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+        </defaultCache>
+       <cache name="console_shiro-activeSessionCache"  
+          maxElementsInMemory="10000"  
+          eternal="false"      
+          maxElementsOnDisk="100000"  
+          overflowToDisk="false"  
+          timeToIdleSeconds="1800"  
+          timeToLiveSeconds="0"  
+          memoryStoreEvictionPolicy="LFU"  >  
+          <!-- 启用分布式-->
+          
+        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" 
+                  properties="replicateAsynchronously=false, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy=true, replicateRemovals=true " />
+ 	    <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+ 	    </cache>
+ 	    
+    <cache name="login-Cache"  
+          maxElementsInMemory="10000"  
+          eternal="false"      
+          maxElementsOnDisk="100000"  
+          overflowToDisk="false"  
+          timeToIdleSeconds="604800"  
+          timeToLiveSeconds="604800"  
+          memoryStoreEvictionPolicy="LFU"  >
+          <!-- 启用分布式-->
+          
+        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" 
+                  properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy= true, replicateRemovals= true, asynchronousReplicationIntervalMillis=1 " />
+                  <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+     </cache> 
+     <cache name="system-Cache"  
+          maxElementsInMemory="10000"  
+          eternal="false"      
+          maxElementsOnDisk="100000"  
+          overflowToDisk="false"  
+          timeToIdleSeconds="0"  
+          timeToLiveSeconds="0"  
+          memoryStoreEvictionPolicy="LFU"  >
+          <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" 
+                  properties="replicateAsynchronously=false, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy=true, replicateRemovals=true, asynchronousReplicationIntervalMillis=1" />
+                  <bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"/>
+     </cache>           
+</ehcache>

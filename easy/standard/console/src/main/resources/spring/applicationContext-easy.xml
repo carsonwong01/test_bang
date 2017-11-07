@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+                        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd  
+                        http://www.springframework.org/schema/context   
+                        http://www.springframework.org/schema/context/spring-context-4.1.xsd  
+                        http://www.springframework.org/schema/aop   
+                        http://www.springframework.org/schema/aop/spring-aop-4.1.xsd  
+                        http://www.springframework.org/schema/tx   
+                        http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	<!-- 开启注解配置 -->
+	<context:annotation-config />
+	<!-- 扫描service层 -->
+	<context:component-scan base-package="com.dimeng">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	<!-- 开启事务注解驱动 -->
+	<tx:annotation-driven />
+	<bean id="propertyConfigurer" class="com.dimeng.framework.utils.FrameworkConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:conf/config.properties</value>
+				<value>classpath*:com/dimeng/enum/description_message.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 资源文件读取 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>ValidationMessages</value>
+				<value>i18n/error_easy</value>
+				<value>i18n/error_common</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="finalSystemCache" class="com.dimeng.utils.SystemCache">
+		<property name="systemCache" ref="systemCache" />
+	</bean>
+	<bean id="finalLoginCache" class="com.dimeng.utils.LoginCache">
+		<property name="loginCache" ref="loginCache" />
+	</bean>
+	<!-- <import resource="classpath:spring/applicationContext-cache.xml" />
+	<import resource="classpath*:spring/applicationContext-shiro.xml" /> -->
+</beans>

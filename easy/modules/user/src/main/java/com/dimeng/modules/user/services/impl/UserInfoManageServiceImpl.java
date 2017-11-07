@@ -1,0 +1,647 @@
+package com.dimeng.modules.user.services.impl;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.ehcache.Element;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dimeng.constants.CommonConstant;
+import com.dimeng.constants.IDiMengResultCode;
+import com.dimeng.entity.ext.user.FindAccInfoResp;
+import com.dimeng.entity.ext.user.FindAuthenticationResp;
+import com.dimeng.entity.ext.user.FindUserThirdPartyResp;
+import com.dimeng.entity.ext.user.FrontUserAccHomeResp;
+import com.dimeng.entity.ext.user.FrontUserInfo;
+import com.dimeng.entity.ext.user.ThirdPartyUserResp;
+import com.dimeng.entity.ext.user.UserInfoQscDetailResp;
+import com.dimeng.entity.ext.user.UserManageResp;
+import com.dimeng.entity.ext.user.UserOpenidResp;
+import com.dimeng.entity.table.user.TQUserBasic;
+import com.dimeng.entity.table.user.TUser;
+import com.dimeng.entity.table.user.TUserCapitalAccount;
+import com.dimeng.entity.table.user.TUserThirdParty;
+import com.dimeng.enums.IdCardStatusEnum;
+import com.dimeng.enums.ThirdTypeEnum;
+import com.dimeng.enums.variable.SystemVariable;
+import com.dimeng.framework.constants.DigitalAndStringConstant;
+import com.dimeng.framework.domain.BaseDataResp;
+import com.dimeng.framework.domain.BaseReq;
+import com.dimeng.framework.exception.ServicesException;
+import com.dimeng.framework.mybatis.utils.QueryEvent;
+import com.dimeng.framework.mybatis.utils.page.PageContext;
+import com.dimeng.framework.mybatis.utils.page.PageResult;
+import com.dimeng.framework.service.impl.BaseServiceImpl;
+import com.dimeng.framework.utils.DateUtil;
+import com.dimeng.framework.utils.StringUtil;
+import com.dimeng.model.user.AuthenticationReq;
+import com.dimeng.model.user.FindAccMoneyListReq;
+import com.dimeng.model.user.FindByUserIdReq;
+import com.dimeng.model.user.FindFreezeProReq;
+import com.dimeng.model.user.FindIdCardUniqueCpReq;
+import com.dimeng.model.user.FindThirdPartyReq;
+import com.dimeng.model.user.FindTradeListReq;
+import com.dimeng.model.user.FindUserByOpendIdReq;
+import com.dimeng.model.user.FindUserListReq;
+import com.dimeng.model.user.IsExsitIdCardReq;
+import com.dimeng.model.user.NotPageUserIdReq;
+import com.dimeng.modules.user.services.UserInfoManageService;
+import com.dimeng.service.INciicService;
+import com.dimeng.utils.Base64Decoder;
+import com.dimeng.utils.Base64Encoder;
+import com.dimeng.utils.ExportUtil;
+import com.dimeng.utils.SystemCache;
+import com.dimeng.utils.UUIDGenerate;
+
+/**
+ * 用户管理service
+ * @author  song
+ * @version  [版本号, 2016年9月28日]
+ */
+@Service
+public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserInfoManageService
+{
+    @Autowired
+    private INciicService iNciicService;
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findUserList(FindUserListReq req)
+    {
+        BaseDataResp resp = new BaseDataResp();
+        if (req != null && StringUtils.isNoneBlank(req.getIdCard()))
+        {
+            req.setIdCard(Base64Encoder.encode(req.getIdCard()));
+        }
+        Map<String, Object> data = new HashMap<String, Object>();
+        List<UserManageResp> userList = new ArrayList<>();
+        QueryEvent<FindUserListReq> event = new QueryEvent<FindUserListReq>();
+        //分页属性
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(req.getMaxResults());
+        //分页开关，一定要设置成true，才会分页
+        page.setPagination(!StringUtil.isEmpty(req.getExportPath()) ? false : true);
+        event.setObj(req);
+        event.setStatement("findUserInfoList");
+        List<UserManageResp> list = baseDao.findAllIsPageByCustom(event);
+        //解密身份证号
+        if (list != null && list.size() != 0)
+        {
+            for (UserManageResp user : list)
+            {
+                if (user.getIdCard() != null)
+                {
+                    user.setIdCard(Base64Decoder.decode(user.getIdCard()));
+                }
+                userList.add(user);
+            }
+        }
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
+        if (!StringUtil.isEmpty(req.getExportPath()))
+        {
+            Map<String, String> enumsValue = new HashMap<String, String>();
+            //导出的一些状态码
+            enumsValue.put("status", "com.dimeng.enums.UserStatusEnum");
+            enumsValue.put("source", "com.dimeng.enums.UserSourceEnum");
+            req.setEnumsValue(enumsValue);
+            ExportUtil.export(req, list);
+        }
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp updateUserInfo(FindUserListReq req)
+        throws ServicesException
+    {
+        BaseDataResp resp = new BaseDataResp();
+        TUser user = new TUser();
+        user.setUserId(req.getUserId());
+        user.setUserStatus(req.getStatus());
+        if (baseDao.update(user) != 1)
+        {
+            logs.info("数据更新出错");
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+        }
+        //更新在线用户的状态 -
+        updateFrontLoginCache(req);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void updateFrontLoginCache(FindUserListReq req)
+    {
+        List<Object> list = loginCache.getKeys();
+        if (list != null)
+        {
+            for (Object object : list)
+            {
+                Object user = loginCache.get(object).getObjectValue();
+                if (user instanceof FrontUserInfo)
+                {
+                    FrontUserInfo userInfo = (FrontUserInfo)user;
+                    if (userInfo.getUserId().equals(req.getUserId()))
+                    {
+                        if ("2".equals(req.getStatus()))
+                        {
+                            loginCache.remove(object);
+                        }
+                        else
+                        {
+                            userInfo.setUserStatus(req.getStatus());
+                            loginCache.put(new Element(object, userInfo));
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @Override
+    public BaseDataResp findUserInfo(NotPageUserIdReq req)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        BaseDataResp resp = new BaseDataResp();
+        QueryEvent event = new QueryEvent();
+        event.setStatement("findUserDetail");
+        event.setObj(req);
+        UserInfoQscDetailResp result = (UserInfoQscDetailResp)baseDao.findOneByCustom(event);
+        if (result == null)
+        {
+            resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
+            return resp;
+        }
+        if (StringUtils.isNoneBlank(result.getIdCard()))
+        {
+            result.setIdCard(Base64Decoder.decode(result.getIdCard()));
+        }
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, result);
+        resp.setData(map);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @Override
+    public BaseDataResp findUserHomeInfo(FindByUserIdReq req)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        BaseDataResp resp = new BaseDataResp();
+        QueryEvent event = new QueryEvent();
+        event.setStatement("findUserHomeInfo");
+        event.setObj(req);
+        FrontUserAccHomeResp result = (FrontUserAccHomeResp)baseDao.findOneByCustom(event);
+        
+        if (result == null)
+        {
+            resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
+            return resp;
+        }
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, result);
+        resp.setData(map);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @Override
+    public BaseDataResp findThirdPartyList(FindThirdPartyReq req)
+    {
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent event = new QueryEvent();
+        req.setType("5");
+        event.setObj(req);
+        event.setStatement("findThirdPartyList");
+        List<FindUserThirdPartyResp> wxlist = baseDao.findAllIsPageByCustom(event);
+        req.setType("3");
+        List<FindUserThirdPartyResp> wblist = baseDao.findAllIsPageByCustom(event);
+        req.setType("4");
+        List<FindUserThirdPartyResp> qqlist = baseDao.findAllIsPageByCustom(event);
+        data.put("qqList", qqlist);
+        data.put("wxList", wxlist);
+        data.put("wbList", wblist);
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findAccInfo(NotPageUserIdReq req)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        BaseDataResp resp = new BaseDataResp();
+        
+        QueryEvent<NotPageUserIdReq> event = new QueryEvent<NotPageUserIdReq>();
+        event.setStatement("findAccInfo");
+        event.setObj(req);
+        FindAccInfoResp result = (FindAccInfoResp)baseDao.findOneByCustom(event);
+        
+        if (result == null)
+        {
+            resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
+            return resp;
+        }
+        /*  String userName = result.getUserName();
+          result.setUserName(userName.substring(0, 3) + "****" + userName.substring(7));*/
+        // String mobile = result.getPhoneNumber();
+        // result.setPhoneNumber(mobile.substring(0, 3) + "****" + mobile.substring(7));
+        result.setTradePwdStatus(StringUtils.isNotBlank(result.getTradePwdStatus()) ? "1" : "2");
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, result);
+        resp.setData(map);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp updateAuthentication(AuthenticationReq req)
+        throws Throwable
+    {
+        BaseDataResp resp = new BaseDataResp();
+        //查询该用户是否已经存在或已经进行实名认证
+        TQUserBasic tqUserBasic = new TQUserBasic();
+        tqUserBasic.setUserId(req.getUserId());
+        tqUserBasic = (TQUserBasic)baseDao.findById(tqUserBasic);
+        if (tqUserBasic == null)
+        {
+            throw new ServicesException(IDiMengResultCode.UserManager.ERROR_USER_NOT_EXIST);
+        }
+        if (IdCardStatusEnum.YRZ.dataBaseVal.equals(tqUserBasic.getIdcardStatus()))
+        {
+            throw new ServicesException(IDiMengResultCode.UserManager.USER_HAS_ID_CARD);
+        }
+        //判断身份证是否存在
+        IsExsitIdCardReq exsitIdCardReq = new IsExsitIdCardReq();
+        exsitIdCardReq.setIdCardNmber(req.getIdNumber());
+        if (isExsitIdCard(exsitIdCardReq).getCode().equals(IDiMengResultCode.UserManager.ERROR_IDCARD_EXIST))
+        {
+            throw new ServicesException(IDiMengResultCode.UserManager.ERROR_IDCARD_EXIST);
+        }
+        //身份证解密
+        String idCard = Base64Decoder.decode(req.getIdNumber());
+        //更新认证信息
+        tqUserBasic = new TQUserBasic();
+        //是否开启调用第三方
+        if (Boolean.parseBoolean(SystemCache.getProperty(SystemVariable.IS_NCIIC)))
+        {
+            //调用第三方  根据返回结果码  更新用户基本信息表
+            FindIdCardUniqueCpReq personCertreq = new FindIdCardUniqueCpReq();
+            personCertreq.setIdCard(idCard);
+            personCertreq.setRealName(req.getRealName());
+            personCertreq.setUserType(DigitalAndStringConstant.StringConstant.ONE);
+            resp = iNciicService.nciic(personCertreq);
+            
+            if (IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+            {
+                tqUserBasic.setIdcardStatus(IdCardStatusEnum.YRZ.dataBaseVal);
+            }
+            else
+            {
+                //实名认证不通过
+                throw new ServicesException(IDiMengResultCode.UserManager.ERROR_INFO_NCIIC_FAILL);
+            }
+        }
+        else
+        {
+            tqUserBasic.setIdcardStatus(IdCardStatusEnum.YRZ.dataBaseVal);
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        }
+        
+        //获取性别
+        tqUserBasic.setSex(analyzeIdCard(idCard));
+        tqUserBasic.setUserId(req.getUserId());
+        tqUserBasic.setIdCard2(idCard.substring(0, 3) + "*** *** ***" + idCard.substring(idCard.length() - 2));
+        tqUserBasic.setIdCard(req.getIdNumber());
+        
+        tqUserBasic.setIdCardAuditTime(DateUtil.getNow());
+        tqUserBasic.setRealName(req.getRealName());
+        
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.update(tqUserBasic))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+        }
+        return resp;
+    }
+    
+    /**
+     * 根据身份证号解析性别
+     * <功能详细描述>
+     * @param idCard
+     * @return
+     * @throws ParseException
+     */
+    private String analyzeIdCard(String idCard)
+    {
+        int sex = Integer.valueOf(idCard.substring(16, 17));
+        if (sex % 2 == 0)
+        {
+            //女
+            sex = 2;
+        }
+        else
+        {
+            //男
+            sex = 1;
+        }
+        return String.valueOf(sex);
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findAuthentication(AuthenticationReq req)
+    {
+        BaseDataResp resp = new BaseDataResp();
+        
+        QueryEvent<AuthenticationReq> event = new QueryEvent<AuthenticationReq>();
+        event.setObj(req);
+        event.setStatement("findAuthentication");
+        FindAuthenticationResp authenticationResp = (FindAuthenticationResp)baseDao.findOneByCustom(event);
+        if (authenticationResp != null
+            && DigitalAndStringConstant.StringConstant.ONE.equals(authenticationResp.getAuditStatus()))
+        {
+            String realNameSub = authenticationResp.getRealName().substring(1);
+            String replaceChar = "";
+            for (int i = 0; i < realNameSub.length(); i++)
+            {
+                replaceChar += "*";
+            }
+            authenticationResp.setRealName(authenticationResp.getRealName().substring(0, 1) + replaceChar);
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, authenticationResp);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        resp.setData(map);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp isExsitIdCard(IsExsitIdCardReq req)
+    {
+        BaseDataResp resp = new BaseDataResp();
+        IsExsitIdCardReq authReq = new IsExsitIdCardReq();
+        authReq.setIdCardNmber(req.getIdCardNmber());
+        //判断身份证是否存在
+        QueryEvent<IsExsitIdCardReq> event = new QueryEvent<IsExsitIdCardReq>();
+        event.setObj(authReq);
+        event.setStatement("isExsitIdCard");
+        int count = (int)baseDao.count(event);
+        if (count >= 1)
+        {
+            resp.setCode(IDiMengResultCode.UserManager.ERROR_IDCARD_EXIST);
+        }
+        else
+        {
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        }
+        return resp;
+    }
+    
+    @Override
+    public BaseDataResp commonThirdParty(FindThirdPartyReq req)
+        throws ServicesException
+    { 
+        if ((int)baseDao.executeSQL("delete", "deleteTuserThirdInfo", req) < DigitalAndStringConstant.DigitalConstant.ZERO)
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_DETELE);
+        }
+        BaseDataResp resp = new BaseDataResp();
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    /** {@inheritDoc} */
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findAccCenter(BaseReq req)
+        throws Exception
+    {
+        QueryEvent<BaseReq> event = new QueryEvent<BaseReq>();
+        event.setObj(req);
+        event.setStatement("findUserAccountAmount");
+        TUserCapitalAccount capitalAccount = (TUserCapitalAccount)baseDao.findOneByCustom(event);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, capitalAccount);
+        BaseDataResp resp = new BaseDataResp();
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        resp.setData(map);
+        return resp;
+    }
+    
+    /** {@inheritDoc} */
+    
+    @Override
+    public BaseDataResp findFreezePro(FindFreezeProReq req)
+        throws Exception
+    {
+        QueryEvent<BaseReq> event = new QueryEvent<BaseReq>();
+        Map<String, Object> data = new HashMap<String, Object>();
+        event.setObj(req);
+        //分页属性
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(req.getMaxResults());
+        //分页开关，一定要设置成true，才会分页
+        page.setPagination(true);
+        event.setStatement("findFreezeProjectList");
+        BaseDataResp resp = new BaseDataResp();
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, baseDao.findAllIsPageByCustom(event)));
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    /** {@inheritDoc} */
+    
+    @Override
+    public BaseDataResp findAccMoneyList(FindAccMoneyListReq req)
+        throws Exception
+    {
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FindAccMoneyListReq> event = new QueryEvent<FindAccMoneyListReq>();
+        //分页属性
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(req.getMaxResults());
+        //分页开关，一定要设置成true，才会分页
+        page.setPagination(true);
+        event.setStatement("findAccMoneyList");
+        event.setObj(req);
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, baseDao.findAllIsPageByCustom(event)));
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    /** {@inheritDoc} */
+    
+    @Override
+    public BaseDataResp findTradeList(FindTradeListReq req)
+        throws Exception
+    {
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FindTradeListReq> event = new QueryEvent<FindTradeListReq>();
+        //分页属性
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(req.getMaxResults());
+        //分页开关，一定要设置成true，才会分页
+        page.setPagination(true);
+        event.setStatement("findTradeList");
+        event.setObj(req);
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, baseDao.findAllIsPageByCustom(event)));
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findUserByOpendId(FindUserByOpendIdReq req)
+        throws ServicesException
+    {
+        BaseDataResp resp = new BaseDataResp();
+        QueryEvent<FindUserByOpendIdReq> event = new QueryEvent<FindUserByOpendIdReq>();
+        if ((ThirdTypeEnum.WX.dataBaseVal.equals(req.getType()) || ThirdTypeEnum.GZHYH.dataBaseVal.equals(req.getType()))
+            && StringUtils.isNotBlank(req.getUnionId()))
+        {
+        	/**
+        	 * 1、公众号用户和微信扫码用户opendId是不一样的，同一个用户有两个opendId,可他们的unionId是一样（相当于微信用户的唯一标识）
+        	 * 2、先查询unionId能不能找到用户
+        	 * 2.1如果没有找到，再根据opendId查询用户-----如果找到了，就直接返回这个用户信息---如果没有找到就说明我们库确实没有该用户
+        	 * 2.2如果找到了，再根据用户的userId和授权登录类型去找用户的opendId
+        	 * 2.2.1如果没有找到，就说明unionId是存在的，可是我们库却没有该授权类型的第三方授权信息（也就说，可能用户网站扫码登录过，可是现在是从微信登录-此处就是为了实现只要
+        	 * 用户在一端登录过，在其他端也可直接登录，不需要进行第二次授权绑定）
+        	 * 2.2.2如果找到了，就说明用户存在，直接返回用户信息
+        	 */
+            req.setUnionId(Base64Encoder.encode(req.getUnionId()).replaceAll("\r|\n", ""));
+            event.setObj(req);
+            event.setStatement("findUserByUnionId");
+            List<TUser>  listUser = baseDao.findAllIsPageByCustom(event);
+            //TUser userResp = (TUser)baseDao.findOneByCustom(event);
+            if (listUser == null || listUser.size() == 0)
+            {
+                req.setOpendId(Base64Encoder.encode(req.getOpendId()).replaceAll("\r|\n", ""));
+                event.setObj(req);
+                event.setStatement("findUserByOpendId");
+                TUser findUserResp = (TUser)baseDao.findOneByCustom(event);
+                if (findUserResp == null)
+                {
+                    resp.setCode(IDiMengResultCode.UserManager.ERROR_USER_NOT_EXIST);
+                    return resp;
+                }
+                resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+                resp.setData(findUserResp);
+                return resp;
+            }
+            //根据unionId查询到了用户 记录，1条或者两条记录，但是用户的userId都是一样的
+            FindUserByOpendIdReq openReq = new FindUserByOpendIdReq();
+            openReq.setUserId(listUser.get(0).getUserId());
+            openReq.setType(req.getType());
+            event.setObj(openReq);
+            event.setStatement("findUserOpendId");
+            UserOpenidResp openidResp = (UserOpenidResp)baseDao.findOneByCustom(event);
+            //把查询到的用户id和手机号打回
+            resp.setData(listUser.get(0));
+            if (openidResp == null)
+            {
+                //该类型的用户不存在-可是unionId存在
+                resp.setCode(IDiMengResultCode.UserManager.USER_UNION_ID_STATUS);
+                return resp;
+            }
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+            return resp;
+        }
+        else
+        {
+            req.setOpendId(Base64Encoder.encode(req.getOpendId()).replaceAll("\r|\n", ""));
+            event.setObj(req);
+            event.setStatement("findUserByOpendId");
+            TUser userResp = (TUser)baseDao.findOneByCustom(event);
+            if (userResp == null)
+            {
+                resp.setCode(IDiMengResultCode.UserManager.ERROR_USER_NOT_EXIST);
+                return resp;
+            }
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+            resp.setData(userResp);
+            return resp;
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp insertUserThirdParty(ThirdPartyUserResp insertReq)
+        throws Exception
+    {
+        BaseDataResp resp = new BaseDataResp();
+        TUserThirdParty tirdparty = new TUserThirdParty();
+        tirdparty.setId(UUIDGenerate.generateShortUuid());
+        tirdparty.setUserId(insertReq.getUserId());
+        tirdparty.setAuthorizeTime(DateUtil.getNow());
+        if (StringUtil.notEmpty(insertReq.getTokenExpireIn()))
+        {
+            Calendar c = new GregorianCalendar();
+            Date date = DateUtil.getNow();
+            c.setTime(date);
+            c.add(Calendar.SECOND, Integer.parseInt(insertReq.getTokenExpireIn()));
+            date = c.getTime();
+            tirdparty.setFailTime(date);
+        }
+        tirdparty.setHeadImg(insertReq.getHeadImgUrl());
+        tirdparty.setNickName(insertReq.getNickName());
+        tirdparty.setOpenId(Base64Encoder.encode(insertReq.getOpenid()).replaceAll("\r|\n", ""));
+        tirdparty.setToken(Base64Encoder.encode(insertReq.getToken()).replaceAll("\r|\n", ""));
+        tirdparty.setType(insertReq.getAuthorizeType());
+        if ((ThirdTypeEnum.GZHYH.dataBaseVal.equals(insertReq.getAuthorizeType()) | ThirdTypeEnum.WX.dataBaseVal.equals(insertReq.getAuthorizeType()))
+            && StringUtils.isNotBlank(insertReq.getUnionId()))
+        {
+            tirdparty.setUnionId(Base64Encoder.encode(insertReq.getUnionId()).replaceAll("\r|\n", ""));
+        }
+        
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tirdparty))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+        }
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findUserOpendId(FindUserByOpendIdReq findUserByOpendIdReq)
+        throws Exception
+    {
+        BaseDataResp resp = new BaseDataResp();
+        QueryEvent<FindUserByOpendIdReq> event = new QueryEvent<FindUserByOpendIdReq>();
+        event.setObj(findUserByOpendIdReq);
+        event.setStatement("findUserOpendId");
+        UserOpenidResp openidResp = (UserOpenidResp)baseDao.findOneByCustom(event);
+        if (openidResp != null)
+        {
+            resp.setCode(IDiMengResultCode.UserManager.USER_IS_BOUND);
+            return resp;
+        }
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    
+}

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+	
+	<resultMap type="com.dimeng.entity.ext.finance.PlatformAdjustResp" id="PlatformAdjustRespResultMap">
+		<result column="id" property="id"/>
+		<result column="flow_no" property="flowNo"/>
+		<result column="income" property="income"/>
+		<result column="expenditure" property="expenditure"/>
+		<result column="user_name" property="operator"/>
+		<result column="date_create" property="operateTime"/>
+		<result column="account_balance" property="accountBalance"/>
+		<result column="income_total" property="incomeTotal"/>
+		<result column="expenditure_total" property="expenditureTotal"/>
+		<result column="income_amt" property="incomeAmt"/>
+		<result column="expenditure_amt" property="expenditureAmt"/>
+	</resultMap>
+	
+	<resultMap type="com.dimeng.entity.ext.finance.AdjustRemarkResp" id="AdjustRemarkRespResultMap">
+		<result column="remark" property="remark"/>
+	</resultMap>
+
+    <resultMap id="TUserCapitalAccountMap" type="com.dimeng.entity.table.user.TUserCapitalAccount" >
+        <id column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="available_amount" property="availableAmount" jdbcType="DECIMAL" />
+   </resultMap>
+   
+   
+   <resultMap type="com.dimeng.entity.ext.finance.FindCapitalDetailsListResp" id="FindCapitalDetailsListRespResultMap">
+		<result column="trade_type" property="type"/>
+		<result column="user_name" property="userName"/>
+		<result column="income" property="income"/>
+		<result column="expenditure" property="expenditure"/>
+		<result column="account_balance" property="accountBalance"/>
+		<result column="date_create" property="time"/>
+		<result column="remark" property="remark"/>
+		<result column="project_no" property="projectNo"/>
+		<result column="project_name" property="projectName"/>
+		<result column="income_total" property="incomeTotal"/>
+		<result column="expenditure_total" property="expenditureTotal"/>
+	</resultMap>
+  
+  <resultMap type="com.dimeng.entity.ext.finance.FindOrderCheckListResp" id="FindOrderCheckListRespResultMap">
+		<result column="order_id" property="id"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="user_name" property="userName"/>
+		<result column="support_amount" property="supportAmount"/>
+		<result column="pay_flow_no" property="payFlowNo"/>
+		<result column="date_pay" property="payTime"/>
+		<result column="date_pay_check" property="payCheckTime"/>
+		<result column="pay_check_status" property="payCheckStatus"/>
+		<result column="date_refund" property="refundTime"/>
+		<result column="date_refund_check" property="refundCheckTime"/>
+		<result column="refund_check_status" property="refundCheckStatus"/>
+	</resultMap>
+	
+	<resultMap type="com.dimeng.entity.ext.finance.FindRefundListResp" id="FindRefundListRespResultMap">
+	    <result column="order_id" property="id"/>
+		<result column="order_no" property="orderId"/>
+		<result column="user_name" property="supporter"/>
+		<result column="nick_name" property="nickName"/>
+		<result column="support_amount" property="supportAmt"/>
+		<result column="refund_type" property="refundType"/>
+		<result column="project_id" property="projectId"/>
+		<result column="project_no" property="projectNo"/>
+		<result column="pay_type" property="supportSource"/>
+		<result column="pay_flow_no" property="paySerialNo"/>
+		<result column="date_refund" property="launchTime"/>
+		<result column="date_refund_finish" property="resultTime"/>
+		<result column="status" property="status"/>
+		<result column="remark" property="failResult"/>
+		<result column="support_total" property="supportTotal"/>
+		<result column="project_type" property="projectType"/>
+	</resultMap>
+	<!-- 后台-财务管理-退款管理列表 -->
+	<select id="findRefundList" resultMap="FindRefundListRespResultMap" parameterType="com.dimeng.model.finance.FindRefundListReq">
+		SELECT 
+		     ts.order_no,tu.user_name,tub.nick_name,ts.support_amount,ts.pay_type,ts.refund_type,tpi.project_no,
+		     ts.project_id,ts.pay_flow_no,ts.`status`,ts.remark,ts.order_id,
+		     DATE_FORMAT(ts.date_refund,'%Y-%m-%d %T') date_refund,
+		     DATE_FORMAT(ts.date_refund_finish,'%Y-%m-%d %T') date_refund_finish,tpi.project_type
+		     FROM t_order_support ts
+        LEFT JOIN t_user  tu on ts.user_id = tu.user_id
+        LEFT JOIN t_q_user_basic tub on ts.user_id = tub.user_id
+        LEFT JOIN t_project_info tpi on ts.project_id = tpi.project_id
+        where ts.refund_type is not null
+        <if test="type != null and type != ''">
+		   <if test="type == 1">
+		        and (ts.`status` = 7 or  ts.`status`= '')
+			</if>
+			<if test="type == 2">
+				and ts.`status` = 7  and  ts.refund_check_status = 2
+			</if>
+			<if test="type == 3">
+		        and (ts.`status` = 8  or (ts.`status` = 7 and ts.refund_check_status = 2))
+			</if>
+		</if>
+		<if test="orderId != null and orderId != ''">
+			and ts.order_no LIKE CONCAT ('%',trim(#{orderId,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="supporter != null and supporter != ''">
+			and tu.user_name LIKE CONCAT ('%',trim(#{supporter,jdbcType=VARCHAR}),'%')
+		</if>
+        <if test="refundType != null and refundType != ''">
+			and ts.refund_type = #{refundType,jdbcType=VARCHAR}
+		</if>
+		<if test="projectNo != null and projectNo != ''">
+			and tpi.project_no LIKE CONCAT ('%',trim(#{projectNo,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="startRefundTime != null and startRefundTime != ''">
+			and DATE_FORMAT(ts.date_refund,'%Y%m%d') &gt;= DATE_FORMAT(#{startRefundTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="endRefundTime != null and endRefundTime != ''">
+			and DATE_FORMAT(ts.date_refund,'%Y%m%d') &lt;= DATE_FORMAT(#{endRefundTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if><if test="startResultTime != null and startResultTime != ''">
+			and DATE_FORMAT(ts.date_refund_finish,'%Y%m%d') &gt;= DATE_FORMAT(#{startResultTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="endResultTime != null and endResultTime != ''">
+			and DATE_FORMAT(ts.date_refund_finish,'%Y%m%d') &lt;= DATE_FORMAT(#{endResultTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		ORDER BY ts.date_create DESC
+	</select>
+	
+	<!--后台-财务管理-退款管理列表合计  -->
+	<select id="findRefundListTotal" resultMap="FindRefundListRespResultMap" parameterType="com.dimeng.model.finance.FindRefundListReq">
+		SELECT 
+		     IFNULL(SUM(ts.support_amount),0) support_total
+		     FROM t_order_support ts
+        LEFT JOIN t_user  tu on ts.user_id = tu.user_id
+        LEFT JOIN t_q_user_basic tub on ts.user_id = tub.user_id
+        LEFT JOIN t_project_info tpi on ts.project_id = tpi.project_id
+        where ts.refund_type is not null
+        <if test="type != null and type != ''">
+		    <if test="type == 1">
+		        and (ts.`status` = 7 or  ts.`status`= '')
+			</if>
+			<if test="type == 2">
+				and ts.`status` = 7  and  ts.refund_check_status = 2
+			</if>
+			<if test="type == 3">
+		        and (ts.`status` = 8  or (ts.`status` = 7 and ts.refund_check_status = 2))
+			</if>
+		</if>
+		<if test="orderId != null and orderId != ''">
+			and ts.order_no LIKE CONCAT ('%',trim(#{orderId,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="supporter != null and supporter != ''">
+			and tu.user_name LIKE CONCAT ('%',trim(#{supporter,jdbcType=VARCHAR}),'%')
+		</if>
+        <if test="refundType != null and refundType != ''">
+			and ts.refund_type = #{refundType,jdbcType=VARCHAR}
+		</if>
+		<if test="projectNo != null and projectNo != ''">
+			and tpi.project_no LIKE CONCAT ('%',trim(#{projectNo,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="startRefundTime != null and startRefundTime != ''">
+			and DATE_FORMAT(ts.date_refund,'%Y%m%d') &gt;= DATE_FORMAT(#{startRefundTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="endRefundTime != null and endRefundTime != ''">
+			and DATE_FORMAT(ts.date_refund,'%Y%m%d') &lt;= DATE_FORMAT(#{endRefundTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if><if test="startResultTime != null and startResultTime != ''">
+			and DATE_FORMAT(ts.date_refund_finish,'%Y%m%d') &gt;= DATE_FORMAT(#{startResultTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="endResultTime != null and endResultTime != ''">
+			and DATE_FORMAT(ts.date_refund_finish,'%Y%m%d') &lt;= DATE_FORMAT(#{endResultTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+	</select>
+    <!-- 后台-财务管理-财务管理-平台调账管理列表 -->
+	<select id="findPfTiaoZhangList" resultMap="PlatformAdjustRespResultMap" parameterType="com.dimeng.model.finance.FindPlatformAdjustReq">
+		SELECT
+		    td.id,
+			td.flow_no,
+			td.adjust_type,
+			DATE_FORMAT(
+				td.date_create,
+				'%Y-%m-%d %T'
+			) date_create,
+			tu.user_name,
+			case adjust_type when 1 then td.money else 0.00 end as income,
+            case adjust_type when 2 then td.money else 0.00 end as expenditure,
+			td.account_balance
+		FROM  t_system_adjust td
+		LEFT JOIN t_system_user tu ON td.creator_id = tu.user_id
+		<where>1=1
+		  <if test="tiaozhangType != null and tiaozhangType != ''">
+			and td.adjust_type = #{tiaozhangType,jdbcType=VARCHAR}
+		  </if>
+		  <if test="flowNo != null and flowNo != ''">
+			and td.flow_no LIKE CONCAT ('%',trim(#{flowNo,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="operator != null and operator != ''">
+			and tu.user_name LIKE CONCAT ('%',trim(#{operator,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="startTime != null and startTime != ''">
+			and DATE_FORMAT(td.date_create,'%Y%m%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR},'%Y%m%d')
+		  </if>
+		  <if test="endTime != null and endTime != ''">
+			and DATE_FORMAT(td.date_create,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		  </if>
+		  ORDER BY td.date_create DESC
+		</where>
+	</select>
+	
+	<!-- 后台-财务管理-财务管理-平台调账管理列表 合计-->
+	<select id="findPfTiaoZhangListTotal" resultMap="PlatformAdjustRespResultMap" parameterType="com.dimeng.model.finance.FindPlatformAdjustReq">
+		SELECT
+			IFNULL(SUM(t.income),0) income_total,
+			IFNULL(SUM(t.expenditure),0) expenditure_total
+		FROM  
+		(
+		  SELECT
+			case adjust_type when 1 then td.money else 0.00 end as income,
+			case adjust_type when 2 then td.money else 0.00 end as expenditure
+		  FROM  t_system_adjust td
+		  LEFT JOIN t_system_user tu ON td.creator_id = tu.user_id
+		  <where>1=1
+		    <if test="tiaozhangType != null and tiaozhangType != ''">
+			    and td.adjust_type = #{tiaozhangType,jdbcType=VARCHAR}
+		    </if>
+		    <if test="flowNo != null and flowNo != ''">
+			    and td.flow_no LIKE CONCAT ('%',trim(#{flowNo,jdbcType=VARCHAR}),'%')
+		    </if>
+		    <if test="operator != null and operator != ''">
+			    and tu.user_name LIKE CONCAT ('%',trim(#{operator,jdbcType=VARCHAR}),'%')
+		    </if>
+		    <if test="startTime != null and startTime != ''">
+			    and DATE_FORMAT(td.date_create,'%Y%m%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR},'%Y%m%d')
+		    </if>
+		    <if test="endTime != null and endTime != ''">
+			    and DATE_FORMAT(td.date_create,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		    </if>
+		   </where>
+		 ) t
+	</select>
+	
+	<!-- 后台-财务管理-财务管理-平台调账管理列表 累计-->
+	<select id="findPfTiaoZhangListStat" resultMap="PlatformAdjustRespResultMap" parameterType="com.dimeng.model.finance.FindPlatformAdjustReq">
+		SELECT
+			IFNULL(SUM(t.income),0) income_amt,
+			IFNULL(SUM(t.expenditure),0) expenditure_amt
+		FROM  
+		(
+		  SELECT
+			case adjust_type when 1 then td.money else 0.00 end as income,
+			case adjust_type when 2 then td.money else 0.00 end as expenditure
+		  FROM  t_system_adjust td
+		  LEFT JOIN t_system_user tu ON td.creator_id = tu.user_id
+		 ) t
+	</select>
+	
+	<!-- 后台-财务管理-财务管理-查看调账备注 -->
+	<select id="findTiaoZhangRemark" resultMap="AdjustRemarkRespResultMap" parameterType="com.dimeng.model.common.IdReq">
+		SELECT
+		    td.remark
+		FROM  t_system_adjust td
+		<where>
+		   td.id = #{id,jdbcType=VARCHAR}
+		</where>
+	</select>
+	
+	<!--后台-财务管理-财务管理-平台资金明细列表||后台-财务管理-财务管理-用户资金明细列表||前台-个人中心-交易明细 -->
+	<select id="findCapitalDetailsList" resultMap="FindCapitalDetailsListRespResultMap" parameterType="com.dimeng.model.finance.FindCapitalDetailsListReq">
+		SELECT 
+		   tur.trade_type,tu.user_name,tur.account_balance,tpi.project_no,
+           tpi.project_name,tur.remark,
+           DATE_FORMAT(tur.date_create,'%Y-%m-%d %T')date_create,
+           case tur.capital_direction when 1 then tur.trade_amount else 0.00 end as income,
+           case tur.capital_direction when 2 then tur.trade_amount else 0.00 end as expenditure
+        FROM t_user_account_flow_record tur
+        LEFT JOIN t_user tu on tur.user_id = tu.user_id
+        LEFT JOIN t_order_support tos on tur.order_id = tos.order_id
+        LEFT JOIN t_project_info tpi on tos.project_id =tpi.project_id
+		<where>
+		  <if test="listType == 0">
+		        tur.user_id = 0
+	      </if>
+		  <if test="listType != 0">
+				tur.user_id != 0
+		  </if>
+		  <if test="userId != null and userId != ''">
+			    and tur.user_id = #{userId,jdbcType=VARCHAR}
+		  </if>
+		  <if test="type != null and type != ''">
+			and tur.trade_type = #{type,jdbcType=VARCHAR}
+		  </if>
+		  <if test="userName != null and userName != ''">
+			and tu.user_name LIKE CONCAT ('%',trim(#{userName,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="projectNo != null and projectNo != ''">
+			and tpi.project_no LIKE CONCAT ('%',trim(#{projectNo,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="projectName != null and projectName != ''">
+			and tpi.project_name LIKE CONCAT ('%',trim(#{projectName,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="beginTime != null and beginTime != ''">
+			and DATE_FORMAT(tur.date_create,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime,jdbcType=VARCHAR},'%Y%m%d')
+		  </if>
+		  <if test="endTime != null and endTime != ''">
+			and DATE_FORMAT(tur.date_create,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		  </if>
+		  ORDER BY tur.date_create DESC
+		</where>
+	</select>
+	<!--后台-财务管理-财务管理-平台资金明细列表||后台-财务管理-财务管理-用户资金明细列表 合计 -->
+	<select id="findCapitalDetailsListTotal" resultMap="FindCapitalDetailsListRespResultMap" parameterType="com.dimeng.model.finance.FindCapitalDetailsListReq">
+		SELECT
+			IFNULL(SUM(t.income),0) income_total,
+			IFNULL(SUM(t.expenditure),0) expenditure_total
+		FROM
+		(
+		  SELECT 
+           case tur.capital_direction when 1 then tur.trade_amount else 0.00 end as income,
+           case tur.capital_direction when 2 then tur.trade_amount else 0.00 end as expenditure
+        FROM t_user_account_flow_record tur
+        LEFT JOIN t_user tu on tur.user_id = tu.user_id
+        LEFT JOIN t_order_support tos on tur.order_id = tos.order_id
+        LEFT JOIN t_project_info tpi on tos.project_id =tpi.project_id
+		<where>
+		  <if test="listType == 0">
+		        tur.user_id = 0
+	      </if>
+		  <if test="listType != 0">
+				tur.user_id != 0
+		  </if>
+		  <if test="userId != null and userId != ''">
+			and tur.user_id = #{userId,jdbcType=VARCHAR}
+		  </if>
+		  <if test="type != null and type != ''">
+			and tur.trade_type = #{type,jdbcType=VARCHAR}
+		  </if>
+		  <if test="userName != null and userName != ''">
+			and tu.user_name LIKE CONCAT ('%',trim(#{userName,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="projectNo != null and projectNo != ''">
+			and tpi.project_no LIKE CONCAT ('%',trim(#{projectNo,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="projectName != null and projectName != ''">
+			and tpi.project_name LIKE CONCAT ('%',trim(#{projectName,jdbcType=VARCHAR}),'%')
+		  </if>
+		  <if test="startTime != null and startTime != ''">
+			and DATE_FORMAT(tur.date_create,'%Y%m%d') &gt;= DATE_FORMAT(#{startTime,jdbcType=VARCHAR},'%Y%m%d')
+		  </if>
+		  <if test="endTime != null and endTime != ''">
+			and DATE_FORMAT(tur.date_create,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		  </if>
+		</where>
+		) t
+	</select>
+	
+	<!--后台-财务管理-对账管理-支付对账列表||后台-财务管理-对账管理-退款对账列表 -->
+	<select id="findOrderCheckList" resultMap="FindOrderCheckListRespResultMap" parameterType="com.dimeng.model.finance.FindPaymentListReq">
+		SELECT 
+		     tos.order_id,tos.order_no,tu.user_name,tos.support_amount,tos.pay_flow_no,
+             tos.pay_check_status,tos.refund_check_status,
+             DATE_FORMAT(tos.date_pay,'%Y-%m-%d %T') date_pay,
+             DATE_FORMAT(tos.date_refund,'%Y-%m-%d %T') date_refund,
+             DATE_FORMAT(tos.date_pay_check,'%Y-%m-%d %T') date_pay_check,
+             DATE_FORMAT(tos.date_refund_check,'%Y-%m-%d %T') date_refund_check
+		FROM t_order_support tos
+        LEFT JOIN t_user tu on tos.user_id = tu.user_id
+        where 
+        <if test="listType == 1">
+				tos.pay_check_status in (1,2,3)
+		</if>
+		<if test="listType == 2">
+		        tos.refund_check_status in (1,2,3)
+		</if>
+        <if test="userName != null and userName != ''">
+			and tu.user_name LIKE CONCAT ('%',trim(#{userName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="orderNo != null and orderNo != ''">
+			and tos.order_no LIKE CONCAT ('%',trim(#{orderNo,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="payFlowNo != null and payFlowNo != ''">
+			and tos.pay_flow_no LIKE CONCAT ('%',trim(#{payFlowNo,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="payCheckStatus != null and payCheckStatus != ''">
+			and tos.pay_check_status = #{payCheckStatus,jdbcType=VARCHAR}
+		</if>
+		
+		<if test="refundCheckStatus != null and refundCheckStatus != ''">
+			and tos.refund_check_status = #{refundCheckStatus,jdbcType=VARCHAR}
+		</if>
+		<if test="payBeginTime != null and payBeginTime != ''">
+			and DATE_FORMAT(tos.date_pay,'%Y%m%d') &gt;= DATE_FORMAT(#{payBeginTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="payEndTime != null and payEndTime != ''">
+			and DATE_FORMAT(tos.date_pay,'%Y%m%d') &lt;= DATE_FORMAT(#{payEndTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="refundBeginTime != null and refundBeginTime != ''">
+			and DATE_FORMAT(tos.date_refund,'%Y%m%d') &gt;= DATE_FORMAT(#{refundBeginTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="refundEndTime != null and refundEndTime != ''">
+			and DATE_FORMAT(tos.date_refund,'%Y%m%d') &lt;= DATE_FORMAT(#{refundEndTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+				ORDER BY tos.date_create DESC
+	</select>
+	
+	<!-- 查询平台账户资金 -->
+	<select id="findPlatformAccount" resultMap="TUserCapitalAccountMap">
+		SELECT 
+		    user_id,available_amount
+		FROM t_user_capital_account
+		WHERE user_id='0' for update
+	</select>
+</mapper>

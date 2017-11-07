@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TProjectAduitRecordResultMap" type="com.dimeng.entity.table.project.TProjectAduitRecord" >
+    <id column="aduit_id" property="aduitId" jdbcType="VARCHAR" />
+    <result column="validation_id" property="validationId" jdbcType="VARCHAR" />
+    <result column="date_aduit" property="dateAduit" jdbcType="TIMESTAMP" />
+    <result column="aduit_result" property="aduitResult" jdbcType="CHAR" />
+    <result column="aduit_user_id" property="aduitUserId" jdbcType="VARCHAR" />
+    <result column="aduit_option" property="aduitOption" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TProjectAduitRecord_Column_List" >
+    aduit_id, validation_id, date_aduit, aduit_result, aduit_user_id, aduit_option
+  </sql>
+  <select id="findByIdTProjectAduitRecord" resultMap="TProjectAduitRecordResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TProjectAduitRecord_Column_List" />
+    from t_project_aduit_record
+    where aduit_id = #{aduitId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTProjectAduitRecord" parameterType="java.lang.String" >
+    delete from t_project_aduit_record
+    where aduit_id = #{aduitId,jdbcType=VARCHAR}
+  </delete> 
+  <insert id="insertTProjectAduitRecord" parameterType="com.dimeng.entity.table.project.TProjectAduitRecord" >
+    insert into t_project_aduit_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aduitId != null" >
+        aduit_id,
+      </if>
+      <if test="validationId != null" >
+        validation_id,
+      </if>
+      <if test="dateAduit != null" >
+        date_aduit,
+      </if>
+      <if test="aduitResult != null" >
+        aduit_result,
+      </if>
+      <if test="aduitUserId != null" >
+        aduit_user_id,
+      </if>
+      <if test="aduitOption != null" >
+        aduit_option,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aduitId != null" >
+        #{aduitId,jdbcType=VARCHAR},
+      </if>
+      <if test="validationId != null" >
+        #{validationId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAduit != null" >
+        #{dateAduit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aduitResult != null" >
+        #{aduitResult,jdbcType=CHAR},
+      </if>
+      <if test="aduitUserId != null" >
+        #{aduitUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="aduitOption != null" >
+        #{aduitOption,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTProjectAduitRecord" parameterType="com.dimeng.entity.table.project.TProjectAduitRecord" >
+    update t_project_aduit_record
+    <set >
+      <if test="validationId != null" >
+        validation_id = #{validationId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateAduit != null" >
+        date_aduit = #{dateAduit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aduitResult != null" >
+        aduit_result = #{aduitResult,jdbcType=CHAR},
+      </if>
+      <if test="aduitUserId != null" >
+        aduit_user_id = #{aduitUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="aduitOption != null" >
+        aduit_option = #{aduitOption,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where aduit_id = #{aduitId,jdbcType=VARCHAR}
+  </update>
+</mapper>

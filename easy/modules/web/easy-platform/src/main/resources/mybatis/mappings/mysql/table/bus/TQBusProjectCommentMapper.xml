@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TQBusProjectCommentResultMap" type="com.dimeng.entity.table.bus.TQBusProjectComment" >
+    <id column="comment_id" property="commentId" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="date_comment" property="dateComment" jdbcType="TIMESTAMP" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="support_amount" property="supportAmount" jdbcType="DECIMAL" />
+    <result column="reply_id" property="replyId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TQBusProjectComment_Column_List" >
+    comment_id, order_id, date_comment, comment_content, user_id, support_amount, reply_id
+  </sql>
+  <select id="findByIdTQBusProjectComment" resultMap="TQBusProjectCommentResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TQBusProjectComment_Column_List" />
+    from t_q_bus_project_comment
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTQBusProjectComment" parameterType="java.lang.String" >
+    delete from t_q_bus_project_comment
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </delete> 
+  <insert id="insertTQBusProjectComment" parameterType="com.dimeng.entity.table.bus.TQBusProjectComment" >
+    insert into t_q_bus_project_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="dateComment != null" >
+        date_comment,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="supportAmount != null" >
+        support_amount,
+      </if>
+      <if test="replyId != null" >
+        reply_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateComment != null" >
+        #{dateComment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportAmount != null" >
+        #{supportAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="replyId != null" >
+        #{replyId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTQBusProjectComment" parameterType="com.dimeng.entity.table.bus.TQBusProjectComment" >
+    update t_q_bus_project_comment
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateComment != null" >
+        date_comment = #{dateComment,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="supportAmount != null" >
+        support_amount = #{supportAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="replyId != null" >
+        reply_id = #{replyId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </update> 
+</mapper>

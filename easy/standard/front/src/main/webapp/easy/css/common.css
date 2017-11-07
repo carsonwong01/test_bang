@@ -1,0 +1,265 @@
+/*李新跃*/
+/*第三方首次登录绑定*/
+.login-box{ position:relative; }
+.login-form{ width:490px; position:absolute; left:50%; margin-left:-245px; }
+.login-form h2{ font-size:28px;}
+.login-figure-pic{ padding-top:20px;}
+.login-figure-pic img{ width:73px; height:73px; border-radius:50%; box-shadow: 0 6px 14px #80cdfc; }
+.login-form-con{ padding-top:20px; width: 490px; margin: 0 auto; }
+.login-form-con .login-item{ padding:10px 0; border-bottom:1px solid #d8d8d8;}
+.login-item .lg-phone-icon{ background-position:-150px 0;}
+.login-item .lg-mima-icon{background-position:-180px 0;}
+.login-item .lg-yzm-icon{background-position:-210px 0;}
+.login-form .text_style{ width:282px; padding-left:20px; }
+.login-item-l{ margin-top:25px;}
+.login-item-r .focus{position: relative;}
+.focus_input label{ position:absolute; left:20px; top:0; line-height: 30px; color:#acacac; cursor:text; font-size:18px; }
+.login-form .prompt{ color:#333; height:20px; padding:2px 0 5px 0;}
+.login-item .error-icon{ background-position:-248px -7px; width:15px; height: 15px; display:inline-block; overflow:hidden;}
+.login-item .login-item-valida{ width:126px; height: 43px;margin-top: 15px;}
+.login-form .login-btn-dl{ border-radius:40px; font-size:32px; box-shadow: 0 6px 14px #80cdfc; padding:15px 0; }
+.login-form-bottom .login-other-til{ margin-bottom:10px; text-align:center; height:13px; border-bottom:1px solid #ddd;}
+.login-other-til h3{ background:#fff; display:inline-block; padding:0 15px; font-size: 16px;}
+.login-way .other-login-icon, .login-way2 .other-login-icon{ width: 78px; height:78px; background:url("../images/chart_ico.png") no-repeat; display:block; margin:0 auto; cursor: pointer;}
+.login-way2{text-align: center;font-size: 0;}
+.login-way2 .other-login-icon{display: inline-block;}
+.login-way2 .centerIcon1{margin: 0 55px}
+.login-way2 .centerIcon2{margin-right: 55px}
+.login-way{padding-top:30px;}
+.login-way ul li{ width:33.3333%; float:left; }
+.login-way .other-padd-le{margin-right:70px;}
+.login-way .other-padd-cn{margin-left:35px; margin-right:35px; }
+.login-way .other-padd-rg{margin-left:70px;}
+.login-way .other-login-shouji{ background-position:0 0; }
+.login-way .other-login-weibo,.login-way2 .other-login-weibo{ background-position:-88px 0; }
+.login-way .other-login-qqicon, .login-way2 .other-login-qqicon{ background-position:-176px 0;}
+.login-way .other-login-weixin, .login-way2 .other-login-weixin{ background-position:-264px 0;}
+.login-way2 .other-login-qqZoom{background-position: -352px 0}
+
+/*微信登录*/
+.weChat-code{ border: 1px solid #ddd; padding:20px; display:inline-block; }
+.weChat-code img{ width: 280px; height:280px;}
+
+/*输入框*/
+.focus_text:focus{outline:none;}
+.text_style{ height: 30px; line-height: 30px; vertical-align:middle;}
+
+
+/*弹窗*/
+.popup_bg { width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 999;background:#000; filter: alpha(opacity=30); -moz-opacity: .30; opacity: 0.3; _position: absolute; _height: 2000px; }
+.dialog { box-shadow: 0 2px 10px 5px #999; border: 1px solid #ccc; background: #fdfdfd; position: fixed; left: 50%; top: 100px; _position: absolute; _top:expression(100+((e=document.documentElement.scrollTop)?e:document.body.scrollTop)+'px');z-index: 999; width: 500px; margin-left: -251px; border-radius: 5px; }
+.dialog_big{ width:800px; margin-left:-400px;}
+.dialog .title { font-size: 16px; line-height: 38px; height: 38px; padding-left: 20px; background: #eee; border-bottom: 1px #ddd solid; border-radius: 5px 5px 0 0; color: #333; }
+.dialog .title .out { background: url("../images/dialog.png") no-repeat 0 3px; width: 30px; height: 28px; display: inline-block; float: right; margin: 10px 0 0 0; }
+.dialog .content { padding-bottom:30px; }
+.dialog .content .dia_auto{max-height:350px; overflow:auto; overflow-x:hidden; padding:30px 50px; margin-bottom: 20px;}
+.dialog .tip_information { width: 400px; text-align: center; padding: 20px 0; }
+.dialog .tip_information .doubt, .dialog .tip_information .error, .dialog .tip_information .successful { background: url("../images/dialog.png") no-repeat 0 -33px; width: 23px; height: 23px; display: inline-block; vertical-align: top; margin-top: 4px; }
+.dialog .tip_information .error { background-position: 0 -67px; }
+.dialog .tip_information .successful { background-position: 0 -105px; }
+.dialog .tip_information .tips { display: inline-block; text-align: left; margin-left: 10px; vertical-align: top; max-width: 360px; }
+.dialog .text_list li { float: left; min-width: 200px; margin-bottom: 20px; }
+.dialog .text_list .long { width: 400px; }
+.dialog .select_style { width: 222px; height: 30px; line-height: 30px; border: 1px solid #ddd; margin-right: 10px; vertical-align: middle; padding-left: 5px; padding:2px 2px 3px 5px\9;}
+.dialog .text_style { width: 220px; height: 18px; line-height: 18px; border: 1px solid #ddd; margin-right: 10px; vertical-align: middle; padding: 5px; }
+.dialog .text_style_date{ padding-left:35px;}
+.dialog .textarea_style { line-height: 24px; border: 1px solid #ddd; margin-right: 10px; vertical-align: middle; padding: 5px; }
+.dialog .text_list2 li:after { display: block; clear: both; height: 0; content: '\20'; }
+.dialog .text_list2 li { zoom: 1; margin-bottom: 10px; line-height: 30px; }
+.dialog .text_list2 .til { float: left; text-align: right; width: 25%;min-height: 1px}
+.dialog .text_list2 .con { float: left; width: 75%; line-height: 30px; }
+.dialog .pic_delete { margin-top: 20px; }
+.dialog .popBox .pic_delete li{width:60px;height:70px} 
+.dialog .popBox .fileListAfter{overflow:hidden}
+.dialog .pic_delete li { float: left; margin: 0 25px 10px 0; position: relative; }
+.dialog .pic_delete img { width: 60px; height: 70px; }
+.dialog .pic_delete .ico { background: url("../images/pop_icon.png") no-repeat -13px 0; width: 15px; height: 15px; display: inline-block; position: absolute; margin: -5px 0 0 52px; }
+.dialog .pic_delete .addto { border: 1px #ddd dashed; width: 60px; height: 70px; text-align: center; display: inline-block; font-size: 12px; }
+.dialog .pic_delete .addto .ico_add { background: url("../images/pop_icon.png") no-repeat 0 0; width: 13px; height: 13px; display: inline-block; margin: 15px 0 5px 0; }
+.dialog .pic_delete .addto p { line-height: 15px; }
+.dialog .focus_input label{ top:6px;}
+.dialog .dividend{ background:#eeeeee; height:40px; line-height:40px; padding:0 10px; margin:10px 0 12px 0;}
+.dialog .dend_title{ font-size:18px; color:#333; font-weight:bold; margin-bottom:20px;}
+.dialog .dend_table{ border-top:1px #999 solid;border-left:1px #999 solid;}
+.dialog .dend_table td{border-right:1px #999 solid;border-bottom:1px #999 solid; padding:4px;}
+.dialog .dia_auto .areaTips{display:block;text-align:right;width: 465px}
+.dialog .timeWait-icon{width: 58px;height: 58px;background: url('../images/color_front_zxs.png') no-repeat 0 -24px;display: block;margin: 0 auto}
+
+/*浮层*/
+.floating_layer{position:fixed;right:10px;top:50%;margin-top:-83px;z-index:1000;}
+.floating_layer .item{height:50px;width:50px; margin-bottom:2px;position:relative;}
+.floating_layer .block{height:50px;width:50px;display:block;background:url('../images/floating_layer.png') no-repeat;-webkit-transition: all 0.15s linear;}
+.floating_layer .block:hover{background:url('../images/floating_layer.png') no-repeat}
+.floating_layer .weixin:hover{background-position:0 -50px;}
+.floating_layer .app{ background-position:-52px 0;}
+.floating_layer .app:hover{ background-position:-52px -50px;}
+
+.floating_layer .back{ background-position:-156px 0;}
+.floating_layer .back:hover{ background-position:-156px -50px;}
+.floating_layer .con{width:0;right:50px;position:absolute;overflow:hidden;z-index:8; font-size:12px; text-align:center;}
+.floating_layer .block .con{display:none; margin-top:-30px;}
+.floating_layer .block .arrow{ position:absolute; right:-9px; display:block; width:9px; height:13px; z-index:99;background:url('../images/floating_layer.png') no-repeat -216px 0;}
+.floating_layer .block:hover .con{width:auto;overflow:visible; padding-right:10px; display:block;}
+.floating_layer .block:hover .border{ padding:5px; background:#fff; position:relative;white-space:nowrap; }
+.floating_layer .code:hover .con img{ width:110px; height:110px;}
+.floating_layer .code .arrow{ top:52px;}
+
+.floating_layer .service{ background-position:-104px 0;}
+.floating_layer .service:hover{ background-position:-104px -50px;}
+.floating_layer .service .con{display:none; bottom:2px;}
+.floating_layer .service .arrow{bottom:10px;}
+.floating_layer .service li a{ display:block;border-top:1px dotted #ddd; height:35px; line-height:35px;background:url('../images/qq.png') no-repeat 10px 5px; padding:0 20px 0 50px;}
+#returnTop{ position:absolute; right:0px; bottom:-52px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 郑雄升 */
+/* 头部样式 */
+.wrap-1220 .layout{width: 1220px;margin: 0 auto}
+.wrap-1002 .layout{width: 1002px;margin: 0 auto}
+.head{padding: 10px 0;position: relative;z-index: 2}
+.head .logo{width: 240px;height: 60px;background: url('../images/logo.png') no-repeat;}
+.head .fr li{float: left;margin-left: 40px}
+.head .fr{padding-top: 14px}
+.head .fr a{display: inline-block;font-size: 18px;}
+.head li{height: 32px;line-height: 32px;}
+.head .u-login{position: relative;margin-top: -3px}
+.head .u-login span{display: block;cursor: pointer;height: 36px;line-height: 36px;}
+.head .u-login .triangle, .head .u-login img{display: inline-block;vertical-align: middle;}
+.head .u-login img{width: 36px;height: 36px;padding-right: 10px}
+.head .u-login .triangle{background: url('../images/login_icon.png') no-repeat;width: 12px;height: 10px}
+.head .u-login.active .triangle{background-position: -12px 0}
+.head .u-login ul{ display: none;position: absolute;top: 40px;right: 0;width: 144px;background-color: #fff}
+.head .u-login.active ul{display: block;}
+.head .u-login li{height: 42px;line-height: 42px;margin-left: 0;float: none;text-align: center;}
+.head .u-login li:first-child{height: 42px;line-height: 42px;color: #fff;background-color: #1ea8fb}
+.head .u-login li:first-child a:hover{color: #fff}
+.head .u-login em, .head .u-login i{display: inline-block;vertical-align: middle;}
+.head .u-login i{background: url('../images/login_icon.png') no-repeat;margin-right: 10px}
+.head .u-login .i1{width: 14px;height: 17px;background-position: 0 -10px}
+.head .u-login .i2{width: 14px;height: 18px;background-position: -15px -10px}
+.head .u-login .i3{width: 14px;height: 14px;background-position: -31px -10px}
+.head .u-login .i4{width: 14px;height: 14px;background-position: -47px -10px}
+.head .u-login .i5{width: 14px;height: 14px;background-position: -64px -10px}
+
+
+/* 底部样式 */
+.footer{padding: 30px 0px;background-color: #efeeee}
+.footer .QRCodeBox{padding-top: 4px;}
+.footer .QRCodeBox li{text-align: center;font-size: 14px;padding-left: 25px;float: left;}
+.footer .QRCodeBox img{display: inline-block;padding-bottom: 10px}
+.footer .footerLogo{width: 22.5%;padding-top: 32px}
+.footer .footerLogo a{display: block;width: 216px;height: 54px;}
+.footer .footerLink{width: 23.5%;padding-top: 45px;padding-left: 6%}
+.footer .footerLink a, .footer .footerLink i{display: inline-block;vertical-align: middle;}
+.footer .footerLink a{font-size: 18px;}
+.footer .footerLink i{margin: 0 10px;font-size: 18px;color: #666}
+.footer .phoneNum{font-size: 24px;font-weight: bold;}
+.footer .time, .footer .footerAdr li{font-size: 16px;}
+.footer .footerAdr li{padding-top: 5px}
+
+/* 样式调整2016-11-28 */
+.wrap-1002 .footer .footerLink a{ font-size: 14px;}
+.wrap-1002 .footer .time, .footer .footerAdr li{font-size: 14px;}
+.wrap-1002 .footer .footerLink ul{ padding-left:30px;}
+
+/* 模拟placeholder样式*/
+.passwp{position: relative;display: inline-block;width: 100%}
+.passwp .passTis{position: absolute;height: 100%;top: 0;/* color: #a9a9a9 */}
+
+
+
+
+/*分页*/
+.paging{text-align:center; padding-top:50px; font-size:14px; color:#333;}
+.paging a{padding: 0 10px;border: 1px solid #ddd;background:#fff;margin: 0 10px;display: inline-block;height: 20px;line-height: 20px;}
+.paging a:hover{ background:#1ea8fb; color: #fff; }
+.cpagebox{padding:0 10px;}
+.page_input{width:30px;margin:0 5px 0 5px;text-align:center;border: 1px solid #ddd; height:20px; vertical-align:middle;}
+.paging .btn_ok{border-radius:3px;font-size:12px;height:22px;line-height:20px; color:#fff;background: #1ea8fb!important;display:inline-block;vertical-align:middle;cursor:pointer;padding: 0 10px;}
+.paging .btn_ok:hover{ color:#fff;}
+.paging .disabled,.paging .nextpage{color:#c2c2c2; background:#fff; }
+.paging .syy-arrow,.paging .xyy-arrow{ width:5px; height:9px; background:url("../images/icon.png") no-repeat -42px -10px; display:inline-block;}
+.paging .syy-arrow{ margin-right:5px; }
+.paging .xyy-arrow{ background:url("../images/icon.png") no-repeat -72px -10px; margin-left:5px; }
+.paging .disabled:hover .syy-arrow{ background:url("../images/icon.png") no-repeat -102px -10px;  }
+.paging .disabled:hover,.paging .nextpage:hover{ color:#424242; background:#fff;  }
+.paging .nextpage:hover .xyy-arrow{ background:url("../images/icon.png") no-repeat -132px -10px;}
+
+
+/* 网站用到的主要用到字体颜色 */
+.color333{color: #333}
+.color999{color: #999}
+.colorfff{color: #fff}
+.colorMain{color: #1ea8fb}
+.width-full img{max-width: 100% !important}
+
+
+
+/*提示弹框按钮加间距*/
+.popup_con .dbutton a{margin:0 20px}
+
+
+
+
+
+/*图标*/
+.icon-public{ display:inline-block; width:30px; height:30px; background:url("../images/icon.png") no-repeat; vertical-align:middle; margin-right:5px;}
+
+
+
+/*button*/
+.btn-public{display:inline-block; border:none; cursor:pointer; text-align:center; color:#fff; padding:0 10px; vertical-align:middle;}/*按钮基本样式*/
+.btn-public:hover{color:#fff;}
+.btn-w50{ min-width: 50px; height: 20px; line-height: 20px; border-radius:5px; }
+.btn-w70{min-width:70px; height:30px; line-height:30px; font-size:16px; border-radius:5px;}
+.btn-w50h25,.btn-w50h25-orange{min-width: 50px; height: 25px; line-height: 25px; border-radius:5px;}
+.btn-w80{min-width:80px; height:30px; line-height:30px; font-size:16px; border-radius:25px;}
+.btn-w310{min-width:310px; height:50px; line-height:50px; font-size:18px; border-radius:25px;}
+.btn-w50-hollow{ width:50px; height:28px; line-height:28px; font-size:16px; border-radius:25px;}
+.btn-hollow{ width:306px; height:48px; line-height: 48px; border-radius:25px; font-size: 18px;cursor: pointer;}
+.btn-block{ display:block; width:100%; padding:10px 0;}/*块级按钮(拉伸至父元素100%的宽度)*/
+.btn-disabled{ cursor:not-allowed;}/*不可点击按钮*/
+.btn-gray,.btn-gray:hover{ background:#c5c5c5 !important;}/*灰色按钮*/
+
+/*主色-蓝色*/
+a:hover{color:#1ea8fb;}
+.highlight{color:#1ea8fb!important;}/*高亮文字*/
+.btn-blue{ background:#1ea8fb; }/*主色按钮*/
+.borderMain{border:1px solid #1ea8fb}/* 主色边框 */
+.btn-w50-hollow{ border:1px solid #1ea8fb; color:#1ea8fb;}/* 空边框*/
+.btn-hollow{border:1px solid #1ea8fb;  color:#1ea8fb;}/* 空边框*/
+.head .fr .cur{color: #1ea8fb}/*头部导航焦点*/
+
+/*主色-蓝-透明度*/
+.btn-blue:hover{ color:#fff;filter:alpha(opacity=80);-moz-opacity:.8;opacity:0.8;}/*主色按钮-透明度80%*/
+.head .btn-w80:hover{box-shadow: 0 0 6px 1px #1ea8fb;}
+.btn-hollow:hover,.btn-w50-hollow:hover{ background-color:#1ea8fb; color: #fff;}
+
+/*辅色-橙*/
+.btn-w50h25-orange{ background:#ff7f2b; color:#fff;}
+.btn-w50h25-orange:hover{ color:#fff;filter:alpha(opacity=80);-moz-opacity:.8;opacity:0.8;}/*主色按钮-透明度80%*/
+.highlight2{ color:#ff7f2b;}
+.highlight-red{ color:#ff1b1b;}/*高亮红*/
+.btn-orange{background:#ff7f2b;}/*辅色按钮*/
+
+/*辅色-橙-透明度*/
+.btn-orange:hover{background:#ff9955;}/*辅色按钮-透明度80%*/

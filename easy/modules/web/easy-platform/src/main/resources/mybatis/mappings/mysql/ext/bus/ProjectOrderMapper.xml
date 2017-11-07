@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+
+	<resultMap id="findSupportListResultMap" type="com.dimeng.entity.ext.bus.FindSupportListResp" >
+		<result column="order_id" property="orderId"/>
+		<result column="nick_name" property="nickName"/>
+		<result column="image_url" property="imageUrl"/>
+		<result column="support_amount" property="supportAmount"/>
+		<result column="status" property="status"/>
+		<result column="date_create" property="supportTime"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="return_amount" property="returnAmount"/>
+		<result column="support_count" property="returnCount"/>
+		<result column="return_describe" property="returnDescribe"/>
+	</resultMap>
+	
+	<resultMap id="findSupportListCountResultMap" type="com.dimeng.entity.ext.bus.FindSupportListCountResp" >
+		<result column="support_count" property="supportCount"/>
+		<result column="support_total" property="supportAmtTotal"/>
+		<result column="waite_send_count" property="waiteSendCount"/>
+	</resultMap>
+	
+	<resultMap id="findUserSupportListResultMap" type="com.dimeng.entity.ext.bus.FindUserSupportListResp" >
+		<result column="order_id" property="orderId"/>
+		<result column="order_no" property="orderNo"/>
+		<result column="support_amount" property="supportAmount"/>
+		<result column="status" property="status"/>
+		<result column="date_create" property="supportTime"/>
+		<result column="project_id" property="projectId"/>
+		<result column="project_type" property="projectType"/>
+		<result column="project_status" property="projectStatus"/>
+		<result column="cover_image_url" property="coverImage"/>
+		<result column="project_name" property="projectName"/>
+		<result column="project_intro" property="projectIntro"/>
+		<result column="raised_amount" property="raisedAmount"/>
+		<result column="target_amount" property="targetAmount"/>
+		<result column="remaining_day" property="remainingDay"/>
+	</resultMap>
+
+	<!-- 项目支持订单列表 -->
+	<select id="findSupportList" resultMap="findSupportListResultMap" parameterType="com.dimeng.model.bus.FindSupportListReq" >
+		SELECT
+			tos.order_id,
+			tos.order_no,
+			tos.`status`,
+			tos.support_count,
+			floor(tos.support_amount) support_amount,
+			DATE_FORMAT(tos.date_pay, '%Y-%m-%d %T') date_create,
+			tqub.nick_name,
+			tqub.image_url,
+			floor(tpr.support_amount) return_amount,
+			tpr.return_describe
+		FROM
+			t_order_support tos
+		LEFT JOIN t_q_user_basic tqub ON tos.user_id = tqub.user_id
+		LEFT JOIN t_project_return tpr ON tos.return_id = tpr.return_id
+		WHERE tos.project_id = #{projectId,jdbcType=VARCHAR} AND tos.`status` in (3,4,5,6,7,8) AND IFNULL(tos.refund_type,0) not in (3,4,5,6)
+		<if test="orderNo != null and orderNo != ''">
+			AND tos.order_no LIKE CONCAT('%', #{orderNo,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="status != null and status != ''">
+			AND tos.`status` = #{status,jdbcType=VARCHAR}
+		</if>
+		<if test="nickName != null and nickName != ''">
+			AND tqub.nick_name LIKE CONCAT('%', #{nickName,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="supportAmount != null and supportAmount != ''">
+			AND floor(tpr.support_amount) = #{supportAmount,jdbcType=VARCHAR}
+		</if>
+		<if test="beginTime != null and beginTime != ''">
+			AND DATE_FORMAT(tos.date_pay,'%Y%m%d') &gt;= DATE_FORMAT(#{beginTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(tos.date_pay,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+	</select>
+	
+	<!-- 项目支持订单列表总计 -->
+	<select id="findSupportListCount" resultMap="findSupportListCountResultMap" parameterType="com.dimeng.model.bus.FindSupportListReq" >
+		SELECT
+			floor(IFNULL(COUNT(order_id),0)) support_count, floor(IFNULL(SUM(support_amount),0)) support_total,
+			(select IFNULL(COUNT(1),0) FROM  t_order_support WHERE `status` = 4 and project_id = #{projectId,jdbcType=VARCHAR}) waite_send_count
+		FROM
+			t_order_support
+		WHERE project_id = #{projectId,jdbcType=VARCHAR} AND `status` in (3,4,5,6,7,8) AND IFNULL(refund_type,0) not in (3,4,5,6)
+	</select>
+	
+	<!-- 我支持的项目订单列表 -->
+	<select id="findUserSupportList" resultMap="findUserSupportListResultMap" parameterType="com.dimeng.model.bus.FindUserSupportListReq" >
+		SELECT
+			tos.order_id,
+			tos.order_no,
+			floor(tos.support_amount) support_amount,
+			tos.`status`,
+			DATE_FORMAT(tos.date_create,'%Y-%m-%d %T') date_create,
+			tpi.project_id,
+			tpi.project_type,
+			tpi.project_status,
+			tpi.cover_image_url,
+			tpi.project_name,
+			tpi.project_intro,
+			floor(tpi.raised_amount) raised_amount,
+			floor(tpi.target_amount) target_amount,
+			datediff(tpi.date_raised_end, now()) remaining_day
+		FROM
+			t_order_support tos
+		LEFT JOIN t_project_info tpi ON tos.project_id = tpi.project_id
+		WHERE tos.user_id = #{userId,jdbcType=VARCHAR}
+		<if test="status != null and status != ''">
+			AND tos.`status` = #{status,jdbcType=VARCHAR}
+		</if>
+		ORDER BY tos.date_create DESC
+	</select>
+</mapper>

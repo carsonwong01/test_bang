@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TQUserBankCardResultMap" type="com.dimeng.entity.table.user.TQUserBankCard" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="card_user_name" property="cardUserName" jdbcType="VARCHAR" />
+    <result column="card_number_encrypt" property="cardNumberEncrypt" jdbcType="VARCHAR" />
+    <result column="card_number" property="cardNumber" jdbcType="VARCHAR" />
+    <result column="card_type" property="cardType" jdbcType="CHAR" />
+    <result column="card_status" property="cardStatus" jdbcType="CHAR" />
+    <result column="bank_id" property="bankId" jdbcType="VARCHAR" />
+    <result column="date_create" property="dateCreate" jdbcType="TIMESTAMP" />
+    <result column="bank_region_id" property="bankRegionId" jdbcType="VARCHAR" />
+    <result column="branch_bank" property="branchBank" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TQUserBankCard_Column_List" >
+    id, user_id, card_user_name, card_number_encrypt, card_number, card_type, card_status, 
+    bank_id, date_create, bank_region_id, branch_bank
+  </sql>
+  <select id="findByIdTQUserBankCard" resultMap="TQUserBankCardResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TQUserBankCard_Column_List" />
+    from t_q_user_bank_card
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTQUserBankCard" parameterType="java.lang.String" >
+    delete from t_q_user_bank_card
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+ 
+  <insert id="insertTQUserBankCard" parameterType="com.dimeng.entity.table.user.TQUserBankCard" >
+    insert into t_q_user_bank_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="cardUserName != null" >
+        card_user_name,
+      </if>
+      <if test="cardNumberEncrypt != null" >
+        card_number_encrypt,
+      </if>
+      <if test="cardNumber != null" >
+        card_number,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="cardStatus != null" >
+        card_status,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="dateCreate != null" >
+        date_create,
+      </if>
+      <if test="bankRegionId != null" >
+        bank_region_id,
+      </if>
+      <if test="branchBank != null" >
+        branch_bank,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardUserName != null" >
+        #{cardUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumberEncrypt != null" >
+        #{cardNumberEncrypt,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumber != null" >
+        #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=CHAR},
+      </if>
+      <if test="cardStatus != null" >
+        #{cardStatus,jdbcType=CHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null" >
+        #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankRegionId != null" >
+        #{bankRegionId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchBank != null" >
+        #{branchBank,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTQUserBankCard" parameterType="com.dimeng.entity.table.user.TQUserBankCard" >
+    update t_q_user_bank_card
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardUserName != null" >
+        card_user_name = #{cardUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumberEncrypt != null" >
+        card_number_encrypt = #{cardNumberEncrypt,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNumber != null" >
+        card_number = #{cardNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=CHAR},
+      </if>
+      <if test="cardStatus != null" >
+        card_status = #{cardStatus,jdbcType=CHAR},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="dateCreate != null" >
+        date_create = #{dateCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankRegionId != null" >
+        bank_region_id = #{bankRegionId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchBank != null" >
+        branch_bank = #{branchBank,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

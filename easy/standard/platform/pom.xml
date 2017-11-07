@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>platform</artifactId>
+	<packaging>war</packaging>
+
+	<name>PlatformInterfaceSystem-${project.branch}</name>
+	<parent>
+		<groupId>com.dimeng.platform.easy</groupId>
+		<artifactId>Easy-standard</artifactId>
+		<version>2.0.0</version>
+	</parent>
+	<dependencies>
+        <!-- 房地产众筹 -->
+        <dependency>
+            <groupId>com.dimeng.platform.easy.modules</groupId>
+            <artifactId>Easy-web-platform</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+        <!-- 房地产众筹 -->
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<!-- 包含 -->
+				<includes>
+					<include>*/*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<!-- 排除 -->
+				<excludes>
+					<exclude>*/*</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<!-- 将类文件打成jar包 -->
+					<archiveClasses>true</archiveClasses>
+					<!-- 将资源文件打到classes目录下 -->
+					<webResources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<!--<plugin>            
+			    <groupId>org.apache.maven.plugins</groupId>  
+			    <artifactId>maven-javadoc-plugin</artifactId>  
+			    <version>2.9.1</version>  
+			    <executions>  
+			      <execution>  
+			        <id>attach-javadocs</id>  
+			          <goals>  
+			            <goal>jar</goal>  
+			          </goals>  
+			          <configuration>
+						<charset>UTF-8</charset>
+				      </configuration>
+			      </execution>  
+			    </executions>  
+			  </plugin>     -->
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>DiMeng-Platform-snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>DiMeng-Platform-releases</id>
+			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+</project>

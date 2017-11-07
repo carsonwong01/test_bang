@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+
+	<!-- 查询公告列表-->
+	<select id="findNoticelList"
+		resultType="com.dimeng.entity.ext.home.front.HomeNoticeListResp">
+		 select 
+			 id noticeId,
+			 info_title  noticeTitle
+		 from
+			 t_site_investment_info 
+		 where publish_status = '1'
+		 order by date_top desc 
+		 limit 0,3
+	</select>
+
+	<!-- 查询广告列表 -->
+	<select id="findAdvertiseList" resultType="com.dimeng.entity.ext.home.front.HomeAdvertiseResp"
+	  parameterType="com.dimeng.model.home.FrontIndexReq" >
+		 select 
+			title adTitle,
+			picture_url	 adImageUrl,
+			partner_url	 adPartnerUrl,
+			open_type  openType
+		 from t_site_adv_info
+		 where status = '1' and adv_type = #{opSource,jdbcType=VARCHAR} and date_visible &lt;= NOW() 
+		 ORDER BY date_top desc 
+	</select>
+
+	<!-- 查询前台首页统计数据-->
+	<select id="findHomeTotal" resultType="com.dimeng.entity.ext.home.front.HomeTotalResp">
+		 select
+			(SELECT
+					FORMAT(IFNULL(sum(raised_amount), 0),0)
+			 FROM
+					t_project_info ) as raiseTotal,
+			(select count(1) from t_project_info where  project_status = '2' ) as projectCount,
+			(SELECT
+					COUNT(1)
+				FROM
+					t_order_support sup
+				WHERE
+				sup.`status` NOT IN(1,2,9)
+				AND  IFNULL(sup.refund_type,0) IN(0,1,2)
+			) as memberCount 
+	</select>
+	
+	<!-- 首页项目列表 -->
+	<select id="findRecommendList" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" 
+	parameterType="com.dimeng.model.home.FrontIndexReq" >
+	 SELECT
+			p.project_id projectId,
+			u.nick_name nickName,
+			TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft,
+			p.cover_image_url projectImg,
+		  	p.project_name projectName,
+		  	p.project_intro projectIntro,
+			p.project_label projectTag,
+		  	(select IFNULL(count(1),0) from t_order_support where project_id = p.project_id and  `status` not in (1,2,9) and IFNULL(refund_type,0) IN(0,1,2)) supportCount,
+		  	floor(p.target_amount) targetAmount,
+		  	floor(p.raised_amount) raiseTotal,
+		  	p.project_type  projectType,
+  			IFNULL(LEFT(((p.raised_amount / p.target_amount)) ,4), 0.00 ) rate
+	FROM
+	t_site_home_project ho 
+  	LEFT JOIN t_project_info p on ho.project_id = p.project_id
+ 	LEFT JOIN t_q_user_basic u on p.project_creator_id = u.user_id
+	 <where> 
+			1 = 1
+			<if test=" tagType != null and tagType != ''">
+				 AND  p.project_label like CONCAT ('%',trim(#{tagType,jdbcType=VARCHAR}),'%')  
+			</if>  
+			<if test="projectType != null and projectType != '' and projectType != 0">
+				AND p.project_type = #{projectType,jdbcType=VARCHAR}
+			</if> 
+			
+			<!-- PC首页 -->
+			<if test="opSource != null    and opSource == 1">
+				AND ho.recommend_pc = 1
+			</if> 
+			<!-- 微信首页 -->
+			<if test="opSource != null   and opSource == 2">
+				AND ho.recommend_weixin = 1
+			</if> 
+			<!-- APP首页 -->
+			<if test="opSource != null   and opSource == 3">
+				AND ho.recommend_app = 1
+			</if> 
+			
+			<!-- PC首页 -->
+			<if test="opSource != null  and opSource == 1 and (sorting == null || sorting =='')">
+				ORDER BY ho.date_pc  DESC
+			</if> 
+			<!-- 微信首页 -->
+			<if test="opSource != null  and opSource == 2 and (sorting == null || sorting =='')">
+				ORDER BY ho.date_weixin  DESC
+			</if> 
+			<!-- APP首页 -->
+			<if test="opSource != null  and opSource == 3 and (sorting == null || sorting =='')">
+				ORDER BY ho.date_app  DESC
+			</if>
+			<if test=" sorting != null and sorting != ''">
+				ORDER BY ${sorting}  ${order}
+			</if>  
+		</where>
+	</select> 
+
+	<!-- PC首页3个热门推荐项目 -->
+	<select id="findRecommend" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" >
+	 SELECT
+			p.project_id projectId,
+			p.cover_image_url projectImg,
+		  	p.project_name projectName,
+		  	TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft, 
+		  	p.project_intro projectIntro,
+			p.project_label projectTag,
+			p.project_type projectType,
+			FORMAT(p.raised_amount,0)  raiseTotal,
+  			IFNULL(LEFT(((p.raised_amount / p.target_amount)) ,4), 0.00 ) rate
+	FROM
+	t_site_home_project ho 
+  	LEFT JOIN t_project_info p on ho.project_id = p.project_id 
+	WHERE  ho.recommend_pc = 1  
+	ORDER BY ho.date_pc DESC
+	LIMIT 0,3
+	</select> 
+	<delete id="deleteByProjectId" parameterType="java.util.Map">
+		delete from t_site_home_project where project_id=#{projectId,jdbcType=VARCHAR} limit 1
+	</delete>
+</mapper>

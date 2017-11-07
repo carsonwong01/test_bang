@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    					http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    					http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+    					http://www.springframework.org/schema/util
+    					http://www.springframework.org/schema/util/spring-util-4.1.xsd
+    					http://www.springframework.org/schema/context
+        				http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:component-scan base-package="com.dimeng">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/> 
+	</context:component-scan>
+	<mvc:annotation-driven />
+	<mvc:resources mapping="/js/**" location="/js/"/>  
+    <mvc:resources mapping="/css/**" location="/css/"/>  
+    <mvc:resources mapping="/images/**" location="/images/"/>  
+    <mvc:default-servlet-handler />
+    <!-- 启动对@AspectJ注解的支持 开启Controller的日志打印-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<!-- <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+	</bean>-->
+    <!-- 处理JSON请求 -->
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="2" />
+        <!-- 如果接口全是以json格式来处理的，可以放在这个
+        <property name="defaultContentType" value="application/json;charset=UTF-8"/>
+         -->
+        <!-- <property name="mediaTypes">
+            <map>
+                <entry key="html" value="text/html"/>
+                <entry key="json" value="application/json" />
+                <entry key="xml" value="application/xml" />
+                <entry key="jsonp" value="application/javascript"/>  
+            </map>
+        </property> -->
+        
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" ></bean>
+            </list>
+        </property>
+        <!-- <property name="ignoreAcceptHeader" value="true" /> -->
+    </bean>
+	 <!-- 上传拦截，如最大上传值及最小上传值 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- one of the properties available; the maximum file size in bytes -->  
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="20971520"/> 
+        <property name="uploadTempDir" value="temp"/>
+    </bean> 
+    <!--tiles 视图解析   begin-->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+	    <property name="definitions">
+	        <list>
+	            <value>/WEB-INF/tiles/qsc-tiles-general.xml</value><!-- 考虑到后期项目合并，这里改变配置;gq- 股权，cp- 产品 -->
+	        </list>
+	    </property>
+	</bean>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+	    <property name="order" value="1" />
+	    <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>
+	</bean>
+	<!-- 基于Cookie的本地化解析器 
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+	   <property name="cookieMaxAge" value="604800"/>
+	   <property name="defaultLocale" value="zh_CN"/>
+	   <property name="cookieName" value="Language"></property>
+	</bean>
+	<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	-->
+	
+	<!--tiles 视图解析   end-->
+	<mvc:interceptors>  
+        <mvc:interceptor>  
+            <mvc:mapping path="/**"/> 
+            <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->  
+           <bean class="com.dimeng.front.interceptor.FrontApplicationContext"/>  
+        </mvc:interceptor>  
+        <!-- add wsh 防重复提交拦截器 -->
+          <!-- 配置Token拦截器，防止用户重复提交数据 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.dimeng.front.interceptor.TokenInterceptor"/>
+        </mvc:interceptor>
+        <!-- <mvc:interceptor>  
+            <mvc:mapping path="/**"/> 
+            定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的  
+           <bean class="com.dimeng.front.interceptor.AvoidCSRFInterceptor"/>  
+        </mvc:interceptor>  --> 
+    </mvc:interceptors>  
+    <bean id="exceptionHandler" class="com.dimeng.front.exception.FrontExceptionHandler"/>
+</beans>

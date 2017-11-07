@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TProjectReportResultMap" type="com.dimeng.entity.table.project.TProjectReport" >
+    <id column="report_id" property="reportId" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="report_user_id" property="reportUserId" jdbcType="VARCHAR" />
+    <result column="report_reason" property="reportReason" jdbcType="VARCHAR" />
+    <result column="date_report" property="dateReport" jdbcType="TIMESTAMP" />
+    <result column="report_name" property="reportName" jdbcType="VARCHAR" />
+    <result column="report_phone" property="reportPhone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="TProjectReport_Column_List" >
+    report_id, project_id, report_user_id, report_reason, date_report, report_name, report_phone
+  </sql>
+  <select id="findByIdTProjectReport" resultMap="TProjectReportResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TProjectReport_Column_List" />
+    from t_project_report
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTProjectReport" parameterType="java.lang.String" >
+    delete from t_project_report
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertTProjectReport" parameterType="com.dimeng.entity.table.project.TProjectReport" >
+    insert into t_project_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportId != null" >
+        report_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="reportUserId != null" >
+        report_user_id,
+      </if>
+      <if test="reportReason != null" >
+        report_reason,
+      </if>
+      <if test="dateReport != null" >
+        date_report,
+      </if>
+      <if test="reportName != null" >
+        report_name,
+      </if>
+      <if test="reportPhone != null" >
+        report_phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportId != null" >
+        #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportUserId != null" >
+        #{reportUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportReason != null" >
+        #{reportReason,jdbcType=VARCHAR},
+      </if>
+      <if test="dateReport != null" >
+        #{dateReport,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportName != null" >
+        #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportPhone != null" >
+        #{reportPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTProjectReport" parameterType="com.dimeng.entity.table.project.TProjectReport" >
+    update t_project_report
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportUserId != null" >
+        report_user_id = #{reportUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportReason != null" >
+        report_reason = #{reportReason,jdbcType=VARCHAR},
+      </if>
+      <if test="dateReport != null" >
+        date_report = #{dateReport,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportName != null" >
+        report_name = #{reportName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportPhone != null" >
+        report_phone = #{reportPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </update>
+</mapper>

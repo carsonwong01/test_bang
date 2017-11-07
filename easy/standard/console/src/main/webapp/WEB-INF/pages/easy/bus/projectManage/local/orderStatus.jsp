@@ -1,0 +1,10 @@
+{{if data.payStatus== '0'}}支付成功{{/if}}
+{{if data.payStatus== '1'}}待支付{{/if}}
+{{if data.payStatus== '2'}}已取消{{/if}}
+{{if data.payStatus== '3'}}已支付{{/if}}
+{{if data.payStatus== '4'}}待发货{{/if}}
+{{if data.payStatus== '5'}}待收货{{/if}}
+{{if data.payStatus== '6'}}已收货{{/if}}
+{{if data.payStatus== '7'}}待退款{{/if}}
+{{if data.payStatus== '8'}}已退款{{/if}}
+{{if data.payStatus== '9'}}已失败{{/if}}

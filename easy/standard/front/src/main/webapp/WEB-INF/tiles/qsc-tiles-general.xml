@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+ <!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"> 
+ <tiles-definitions> 
+ 	<definition name="temple_page" 
+         template="/WEB-INF/include/easy/layout/layout.jsp"> 
+         <put-attribute name="title" value="迪蒙众筹" /> 
+         <put-attribute name="header" value="/WEB-INF/include/easy/layout/header.jsp" /> 
+         <put-attribute name="body" value="" /> 
+         <put-attribute name="footer" value="/WEB-INF/include/easy/layout/footer.jsp" /> 
+     </definition> 
+     <definition name="temple_base" 
+         template="/WEB-INF/include/easy/layout/layout.jsp"> 
+         <put-attribute name="title" value="迪蒙众筹" /> 
+         <put-attribute name="header" value="" /> 
+         <put-attribute name="body" value="" /> 
+         <put-attribute name="footer" value="" /> 
+     </definition>
+     <definition name="temple_header" 
+         template="/WEB-INF/include/easy/layout/layout.jsp"> 
+         <put-attribute name="title" value="迪蒙众筹" /> 
+         <put-attribute name="header" value="/WEB-INF/include/easy/layout/header.jsp" /> 
+         <put-attribute name="body" value="" /> 
+         <put-attribute name="footer" value="" /> 
+     </definition>  
+      
+     <!-- 用户中心右边内容模板-->
+      <definition name="temple_body" 
+         template="/WEB-INF/include/easy/layout/body.jsp"> 
+         <put-attribute name="title" value="迪蒙众筹" /> 
+         <put-attribute name="header" value="" /> 
+         <put-attribute name="body" value="" /> 
+         <put-attribute name="footer" value="" /> 
+     </definition>  
+       
+     <!-- 后面其他模块视图都按下面账户总览实例添加即可。或者命名方式按通配符的格式来访问也可以 -->
+     <!-- 
+                  通配符配置  
+                  例如： return new ModelAndView("user/testJspPage", "users", users);
+                  其中user为模块名 ，testJsp为testJsp.jsp的名称，按此规则命名则不需在此添加配置，系统会默认
+                  走通配符配置
+      -->
+     <definition name="*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}.jsp" />
+     </definition>
+     <definition name="*/*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}.jsp" />
+     </definition>
+     <definition name="*/*/*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}/{5}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*/*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+     </definition>
+      <definition name="*/*/*/*/*/*/*/*.page" extends="temple_page" >
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+     </definition>
+     
+     
+    <!-- 只有body 的通配符配置  后缀以.base结尾的走此通配符 -->
+     <definition name="*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp" />
+     </definition>
+     <definition name="*/*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}.jsp" />
+     </definition>
+     <definition name="*/*/*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*/*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+     </definition>
+       <definition name="*/*/*/*/*/*/*/*.base" extends="temple_base" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+     </definition>
+     
+     <!-- 只有body和header 的通配符配置  后缀以.header结尾的走此通配符 -->
+     <definition name="*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp" />
+     </definition>
+     <definition name="*/*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}.jsp" />
+     </definition>
+     <definition name="*/*/*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}/{6}.jsp" />
+     </definition>
+     <definition name="*/*/*/*/*/*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}/{6}/{7}.jsp" />
+     </definition>
+       <definition name="*/*/*/*/*/*/*/*.header" extends="temple_header" >
+        <put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp" />
+     </definition>
+     <!-- 用户中心模块-无刷新temple开始 temple_page-->
+	<definition name="*/*_temple" extends="temple_body" >
+     	<put-attribute name="header" value="" />
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}_temple.jsp" />
+        <put-attribute name="footer" value="" />
+     </definition>
+     <definition name="*/*/*_temple" extends="temple_body" >
+     	<put-attribute name="header" value="" />
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}_temple.jsp" />
+        <put-attribute name="footer" value="" />
+     </definition>
+      <definition name="*/*/*/*_temple" extends="temple_body" >
+      	<put-attribute name="header" value="" />
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}_temple.jsp" />
+        <put-attribute name="footer" value="" />
+     </definition>
+      <definition name="*/*/*/*/*_temple" extends="temple_body" >
+      	<put-attribute name="header" value="" />
+        <put-attribute name="body" value="/WEB-INF/pages/{1}/{2}/{3}/{4}/{5}_temple.jsp" />
+        <put-attribute name="footer" value="" />
+     </definition>
+	 <!-- 用户中心模块-无刷新temple结束-->
+	 
+	
+ </tiles-definitions>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="TUserNotifyResultMap" type="com.dimeng.entity.table.user.TUserNotify" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="pro_status_notify" property="proStatusNotify" jdbcType="CHAR" />
+    <result column="oth_people_pay_notify" property="othPeoplePayNotify" jdbcType="CHAR" />
+    <result column="people_pay_notify" property="peoplePayNotify" jdbcType="CHAR" />
+    <result column="reply_notify" property="replyNotify" jdbcType="CHAR" />
+    <result column="withdraw_notify" property="withdrawNotify" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="TUserNotify_Column_List" >
+    user_id, pro_status_notify, oth_people_pay_notify, people_pay_notify, reply_notify, 
+    withdraw_notify
+  </sql>
+  <select id="findByIdTUserNotify" resultMap="TUserNotifyResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="TUserNotify_Column_List" />
+    from t_user_notify
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteTUserNotify" parameterType="java.lang.String" >
+    delete from t_user_notify
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete> 
+  <insert id="insertTUserNotify" parameterType="com.dimeng.entity.table.user.TUserNotify" >
+    insert into t_user_notify
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="proStatusNotify != null" >
+        pro_status_notify,
+      </if>
+      <if test="othPeoplePayNotify != null" >
+        oth_people_pay_notify,
+      </if>
+      <if test="peoplePayNotify != null" >
+        people_pay_notify,
+      </if>
+      <if test="replyNotify != null" >
+        reply_notify,
+      </if>
+      <if test="withdrawNotify != null" >
+        withdraw_notify,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="proStatusNotify != null" >
+        #{proStatusNotify,jdbcType=CHAR},
+      </if>
+      <if test="othPeoplePayNotify != null" >
+        #{othPeoplePayNotify,jdbcType=CHAR},
+      </if>
+      <if test="peoplePayNotify != null" >
+        #{peoplePayNotify,jdbcType=CHAR},
+      </if>
+      <if test="replyNotify != null" >
+        #{replyNotify,jdbcType=CHAR},
+      </if>
+      <if test="withdrawNotify != null" >
+        #{withdrawNotify,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateTUserNotify" parameterType="com.dimeng.entity.table.user.TUserNotify" >
+    update t_user_notify
+    <set >
+      <if test="proStatusNotify != null" >
+        pro_status_notify = #{proStatusNotify,jdbcType=CHAR},
+      </if>
+      <if test="othPeoplePayNotify != null" >
+        oth_people_pay_notify = #{othPeoplePayNotify,jdbcType=CHAR},
+      </if>
+      <if test="peoplePayNotify != null" >
+        people_pay_notify = #{peoplePayNotify,jdbcType=CHAR},
+      </if>
+      <if test="replyNotify != null" >
+        reply_notify = #{replyNotify,jdbcType=CHAR},
+      </if>
+      <if test="withdrawNotify != null" >
+        withdraw_notify = #{withdrawNotify,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

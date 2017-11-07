@@ -1,0 +1,482 @@
+/*李新跃*/
+/*项目列表*/
+.main-content{ background: #f7f7f7; padding:20px 0 60px 0;}
+.xm-screening-con{ border: 1px solid #ddd; background:#fff; padding:20px;}
+.xm-leixing-con dt{ float:left; width:75px; }
+.xm-leixing-con dd{ float:left; width:885px;}
+.wrap-1220 .xm-screening-con dd{ width:1100px; }
+.xm-leixing-con dd a{ display: inline-block; padding: 0 5px; margin-right:30px;}
+.xm-leixing-con dd .cur{ background:#1ea8fb; color:#fff;}
+.xm-leixing-con dl{ zoom:1; line-height:20px; margin-top:20px; overflow: auto;}
+.xm-leixing-con .first{ margin-top:0;}
+.xm-leixing-con .upward,.xm-leixing-con .down{ width: 9px; height: 15px; background:url("../images/front_icon_pic.png") no-repeat; display: inline-block; vertical-align:middle; margin-left:5px;}
+.xm-leixing-con a.cur .upward{ background:url("../images/color_front_icon_pic.png") no-repeat 0 0; }
+.xm-leixing-con .down{ background:url("../images/front_icon_pic.png") no-repeat -21px 0; }
+.xm-leixing-con a.cur .down{background:url("../images/color_front_icon_pic.png") no-repeat -21px 0;}
+.xm-project-con .xm-percent-box{ float: left; width:33.3333%;}
+.xm-project-con .xm-percent-box .item-project-bor{ border: 1px solid #ddd; background:#fff; margin-top:20px; position:relative; }
+.xm-project-con .xm-percent-box .item-project-bor:hover{box-shadow: 0 0 8px 1px #ddd;}
+.item-project-padd1{ margin-right:10px; }
+.item-project-padd2{ margin-right:5px; margin-left:5px; }
+.item-project-padd3{ margin-left:10px; }
+.item-img-tu{ height: 279px; overflow: hidden;}
+.item-img-tu img{ width:100%; height:100%;transition:transform 2s;
+-moz-transition:transform 2s; /* Firefox 4 */
+-webkit-transition:transform 2s; /* Safari and Chrome */
+-o-transition:transform 2s; /* Opera */}
+.item-img-tu img:hover{ transform:scale(1.2,1.2);
+  -ms-transform:scale(1.2,1.2); /* IE 9 */
+  -moz-transform:scale(1.2,1.2); /* Firefox */
+  -webkit-transform:scale(1.2,1.2); /* Safari and Chrome */
+  -o-transform:scale(1.2,1.2); /* Opera */
+}
+.xm-project-con .item-title-t{ margin:0 20px;   border-bottom:1px dashed #ddd;}
+.item-title-t .item-title-x{ font-size:18px; color:#333;white-space:nowrap;text-overflow:ellipsis;overflow:hidden }
+.item-title-t .item-title-text{ display: block; color:#999; 
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -moz-binding: url("ellipsis.xml#ellipsis");}
+.biaoqian-lab{}
+.item-sj-con{ margin:15px 20px;}
+.bq-icon{ background-position:-5px 0; width:16px;}
+.item-sj-data .item-shuju-bor{ border-right:1px solid #ddd;}
+.item-sj-data .item-shuju-nobor{ border:0;}
+.item-sj-data .item-shuju-list01{ text-align:left; }
+.item-sj-data .item-shuju-list02{ text-align: center; }
+.item-sj-data .item-shuju-list03{ text-align: right;}
+.item-project-bor .xm-biaodi-icon{ width:91px; height:91px; background:url("../images/front_d_icon.png") no-repeat; display:inline-block; position:absolute; right:-5px; top:-5px; z-index: 1; }
+.item-project-bor .xm-biaodi-icon01{ background-position:0 0; }
+.item-project-bor .xm-biaodi-icon02{ background-position:-101px 0; }
+.item-sj-data .item-percent-l{ float: left; width: 25%;}
+.item-sj-data .item-percent-c{ float:left; width: 50%; }
+
+
+
+
+/*PC轻众筹APP下载.html  - 开始*/
+.app-down-container{  height: 829px; background: url("../images/appdown_bg.jpg") center top no-repeat;}
+.app-down-content{ width:100%; margin:0 auto; padding-top:140px;}
+.app-down-title{padding-left:200px;}
+.app-down-content .code-ul{ padding-top:20px; padding-left:200px;}
+.app-down-content .code-ul li{ width:100%; height:140px; margin-top:80px;}
+.app-down-content .code-ul .iphone-icon{ display:inline-block; margin-left:50px; padding-left:60px; height:50px; line-height:50px; background:url(../images/iphone.png) left center no-repeat;}
+.app-down-content .code-ul .android-icon{ display:inline-block; margin-left:50px; padding-left:60px; height:50px;line-height:50px; background:url(../images/android.png) left center no-repeat;}
+
+/*PC轻众筹APP下载.html  - 结束*/
+
+
+/*图片上传控件*/
+.webuploader-container {position: relative;}
+.webuploader-element-invisible {position: absolute !important;clip: rect(1px 1px 1px 1px);}
+.webuploader-pick {position: relative;display: inline-block;cursor: pointer;padding: 20px;color: #fff;text-align: center;border-radius: 3px;overflow: hidden;padding-top: 83px;top: -83px;}
+.webuploader-pick-hover {}
+.webuploader-pick-disable {opacity: 0.6;pointer-events:none;}
+.thumbnail {width: 139px;height: 152px;}
+.thumbnail img {width: 100%;height: 100%;}
+.file-item {float: left;position: relative;margin: 0 20px 20px 0;}
+.file-item .error {position: absolute;top: 0px;left: 0px;right: 0px;background: red;color: white;text-align: center;height: 30px;font-size: 14px;line-height: 33px;}
+.upload-state-done:after {content:"";font-family: FontAwesome;font-style: normal;font-weight: normal;line-height: 1;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;font-size: 24px;position: absolute;bottom: 4px;right: 4px;color: #4cae4c;z-index: 99;}
+.file-item .progress {position: absolute;left: 1px;right: 1px;bottom: 0px;height: 3px;height: 4px;overflow: hidden;z-index: 15;margin:0;padding: 0;border-radius: 0;background: transparent;}
+.file-item .progress span {display: block;overflow: hidden;width: 0;height: 100%;background: #d14 url(../images/upload_progress.png) repeat-x;-webit-transition: width 200ms linear;-moz-transition: width 200ms linear;-o-transition: width 200ms linear;-ms-transition: width 200ms linear;transition: width 200ms linear;-webkit-animation: progressmove 2s linear infinite;-moz-animation: progressmove 2s linear infinite;-o-animation: progressmove 2s linear infinite;-ms-animation: progressmove 2s linear infinite;animation: progressmove 2s linear infinite;-webkit-transform: translateZ(0);}
+@-webkit-keyframes progressmove {0% {background-position: 0 0;}100% {background-position: 17px 0;}}
+@-moz-keyframes progressmove {0% {background-position: 0 0;}100% {background-position: 17px 0;}}
+@keyframes progressmove {0% {background-position: 0 0;}100% {background-position: 17px 0;}}
+
+
+/*郑雄升*/
+/* 项目详情页 */
+.p-detail-content{padding: 25px 0 40px;background-color: #f7f7f7}
+.p-detail-content .leftbox{width: 71.56%}
+.wrap-1002 .p-detail-content .leftbox{width: 65.56%}
+.p-detail-content .p-tabCont .list{display: none}
+.p-detail-content .p-tabCont .list:first-child{display: block;}
+.p-detail-content .rightbox{width: 327px;padding-top: 46px}
+.p-detail-content .p-detail{background-color: #fff}
+.p-detail-content .p-til{font-size: 24px;color: #333;padding-bottom: 10px;height: 36px;line-height: 36px;}
+.p-detail-content .p-headImg{position: relative;padding-bottom: 20px}
+.p-detail-content .p-headImg img{display: block;width: 100%}
+.p-detail-content .p-headImg .collection{position: absolute;cursor: pointer;right: 0;top: 0;width: 40px;height: 40px;background: url('../images/p_detail_icon.png') no-repeat;}
+.p-detail-content .p-headImg .collection.active{background-position: -40px 0}
+.p-detail-content .p-tabbox{padding-top:20px;border-bottom: 1px solid #ddd}
+.p-detail-content .p-tabbox .control{cursor: pointer;float: left;font-size: 18px;color: #333;min-width: 125px;text-align: center;margin-right:50px;padding-bottom: 16px;position: relative;}
+.p-detail-content .p-tabbox i{left: 0;bottom: -1px;height: 2px;width: 100%;background-color: #1ea8fb}
+.p-detail-content .p-tabbox .active i{position: absolute;}
+.p-detail-content .p-tabbox .num{color: #ff2755}
+.p-detail-content .p-tabCont{padding: 30px 20px}
+.p-detail-content .p-box{background-color: #fff;margin-bottom: 20px;padding: 24px;position: relative;overflow: hidden;}
+.p-detail-content .p-box .til{padding: 0 0 15px 15px;position: relative;font-size: 18px;}
+.p-detail-content .p-box .til i{position: absolute;left: 0;top: 5px;width: 3px;height: 18px;}
+.p-detail-content .p-box .bord{position: absolute;left: 50%;margin-left: -200px ;width: 400px;border-bottom:1px solid #d8d8d8;bottom: 0}
+.p-detail-content .p-getMoney.p-box{overflow: visible}
+.p-detail-content .p-getMoney.p-box .til{padding-bottom: 0}
+.p-detail-content .p-getMoney{position: relative;}
+.p-detail-content .p-getMoney .p-statusIco{position: absolute;width: 91px;height: 91px;background: url('../images/p_detail_icon.png') no-repeat 0 -40px;right: -3px;top: -5px}
+.p-detail-content .p-getMoney .p-failureIco{background-position:-118px -40px;}
+.p-detail-content .p-getMoney .p-successfulIco{background-position:-219px -40px;}
+.p-detail-content .g-money{vertical-align: bottom;padding: 5px 0}
+.p-detail-content .g-money span{color: #000;padding-right: 1px}
+.p-detail-content .a-money{font-size: 16px;padding-bottom: 10px}
+.p-detail-content .a-money span{padding-left: 5px;color: #ff2755}
+.p-detail-content .progressbox{padding-bottom: 10px}
+.p-detail-content .progressbox .fr{color: #1ea8fb}
+.p-detail-content .progressbox .progress{width: 240px;position: relative;background-color: #e4e4e4;height: 4px;margin-top: 8px}
+.p-detail-content .progressbox em{position: absolute;left: 0;top: 0;height: 100%;width: 0}
+.p-detail-content .support{padding-bottom: 10px}
+.p-detail-content .Notebox{padding-bottom: 10px;font-size: 0;}
+.p-detail-content .Notebox i, .p-detail-content .Notebox span{display: inline-block;vertical-align: middle;}
+.p-detail-content .Notebox i{width: 16px;height: 14px;background: url('../images/p_detail_icon.png') no-repeat -91px -40px;}
+.p-detail-content .Notebox span{font-size: 12px;padding-left: 10px}
+.p-detail-content .eqcbox{margin-top: 8px;padding-top: 15px;border-top: 1px dashed #ddd}
+.p-detail-content .eqcbox img, .p-detail-content .eqcbox span{display: inline-block;vertical-align: middle;}
+.p-detail-content .eqcbox span{text-align: center;padding-left: 10px;font-size: 18px;}
+.p-detail-content .p-box .pdt15{padding-top: 15px}
+.p-detail-content .promoter{padding-top: 15px}
+.p-detail-content .promoter img{padding-right: 15px;width: 65px;height: 65px}
+.p-detail-content .promoter .namebox{padding-top: 10px}
+.p-detail-content .promoter .name{font-size: 16px;color: #333}
+.p-detail-content .promoter .time{color: #999}
+.p-detail-content .dreamList li{padding: 15px 0;border-bottom: 1px dashed #ddd}
+.p-detail-content .dreamList h6{padding-bottom: 5px;font-size: 16px;color: #333}
+.p-detail-content .dreamList p{font-size: 14px;color: #999;line-height: 24px;}
+.mod-project-pic{ padding-top: 30px;}
+.mod-project-pic ul li{ float:left; width: 25%; }
+.mod-project-pic .mod-project-padd{ padding:10px 5px; }
+
+
+/* 项目详情页动态 */
+.p-detail-content .dynamic{padding:30px 0 0 40px;border-left: 3px solid #e8e8e8;margin-left: 24px}
+.p-detail-content .dynamic .schedule{position: relative;padding-bottom: 55px}
+.p-detail-content .dynamic .schedule h6{font-size: 16px;color: #999;line-height: 30px;}
+.p-detail-content .dynamic .schedule .ico{position: absolute;left: -50px;top: 6px;width: 18px;height: 19px;background: url('../images/color_front_zxs.png') no-repeat -90px 0;}
+.p-detail-content .dynamic .schedule p{font-size: 16px;line-height: 30px;}
+
+
+
+/* 项目详情页支持者 */
+.p-detail-content .messagelist{position: relative;padding: 25px 0 30px 84px;border-top: 1px solid #d8d8d8}
+.p-detail-content .messagelist:first-child{border-top: 0}
+.p-detail-content .messagelist .m-headImg{position: absolute;left: 0;top: 26px;width: 65px;height: 65px}
+.p-detail-content .messagelist .userinfo{padding-top: 10px}
+.p-detail-content .messagelist .namebox{padding-bottom: 2px;font-size: 16px;position: relative;}
+.p-detail-content .messagelist .namebox .name{padding-right: 10px}
+.p-detail-content .messagelist .namebox .replaybtn{cursor: pointer;position: absolute;right: 0;top: 0;width: 22px;height: 22px;background: url('../images/p_detail_icon2.png.png') no-repeat -125px 0;transition:background-position .3s;}
+.p-detail-content .messagelist .namebox .replaybtn:hover{background-position: -125px -22px}
+.p-detail-content .messagelist .message{padding: 10px 0 }
+.p-detail-content .messagelist .otherReplay{background-color: #f8f9fb}
+.p-detail-content .messagelist .otherReplay li{padding: 12px 10px 12px 20px;position: relative;font-size: 16px;border-bottom: 1px dashed #eaeaea}
+.p-detail-content .messagelist .otherReplay img{position: absolute;left: 20px;top: 13px;width: 40px;height:40px }
+.p-detail-content .messagelist form{display: block;padding: 18px 20px 0}
+.p-detail-content .messagelist textarea{width: 100%;border-color: #d8d8d8; resize:none;}
+
+
+
+/* 认证资料 */
+.p-detail-content .authentication .tips{color: #999;font-size: 14px;}
+.p-detail-content .authentication li{clear: both;overflow: hidden;height: 60px;line-height: 60px;border-bottom: 1px dashed #ddd;font-size: 16px;}
+.p-detail-content .authentication li span, .p-detail-content .authentication li i{display: inline-block;vertical-align: middle;}
+.p-detail-content .authentication li i{background: url('../images/p_detail_icon.png') no-repeat;width: 15px;height: 15px;margin-right: 10px}
+.p-detail-content .authentication .status-yes{background-position: -91px 0}
+.p-detail-content .authentication .status-no{background-position: -91px -15px}
+.p-detail-content .authentication .des{padding-top: 10px}
+.p-detail-content .authentication .des p{line-height: 24px;text-align: justify;}
+
+
+/* 运费说明和发货时间 */
+.p-detail-content .order-des .box{padding-top: 15px}
+.p-detail-content .order-des p{line-height: 26px;}
+.p-detail-content .order-des b{color: #333}
+
+/* 产品回报 */
+.p-detail-content .p-profit dl{padding: 20px 0;border-bottom: 1px dashed #ddd}
+.p-detail-content .p-profit dt, .p-detail-content .p-profit dd{clear: both;}
+.p-detail-content .p-profit dd{padding-top: 15px}
+.p-detail-content .p-profit dd img{float: left;width: 70px;height: 70px}
+.p-detail-content .p-profit dd p{padding-left: 80px;text-align: justify;;line-height: 24px;color: #999;word-break:normal;word-wrap:break-word;}
+.p-detail-content .p-profit .Blue{font-weight: bold;padding: 0 3px}
+
+
+/* 发起项目 */
+.makeProject{height: 980px;background: url('../images/p_big_bg.jpg') no-repeat center 0;}
+.makeProject .tabbox{padding-top: 170px;text-align: center;margin-bottom: 50px}
+.makeProject .tabbox .centerbox{margin: 0 204px}
+.makeProject .tabbox a{font-size: 0;}
+.makeProject .tabbox .control{text-align: center;display: inline-block;font-size: 30px;color: #fff;cursor: pointer;}
+.makeProject .tabbox .control em{position: relative;z-index: 1;font-size: 0;;display: inline-block;width: 208px;height: 208px;line-height: 208px;vertical-align: middle;background: url('../images/makeProject_icon.png') no-repeat;margin-bottom: 10px}
+.makeProject .tabbox .control em:before{content: '';position: absolute;display: none \9;z-index: -1;width: 160px;height: 160px;background-color: #fff;border-radius: 50%;left: 50%;top: 50%;margin: -80px 0 0 -80px}
+.makeProject .tabbox .control em.active:before{animation : w_opacity .8s;}
+@keyframes w_opacity{
+  from{opacity: 1;transform:scale(1);}
+  to{opacity: 0;transform:scale(1.5);}
+}
+.makeProject .tabbox .control i{background: url('../images/makeProject_icon.png') no-repeat;position: absolute;left: 50%;top: 50%}
+.makeProject .tabbox .control .i1{width: 80px;height: 72px;background-position: -208px 0;margin: -36px 0 0 -40px}
+.makeProject .tabbox .control .i2{width: 70px;height: 73px;background-position: -288px 0;margin: -36px 0 0 -35px}
+.makeProject .tabbox .control .i3{width: 81px;height: 80px;background-position: -358px 0;margin: -40px 0 0 -40px}
+.makeProject .tips{width: 1035px;margin: 50px auto 0;padding-left: 25px}
+.makeProject .tips dt{font-size: 18px;color: #fff;padding-bottom: 10px}
+.makeProject .tips p{font-size: 16px;color: #fff;line-height: 36px}
+.makeProject .friendly{width: 1060px;margin: 0 auto;background: url('../images/p-repeatBg.png') repeat;font-size: 0;padding: 35px 0;position: relative;display: none}
+.makeProject .friendly .trianle{position: absolute;width: 43px;height: 15px;background: url('../images/makeProject_icon.png') no-repeat -245px -157px;left: 80px;top: -15px}
+.makeProject .friendly dl{float: left;width: 142px;position: relative;padding-left: 70px;}
+.makeProject .friendly h6{font-size: 16px;color: #fff}
+.makeProject .friendly p{font-size: 12px;color: #fff}
+.makeProject .friendly i{position: absolute;background: url('../images/makeProject_icon.png') no-repeat;left: 23px;top: 50%}
+.makeProject .friendly .i1{width: 37px;height: 30px;background-position: -208px -80px;margin-top: -15px}
+.makeProject .friendly .i2{width: 36px;height: 42px;background-position: -245px -80px;margin-top: -21px}
+.makeProject .friendly .i3{width: 36px;height: 35px;background-position: -281px -80px;margin-top: -17px}
+.makeProject .friendly .i4{width: 37px;height: 28px;background-position: -317px -80px;margin-top: -14px}
+.makeProject .friendly .i5{width: 30px;height: 27px;background-position: -354px -80px;margin-top: -13px}
+
+
+/* 所有大病救助公用样式*/
+.sicknessbox{padding: 25px 0 40px;background-color: #f7f7f7}
+.sicknessbox h2{text-align: center;font-size: 28px;color: #333;padding-top: 10px}
+.sicknessbox h2 span{color: #999;font-size: 18px;}
+.sicknessbox .sickwhiteBg{width: 75.98%;margin: 0 auto 30px;background-color: #fff;}
+.sicknessbox .sickwhiteBg .til{padding-left: 20px;font-size: 20px;color: #333;height: 59px;line-height: 59px;border-bottom: 1px solid #d8d8d8}
+.sicknessbox .sickwhiteBg .formbox{width: 540px;margin: 30px auto 0}
+.sicknessbox .formbox dl{position: relative;padding-bottom: 30px}
+.sicknessbox .formbox dt{width: 26%;position: absolute;left: 0;top: 0;height: 37px;padding-top: 13px;font-size: 18px;color: #333}
+.sicknessbox .formbox dd{padding-left: 28%;position: relative;display: block;}
+.sicknessbox .formbox .input_txt{height: 48px;line-height: 48px;padding: 0 28px 0 10px;border: 1px solid #ddd;font-size: 18px;min-width: 205px;display: block;}
+.sicknessbox .formbox .input_txt:focus, .sicknessPage .input_txt:focus{border-color: #aaa}
+.sicknessbox .formbox .wid92{width: 87%}
+.sicknessbox .formbox textarea{padding: 0 28px 0 10px}
+.sicknessbox .formbox .addCover li, .sicknessPage .addCover li{float: left;width: 139px;height: 153px;margin: 0 15px 20px 0;position: relative;}
+.sicknessbox .formbox .addCover li img{width: 139px;height: 153px;}
+.sicknessbox .formbox .addCover .remove{position: absolute;width: 29px;height: 29px;background: url('../images/sicknessRescue_Icon.png') no-repeat -139px 0;right: -14px;top: -14px;cursor: pointer;}
+.sicknessbox .formbox .addCover .cont{position: absolute;width: 100%;height: 42px;line-height: 42px;bottom: 0;left: 0}
+.sicknessbox .formbox .addCover .bg{position: absolute;left: 0;top: 0;width: 100%;height: 100%;background-color: #000;opacity: 0.5;filter:alpha(opacity=50);}
+.sicknessbox .formbox .addCover .cont a, .sicknessbox .formbox .addCover .cont span{position: absolute;width: 100%;height: 42px;line-height: 42px;color: #fff;text-align: center;}
+.sicknessbox .formbox .addCover .cont span{cursor: default;}
+.sicknessbox .formbox .addCoverIcon{display: block;width: 139px;height: 70px;background: url('../images/sicknessRescue_Icon.png') no-repeat;cursor: pointer;text-align: center;padding-top: 83px}
+.sicknessbox .formbox .addCoverIcon span{font-size: 16px;color: #acacac;line-height: 24px;}
+.sicknessbox  .tips{line-height: 24px;}
+.sicknessbox  .formpage .limitWord, ..sicknessbox  .redCol{color: #ff2755}
+.sicknessbox  .input-midle{padding-right: 10px}
+.sicknessbox .input-midle label, .sicknessbox  .input-midle{display: inline-block;vertical-align: middle;}
+.sicknessbox  .input-midle select{width: 145px;height: 48px;line-height: 48px;border: 1px solid #ddd}
+.sicknessbox .input-midle label{height: 50px;line-height: 50px;padding-left: 5px;font-size: 18px;color: #333;}
+
+
+/* 大病救助（项目验证） */
+.sicknessRescue .box{text-align: center;font-size: 0;margin: 90px 0}
+.sicknessRescue li{width: 340px;color: #fff;font-size: 16px;height: 101px;text-align: left;background: url('../images/sickness_Icon.png') no-repeat;padding: 30px 0 0 54px;display: inline-block;*display: inline;*zoom:1;margin: 0 5% 23px}
+.sicknessRescue .li2{background-position: -395px 0}
+.sicknessRescue .li3{background-position: 0 -131px}
+.sicknessRescue .li4{background-position: -395px -131px}
+.sicknessRescue li .til{font-size: 20px;display: inline-block;padding-bottom: 5px}
+.sicknessRescue .Btn{display: block;margin: 0 auto 80px;width: 331px;height: 50px;line-height: 50px;text-align: center;font-size: 18px;color: #1ea8fb;background: url('../images/sickness_Icon.png') no-repeat 0 -263px;}
+.sicknessRescue.m100{padding: 64px 0}
+
+/* 大病救助 （产品急销，实现梦想公用此样式）*/
+.sicknessPage h2{height: 42px;line-height: 42px;}
+.sicknessPage .explain{display: inline-block;margin-left: 20px;font-size: 14px;line-height: normal;vertical-align: middle;padding-left: 25px;position: relative;cursor: pointer;}
+.sicknessPage .explain i{position: absolute;width: 18px;height: 18px;background: url('../images/color_front_zxs.png') no-repeat -48px 0;left: 0;top: 50%;margin-top: -9px}
+.sicknessPage .formpage{width: 968px;margin: 35px auto 40px;padding-right: 120px;padding-top: 35px;background-color: #fff}
+.wrap-1002 .sicknessPage .formpage{width: 796px;padding-right: 98px}
+.sicknessPage dl{position: relative;padding-bottom: 30px}
+.sicknessPage dt{width: 25%;position: absolute;left: 0;top: 0;text-align: center;height: 37px;padding-top: 13px;font-size: 18px;color: #333}
+.sicknessPage dd{padding-left: 25%;position: relative;}
+.sicknessPage .input_txt{height: 48px;line-height: 48px;padding: 0 28px 0 10px;border: 1px solid #ddd;font-size: 18px;min-width: 205px}
+.sicknessPage .wid92{width: 92%}
+.beg-timeBox{height: 50px;line-height: 50px;font-size: 18px;}
+.sicknessPage .setTimeBox{width: 180px;padding: 0 60px;position: relative;text-align: center;height: 60px;line-height: 60px;margin-top: 10px;position: relative;}
+.sicknessPage .setTimeBox .l_btn, .sicknessPage .setTimeBox .r_btn{position: absolute;width: 60px;height: 60px;top: 0;cursor: pointer;}
+.sicknessPage .setTimeBox input{border: 0;width: 180px;text-align: center;vertical-align: middle;font-size: 28px;color: #333;margin-top:7px;}
+.sicknessPage .setTimeBox i{position: absolute;left: 50%;top: 50%;background: url('../images/color_front_zxs.png') no-repeat;width: 24px;margin-left: -12px}
+.sicknessPage .setTimeBox .l_btn i{background-position: 0 0;height:4px;margin-top: -2px}
+.sicknessPage .setTimeBox .r_btn i{background-position: -24px 0;height:24px;margin-top: -12px}
+.sicknessPage textarea{padding: 0 28px 0 10px;border-color: #ddd;font-size: 18px;}
+.sicknessPage .formpage .limitWord, .sicknessPage .redCol{color: #ff2755}
+.sicknessPage .tips{padding: 10px 0 20px}
+.sicknessPage .addCover .remove{position: absolute;width: 28px;height: 28px;background: url('../images/sicknessRescue_Icon.png') no-repeat -139px 0;right: -14px;top: -14px;cursor: pointer;}
+.sicknessPage .addCover .cont{position: absolute;width: 100%;height: 42px;line-height: 42px;bottom: 0;left: 0}
+.sicknessPage .addCover .bg{position: absolute;left: 0;top: 0;width: 100%;height: 100%;background-color: #000;opacity: 0.5;filter:alpha(opacity=50);}
+.sicknessPage .addCover .cont a{position: absolute;width: 100%;height: 42px;line-height: 42px;color: #fff;text-align: center;cursor: pointer;}
+.sicknessPage .addCoverIcon{display: block;width: 139px;height: 70px;background: url('../images/sicknessRescue_Icon.png') no-repeat;cursor: pointer;text-align: center;padding-top: 83px}
+.sicknessPage .addCoverIcon span{font-size: 16px;color: #acacac;line-height: 24px;}
+.sicknessPage .big-Btn{width: 330px;height: 50px;background-color: #1ea8fb;text-align: center;line-height: 50px;color: #fff}
+.sicknessPage .formpage .limitWord{position: absolute;right: -35px;top: 0;height: 50px;line-height: 50px;font-size: 18px;}
+.sicknessPage .formpage .unit{position: absolute;left: 498px;top: 0;height: 50px;line-height: 50px;font-size: 18px;}
+.wrap-1002 .sicknessPage .formpage .unit{left: 455px}
+.sicknessPage .formpage .dateBox{left: 320px;font-size: 20px;height: 62px;line-height: 62px;}
+.sicknessPage .big-Btn{display: block;width: 330px;height: 50px;line-height: 50px;color: #fff;text-align: center;font-size: 18px;border-radius: 30px;margin: 30px auto 40px}
+.sicknessPage .link-lebal{}
+.sicknessPage .link-lebal li{float: left;width: 18%;margin-right: 2%;height: 32px;line-height: 32px;;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;padding-bottom: 20px}
+.sicknessPage .link-lebal a{display: block;height: 30px;line-height: 30px;border: 1px solid #999;border-radius: 20px;text-align: center;color: #999;font-size: 16px;}
+.sicknessPage .link-lebal a.active,.sicknessPage .link-lebal a:hover{background-color: #1ea8fb;border-color: #1ea8fb;color: #fff}
+/* 实现梦想 */
+.sicknessPage .dreamAction{width: 1088px;margin: 35px auto 40px;background-color: #fff;padding-bottom: 30px}
+.wrap-1002 .sicknessPage .dreamAction{width: 894px;}
+.sicknessPage .dreamAction h3{padding-left: 15px;height: 59px;line-height: 59px;font-size: 20px;color: #333;border-bottom: 1px solid #d8d8d8}
+.sicknessPage .front-return-mod{padding: 0 15px}
+.sicknessPage .front-return-list{ position: relative; padding:20px 60px 20px 0; border-bottom: 1px solid #ddd; }
+.sicknessPage .front-return-list h6{font-size: 18px;padding-bottom: 5px}
+.sicknessPage .front-return-list p{font-size: 16px;line-height: 28px;text-align: justify;word-wrap: break-word;word-break:normal;max-width:900px}
+.sicknessPage .front-return-list .Btn-edit{position: absolute;right: 0;top: 50%;height: 62px;margin-top: -26px}
+.sicknessPage .front-return-list .Btn-edit a{display: inline-block;margin-bottom: 10px;cursor: pointer;}
+.sicknessPage .addareturn{ display: block; text-align:center; font-size:16px; color:#1ea8fb; padding-top:20px; }
+.sicknessPage .jiaohao-icon{position: absolute;left: 50%;top: 50%;background: url('../images/color_user_icon.png') no-repeat; width:15px;margin-left:-8px;}
+.sicknessPage .tianjia-icon{ width:15px; height:15px; position:static;left:0; top:0; display:inline-block; background-position: -24px 0; vertical-align:middle; margin-right:10px; }
+.sicknessPage .midle{vertical-align: middle;}
+.sicknessPage .hei50{height: 50px;display: inline-block;line-height: 50px;font-size: 20px;padding-right: 5px;}
+
+/* 产品急销 */
+.sicknessPage .repaySetup .front-return-list{padding: 56px 60px 40px 140px;position: relative;}
+.sicknessPage .repaySetup .front-return-list img{position: absolute;width: 120px;height: 120px;left: 0;top: 40px;}
+.sicknessPage .repaySetup .front-return-list p{height: 56px;overflow: hidden;}
+
+
+/* 大病救助（亲属验证） */
+.sickRelatives .sickwhiteBg .formbox{width: 600px}
+.sickRelatives .formbox dt{width: 23%;}
+.sickRelatives .formbox dd{padding-left: 24%;}
+.sickRelatives .formbox .addImgBox{width: 120%;}
+.sickRelatives .formbox .addImgBoxUl ul{float: left;}
+
+
+/* 帮助中心和新闻资讯公用样式 */
+.helpAndNewsPage .layout{overflow: hidden;}
+.helpAndNewsPage .minHeiBox{min-height: 610px}
+.helpAndNewsPage .leftBox, .helpAndNewsPage .rightBox{background-color: #fff;margin-bottom: -1000px;padding-bottom: 1000px}
+.helpAndNewsPage .leftBox{width: 21.32%}
+.helpAndNewsPage .rightBox{width: 77.1%}
+.helpAndNewsPage .leftBox a{display: block;height: 59px;line-height: 59px;border-bottom: 1px solid #ddd;text-align: center;position: relative;font-size: 0;color: #333;}
+.helpAndNewsPage .leftBox .spbox{display: inline-block;min-width: 125px;text-align: left;position: relative;padding-left: 28px;font-size: 14px;}
+.helpAndNewsPage .leftBox i{background: url('../images/help_centerIcon.png') no-repeat;position: absolute;left: 0;top: 50%;}
+.helpAndNewsPage .leftBox b{left: 0;top: 0;height: 100%;width: 5px;}
+.helpAndNewsPage .leftBox .active b{position: absolute;}
+
+
+/* 帮助中心 */
+.help-centerPage{background-color: #f7f7f7;padding-bottom: 35px}
+.help-centerPage .locationBox{height: 54px;line-height: 54px;}
+.help-centerPage .leftBox .i1{width: 20px;height: 15px;margin-top: -7px;background-position: 0 0}
+.help-centerPage .leftBox .i2{width: 16px;height: 16px;margin-top: -8px;background-position: -20px 0}
+.help-centerPage .leftBox .i3{width: 17px;height: 17px;margin-top: -8px;background-position: -36px 0}
+.help-centerPage .leftBox .i4{width: 17px;height: 17px;margin-top: -8px;background-position: -53px 0}
+.help-centerPage .leftBox .active .i1{background: url('../images/color_front_zxs.png') no-repeat -120px 0}
+.help-centerPage .leftBox .active .i2{background: url('../images/color_front_zxs.png') no-repeat -140px 0}
+.help-centerPage .leftBox .active .i3{background: url('../images/color_front_zxs.png') no-repeat -156px 0}
+.help-centerPage .leftBox .active .i4{background: url('../images/color_front_zxs.png') no-repeat -173px 0}
+.help-centerPage .rightBox .cont{padding: 15px 3.1% 30px}
+.help-centerPage .rightBox dl.list{padding: 15px 0 15px;border-bottom: 1px solid #ddd;}
+.help-centerPage .rightBox dt.til{position: relative;cursor: pointer;}
+.help-centerPage .rightBox dt.til i,.help-centerPage .rightBox dt.til b, .help-centerPage .rightBox dt.til span{display: inline-block;vertical-align: middle;}
+.help-centerPage .rightBox dt.til i{width: 19px;height: 19px;background: url('../images/color_front_zxs.png') no-repeat -190px 0;margin-right: 7px}
+.help-centerPage .rightBox dt.til .title{font-size: 16px;color: #333}
+.help-centerPage .rightBox dt.til b{background: url('../images/color_front_zxs.png') no-repeat -209px -6px;width: 10px;height: 5px;margin-left: 5px}
+.help-centerPage .rightBox .Btn-til-zxs{position: absolute;right: 0;top: 0}
+.help-centerPage .rightBox .Btn-til-zxs .down{display: none;}
+.help-centerPage .rightBox .offleft{padding: 10px  0 0 30px;color: #333;display: none;}
+.help-centerPage .rightBox .offleft p{line-height: 30px;}
+.help-centerPage .rightBox dl.active .offleft{display: block;}
+.help-centerPage .rightBox dl.active .Btn-til-zxs .down{display: inline-block;}
+.help-centerPage .rightBox dl.active .Btn-til-zxs .up{display: none;}
+.help-centerPage .rightBox dl.active dt.til b{background-position: -209px 0}
+
+
+/* 新闻资讯-详情 */
+.newsInfoPage{background-color: #f7f7f7;}
+.newsInfoPage .leftBox .spbox{min-width: 75px}
+.newsInfoPage .leftBox .i1{width: 18px;height: 17px;margin-top: -8px;background-position: -89px 0}
+.newsInfoPage .leftBox .i2{width: 16px;height: 16px;margin-top: -8px;background-position: -70px 0}
+.newsInfoPage .leftBox .active .i1{background: url('../images/color_front_zxs.png') no-repeat -238px 0}
+.newsInfoPage .leftBox .active .i2{background: url('../images/color_front_zxs.png') no-repeat -219px 0}
+.newsInfoPage .rightBox .cont{padding: 15px 7.4% 30px}
+.newsInfoPage .rightBox .h2til{font-size: 24px;color: #333;padding-bottom: 10px}
+.newsInfoPage .rightBox .authorBox{padding-bottom: 15px;color: #999}
+.newsInfoPage .rightBox .authorBox span, .newsInfoPage .rightBox .authorBox i{display: inline-block;vertical-align: middle;}
+.newsInfoPage .rightBox .author{color: #333}
+.newsInfoPage .rightBox .authorBox i{background: url('../images/help_centerIcon.png') no-repeat;margin-right: 5px}
+.newsInfoPage .rightBox .authorBox .i1{width: 12px;height: 12px;background-position: -107px 0}
+.newsInfoPage .rightBox .authorBox .i2{width: 12px;height: 12px;background-position: -119px 0}
+.newsInfoPage .rightBox .authorBox .i3{width: 18px;height: 10px;background-position: -131px 0}
+.newsInfoPage .rightBox .authorBox span{padding-right: 28px}
+.newsInfoPage .rightBox .article p{text-indent: 32px;font-size: 16px;line-height: 36px;}
+
+/* 新闻资讯 */
+.f-news_list{ margin-left:-25px; }
+.f-news_list li { height: 45px; line-height: 45px; font-size: 16px; }
+.f-news_list a { width: 600px; display: block; padding-left: 25px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;position: relative;}
+.f-news_list .ico{left: 0;top: 50%;margin-top: -6px;width: 15px;height: 12px;background: url("../images/color_front_zxs.png") no-repeat -256px 0;}
+.f-news_list a:hover .ico{position: absolute;}
+
+
+
+.hvr-float-shadow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+[class^="hvr-"] {
+    margin: .4em;
+    padding: 1em;
+    cursor: pointer;
+    background: #e1e1e1;
+    text-decoration: none;
+    color: #666;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.Red{color: #ff2755}
+.fz18{font-size: 18px;}
+.fz36{font-size: 36px;}
+
+
+
+/*关于我们*/
+.r_main{ width:72.1%; min-height:655px; float:right; background:#fff; padding:15px 30px 30px 30px;}
+.r_main .hd{ font-size:20px; font-weight:bold; color:#333; margin-bottom:15px; border-bottom:1px solid #ddd; padding-bottom:15px;}
+.aboutus p { line-height: 24px; margin-bottom: 20px; }
+.aboutus img { max-width: 100%; }
+/*关于我们   2016-11-25*/
+body .helpAndNewsPage .leftBox .about-ico{ width: 18px; height: 16px; display:inline-block;  background: url('../images/about_icon.png') no-repeat;position: absolute;left: 0;top: 50%; margin-top:-8px; }
+body .help-centerPage .leftBox .about-ico01{background-position: 0 0;}
+body .help-centerPage .leftBox .about-ico02{background-position:-28px 0;}
+body .help-centerPage .leftBox .about-ico03{background-position:-56px 0;}
+body .help-centerPage .leftBox .about-ico04{background-position:-84px 0;}
+body .help-centerPage .leftBox .about-ico05{background-position:-112px 0;}
+body .help-centerPage .leftBox .about-ico06{background-position:-140px 0;}
+body .help-centerPage .leftBox .about-ico07{background-position:-168px 0;}
+body .help-centerPage .leftBox .about-ico08{background-position:-196px 0;}
+body .help-centerPage .leftBox .active .about-ico01{background: url('../images/color_about_icon.png') no-repeat 0 0;}
+body .help-centerPage .leftBox .active .about-ico02{background: url('../images/color_about_icon.png') no-repeat -28px 0;}
+body .help-centerPage .leftBox .active .about-ico03{background: url('../images/color_about_icon.png') no-repeat -56px 0;}
+body .help-centerPage .leftBox .active .about-ico04{background: url('../images/color_about_icon.png') no-repeat -84px 0;}
+body .help-centerPage .leftBox .active .about-ico05{background: url('../images/color_about_icon.png') no-repeat -112px 0;}
+body .help-centerPage .leftBox .active .about-ico06{background: url('../images/color_about_icon.png') no-repeat -140px 0;}
+body .help-centerPage .leftBox .active .about-ico07{background: url('../images/color_about_icon.png') no-repeat -168px 0;}
+body .help-centerPage .leftBox .active .about-ico08{background: url('../images/color_about_icon.png') no-repeat -196px 0;}
+
+
+
+
+/*主色-蓝色*/
+.xm-all-tex .cur{ background:#1ea8fb; color:#fff;}
+.sicknessPage .setTimeBox .l_btn{left: 0;border-right: 1px solid #1ea8fb}
+.sicknessPage .setTimeBox .r_btn{right: 0;border-left: 1px solid #1ea8fb}
+
+/*主色-蓝色-透明度*/
+
+
+/*辅色-橙*/
+
+
+/*辅色-橙-透明度*/

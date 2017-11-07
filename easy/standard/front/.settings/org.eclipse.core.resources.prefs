@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/webapp=UTF-8
+encoding//src/main/webapp/WEB-INF=UTF-8
+encoding//src/main/webapp/WEB-INF/include/easy/layout/footer.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/aboutUs/aboutUs.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/aboutUs/leftMainAbout.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/aboutUs/newbieGuide.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/helpCenter/helpCenter.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/home/homePage.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/home/homePageBody.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/pages/easy/project/projectDetails.jsp=UTF-8
+encoding/<project>=UTF-8

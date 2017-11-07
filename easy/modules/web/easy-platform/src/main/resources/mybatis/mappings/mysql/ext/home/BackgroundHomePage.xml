@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+
+	<!-- 查询今日数据 -->
+	<select id="findQscTodayData"
+		resultType="com.dimeng.entity.ext.home.back.HomeTodayDataResp">
+		SELECT
+		(select count(1) from t_user b   where
+		date_format(b.date_register,'%Y-%m-%d') =
+		date_format(now(),'%Y-%m-%d') and b.source_type = 4) 
+		as registerPerCount, 
+		(select COUNT(1) login_count
+		FROM t_user tu
+		WHERE DATE_FORMAT(tu.date_login,'%Y-%m-%d') =
+		DATE_FORMAT(now(),'%Y-%m-%d')) as loginUserCount
+	</select>
+
+	<!-- 查询后台首页统计数据 -->
+	<select id="findQscHomeStatData"
+		resultType="com.dimeng.entity.ext.home.back.HomeStatDataResp">
+		 SELECT
+			(
+				SELECT
+					IFNULL(sum(raised_amount), 0.00)
+				FROM
+					t_project_info 
+			) AS crowdfundingAmount,
+			(
+				SELECT
+					IFNULL(sum(raised_amount), 0.00)
+				FROM
+					t_project_info
+				WHERE
+					project_status = 2
+			) AS cfdSuccessAmount,
+			(
+				SELECT
+					count(1)
+				FROM
+					t_project_info
+				WHERE
+					project_status = 2
+			) AS sucProjectCount,
+			(
+				SELECT
+					COUNT(1)
+				FROM
+					t_order_support sup
+				WHERE
+				sup.`status` NOT IN(1,2)
+				AND  IFNULL(sup.refund_type,0) IN(0,1,2)
+			) AS supportPersonTime,
+			(
+				SELECT
+					IFNULL(sum(withdraw_amount), 0.00)
+				FROM
+					t_bus_withdraw_apply
+				WHERE
+					withdraw_status = 2
+			) AS withdrawAmount
+	</select>
+
+	<!-- 查询待办事项 -->
+	<select id="findQscHomeBacklog" resultType="com.dimeng.entity.ext.home.back.HomeBacklogResp">
+		 select
+			(select count(1) from t_project_validation pro where pro.audit_status = 1 ) as proVerification,
+			(select count(1) from t_bus_withdraw_apply tub  where  tub.withdraw_status = 0 ) as withdrawAudit,
+			(select count(1) from t_bus_withdraw_apply tub  where  tub.withdraw_status = 1 ) as withdrawLoan,
+			(select count(1) from t_order_support where status = 7 ) as orderFailRefund
+	</select>
+
+</mapper>

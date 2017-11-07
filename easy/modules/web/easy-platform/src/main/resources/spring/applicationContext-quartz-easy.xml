@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context-4.1.xsd
+					       http://www.springframework.org/schema/beans 
+					       http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+					       http://www.springframework.org/schema/aop 
+					       http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<!-- 线程池配置 -->
+	<bean id="executor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="10" />
+		<property name="maxPoolSize" value="10" />
+		<property name="queueCapacity" value="10" />
+		<property name="keepAliveSeconds" value="2000" />
+		<property name="rejectedExecutionHandler">
+			<bean class="java.util.concurrent.ThreadPoolExecutor$AbortPolicy" />
+		</property>
+	</bean>
+ 
+	<!-- 在线用户统计定时任务 开始 -->
+	<bean id="insertStatsUserOnlineJob"
+		class="com.dimeng.modules.expand.services.commonJobs.InsertStatsUserOnlineJob"></bean>
+	<!-- 调度业务逻辑 -->
+	<bean id="insertStatsUserOnlineJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass">
+			<value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="insertStatsUserOnlineJob" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<!--增加调度触发器 -->
+	<bean id="insertStatsUserOnlineJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="insertStatsUserOnlineJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 0-23 * * ?</value>
+		</property>
+	</bean>
+	<!-- 在线用户统计定时任务统计数据 结束 -->
+	
+	
+	<!-- 修改广告图片状态定时任务 开始 -->
+	<bean id="updateAaveriseStatsJob"
+		class="com.dimeng.modules.expand.services.commonJobs.UpdateSiteAdveriseStatusJob"></bean>
+	<!-- 调度业务逻辑 -->
+	<bean id="updateAaveriseStatsJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass">
+			<value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="updateAaveriseStatsJob" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<!--增加调度触发器 -->
+	<bean id="updateAaveriseStatsJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updateAaveriseStatsJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value>
+		</property>
+	</bean>
+	<!-- 修改广告图片状态定时任务 结束 -->
+	
+	<!-- 清空发送次数定时任务 开始 -->
+	<bean id="updateSystemSendCountJob"
+		class="com.dimeng.modules.expand.services.commonJobs.UpdateSystemSendCountJob"></bean>
+	<!-- 调度业务逻辑 -->
+	<bean id="updateSystemSendCountJobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="Durability" value="true" />
+		<property name="jobClass">
+			<value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean
+			</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="updateSystemSendCountJob" />
+				<entry key="targetMethod" value="execute" />
+			</map>
+		</property>
+	</bean>
+	<!--增加调度触发器 -->
+	<bean id="updateSystemSendCountJobTrigger"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updateSystemSendCountJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 2 * * ?</value>
+		</property>
+	</bean>
+	<!-- 清空发送次数定时任务 结束 -->
+
+	
+	<!--  用户统计 -->
+	<bean id="insertStatUserJob"
+			class="com.dimeng.modules.jobs.statistics.InsertStatsUserJob"></bean>
+		  <!-- 调度业务逻辑  -->
+		<bean id="insertStatUserJobDetail"
+			class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+			<property name="Durability" value="true" />
+			<property name="jobClass">
+				<value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean
+				</value>
+			</property>
+			<property name="jobDataAsMap">
+				<map>
+					<entry key="targetObject" value="insertStatUserJob" />
+					<entry key="targetMethod" value="execute" />
+				</map>
+			</property>
+		</bean>
+		 <!-- 增加调度触发器   -->
+		<bean id="insertStatUserJobTrigger"
+			class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+			<property name="jobDetail">
+				<ref bean="insertStatUserJobDetail" />
+			</property>
+			<property name="cronExpression">
+				<value>0 0 2 * * ?</value>
+			</property>
+	</bean>
+	<!-- 用户统计结束 -->
+	
+	<!--  提现统计 -->
+	<bean id="insertStatWithdrawJob"
+			class="com.dimeng.modules.jobs.statistics.InsertStatsWithdrawJob"></bean>
+		  <!-- 调度业务逻辑  -->
+		<bean id="insertStatWithdrawJobDetail"
+			class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+			<property name="Durability" value="true" />
+			<property name="jobClass">
+				<value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean
+				</value>
+			</property>
+			<property name="jobDataAsMap">
+				<map>
+					<entry key="targetObject" value="insertStatWithdrawJob" />
+					<entry key="targetMethod" value="execute" />
+				</map>
+			</property>
+		</bean>
+		 <!-- 增加调度触发器   -->
+		<bean id="insertStatWithdrawJobTrigger"
+			class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+			<property name="jobDetail">
+				<ref bean="insertStatWithdrawJobDetail" />
+			</property>
+			<property name="cronExpression">
+				<value>0 0 2 * * ?</value>
+			</property>
+	</bean>
+	<!-- 提现统计结束 -->
+	  
+	<!-- 项目状态修改任务 -->
+	<bean id="updateProStatusDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="Durability" value="true"/>
+	    <property name="jobClass">
+	        <value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean</value>
+	    </property>
+	    <property name="jobDataAsMap">
+	        <map>
+	            <entry key="targetObject" value="serviceManageJob" />
+	            <entry key="targetMethod" value="proExecute" />
+	        </map>
+	    </property>
+	</bean>
+	<!--增加调度触发器  -->
+    <bean id="updateProStatusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+       <property name="jobDetail">
+           <ref bean="updateProStatusDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 1 0 * * ?</value>
+       </property>
+    </bean> 
+    	<!-- 提现统计结束 -->
+	  
+	<!-- 退款定时器  开始-->
+	<bean id="refundJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="Durability" value="true"/>
+	    <property name="jobClass">
+	        <value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean</value>
+	    </property>
+	    <property name="jobDataAsMap">
+	        <map>
+	            <entry key="targetObject" value="weChatRefundManageJob" />
+	            <entry key="targetMethod" value="refundExecute" />
+	        </map>
+	    </property>
+	</bean>
+	<!--增加调度触发器  -->
+    <bean id="refundJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+       <property name="jobDetail">
+           <ref bean="refundJobDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 0/10 * * * ?</value>
+       </property>
+    </bean> 
+    <!-- 退款对账定时器 结束 -->
+    	<!-- 退款定时器  开始-->
+	<bean id="refundCheckJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="Durability" value="true"/>
+	    <property name="jobClass">
+	        <value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean</value>
+	    </property>
+	    <property name="jobDataAsMap">
+	        <map>
+	            <entry key="targetObject" value="weChatRefundManageJob" />
+	            <entry key="targetMethod" value="refundCheckExecute" />
+	        </map>
+	    </property>
+	</bean>
+	<!--增加调度触发器  -->
+    <bean id="refundCheckJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+       <property name="jobDetail">
+           <ref bean="refundCheckJobDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 0 0/2 * * ?</value>
+       </property>
+    </bean> 
+    <!-- 退款对账定时器 结束 -->
+    
+	
+	<!-- 订单管理定时任务 -->
+	<bean id="orderManageDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="Durability" value="true"/>
+	    <property name="jobClass">
+	        <value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean</value>
+	    </property>
+	    <property name="jobDataAsMap">
+	        <map>
+	            <entry key="targetObject" value="serviceManageJob" />
+	            <entry key="targetMethod" value="orderExecute" />
+	        </map>
+	    </property>
+	</bean>
+	<!--增加调度触发器  -->
+    <bean id="orderManageJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+       <property name="jobDetail">
+           <ref bean="orderManageDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 0/5 * * * ?</value>
+       </property>
+    </bean> 
+	<!-- 订单管理定时任务结束 -->
+	
+	 
+	<!-- 确认收货定时任务 -->
+	<bean id="takeDeliveryDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+	    <property name="Durability" value="true"/>
+	    <property name="jobClass">
+	        <value>com.dimeng.framework.abilitys.quartz.MyDetailQuartzJobBean</value>
+	    </property>
+	    <property name="jobDataAsMap">
+	        <map>
+	            <entry key="targetObject" value="serviceManageJob" />
+	            <entry key="targetMethod" value="takeDelivery" />
+	        </map>
+	    </property>
+	</bean>
+	<!--增加调度触发器  -->
+    <bean id="takeDeliveryJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+       <property name="jobDetail">
+           <ref bean="takeDeliveryDetail" />
+       </property>
+       <property name="cronExpression">
+           <value>0 30 0 * * ?</value>
+       </property>
+    </bean> 
+	<!-- 确认收货定时任务结束 -->
+	 
+	<!-- 总管理类，如果lazy-init='false', 如果lazy-init='true',则需要实例化该bean才能执行调度程序 -->
+	<bean id="JobScheduler" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!--QuartzScheduler 延时启动，应用启动完后 QuartzScheduler 再启动（单位是秒） -->
+		<!-- <property name="startupDelay" value="30"/> -->
+		<property name="configLocation" value="classpath:conf/quartz-cluster.properties" />
+		<property name="triggers">
+			<list>
+				<!-- 项目订单默认收货定时任务 -->
+				<ref bean="takeDeliveryJobTrigger" /> 
+				<!-- 项目筹资期限到期定时任务  -->
+				<ref bean="updateProStatusJobTrigger" /> 
+				<!-- 订单失效定时任务 -->
+				<ref bean="orderManageJobTrigger" />
+				<!-- 在线用户统计定时任务 -->
+				<ref bean="insertStatsUserOnlineJobTrigger" />
+				<!-- 修改广告图片状态定时任务 -->
+				<ref bean="updateAaveriseStatsJobTrigger" />
+				<!-- 清空发送次数定时任务 -->
+				<ref bean="updateSystemSendCountJobTrigger" /> 
+				<!-- 用户统计定时任务-->
+				<ref bean="insertStatUserJobTrigger" />
+				<!-- 提现统计定时任务-->
+				<ref bean="insertStatWithdrawJobTrigger" />
+				<!-- 退款对账定时器 -->
+				<ref bean="refundCheckJobTrigger" />
+				<!-- 退款定时器 -->
+			    <ref bean="refundJobTrigger" />
+			    
+			</list>
+		</property>
+		<property name="taskExecutor" ref="executor" />
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+	</bean>
+
+</beans>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+	
+	<resultMap type="com.dimeng.entity.ext.expand.FindProjectLabelSetResp" id="FindProjectLabelSetRespResultMap">
+		<result column="project_type" property="proType"/>
+		<result column="label_name" property="labelNames"/>
+		<result column="user_name" property="updateUser"/>
+		<result column="date_create" property="updateTime"/>
+	</resultMap>
+	
+	<!-- 后台-运营管理-项目标签列表 -->
+	<select id="findProjectLabelList" resultMap="FindProjectLabelSetRespResultMap" parameterType="com.dimeng.model.expand.FindProjectBasicSetReq">
+		SELECT tpltg.project_type, tpltg.label_name, tsu.user_name, DATE_FORMAT(tplt.date_create,'%Y-%m-%d %T') as date_create FROM (SELECT project_type, MAX(label_type_id) AS label_type_id, GROUP_CONCAT(label_name) AS label_name FROM t_project_label_type GROUP BY project_type) tpltg LEFT JOIN t_project_label_type tplt ON tplt.label_type_id = tpltg.label_type_id LEFT JOIN t_system_user tsu ON tplt.create_id = tsu.user_id
+        <where>
+			<if test="updateUser != null and updateUser != ''">
+				tsu.user_name LIKE CONCAT ('%',trim(#{updateUser,jdbcType=VARCHAR}),'%')
+			</if>
+			<if test="staDate != null and staDate != ''">
+				AND DATE_FORMAT(tplt.date_create,'%Y%m%d') &gt;= DATE_FORMAT(#{staDate,jdbcType=VARCHAR},'%Y%m%d')
+			</if>
+			<if test="endDate != null and endDate != ''">
+				AND DATE_FORMAT(tplt.date_create,'%Y%m%d') &lt;= DATE_FORMAT(#{endDate,jdbcType=VARCHAR},'%Y%m%d')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 后台-运营管理-某项目类型的项目标签列表 -->
+	<select id="findProjectLabels" resultMap="TProjectLabelTypeResultMap" parameterType="java.lang.String" >
+		SELECT 
+		<include refid="TProjectLabelType_Column_List" />
+		FROM t_project_label_type
+		WHERE 1=1
+		<if test="projectType != null and projectType != ''">
+			AND project_type = #{projectType,jdbcType=VARCHAR}
+		</if>
+	</select>
+	 
+	<!-- 后台-运营管理-查询图片模板列表 -->
+	<select id="findImageTemplateList" resultMap="TSiteImageTemplateResultMap" parameterType="com.dimeng.model.expand.ImgModelReq">
+		SELECT 
+	    <include refid="TSiteImageTemplate_Column_List" />
+	    FROM t_site_image_template 
+	    WHERE 1=1
+	    <if test="templateId != null and templateId != ''">
+			AND template_id = #{templateId,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+</mapper>

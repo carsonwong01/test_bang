@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="recommendResultMap" type="com.dimeng.model.bus.RecommendProReq" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="recommend_pc" property="isPc" jdbcType="VARCHAR" />
+    <result column="recommend_weixin" property="isWeixin" jdbcType="VARCHAR" /> 
+    <result column="recommend_app" property="isApp" jdbcType="VARCHAR" /> 
+  </resultMap>
+   <select id="findrecommendInfo" resultMap="recommendResultMap" parameterType="com.dimeng.model.bus.RecommendProReq" >
+    select 
+    recommend_pc,recommend_weixin,recommend_app
+    from t_site_home_project
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>
