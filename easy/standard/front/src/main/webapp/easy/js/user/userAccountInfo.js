@@ -7,8 +7,9 @@ var UserAccountInfoController = DM.Controller.sub({
 		else if (hour < 14){return "中午好";}
 		else if (hour < 17){return "下午好";}
 		else if (hour < 19){return "傍晚好";}
-		else if (hour < 22){return "晚上好";} 
-		else {document.write("夜里好");}
+		else if (hour < 22){return "晚上好";}
+        else {return "夜里好";}
+		// else {document.write("夜里好");}
 	},
 	getRecommendList : function() {
 		var _self = this;

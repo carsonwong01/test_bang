@@ -141,9 +141,9 @@ List<SiteProtocolModelResp> list = (List<SiteProtocolModelResp>)SystemCache.getC
 <script type="text/javascript"> 
 	  var obj = new WxLogin({
 		    id:"ewm", 
-		    appid: "wxe2a3d0c7fa155ac5", 
+		    appid: "wxf3a021d03e708ac2",
 		    scope: "snsapi_login", 
-		    redirect_uri: "http%3a%2f%2fwww.72xs.com%2ffrontHome%2fwxCallback.do",
+		    redirect_uri: "http%3a%2f%2f365bangnichou.com%2ffrontHome%2fwxCallback.do",
 		    state: "116ec67e09f728cfb78eb1577",
 		    style: "black",
 		    href: ""

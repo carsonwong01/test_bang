@@ -49,11 +49,25 @@ public class FindUserListReq extends FindExportExcelParamsReq
      * 开始时间 注册
      */
     private String staTime;
-    
+
+    /**
+     * 用户类型
+     */
+    private String userType;
+
+
     /**
      * 结束时间
      */
     private String endTime;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public String getUserName()
     {

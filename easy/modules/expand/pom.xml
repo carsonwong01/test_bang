@@ -28,6 +28,11 @@
 			<artifactId>Base-service-user</artifactId>
 			<version>2.0.0</version>
 		</dependency>
-		
-	</dependencies>
+        <dependency>
+            <groupId>com.dimeng.platform.easy.modules</groupId>
+            <artifactId>Easy-service-home</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
+    </dependencies>
 </project>

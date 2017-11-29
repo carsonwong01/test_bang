@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao">
+
+<!--
+1、医院用户根据项目表中的createID（用户ID）来查询用户自己发起的项目
+2、个人用户根据医院ID查询医院，获取该医院的ID后，根据该ID来查询与该ID相关的项目，
+然后根据获取到的项目ID查询项目详情
+-->
+    <resultMap id="findHospitalProjectListResultMap" type="com.dimeng.entity.ext.bus.FindHospitalProjectBaseResp" >
+        <id column="project_id" property="projectId" />
+        <result column="project_name" property="title" />
+        <result column="target_amount" property="facTarget" />
+        <result column="raised_amount" property="supportAmt" />
+        <result column="supprot_times" property="supportTimes" />
+        <result column="remaining_day" property="remainingDay" />
+        <result column="project_status" property="projectStatus" />
+        <result column="cover_image_url" property="coverImgUrl" />
+        <result column="project_type" property="projectType" />
+        <result column="hospital_id" property="hospitalId" />
+        <result column="hospital_name" property="hospitalName" />
+        <!--???????????????????-->
+    </resultMap>
+
+
+
+<!-- 前台-查询指定医院发起的项目列表 -->
+    <select id="findHospitalProjectList" resultMap="findHospitalProjectListResultMap" parameterType="com.dimeng.model.bus.FindHospitalProjectBaseReq" >
+        SELECT
+        (
+        SELECT COUNT(tos.order_id) FROM t_order_support tos
+        WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
+        ) supprot_times,
+        tpi.project_id,
+        tpi.project_name,
+        floor(tpi.target_amount) target_amount,
+        tpi.project_type,
+        floor(tpi.raised_amount) raised_amount,
+        datediff(tpi.date_raised_end, now()) remaining_day,
+        tpi.project_status,
+        tpi.cover_image_url,
+        thb.hospital_id,
+        thb.hospital_name
+        FROM t_hospital_basic thb
+        LEFT JOIN t_project_info tpi ON tpi.project_creator_id = #{hospitalId,jdbcType=VARCHAR} AND tpi.project_status!='4'
+        <if test="projectStatus != null and projectStatus != ''">
+            AND tpi.project_status = #{projectStatus,jdbcType=VARCHAR}
+        </if>
+        ORDER BY tpi.date_update DESC
+    </select>
+ </mapper>
+        <!--WHERE tpi.project_creator_id = #{userId,jdbcType=VARCHAR} AND tpi.project_status!='4'-->
+        <!--LEFT JOIN t_project_info tpi ON tpf.project_id = tpi.project_id-->
+       <!--WHERE tpf.type = '1' AND tpf.user_id = #{userId,jdbcType=VARCHAR} AND tpi.project_status!='4'-->

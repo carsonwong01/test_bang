@@ -171,7 +171,7 @@
 .user-subject-box .formbox .addCoverIcon{display: block;width:102px;height:52px;background: url("../images/") no-repeat;cursor: pointer;text-align: center;padding-top:60px;}
 .user-subject-box .formbox .addCoverIcon span{font-size: 16px;color: #acacac;line-height: 24px;}
 .user-subject-box .tips{line-height: 24px; width:670px; }
-.user-subject-box .formpage .limitWord, ..sicknessbox  .redCol{color: #ff2755}
+.user-subject-box .formpage .limitWord, .sicknessbox  .redCol{color: #ff2755}
 .user-subject-box .input-midle{padding-right: 10px}
 .user-subject-box .input-midle label, .sicknessbox  .input-midle{display: inline-block;vertical-align: middle;}
 .user-subject-box .input-midle select{width: 145px;height: 48px;line-height: 48px;border: 1px solid #ddd;}

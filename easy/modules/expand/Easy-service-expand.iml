@@ -58,6 +58,7 @@
     <orderEntry type="library" name="Maven: com.dimeng.platform.base.modules:Base-service-message:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.dimeng.platform.base.modules:Base-service-expand:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.dimeng.platform.base.modules:Base-service-user:2.0.0" level="project" />
+    <orderEntry type="module" module-name="Easy-service-home" />
     <orderEntry type="module" module-name="Easy-common" />
     <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.zxing:javase:3.3.0" level="project" />

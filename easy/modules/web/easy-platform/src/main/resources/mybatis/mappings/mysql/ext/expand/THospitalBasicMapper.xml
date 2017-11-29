@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao" >
+  <resultMap id="THospitalBasicResultMap" type="com.dimeng.model.expand.HospitalBasicReq" >
+    <id column="hospital_id" property="hospitalId" jdbcType="VARCHAR" />
+    <result column="hospital_name" property="hospitalName" jdbcType="VARCHAR" />
+    <result column="hospital_num" property="hospitalNum" jdbcType="VARCHAR" />
+    <result column="hospital_grade" property="hospitalGrade" jdbcType="VARCHAR" />
+    <result column="hospital_Type" property="hospitalType" jdbcType="VARCHAR" />
+    <result column="hospital_abstract" property="hospitalAbstract" jdbcType="VARCHAR" />
+    <result column="hospital_image_url" property="hospitalImageUrl" jdbcType="VARCHAR" />
+    <result column="hospital_image_id" property="hospitalImageId" jdbcType="VARCHAR" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="hospital_mail" property="hospitalMail" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="office_tel" property="officeTel" jdbcType="VARCHAR" />
+    <result column="hospital_url" property="hospitalUrl" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="logo_url" property="logoUrl" jdbcType="VARCHAR" />
+    <result column="logo_id" property="logoId" jdbcType="VARCHAR" />
+    <result column="description_image_url" property="descirptionImageUrl" jdbcType="VARCHAR" />
+    <result column="description_image_id" property="descriptionImageId" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="THospitalBasic_Column_List" >
+    hospital_id,hospital_name,hospital_num,hospital_grade,hospital_Type,hospital_abstract,hospital_image_url,
+    hospital_image_id,link_name,mobile_phone,office_tel,hospital_url,province,city,
+    county,logo_url,logo_id,description_image_url,description_image_id,description
+  </sql>
+
+  <select id="findAllHospital" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+          parameterType="com.dimeng.model.expand.HospitalBasicReq">
+    SELECT
+    hospital_id hospitalId,
+    hospital_name hospitalName,
+    hospital_num hospitalNum,
+    hospital_grade hospitalGrade,
+    hospital_type hospitalType,
+    hospital_abstract hospitalAbstract,
+    hospital_image_url hospitalImageUrl,
+    hospital_image_id hospitalImageId,
+    link_name linkName,
+    hospital_mail hospitalMail,
+    mobile_phone mobilePhone,
+    office_tel officeTel,
+    hospital_url hospitalUrl,
+    province province,
+    city city,
+    county county,
+    logo_url logoUrl,
+    logo_id logoId,
+    description_image_url descirptionImageUrl,
+    description_image_id descriptionImageId,
+    description description
+    FROM t_hospital_basic
+  </select>
+
+  <select id="hospitalDetails" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+          parameterType="com.dimeng.model.expand.HospitalBasicReq">
+    SELECT
+    hospital_id hospitalId,
+    hospital_name hospitalName,
+    hospital_num hospitalNum,
+    hospital_grade hospitalGrade,
+    hospital_type hospitalType,
+    hospital_abstract hospitalAbstract,
+    hospital_image_url hospitalImageUrl,
+    hospital_image_id hospitalImageId,
+    link_name linkName,
+    hospital_mail hospitalMail,
+    mobile_phone mobilePhone,
+    office_tel officeTel,
+    hospital_url hospitalUrl,
+    province province,
+    city city,
+    county county,
+    logo_url logoUrl,
+    logo_id logoId,
+    description_image_url descirptionImageUrl,
+    description_image_id descriptionImageId,
+    description description
+    FROM t_hospital_basic
+    where 1=1
+    <!-- 2016-12-16-wenguanhai:由if改为choose-when -->
+    <choose>
+      <when test="hospitalId != null and hospitalId != ''">and t_hospital_basic.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
+      <otherwise>and t_hospital_basic.hospital_id=''</otherwise>
+    </choose>
+  </select>
+
+
+
+
+<!--      <when test="hospitalNum != null and hospitalNum != ''">and t_hospital_basic.hospital_num=#{hospitalNum,jdbcType=VARCHAR}</when>
+-->
+
+
+  <!--<select id="findHospitalById" resultType="com.dimeng.entity.ext.hospital.FindAllHospitalResp"-->
+          <!--parameterType="com.dimeng.model.hospital.HospitalBasicReq">-->
+    <!--SELECT-->
+    <!--<include refid="THospitalBasic_Column_List"/>-->
+    <!--from t_hospital_basic-->
+    <!--where hospital_id = #{hospitalId,jdbcType=VARCHAR}-->
+  <!--</select>-->
+
+  <!--<select id="findAllHospital" resultType="com.dimeng.entity.ext.hospital.FindAllHospitalResp"-->
+      <!--parameterType="com.dimeng.model.hospital.HospitalBasicReq">-->
+      <!--SELECT-->
+        <!--hospital_id hospitalId,-->
+        <!--hospital_name hospitalName,-->
+        <!--hospital_num hospitalNum,-->
+        <!--hospital_grade hospitalGrade,-->
+        <!--link_name linkName,-->
+        <!--mobile_phone mobilePhone-->
+      <!--FROM t_hospital_basic-->
+  <!--</select>-->
+
+
+<!--
+  <delete id="deleteHospital" parameterType="java.lang.String" >
+    delete from t_hospital_basic
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insertHospital" parameterType="com.dimeng.front.entity.hospital.HospitalBasicReq" >
+    insert into t_hospital_basic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="hospital_name != null" >
+        hospital_name,
+      </if>
+      <if test="hospital_num != null" >
+        hospital_num,
+      </if>
+      <if test="hospital_grade != null" >
+        hospital_grade,
+      </if>
+      <if test="hospital_abstract != null" >
+        hospital_abstract,
+      </if>
+      <if test="hospital_image_url != null" >
+        hospital_image_url,
+      </if>
+      <if test="hospital_image_id != null" >
+        hospital_image_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="link_name != null" >
+        link_name,
+      </if>
+      <if test="office_num != null" >
+        office_num,
+      </if>
+      <if test="num_status != null" >
+        num_status,
+      </if>
+      <if test="logo_url != null" >
+        logo_url,
+      </if>
+      <if test="logo_id != null" >
+        logo_id,
+      </if>
+      <if test="platform_card_bind != null" >
+        platform_card_bind,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="user_id != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_name != null" >
+        #{hospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_num != null" >
+        #{hospitalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_grade != null" >
+        #{hospitalGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_abstract != null" >
+        #{hospitalAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_image_url != null" >
+        #{hospitalImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital_image_id != null" >
+        #{hospitalImageId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ink_name != null" >
+        #{inkName,jdbcType=VARCHAR},
+      </if>
+      <if test="office_num != null" >
+        #{officeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="num_status != null" >
+        #{numStatus,jdbcType=CHAR},
+      </if>
+      <if test="logo_url != null" >
+        #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logo_id != null" >
+        #{logoId,jdbcType=VARCHAR},
+      </if>
+      <if test="platform_card_bind != null" >
+        #{platformCardBind,jdbcType=INT},
+    </trim>
+  </insert>
+  <update id="updateHospital" parameterType="com.dimeng.front.entity.hospital.HospitalBasicReq" >
+    update t_hospital_basic
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalName != null" >
+        hospital_name = #{hospitaltName,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalNum != null" >
+        hospital_num = #{hospitalNum,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalGrade != null" >
+        hospital_grade = #{hospitalGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalAbstract != null" >
+        hospital_abstract = #{hospitalAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalIamgeUrl != null" >
+        hospital_iamge_url = #{hospitalIamgeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalIamgeId != null" >
+        hospital_iamge_id = #{hospitalIamgeId,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=TEXT},
+      </if>
+      <if test="linkName != null" >
+        ling_name = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="officeNum != null" >
+        office_num = #{officeNum,jdbcType=TIMESTAMP},
+      </if>
+      <if test="numStatus != null" >
+        num_status = #{numStatus,jdbcType=CHAR},
+      </if>
+      <if test="logoUrl != null" >
+        logo_url = #{logoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="logoId != null" >
+        logo_id = #{logoId,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCardBind != null" >
+        platform_card_bind = #{platformCardBind,jdbcType=INT},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>-->
+</mapper>

@@ -1,23 +1,5 @@
 package com.dimeng.modules.home.services.impl;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.sf.ehcache.Element;
-
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
@@ -28,11 +10,7 @@ import com.dimeng.entity.ext.home.front.HomeNoticeListResp;
 import com.dimeng.entity.ext.home.front.HomeTotalResp;
 import com.dimeng.entity.ext.user.FrontUserInfo;
 import com.dimeng.entity.ext.user.UserOpenidResp;
-import com.dimeng.entity.table.user.TQUserBasic;
-import com.dimeng.entity.table.user.TUser;
-import com.dimeng.entity.table.user.TUserCapitalAccount;
-import com.dimeng.entity.table.user.TUserNotify;
-import com.dimeng.entity.table.user.TUserThirdParty;
+import com.dimeng.entity.table.user.*;
 import com.dimeng.enums.ThirdTypeEnum;
 import com.dimeng.framework.abilitys.encryptors.RSAEncryptor;
 import com.dimeng.framework.constants.DigitalAndStringConstant;
@@ -49,10 +27,19 @@ import com.dimeng.model.home.FrontLoginCheckReq;
 import com.dimeng.model.home.FrontRegisterReq;
 import com.dimeng.model.user.FindUserByOpendIdReq;
 import com.dimeng.modules.home.services.FrontIndexService;
-import com.dimeng.utils.Base64Decoder;
 import com.dimeng.utils.SpringBeanUtil;
 import com.dimeng.utils.SystemCache;
 import com.dimeng.utils.UUIDGenerate;
+import net.sf.ehcache.Element;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 /**
  * 前台首页service实现类-注册、登录
@@ -62,12 +49,12 @@ import com.dimeng.utils.UUIDGenerate;
 @Service
 public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndexService
 {
-    
+
     @Autowired
     SpringBeanUtil springBeanUtil;
-    
+
     private BaseDataResp resp = new BaseDataResp();
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public BaseDataResp frontTotalInfo(FrontIndexReq req)
@@ -75,17 +62,17 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
     {
         BaseDataResp resp = new BaseDataResp();
         Map<String, Object> map = new HashMap<String, Object>();
-        
+
         QueryEvent<FrontIndexReq> event = new QueryEvent<FrontIndexReq>();
         event.setObj(req);
         event.setStatement("findAdvertiseList");
         List<HomeAdvertiseResp> advertiseList = baseDao.findAllIsPageByCustom(event);
         map.put("advertiseList", advertiseList);
-        
+
         event.setStatement("findNoticelList");
         List<HomeNoticeListResp> noticelList = baseDao.findAllIsPageByCustom(event);
         map.put("noticelList", noticelList);
-        
+
         event.setStatement("findHomeTotal");
         HomeTotalResp homeTotal = (HomeTotalResp)baseDao.findOneByCustom(event);
         if(homeTotal.getRaiseTotal() == null){
@@ -99,7 +86,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public BaseDataResp findRecommendList(FrontIndexReq req)
@@ -117,7 +104,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         event.setObj(req);
         event.setStatement("findRecommendList");
         List<FindRecommendListResp> list = baseDao.findAllIsPageByCustom(event);
-        
+
         //格式化标签为List
         if (list != null && list.size() > 0)
         {
@@ -138,14 +125,14 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
                 findRecommendListResp.setProjectTag(null);
             }
         }
-        
+
         data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
-        
+
         resp.setData(data);
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
-    
+
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public BaseDataResp commonLoginCheck(FrontLoginCheckReq req)
@@ -175,7 +162,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
                     if(resp.getCode().equals(IDiMengResultCode.Commons.SUCCESS)){
                         resp.setCode(IDiMengResultCode.UserManager.USER_INSERTINFO_OK);
                     }
-                    return resp; 
+                    return resp;
                 }//判断用户是否锁定  1：正常 2：锁定  3拉黑，拉黑是可以登录的
                 else if (CommonConstant.TWO.equals(loginUserResp.getUserStatus()))
                 {
@@ -217,7 +204,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
                     {
                         throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
                     }
-                    
+
                     //获取用户的公众号openId
                     FindUserByOpendIdReq openReq = new FindUserByOpendIdReq();
                     openReq.setUserId(loginUserResp.getUserId());
@@ -227,7 +214,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
                     UserOpenidResp openidResp = (UserOpenidResp) baseDao.findOneByCustom(event);
                     if(openidResp != null && StringUtils.isNotBlank(openidResp.getOpendId())){
                     	loginUserResp.setGzhyhOpenId(openidResp.getOpendId());
-                    } 
+                    }
                     getToken(req.getImei(), loginUserResp, resp);
                 }
             }
@@ -243,7 +230,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         }
         return resp;
     }
-    
+
     private void getToken(String imei, FrontUserInfo loginUserResp, BaseDataResp resp)
         throws Exception
     {
@@ -260,7 +247,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         resp.setData(loginUserResp);
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
     }
-    
+
     /**
      * 更新缓存登录统计
      * <功能详细描述>
@@ -280,10 +267,10 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         }
         systemCache.put(new Element("loginCount", loginCount));
     }
-    
+
     /**
      * 点击注册后，校验用户名的唯一
-     * @throws ServicesException 
+     * @throws ServicesException
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
     private BaseDataResp checkUserNameUniqueLast(FrontRegisterReq req) throws ServicesException
@@ -315,10 +302,10 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
                  {
                      Calendar c = new GregorianCalendar();
                      Date date = DateUtil.getNow();
-                     c.setTime(date); 
-                     c.add(Calendar.SECOND,Integer.parseInt(req.getTokenExpireIn())); 
-                     date=c.getTime();  
-                     tirdparty.setFailTime(date); 
+                     c.setTime(date);
+                     c.add(Calendar.SECOND,Integer.parseInt(req.getTokenExpireIn()));
+                     date=c.getTime();
+                     tirdparty.setFailTime(date);
                  }
                  tirdparty.setHeadImg(req.getHeadPortrait());
                  tirdparty.setNickName(req.getNickname());
@@ -331,7 +318,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
                  if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tirdparty))
                  {
                      throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
-                 } 
+                 }
                  resp.setCode(IDiMengResultCode.UserManager.USER_ERROR_LOGINNAME_EXIST);
         	 }else{
         		 resp.setCode(IDiMengResultCode.UserManager.USER_IS_BOUNDERR);
@@ -343,14 +330,14 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         }
         return resp;
     }
-    
+
     /**
      * 用户注册
      */
     @Override
     public BaseDataResp insertFrontUserInfo(FrontRegisterReq req)
         throws Exception
-    { 
+    {
         //校验手机号格式是否正确
         if (!req.getPhoneNumber().trim().matches(("1[0-9]{10}")))
         {
@@ -365,11 +352,11 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         }
         return resp;
     }
-    
+
     /**
      * 校验通过后，执行插入操作
-     * @throws IllegalAccessException 
-     * @throws InvocationTargetException 
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
      */
     @SuppressWarnings({"unchecked"})
     private BaseDataResp insertTable(FrontRegisterReq insertReq)
@@ -388,7 +375,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         {
             throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
         }
-        //2、新增用户基本信息表 -登录授权方式，如果不是sj则说明是第三方授权登录的  
+        //2、新增用户基本信息表 -登录授权方式，如果不是sj则说明是第三方授权登录的
         TQUserBasic userBase = new TQUserBasic();
         userBase.setUserId(tuser.getUserId());
         userBase.setSex(insertReq.getSex());
@@ -404,12 +391,12 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         }else{
             userBase.setNickName(insertReq.getNickname());
             userBase.setImageUrl(insertReq.getHeadPortrait());
-        } 
+        }
         if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userBase))
         {
             throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
         }
-        
+
         //不是手机号单独注册的，第三方授权登录注册    登录授权方式-1 手机  2 微信 3 微博 4 QQ
         if (!ThirdTypeEnum.SJ.dataBaseVal.equals(insertReq.getThirdType()))
         {
@@ -421,9 +408,9 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
             {
                 Calendar c = new GregorianCalendar();
                 Date date = DateUtil.getNow();
-                c.setTime(date); 
-                c.add(Calendar.SECOND,Integer.parseInt(insertReq.getTokenExpireIn())); 
-                date=c.getTime();  
+                c.setTime(date);
+                c.add(Calendar.SECOND,Integer.parseInt(insertReq.getTokenExpireIn()));
+                date=c.getTime();
                 tirdparty.setFailTime(date);
             }
             tirdparty.setHeadImg(insertReq.getHeadPortrait());
@@ -457,7 +444,7 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public BaseDataResp findRecommend()
@@ -473,5 +460,5 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
-     
+
 }
