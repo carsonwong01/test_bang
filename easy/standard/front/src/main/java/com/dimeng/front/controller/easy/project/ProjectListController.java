@@ -1,7 +1,6 @@
 package com.dimeng.front.controller.easy.project;
 
 import com.alibaba.fastjson.JSON;
-import com.dimeng.enums.ProjectStatusEnum;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.model.bus.FindProjectListReq;
 import com.dimeng.model.home.FrontIndexReq;
@@ -41,10 +40,7 @@ public class ProjectListController extends BaseController
     @RequestMapping(value = "/projectList.do")
     public Object projectList(HttpServletRequest request, HttpServletResponse response)
     {
-        
-//        List<FindAllTProjectLabelTypeResp> allTProjectLabelType = (List<FindAllTProjectLabelTypeResp>)SystemCache.getCache(SystemConstant.CacheKey.PROJECT_LABEL_LIST);
         ModelAndView mv = new ModelAndView("easy/project/projectList.page");
-  //      mv.addObject("allTProjectLabelType",allTProjectLabelType);
         return mv;
     }
     
@@ -90,28 +86,5 @@ public class ProjectListController extends BaseController
             new CommonUtil().callInterfaceMethod(req, "project/query/v/projectList", RequestMethod.POST, request);
         return JSON.parse(data);
     }
-
-    /**
-     * 后台-查询众筹中项目列表数据
-     * <功能详细描述>
-     * @param req
-     * @param request
-     * @param response
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "frontPendingProject.do")
-    public Object pendingList(FindProjectListReq req, HttpServletRequest request, HttpServletResponse response)
-    {
-//        Map<String, Object> map = new HashMap<String, Object>();
-        req.setProjectStatus(ProjectStatusEnum.ZCZ.getDataBaseVal());
-        String data =
-                new CommonUtil().callInterfaceMethod(req, "project/query/v/projectList", RequestMethod.POST, request);
-//        map.put("allProjectList",CommonUtil.getJSONObject(data, null));
-//        map.put("req", req);
-        return JSON.parse(data);
-    }
-
-
 }
 

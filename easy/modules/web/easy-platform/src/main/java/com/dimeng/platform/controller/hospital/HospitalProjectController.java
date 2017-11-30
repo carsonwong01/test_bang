@@ -1,9 +1,10 @@
 package com.dimeng.platform.controller.hospital;
 
 import com.dimeng.constants.IDiMengResultCode;
+import com.dimeng.entity.table.hospital.THospitalBasic;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.framework.domain.BaseDataResp;
-import com.dimeng.model.bus.FindHospitalProjectBaseReq;
+import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.modules.hospital.services.FindHospitalProjectService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
  * 项目列表
  * <一句话功能简述>
  * <功能详细描述>
- * 
+ *
  * @author  zhangshuai
  * @version  [版本号, 2016年11月7日]
  */
@@ -37,15 +38,30 @@ public class HospitalProjectController extends BaseController
                     produces = {"application/json", "application/xml"})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
-    public Object findAllHospital(HttpEntity<FindHospitalProjectBaseReq> httpEntity, HttpServletRequest request)throws Exception{
+    public Object findHospitalProject(HttpEntity<HospitalBasicReq> httpEntity, HttpServletRequest request)throws Exception{
         BaseDataResp resp = this.validator(httpEntity);
-//        THospitalBasic hospitalBasic = new THospitalBasic();
-//        httpEntity.getBody().setHosptialId(hospitalBasic.getHospitalId());
+        THospitalBasic hospitalBasic = new THospitalBasic();
+        httpEntity.getBody().setHospitalId(hospitalBasic.getHospitalId());
         if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
         {
             return resp;
         }
         return findHospitalProjectService.findHospitalProject(httpEntity.getBody());
     }
+
+    @RequestMapping(value = "/{v}/findHosProjectSum",method = RequestMethod.POST,
+            produces = {"application/json", "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findHosProjectSum(HttpEntity<HospitalBasicReq> httpEntity, HttpServletRequest request)throws Exception{
+        BaseDataResp resp = this.validator(httpEntity);
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        return findHospitalProjectService.findHosProjectSum(httpEntity.getBody());
+    }
+
+
 }
 

@@ -12,7 +12,7 @@ public class THospitalBasic implements Serializable{
     private String hospitalAbstract;
     private String hospitalImageUrl;
     private String hospitalImageId;
-    private String descirption;
+    private String description;
     private String linkName;
     private String mobilePhone;
     private String hospitalMail;
@@ -23,26 +23,9 @@ public class THospitalBasic implements Serializable{
     private String county;
     private String logoUrl;
     private String logoId;
-    private String descirptionImageUrl;
+    private String descriptionImageUrl;
     private String descriptionImageId;
-
-    public THospitalBasic(){};
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
-    }
-
-    public String getHospitalMail() {
-        return hospitalMail;
-    }
-
-    public void setHospitalMail(String hospitalMail) {
-        this.hospitalMail = hospitalMail;
-    }
+    private String foundTime;
 
     public String getHospitalId() {
         return hospitalId;
@@ -108,12 +91,12 @@ public class THospitalBasic implements Serializable{
         this.hospitalImageId = hospitalImageId;
     }
 
-    public String getDescirption() {
-        return descirption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescirption(String descirption) {
-        this.descirption = descirption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLinkName() {
@@ -122,6 +105,22 @@ public class THospitalBasic implements Serializable{
 
     public void setLinkName(String linkName) {
         this.linkName = linkName;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getHospitalMail() {
+        return hospitalMail;
+    }
+
+    public void setHospitalMail(String hospitalMail) {
+        this.hospitalMail = hospitalMail;
     }
 
     public String getOfficeTel() {
@@ -180,12 +179,12 @@ public class THospitalBasic implements Serializable{
         this.logoId = logoId;
     }
 
-    public String getDescirptionImageUrl() {
-        return descirptionImageUrl;
+    public String getDescriptionImageUrl() {
+        return descriptionImageUrl;
     }
 
-    public void setDescirptionImageUrl(String descirptionImageUrl) {
-        this.descirptionImageUrl = descirptionImageUrl;
+    public void setDescriptionImageUrl(String descriptionImageUrl) {
+        this.descriptionImageUrl = descriptionImageUrl;
     }
 
     public String getDescriptionImageId() {
@@ -196,29 +195,12 @@ public class THospitalBasic implements Serializable{
         this.descriptionImageId = descriptionImageId;
     }
 
-    @Override
-    public String toString() {
-        return "HospitalBasicReq{" +
-                "hospitalId='" + hospitalId + '\'' +
-                ", hospitalName='" + hospitalName + '\'' +
-                ", hospitalNum='" + hospitalNum + '\'' +
-                ", hospitalGrade='" + hospitalGrade + '\'' +
-                ", hospitalType='" + hospitalType + '\'' +
-                ", hospitalAbstract='" + hospitalAbstract + '\'' +
-                ", hospitalImageUrl='" + hospitalImageUrl + '\'' +
-                ", hospitalImageId='" + hospitalImageId + '\'' +
-                ", descirption='" + descirption + '\'' +
-                ", linkName='" + linkName + '\'' +
-                ", mobilPhone='" + mobilePhone + '\'' +
-                ", officeTel='" + officeTel + '\'' +
-                ", hospitalUrl='" + hospitalUrl + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", county='" + county + '\'' +
-                ", logoUrl='" + logoUrl + '\'' +
-                ", logoId='" + logoId + '\'' +
-                ", descirptionImageUrl='" + descirptionImageUrl + '\'' +
-                ", descriptionImageId='" + descriptionImageId + '\'' +
-                '}';
+    public String getFoundTime() {
+        return foundTime;
     }
+
+    public void setFoundTime(String foundTime) {
+        this.foundTime = foundTime;
+    }
+
 }

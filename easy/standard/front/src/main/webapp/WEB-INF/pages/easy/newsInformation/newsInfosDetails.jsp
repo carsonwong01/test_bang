@@ -34,11 +34,9 @@
 			<div class='xim-qi'>
 				<p><i></i> <span>推荐资讯</span></p>
 				<ul class='ul-o'>
-					<li><i></i><a href=""><span>得了胃癌的我想活下去，想给父母尽孝，想穿婚纱。</span></a></li>
-					<li><i></i><a href=""><span>我是盐城滨海人沈孝国，患上多发性骨髓瘤，请大家帮帮</span></a></li>
-					<li><i></i><a href=""><span>谢谢朋友们的帮助</span></a></li>
-					<li><i></i><a href=""><span>我是盐城滨海人沈孝国，患上多发性骨髓瘤，请大家帮帮</span></a></li>
-					<li><i></i><a href=""><span>得了胃癌的我想活下去，想给父母尽孝，想穿婚纱。</span></a></li>
+					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101710301402384897"><span>“帮你筹”网站公告</span></a></li>
+					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101710301359133576"><span>“帮你筹”：打通互联网医疗救助通道</span></a></li>
+					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101711030957481719"><span>科技引领创新 智能改变生活</span></a></li>
 				</ul>
 			</div>
 

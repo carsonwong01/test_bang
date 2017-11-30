@@ -1,8 +1,11 @@
 package com.dimeng.model.expand;
 
+import java.util.List;
+
 public class HospitalBasicReq extends FindExportExcelParamsReq {
     //医院ID
     private String hospitalId;
+    private List<String> hospitalTypes;
     private String hospitalName;
     private String hospitalNum;
     private String hospitalGrade;
@@ -10,7 +13,7 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String hospitalAbstract;
     private String hospitalImageUrl;
     private String hospitalImageId;
-    private String descirption;
+    private String description;
     private String linkName;
     private String mobilePhone;
     private String hospitalMail;
@@ -21,24 +24,66 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String county;
     private String logoUrl;
     private String logoId;
-    private String descirptionImageUrl;
+    private String descriptionImageUrl;
     private String descriptionImageId;
+    private String foundTime;
 
-    public HospitalBasicReq(){};
-    public String getMobilePhone() {
-        return mobilePhone;
+    private String projectId;
+    private String projectName;
+    private String projectType;
+    private String targetAmount;
+    private String raisedAmount;
+    private String dateRaisedEnd;
+    private String dateCreate;
+    private String projectStatus;
+    private String coverImageUrl;
+    private String recipientRealName;
+    private String supportTimes;
+
+
+    private String allTargetAmount;
+    private String allRaisedAmount;
+    private String allSupprotTimes;
+    private String rate;
+
+    public String getRate() {
+        return rate;
     }
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 
-    public String getHospitalMail() {
-        return hospitalMail;
+    public String getAllTargetAmount() {
+        return allTargetAmount;
     }
 
-    public void setHospitalMail(String hospitalMail) {
-        this.hospitalMail = hospitalMail;
+    public void setAllTargetAmount(String allTargetAmount) {
+        this.allTargetAmount = allTargetAmount;
+    }
+
+    public String getAllRaisedAmount() {
+        return allRaisedAmount;
+    }
+
+    public void setAllRaisedAmount(String allRaisedAmount) {
+        this.allRaisedAmount = allRaisedAmount;
+    }
+
+    public String getAllSupprotTimes() {
+        return allSupprotTimes;
+    }
+
+    public void setAllSupprotTimes(String allSupprotTimes) {
+        this.allSupprotTimes = allSupprotTimes;
+    }
+
+    public List<String> getHospitalTypes() {
+        return hospitalTypes;
+    }
+
+    public void setHospitalTypes(List<String> hospitalTypes) {
+        this.hospitalTypes = hospitalTypes;
     }
 
     public String getHospitalId() {
@@ -105,12 +150,12 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
         this.hospitalImageId = hospitalImageId;
     }
 
-    public String getDescirption() {
-        return descirption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescirption(String descirption) {
-        this.descirption = descirption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLinkName() {
@@ -119,6 +164,22 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
 
     public void setLinkName(String linkName) {
         this.linkName = linkName;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getHospitalMail() {
+        return hospitalMail;
+    }
+
+    public void setHospitalMail(String hospitalMail) {
+        this.hospitalMail = hospitalMail;
     }
 
     public String getOfficeTel() {
@@ -177,12 +238,12 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
         this.logoId = logoId;
     }
 
-    public String getDescirptionImageUrl() {
-        return descirptionImageUrl;
+    public String getDescriptionImageUrl() {
+        return descriptionImageUrl;
     }
 
-    public void setDescirptionImageUrl(String descirptionImageUrl) {
-        this.descirptionImageUrl = descirptionImageUrl;
+    public void setDescriptionImageUrl(String descriptionImageUrl) {
+        this.descriptionImageUrl = descriptionImageUrl;
     }
 
     public String getDescriptionImageId() {
@@ -193,29 +254,99 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
         this.descriptionImageId = descriptionImageId;
     }
 
-    @Override
-    public String toString() {
-        return "HospitalBasicReq{" +
-                "hospitalId='" + hospitalId + '\'' +
-                ", hospitalName='" + hospitalName + '\'' +
-                ", hospitalNum='" + hospitalNum + '\'' +
-                ", hospitalGrade='" + hospitalGrade + '\'' +
-                ", hospitalType='" + hospitalType + '\'' +
-                ", hospitalAbstract='" + hospitalAbstract + '\'' +
-                ", hospitalImageUrl='" + hospitalImageUrl + '\'' +
-                ", hospitalImageId='" + hospitalImageId + '\'' +
-                ", descirption='" + descirption + '\'' +
-                ", linkName='" + linkName + '\'' +
-                ", mobilPhone='" + mobilePhone + '\'' +
-                ", officeTel='" + officeTel + '\'' +
-                ", hospitalUrl='" + hospitalUrl + '\'' +
-                ", province='" + province + '\'' +
-                ", city='" + city + '\'' +
-                ", county='" + county + '\'' +
-                ", logoUrl='" + logoUrl + '\'' +
-                ", logoId='" + logoId + '\'' +
-                ", descirptionImageUrl='" + descirptionImageUrl + '\'' +
-                ", descriptionImageId='" + descriptionImageId + '\'' +
-                '}';
+    public String getFoundTime() {
+        return foundTime;
+    }
+
+    public void setFoundTime(String foundTime) {
+        this.foundTime = foundTime;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(String projectType) {
+        this.projectType = projectType;
+    }
+
+    public String getTargetAmount() {
+        return targetAmount;
+    }
+
+    public void setTargetAmount(String targetAmount) {
+        this.targetAmount = targetAmount;
+    }
+
+    public String getRaisedAmount() {
+        return raisedAmount;
+    }
+
+    public void setRaisedAmount(String raisedAmount) {
+        this.raisedAmount = raisedAmount;
+    }
+
+    public String getDateRaisedEnd() {
+        return dateRaisedEnd;
+    }
+
+    public void setDateRaisedEnd(String dateRaisedEnd) {
+        this.dateRaisedEnd = dateRaisedEnd;
+    }
+
+    public String getDateCreate() {
+        return dateCreate;
+    }
+
+    public void setDateCreate(String dateCreate) {
+        this.dateCreate = dateCreate;
+    }
+
+    public String getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(String projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
+    public String getCoverImageUrl() {
+        return coverImageUrl;
+    }
+
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
+    }
+
+    public String getRecipientRealName() {
+        return recipientRealName;
+    }
+
+    public void setRecipientRealName(String recipientRealName) {
+        this.recipientRealName = recipientRealName;
+    }
+
+    public String getSupportTimes() {
+        return supportTimes;
+    }
+
+    public void setSupportTimes(String supportTimes) {
+        this.supportTimes = supportTimes;
     }
 }

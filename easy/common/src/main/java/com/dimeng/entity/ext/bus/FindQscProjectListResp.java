@@ -58,7 +58,12 @@ public class FindQscProjectListResp implements Serializable
      * 已筹金额（元）
      */
     private String supportAmt;
-    
+
+    /**
+     * 筹资进度
+     */
+    private String rate;
+
     /**
      * 投资期限（天）
      */
@@ -138,7 +143,40 @@ public class FindQscProjectListResp implements Serializable
      * 发起人的真实姓名
      */
     private String initiatorRealName;
-    
+    /**
+     * 项目所属医院名称
+     */
+    private String hospitalName;
+
+    /**
+     * 项目所属医院ID
+     */
+    private String hospitalId;
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
+    }
+
     public String getProValidate()
     {
         return proValidate;

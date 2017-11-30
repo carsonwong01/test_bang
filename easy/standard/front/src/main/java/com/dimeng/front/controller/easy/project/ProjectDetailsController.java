@@ -1,14 +1,5 @@
 package com.dimeng.front.controller.easy.project;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.dimeng.abilitys.annotation.SystemFrontLog;
 import com.dimeng.constants.CommonConstant;
@@ -22,6 +13,14 @@ import com.dimeng.model.bus.ProjectDetailsReq;
 import com.dimeng.model.common.IdReq;
 import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.LoginCache;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 项目详情页面
@@ -60,11 +59,11 @@ public class ProjectDetailsController extends BaseController
         ProjectDetailsResp projectDetail = object.toJavaObject(ProjectDetailsResp.class);
         if("4".equals(projectDetail.getProjectStatus()))
         {
-            mv.setViewName("easy/project/projectDetailsNull.page"); 
-            mv.addObject("status","1"); 
+            mv.setViewName("easy/project/projectDetailsNull.page");
+            mv.addObject("status","1");
         }else if("1".equals(projectDetail.getShieldStatus())){
-            mv.setViewName("easy/project/projectDetailsNull.page"); 
-            mv.addObject("status","2"); 
+            mv.setViewName("easy/project/projectDetailsNull.page");
+            mv.addObject("status","2");
         }else{
             mv.addObject("projectDetails",object); 
         }

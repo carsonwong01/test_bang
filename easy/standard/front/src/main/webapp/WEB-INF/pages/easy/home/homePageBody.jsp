@@ -58,10 +58,11 @@
 			<li>
 				<img src="{{= objInfo.projectImg}}">
 				<div class='detailed'>
-					<p class='ti-m'><a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">{{= objInfo.projectName}}</a></p>
-					<p class='yi-b'><b></b><span>北京第三医院</span><i></i> <span>中国华侨基金会</span></p>
-					<div class='dao-t'>
-						<p><span>{{= objInfo.rate*100}}%</span></p>
+					<p class='ti-m' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+						<a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">{{= objInfo.projectName}}</a></p>
+					<p class='yi-b'><b></b><span>{{= objInfo.hospitalName}}</span><i></i> <span>中国华侨基金会</span></p>
+					<div class='dao-t' id='dao-t'>
+						<p><span id="progress">{{= objInfo.rate*100}}%</span></p>
 					</div>
 					<ul class='ul-num'>
 						<li>目标金额（元）</br> <span>{{= objInfo.targetAmount}}</span></li>
@@ -75,7 +76,7 @@
 			{{/each}}
 			<div class='clear'></div>
 		</ul>
-		<h3 class="til"><a href="<%=basePath%>project/projectList.do" target="_blank" class="mored">查看更多&gt;</a></h3>
+		<h3 class="til"><a href="<%=basePath%>project/projectList.do" target="_blank" class="more">查看更多&gt;</a></h3>
 	</div>
 </div>
 <!-- 合作医院 -->
@@ -164,60 +165,3 @@
                     中国人口福利基金会</span><div class='clear'></div></p>
 	</div>
 </div>
-
-
-<%--
-{{if friendshipUrl!=null && friendshipUrl.length>0}}
-<div class="cooperationBox">
-	<div class="layout">
-		<!--合作伙伴-->
-		<div class="wrap cooperation_mod">
-			<div class="hd clearfix">合作伙伴</div>
-			<div class="cooperation_bd clearfix">
-				<div class="prev"><a class="">上一个</a></div>
-				<div class="bd">
-					<ul class="picList clearfix">
-						{{each(sta, obj) friendshipUrl}}
-						<li><a href="{{= obj.url}}" target="_blank" ><img src="{{= obj.imageUrl}}" alt="{{= obj.title}}"/></a></li>
-						{{/each}}
-					</ul>
-				</div>
-				<div class="next"><a class="">下一个</a></div>
-			</div>
-		</div>
-		<div class="bord"></div>
-		<!--合作伙伴 end-->
-	</div>
-</div>
-{{/if}}
---%>
-<%--
-{{if hotProject!=null && hotProject.length>0}}
-<div class="hotRecommend">
-	<div class="layout">
-		<h3 class="til"><span>推荐项目</span><a href="<%=basePath%>project/projectList.do" target="_blank" class="mored">查看更多&gt;</a></h3>
-		<form id="projectListForm" method="post">
-			<!-- 跳转项目详情页的项目ID -->
-			<input type="hidden" name="projectId" id="projectId"/>
-			<ul class="clearfix">
-				{{each(staInfo, objInfo) hotProject}}
-				&lt;%&ndash;{{if objInfo.projectType == 1 }}&ndash;%&gt;
-				<li class="repayP">
-					<a href="javascript:void(0)" title="{{= objInfo.projectName}}"  onclick="homePageController.projectClick('{{= objInfo.projectId}}');">
-						<img src="{{= objInfo.projectImg}}" style="width: 391.63px;height: 308.7px" >
-						<div class="dec">
-							<h6 style="white-space: nowrap;overflow: hidden;text-overflow:ellipsis;">{{= objInfo.projectName}}</h6>
-							<p >{{= objInfo.projectIntro}}</p>
-						</div>
-						<i class="ico iconImg"></i>
-					</a>
-				</li>
-				&lt;%&ndash;{{/if}}&ndash;%&gt;
-				{{/each}}
-			</ul>
-		</form>
-	</div>
-</div>
-{{/if}}
---%>
-

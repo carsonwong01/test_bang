@@ -20,45 +20,55 @@
     <result column="county" property="county" jdbcType="VARCHAR" />
     <result column="logo_url" property="logoUrl" jdbcType="VARCHAR" />
     <result column="logo_id" property="logoId" jdbcType="VARCHAR" />
-    <result column="description_image_url" property="descirptionImageUrl" jdbcType="VARCHAR" />
+    <result column="description_image_url" property="descriptionImageUrl" jdbcType="VARCHAR" />
     <result column="description_image_id" property="descriptionImageId" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="found_time" property="foundTime" jdbcType="VARCHAR" />
+
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="CHAR" />
+    <result column="target_amount" property="targetAmount" jdbcType="DECIMAL" />
+    <result column="raised_amount" property="raisedAmount" jdbcType="DECIMAL" />
+    <result column="date_raised_end" property="dateRaisedEnd" jdbcType="TIMESTAMP" />
+    <result column="date_create" property="dateCreate" jdbcType="TIMESTAMP" />
+    <result column="project_status" property="projectStatus" jdbcType="CHAR" />
+    <result column="cover_image_url" property="coverImageUrl" jdbcType="VARCHAR" />
+    <result column="recipient_real_name" property="recipientRealName" jdbcType="VARCHAR" />
+    <result column="support_times" property="supportTimes"/>
   </resultMap>
 
-  <sql id="THospitalBasic_Column_List" >
-    hospital_id,hospital_name,hospital_num,hospital_grade,hospital_Type,hospital_abstract,hospital_image_url,
-    hospital_image_id,link_name,mobile_phone,office_tel,hospital_url,province,city,
-    county,logo_url,logo_id,description_image_url,description_image_id,description
-  </sql>
-
+  <!--<sql id="THospitalBasic_Column_List" >-->
+    <!--hospital_id,hospital_name,hospital_num,hospital_grade,hospital_Type,hospital_abstract,hospital_image_url,-->
+    <!--hospital_image_id,link_name,mobile_phone,office_tel,hospital_url,province,city,-->
+    <!--county,logo_url,logo_id,description_image_url,description_image_id,description-->
+  <!--</sql>-->
+<!--查询医院的基本信息-->
   <select id="findAllHospital" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
     SELECT
-    hospital_id hospitalId,
-    hospital_name hospitalName,
-    hospital_num hospitalNum,
-    hospital_grade hospitalGrade,
-    hospital_type hospitalType,
-    hospital_abstract hospitalAbstract,
-    hospital_image_url hospitalImageUrl,
-    hospital_image_id hospitalImageId,
-    link_name linkName,
-    hospital_mail hospitalMail,
-    mobile_phone mobilePhone,
-    office_tel officeTel,
-    hospital_url hospitalUrl,
-    province province,
-    city city,
-    county county,
-    logo_url logoUrl,
-    logo_id logoId,
-    description_image_url descirptionImageUrl,
-    description_image_id descriptionImageId,
-    description description
-    FROM t_hospital_basic
+      hospital_id hospitalId,
+      hospital_name hospitalName,
+      hospital_num hospitalNum,
+      hospital_grade hospitalGrade,
+      hospital_type hospitalType,
+      hospital_abstract hospitalAbstract,
+      logo_url logoUrl,
+      logo_id logoId,
+      t.allTargetAmount,t.allRaisedAmount,t.allSupprotTimes
+    FROM
+      (SELECT
+         tpi.project_creator_id proCreatorId,
+         sum(target_amount) allTargetAmount,
+         sum(raised_amount) allRaisedAmount,
+         sum((SELECT COUNT(tos.order_id) FROM t_order_support tos
+         WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
+       FROM t_project_info tpi GROUP BY project_creator_id) t,
+      t_hospital_basic
+    WHERE t.proCreatorId = t_hospital_basic.hospital_id
   </select>
-
-  <select id="hospitalDetails" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+<!--根据ID查找医院-->
+  <select id="findHospitalDetails" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
     SELECT
     hospital_id hospitalId,
@@ -79,188 +89,85 @@
     county county,
     logo_url logoUrl,
     logo_id logoId,
-    description_image_url descirptionImageUrl,
+    description_image_url descriptionImageUrl,
     description_image_id descriptionImageId,
-    description description
+    description description,
+    found_time foundTime,
+      sum((
+        SELECT COUNT(tos.order_id) FROM t_order_support tos
+        WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
+        )) allSupprotTimes,
+      sum(floor(tpi.target_amount)) allTargetAmount,
+      sum(floor(tpi.raised_amount)) allRaisedAmount,
+      IFNULL(LEFT(((sum(floor(tpi.target_amount)) / sum(floor(tpi.raised_amount)))) ,4), 0.00 ) rate
     FROM t_hospital_basic
+      LEFT JOIN t_project_info tpi ON tpi.project_creator_id = t_hospital_basic.hospital_id AND tpi.project_status!='4'
     where 1=1
-    <!-- 2016-12-16-wenguanhai:由if改为choose-when -->
     <choose>
       <when test="hospitalId != null and hospitalId != ''">and t_hospital_basic.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
       <otherwise>and t_hospital_basic.hospital_id=''</otherwise>
     </choose>
   </select>
 
+  <!--根据医院查找项目-->
+  <select id="findHospitalProject" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+          parameterType="com.dimeng.model.expand.HospitalBasicReq">
+    SELECT
+      thb.hospital_id hospitalId, thb.hospital_name hospitalName,
+      (
+      SELECT COUNT(tos.order_id) FROM t_order_support tos
+      WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
+      ) supportTimes,
+      tpi.project_id projectId,
+      tpi.project_name projectName,
+      floor(tpi.target_amount) targetAmount,
+      tpi.project_type,
+      floor(tpi.raised_amount) raisedAmount,
+      datediff(tpi.date_raised_end, now()) remainingDay,
+      tpi.project_status projectStatus,
+      tpi.cover_image_url coverImageUrl,
+      tpi.date_create dateCreate,
+      IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
+      (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
+    FROM t_hospital_basic thb
+    LEFT JOIN t_project_info tpi ON tpi.project_creator_id = thb.hospital_id AND tpi.project_status!='4'
 
+    ORDER BY tpi.date_update DESC
+  </select>
 
+  <!--项目进度-->
+  <select id="findHosProjectSum" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+          parameterType="com.dimeng.model.expand.HospitalBasicReq">
+    SELECT
+      thb.hospital_id hospitalId, thb.hospital_name hospitalName,
+      (
+      SELECT COUNT(tos.order_id) FROM t_order_support tos
+      WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
+      ) supportTimes,
+      tpi.project_id projectId,
+      tpi.project_name projectName,
+      floor(tpi.target_amount) targetAmount,
+      tpi.project_type,
+      floor(tpi.raised_amount) raisedAmount,
+      datediff(tpi.date_raised_end, now()) remainingDay,
+      tpi.project_status projectStatus,
+      tpi.cover_image_url coverImageUrl,
+      DATE_FORMAT(tpi.date_create,'%Y-%m-%d') dateCreate,
+      IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
+      (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
+    FROM t_hospital_basic thb
+    LEFT JOIN t_project_info tpi ON tpi.project_creator_id = thb.hospital_id AND tpi.project_status!='4'
 
-<!--      <when test="hospitalNum != null and hospitalNum != ''">and t_hospital_basic.hospital_num=#{hospitalNum,jdbcType=VARCHAR}</when>
--->
+    ORDER BY tpi.date_update DESC
+  </select>
 
-
-  <!--<select id="findHospitalById" resultType="com.dimeng.entity.ext.hospital.FindAllHospitalResp"-->
-          <!--parameterType="com.dimeng.model.hospital.HospitalBasicReq">-->
-    <!--SELECT-->
-    <!--<include refid="THospitalBasic_Column_List"/>-->
-    <!--from t_hospital_basic-->
-    <!--where hospital_id = #{hospitalId,jdbcType=VARCHAR}-->
-  <!--</select>-->
-
-  <!--<select id="findAllHospital" resultType="com.dimeng.entity.ext.hospital.FindAllHospitalResp"-->
-      <!--parameterType="com.dimeng.model.hospital.HospitalBasicReq">-->
-      <!--SELECT-->
-        <!--hospital_id hospitalId,-->
-        <!--hospital_name hospitalName,-->
-        <!--hospital_num hospitalNum,-->
-        <!--hospital_grade hospitalGrade,-->
-        <!--link_name linkName,-->
-        <!--mobile_phone mobilePhone-->
-      <!--FROM t_hospital_basic-->
-  <!--</select>-->
+</mapper>
 
 
 <!--
-  <delete id="deleteHospital" parameterType="java.lang.String" >
-    delete from t_hospital_basic
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </delete>
-
-  <insert id="insertHospital" parameterType="com.dimeng.front.entity.hospital.HospitalBasicReq" >
-    insert into t_hospital_basic
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="hospital_name != null" >
-        hospital_name,
-      </if>
-      <if test="hospital_num != null" >
-        hospital_num,
-      </if>
-      <if test="hospital_grade != null" >
-        hospital_grade,
-      </if>
-      <if test="hospital_abstract != null" >
-        hospital_abstract,
-      </if>
-      <if test="hospital_image_url != null" >
-        hospital_image_url,
-      </if>
-      <if test="hospital_image_id != null" >
-        hospital_image_id,
-      </if>
-      <if test="description != null" >
-        description,
-      </if>
-      <if test="link_name != null" >
-        link_name,
-      </if>
-      <if test="office_num != null" >
-        office_num,
-      </if>
-      <if test="num_status != null" >
-        num_status,
-      </if>
-      <if test="logo_url != null" >
-        logo_url,
-      </if>
-      <if test="logo_id != null" >
-        logo_id,
-      </if>
-      <if test="platform_card_bind != null" >
-        platform_card_bind,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="user_id != null" >
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="hospital_name != null" >
-        #{hospitalName,jdbcType=VARCHAR},
-      </if>
-      <if test="hospital_num != null" >
-        #{hospitalNum,jdbcType=VARCHAR},
-      </if>
-      <if test="hospital_grade != null" >
-        #{hospitalGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="hospital_abstract != null" >
-        #{hospitalAbstract,jdbcType=VARCHAR},
-      </if>
-      <if test="hospital_image_url != null" >
-        #{hospitalImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="hospital_image_id != null" >
-        #{hospitalImageId,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="ink_name != null" >
-        #{inkName,jdbcType=VARCHAR},
-      </if>
-      <if test="office_num != null" >
-        #{officeNum,jdbcType=VARCHAR},
-      </if>
-      <if test="num_status != null" >
-        #{numStatus,jdbcType=CHAR},
-      </if>
-      <if test="logo_url != null" >
-        #{logoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="logo_id != null" >
-        #{logoId,jdbcType=VARCHAR},
-      </if>
-      <if test="platform_card_bind != null" >
-        #{platformCardBind,jdbcType=INT},
-    </trim>
-  </insert>
-  <update id="updateHospital" parameterType="com.dimeng.front.entity.hospital.HospitalBasicReq" >
-    update t_hospital_basic
-    <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalName != null" >
-        hospital_name = #{hospitaltName,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalNum != null" >
-        hospital_num = #{hospitalNum,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalGrade != null" >
-        hospital_grade = #{hospitalGrade,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalAbstract != null" >
-        hospital_abstract = #{hospitalAbstract,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalIamgeUrl != null" >
-        hospital_iamge_url = #{hospitalIamgeUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="hospitalIamgeId != null" >
-        hospital_iamge_id = #{hospitalIamgeId,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=TEXT},
-      </if>
-      <if test="linkName != null" >
-        ling_name = #{linkName,jdbcType=VARCHAR},
-      </if>
-      <if test="officeNum != null" >
-        office_num = #{officeNum,jdbcType=TIMESTAMP},
-      </if>
-      <if test="numStatus != null" >
-        num_status = #{numStatus,jdbcType=CHAR},
-      </if>
-      <if test="logoUrl != null" >
-        logo_url = #{logoUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="logoId != null" >
-        logo_id = #{logoId,jdbcType=VARCHAR},
-      </if>
-      <if test="platformCardBind != null" >
-        platform_card_bind = #{platformCardBind,jdbcType=INT},
-      </if>
-    </set>
-    where user_id = #{userId,jdbcType=VARCHAR}
-  </update>-->
-</mapper>
+where 1=1
+<choose>
+<when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
+<otherwise>and thb.hospital_id=''</otherwise>
+</choose>
+-->

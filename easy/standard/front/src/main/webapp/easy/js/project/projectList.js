@@ -42,7 +42,7 @@ var projectList = DM.Controller.sub({
 				// 填充数据
 				$('#projectListTemp').tmpl(data.projectList).appendTo("#projectListD");
 				DM.Event.formatChar();
-				// 初始化分页标签
+				初始化分页标签
 				DM.PageTags.init({
 					"divId" : "paging",
 					"formId" : "projectListForm",

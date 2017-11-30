@@ -266,16 +266,12 @@
 				<!-- 项目详情右侧信息 end-->
 				<div id="clear"></div>
 			</div>
+			<div class='xim-qi'>
+				<p><i></i> <span>推荐救助</span></p>
+				<li><i></i><span><ul class='ul-o'  id="projectListD">
 
-			<%--<div class='xim-qi'>--%>
-				<%--<p><i></i> <span>推荐救助</span></p>--%>
-
-				<%--<ul class='ul-o'>--%>
-					<%--<li><i></i><a href=""><span>${projectDetails.title}</span></a></li>--%>
-					<%--<li><i></i><a href=""><span>${projectDetails.title}</span></a></li>--%>
-					<%--<li><i></i><a href=""><span>${projectDetails.title}</span></a></li>--%>
-				<%--</ul>--%>
-			<%--</div>--%>
+				</ul></span></li>
+			</div>
 			<div class='xim-qi'>
 				<p><i></i> <span>审核拨付流程</span></p>
 				<ul class='shbflc'>
@@ -293,6 +289,12 @@
 		<div class='clear'></div>
 	</div>
 </div>
+<script id="projectListTemp" type="text/x-jquery-tmpl">
+    {{each(i,data) pageResult.list}}
+    	<li><i></i><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}"><span>{{= data.projectName}}</span></a></li>
+    {{/each}}
+</script>
+<script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
 
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">

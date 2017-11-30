@@ -35,7 +35,6 @@ public class FrontHospitalListController extends BaseController
         return mv;
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/hospitalListAjax.do")
     public Object hospitalListAjax(HttpServletRequest request,
@@ -49,30 +48,6 @@ public class FrontHospitalListController extends BaseController
         map.put("req", req);
         return map;
     }
-
-//    /**
-//     * 前台 -医院详情
-//     */
-//    @RequestMapping(value = "/hospitalDetails.do")
-//    public Object hospitalDetails(HttpServletRequest request,
-//                                  HttpServletResponse response,HospitalBasicReq req){
-//        ModelAndView mv = new ModelAndView("easy/hospital/hospitalDetails.page");
-//        String data = new CommonUtil().callInterfaceMethod(req,
-//                "hospital/v/hospitalDetails",RequestMethod.POST,request);
-//        JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
-//        mv.addObject("hospitalDetails",object);
-//        return mv;
-//    }
-
-
-
-//    @RequestMapping(value = "/hospitalDetails.do")
-//    public Object findHospitalDetails(HttpServletRequest request, HttpServletResponse response)throws Exception{
-//        ModelAndView mv = new ModelAndView("easy/hospital/hospitalDetails.page");
-//        return mv;
-//    }
-
-
 }
 
 

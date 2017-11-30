@@ -29,14 +29,14 @@ public class FindHospitalProjectBaseReq extends BasePageReq
     /**
      * 获取当前医院ID
      */
-    private String hosptialId;
+    private String hospitalId;
 
-    public String getHosptialId() {
-        return hosptialId;
+    public String getHospitalId() {
+        return hospitalId;
     }
 
-    public void setHosptialId(String hosptialId) {
-        this.hosptialId = hosptialId;
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
     }
 
     /**

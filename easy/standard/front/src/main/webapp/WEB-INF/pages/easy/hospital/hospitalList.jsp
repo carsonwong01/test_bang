@@ -14,10 +14,10 @@
     </div>
     <!-- 本周推荐 -->
     <div class='men-ded'>
-        <div class='top-io'>
-            <input type="text" placeholder="搜医院">
-            <button type="submit"></button>
-        </div>
+        <%--<div class='top-io'>--%>
+            <%--<input type="text" placeholder="搜医院">--%>
+            <%--<button type="submit"></button>--%>
+        <%--</div>--%>
         <div class='fl fl-cen'>
             <ul id="hospitalListD">
 
@@ -65,16 +65,16 @@
 <li>
     <img src="{{= data.hospitalImageUrl}}" class='fl'>
     <div class='fr zkd'>
-        <div class='h-hi'><a href=<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">{{= data.hospitalName}}</a><span>{{= data.hospitalGrade}}</span><span>{{= data.hospitalType}}</span></div>
+        <div class='h-hi'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">{{= data.hospitalName}}</a><span>{{= data.hospitalGrade}}</span><span>{{= data.hospitalType}}</span></div>
         <div class='msjj'>
             <p>{{= data.hospitalAbstract}}
             </p>
             <a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}" class='fr'>详情</a>
             <div class='clear'></div>
         </div>
-        <p>已筹金额：<span>0</span>元</p>
-        <p>目标金额：<span>0</span>元</p>
-        <p>捐款人次：<span>0</span>次</p>
+        <p>已筹金额：<span>{{= data.allRaisedAmount}}</span>元</p>
+        <p>目标金额：<span>{{= allTargetAmount}}</span>元</p>
+        <p>捐款人次：<span>{{= data.allSupprotTimes}}</span>次</p>
         <div class='wyjkjz'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">我要捐款</a><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">我要求助</a></div>
     </div>
     <div class='clear'></div>
