@@ -54,6 +54,7 @@
 				/easy/images/** = anon
 				/easy/js/** = anon
 				/project/** = anon
+				/hospital/** = anon
 				<!-- 第三方回调地址 -->
 				/thirdCallback/callback.do = anon
 				/**/* = authc

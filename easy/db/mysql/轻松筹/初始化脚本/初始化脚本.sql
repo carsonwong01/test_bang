@@ -767,7 +767,7 @@ CREATE TABLE `t_site_help_center` (
   `date_update` datetime DEFAULT NULL COMMENT '最后更新时间',
   `title` varchar(50) DEFAULT NULL COMMENT '标题',
   `content` text COMMENT '内容',
-  `type` char(2) NOT NULL COMMENT '类型\r\n            1发起项目相关问题\r\n            2项目管理相关问题           3支持项目相关问题\r\n            4其他问题\r\n            5平台规则\r\n            6常见FAQ\r\n            7关于我们\r\n            8联系方式\r\n            9版权声明\r\n            10法律服务\r\n            11合作伙伴\r\n            12加入我们'',',
+  `type` char(2) NOT NULL COMMENT '类型\r\n            1发起项目相关问题\r\n            2项目管理相关问题           3支持项目相关问题\r\n            4常见问题\r\n            5平台规则\r\n            6常见FAQ\r\n            7关于我们\r\n            8联系方式\r\n            9版权声明\r\n            10法律服务\r\n            11合作伙伴\r\n            12加入我们'',',
   `keyword` varchar(50) DEFAULT NULL COMMENT '关键字',
   `status` char(2) NOT NULL DEFAULT '1' COMMENT '是否发布    1是 2否',
   `is_top` char(2) NOT NULL DEFAULT '2' COMMENT '是否置顶  1是2否',
@@ -1288,7 +1288,7 @@ INSERT INTO `t_system_function` VALUES ('515', 'ZDGL_BZZX_ZCXM_SC', '删除', '�
 INSERT INTO `t_system_function` VALUES ('516', 'ZDGL_BZZX_ZCXM_XG', '修改', '修改', '503', null);
 INSERT INTO `t_system_function` VALUES ('517', 'ZDGL_BZZX_ZCXM_CK', '查看', '查看', '503', null);
 INSERT INTO `t_system_function` VALUES ('518', 'ZDGL_BZZX_ZCXM_ZD', '置顶', '置顶', '503', null);
-INSERT INTO `t_system_function` VALUES ('519', 'ZDGL_BZZX_QTWT_MU', '其他问题', '其他问题', '504', null);
+INSERT INTO `t_system_function` VALUES ('519', 'ZDGL_BZZX_QTWT_MU', '常见问题', '常见问题', '504', null);
 INSERT INTO `t_system_function` VALUES ('520', 'ZDGL_BZZX_QTWT_XZ', '新增', '新增', '504', null);
 INSERT INTO `t_system_function` VALUES ('521', 'ZDGL_BZZX_QTWT_SC', '删除', '删除', '504', null);
 INSERT INTO `t_system_function` VALUES ('522', 'ZDGL_BZZX_QTWT_XG', '修改', '修改', '504', null);
@@ -1478,7 +1478,7 @@ INSERT INTO `t_system_module` VALUES ('5', '站点管理', '站点管理', '0');
 INSERT INTO `t_system_module` VALUES ('501', '发起项目相关问题', '发起项目相关问题', '51');
 INSERT INTO `t_system_module` VALUES ('502', '项目管理相关问题', '项目管理相关问题', '51');
 INSERT INTO `t_system_module` VALUES ('503', '支持项目相关问题', '支持项目相关问题', '51');
-INSERT INTO `t_system_module` VALUES ('504', '其他问题', '其他问题', '51');
+INSERT INTO `t_system_module` VALUES ('504', '常见问题', '常见问题', '51');
 INSERT INTO `t_system_module` VALUES ('505', '关于我们', '关于我们', '52');
 INSERT INTO `t_system_module` VALUES ('506', '联系方式', '联系方式', '52');
 INSERT INTO `t_system_module` VALUES ('507', '版权声明', '版权声明', '52');

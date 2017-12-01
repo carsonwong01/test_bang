@@ -14,7 +14,7 @@ var HLeftMainControler = DM.constructor.sub({
 		} else if (type == 3) {
 			helpTitle = "支持项目相关问题";
 		} else if (type == 4) {
-			helpTitle = "其他问题";
+			helpTitle = "常见问题";
 		}
 		/*
 		 * $("#leftMeunUl

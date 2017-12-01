@@ -9,9 +9,11 @@
 		<div class="u-relation-list">
 			<ul class="clearfix">
 				<c:if test="${projectType eq '1'}">
+					<%--
 					<li><a href="javascript:;" data-type="1"><p class="f16 gray6">受助人（患者）本人</p><p class="gray9">患者本人发起</p></a></li>
 					<li class="relation-last"><a href="javascript:;" data-type="2"><p class="f16 gray6"> 父母/亲兄弟姐妹/子女</p><p class="gray9">直系亲属，需提供户口本证明</p></a></li>
 					<li><a href="javascript:;" data-type="3"><p class="f16 gray6">夫妻</p><p class="gray9">夫妻关系，需提供结婚证明</p></a></li>
+					--%>
 					<li class="relation-last"><a href="javascript:;" data-type="4"><p class="f16 gray6">组织机构</p><p class="gray9">以组织机构名义发</p></a></li>
 				</c:if>
 				<c:if test="${projectType eq '2' || projectType eq '3' || projectType eq '4' || projectType eq '5' || projectType eq '7'}">
@@ -31,10 +33,16 @@
 DM.Page.ready({
 	"初始化" : function() {
 		//选择验证类型
+		window.onload = function(){
+            $("#validationType").val($(this).attr("data-type"));
+            $("#form").attr("action",basePath+"user/project/projectValidationStart.do").submit();
+		}
+		/*
 		$(".u-relation-list ul a").click(function(){
 			$("#validationType").val($(this).attr("data-type"));
 			$("#form").attr("action",basePath+"user/project/projectValidationStart.do").submit();
 		});
+		*/
 	}
 });
 </script>

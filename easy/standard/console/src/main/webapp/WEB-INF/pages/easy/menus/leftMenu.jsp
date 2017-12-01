@@ -252,7 +252,7 @@
 						</shiro:hasPermission> 
 						<shiro:hasPermission name="ZDGL_BZZX_QTWT_MU"> 
 							<li><a href="javascript:void(0);" class="click-link"
-							data-url="site/helpCenter/siteArticleGuide/queryArticleGuideList.do?type=4">其他问题</a></li>
+							data-url="site/helpCenter/siteArticleGuide/queryArticleGuideList.do?type=4">常见问题</a></li>
 						 </shiro:hasPermission> 
 			</ul>
 		</dd>

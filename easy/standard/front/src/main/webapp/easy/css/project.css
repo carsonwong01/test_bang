@@ -1,0 +1,402 @@
+.center{
+	background: #f7f7f7;
+}
+.bender>div{
+	width: 100%;
+	height: 433px;
+	background: url(../images/chnerouoojs.png)no-repeat center;
+}
+.men-ded{
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 30px;
+	padding-bottom: 40px;
+}
+.top-io>i{
+	display: inline-block;
+	width: 4px;
+	height:18px;
+	background: #00aaf6;
+	margin-right: 10px;
+	margin-bottom: -2px;
+}
+.top-io>span{
+	font-size: 18px;
+	color: #1a1a1a;
+}
+/*тид*/
+.fl-cen{
+	width: 800px;
+	box-sizing: border-box;
+}
+
+.but-ab{
+	width: 100%;
+	text-align: center;
+	padding-top: 16px;
+}
+.but-ab>a{
+	display: inline-block;
+	width: 140px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 12px;
+	font-weight: lighter;
+	color: #ffffff;
+	background: #00aaf6;
+	border-radius: 4px;
+}
+.ul-nus{
+	width: 350px;
+	height: 30px;
+	margin-right: -10px;
+	margin-top: 12px;
+	position: relative;
+}
+.ul-nus>li{
+	position: absolute;
+	top: 0;
+	left: 0;
+	float: left;
+	text-align: center;
+	font-size: 10px;
+	font-size:12px;-webkit-transform:scale(0.8);
+	color: #999999;
+}
+.ul-nus>li:nth-child(2){
+	left: 74px;
+}
+.ul-nus>li:nth-child(3){
+	left: 150px;
+}
+.ul-nus>li>span{
+	color: #00aaf6;
+	font-size:14px;
+}
+.im-ttx>li:nth-child(2),.im-ttx>li:nth-child(5),.im-ttx>li:nth-child(8){
+	margin:0 17px ;
+	margin-top: 22px;
+	margin-bottom: 10px;
+}
+.im-ttx>li{
+	box-shadow: 0px 4px 20px #d9d9d9;
+	width: 255px;
+	float: left;
+	margin-top: 22px;
+	background: #ffffff;
+	margin-bottom: 10px;
+}
+
+.im-ttx>li>img{
+	width: 255px;
+	height: 140px;
+}
+.ti-ou>a{
+	color: #1a1a1a;
+	font-size: 16px;
+	line-height: 26px;
+}
+.yi-b>u{
+	display: inline-block;
+	width: 1px;
+	height: 12px;
+	background: #1a1a1a;
+	margin: 0 10px;
+	margin-bottom: -3px;
+}
+
+.im-tx2>li{
+	box-shadow: 0px 4px 20px #d9d9d9;
+	width: 374px;
+	float: left;
+	margin-top: 26px;
+	background: #ffffff;
+	margin-bottom: 50px;
+}
+.im-tx2>li:nth-child(1){
+	margin-right: 52px;
+}
+.im-tx2>li>img{
+	width: 374px;
+	height: 210px;
+}
+.detailed{
+	padding: 16px 19px;
+}
+.ti-m>a{
+	color: #1a1a1a;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 26px;
+
+}
+.ti-m>a:hover{
+	text-decoration: underline;
+}
+.yi-b{
+	margin-bottom: 28px;
+}
+.yi-b>span{
+	color: #1a1a1a;
+	font-size: 12px;
+}
+.yi-b>.bba{
+	display: inline-block;
+	width: 13px;
+	height: 13px;
+	background: url(../images/yiyuan2ssd5.png)no-repeat center;
+	margin-bottom: -2px;
+	margin-right: 9px;
+}
+.yi-b>b{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background: url(../images/cn16.png)no-repeat center;
+	margin-bottom: -2px;
+	margin-right: 9px;
+}
+.yi-b>i{
+	display: inline-block;
+	width: 1px;
+	height: 14px;
+	background: #1a1a1a;
+	margin: 0 14px;
+	margin-bottom: -3px;
+}
+.dao-t{
+	width: 100%;
+	border: 1px solid #f8f7f7;
+	height: 3px;
+	background: #f8f7f7;
+	border-radius: 4px;
+	position: relative;
+}
+.dao-t>.dao-p,.dao-t>.dao-p>span{
+	border: 1px solid #00aaf6;
+	background: #00aaf6;
+}
+.dao-t>.dao-p>span{
+	width: 34px;
+	height: 16px;
+	line-height: 16px;
+	top: -7px;
+}
+.dao-t>p{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	border: 1px solid #f4635f;
+	height: 3px;
+	background: #f4635f;
+	border-radius: 4px;
+}
+.dao-t>p>span{
+	position: absolute;
+	display: inline-block;
+	text-align: center;
+	line-height: 18px;
+	width: 40px;
+	height: 18px;
+	background: #f4635f;
+	border-radius: 6px;
+	color: #ffffff;
+	top:-8px;
+	right: -5px;
+	font-weight: lighter;
+	font-size: 10px;
+	font-size:10px;-webkit-transform:scale(0.8);
+}
+.ul-num{
+	margin-top: 12px;
+}
+.ul-num>li{
+	float: left;
+	text-align: center;
+	font-size: 12px;
+	color: #999999;
+}
+.ul-num>li>span{
+	color: #f4635f;
+	font-size: 14px;
+}
+.ul-num>li:nth-child(2){
+	margin: 0 40px;
+}
+.but-a{
+	width: 100%;
+	text-align: center;
+	padding-top: 16px;
+}
+.but-a>a{
+	display: inline-block;
+	width: 140px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 12px;
+	font-weight: lighter;
+	color: #ffffff;
+	background: #f4635f;
+	border-radius: 4px;
+}
+.fr-nav{
+	width: 362px;
+	padding-top: 26px;
+	box-sizing: border-box;
+}
+.top-txt{
+	box-sizing: border-box;
+	width: 362px;
+	height: 62px;
+	border: 1px solid #cbefff;
+	background: #f2fbff;
+	text-align: center;
+	line-height: 62px;
+}
+.top-txt>p>b{
+	display: inline-block;
+	width: 30px;
+	height: 27px;
+	background: url(../images/cn14.png)no-repeat center;
+	margin-bottom: -8px;
+	margin-right: 10px;
+}
+.top-txt>p{
+	color:#00aaf6;
+	font-size: 16.5px;
+}
+.loing{
+	box-sizing: border-box;
+	width: 362px;
+	padding: 25px;
+	background: #ffffff;
+	margin-top: 20px;
+}
+.loing>p{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	overflow: hidden;
+	font-size: 12px;
+	color: #333333;
+	margin-bottom:25px;
+	line-height: 25px;
+}
+.loing>p>a{
+	color: #00aaf6;
+}
+.loing>div{
+	width:100%;
+	text-align: center;
+}
+.loing>div>a{
+	display: inline-block;
+	width: 138px;
+	height: 34px;
+	background: #f6635e;
+	color: #ffffff;
+	line-height: 34px;
+	font-size: 12px;
+	border-radius: 2px;
+}
+.problem{
+	width: 362px;
+	margin-top: 20px;
+	padding-top:24px;
+	background: #ffffff;
+}
+.problem>p{
+	padding-left: 24px;
+	font-size: 16px;
+	color: #1a1a1a;
+	line-height: 16px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ebebeb;
+}
+.problem>p>i{
+	display: inline-block;
+	width: 2px;
+	height: 16px;
+	background: #00aaf6;
+	margin-bottom: -2px;
+	margin-right: 10px;
+}
+.problem>ul{
+	padding-left: 35px;
+	padding-top: 10px;
+	padding-bottom: 25px;
+}
+.problem>ul>li{
+	font-size: 12px;
+	color: #999999;
+	line-height: 24px;
+}
+.problem>ul>li>span{
+	color: #333333;
+	margin: 0 15px;
+}
+.problem>ul>li>a{
+	color: #666666;
+}
+.problem>ul>li>a:hover{
+	color: #00aaf6;
+}
+.problem>ul>li>a>i{
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	background: red;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	background: #b0e7ff;
+	margin-bottom: 1px;
+	margin-right: 10px;
+}
+.asy>a{
+	display: inline-block;
+	padding-top: 22px;
+	width: 51px;
+	height: 13px;
+	background: url(../images/cn17.png)no-repeat center;
+	margin-bottom: -10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

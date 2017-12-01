@@ -28,6 +28,8 @@
         <result column="recommendId" property="recommendId"/>
         <result column="shield_status" property="shieldStatus"/>
         <result column="real_name" property="initiatorRealName"/>
+        <result column="hospital_name" property="hospitalName"/>
+        <result column="hospital_id" property="hospitalId"/>
     </resultMap>
 
     <!-- 项目详细信息 -->
@@ -130,8 +132,11 @@
             parameterType="com.dimeng.model.bus.FindProjectListReq">
         select tpi.project_id,tpi.project_no,tpi.project_name,tpi.shield_status,
         tqub.nick_name,tu.user_name,
+        tu.hospital_id, tu.hospital_name,
+
         tpi.project_type,tpi.project_status,floor(tpi.target_amount) target_amount,floor(tpi.raised_amount)
         raised_amount,
+        IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
         (select count(*) support_count from t_order_support where project_id=tpi.project_id
         and status NOT IN(1,2)
         AND IFNULL(refund_type,0) IN(0,1,2)) as support_number,
@@ -377,14 +382,18 @@
         tpi.raised_amount supportAmt,
         tpi.date_create,
         (select user_name from t_user where user_id = tpi.project_creator_id ) user_name,
+        tu.hospital_name,
+
+
         (select nick_name from t_q_user_basic where user_id = tpi.project_creator_id ) nick_name,
         tpi.financing_days financingDays,
         (select COUNT(1) from t_order_support where `status` in (3,4,5,6,7,8) and refund_type != 1 AND project_id =
         tpi.project_id) support_number,
         IF(IFNULL(hp.id,'-1') &lt; 0,'未推荐','已推荐') recommendStatus,
         hp.id recommendId
-        FROM
+        FROM t_user tu,
         t_project_info tpi LEFT JOIN t_site_home_project hp on tpi.project_id = hp.project_id
+        AND tu.hospital_id = tpi.project_creator_id
         where tpi.project_status = 1 and tpi.shield_status = 2
         <if test="projectNo != null and projectNo != ''">
             and tpi.project_no=#{projectNo,jdbcType=VARCHAR}

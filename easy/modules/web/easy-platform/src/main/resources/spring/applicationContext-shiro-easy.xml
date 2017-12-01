@@ -84,6 +84,12 @@
                 /project/query/v/projectDetails = anon
                 /operation/basicInfoSet/v/findLabels = anon
                 /system/cache/v/findCache = anon
+				/hospital/v/findAllHospital = anon
+				/hospital/v/hospitalDetails = anon
+				/project/query/v/projectList = anon
+				/hospital/v/findHospitalProject = anon
+				/hospital/v/findHosProjectSum = anon
+
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon
                  <!-- 分享 -->

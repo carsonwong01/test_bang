@@ -3,43 +3,80 @@
 <!--主体内容-->
 <div class="help-centerPage newsInfoPage helpAndNewsPage">
 <div class="layout">
-		<div class="locationBox">
-			所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span><span
-				id="helpTitle"></span>
-		</div>
-	</div>
-	<div class="layout clearfix minHeiBox">
-		<input type="hidden" name="investmentInfoType" id="investmentInfoType"
-			value="2" />
-		<!--主体内容-->
-		<div class="leftBox fl">
-			<ul id="sidemenu">
-
-				<li><a
-					href="<%=basePath%>frontHome/newsInfos.do?investmentInfoType=2"><b
-						class="btn-blue"></b><span class="spbox"><i class="i1"></i>新闻资讯</span></a></li>
-				<li><a
-					href="<%=basePath%>frontHome/newsInfos.do?investmentInfoType=1"><b
-						class="btn-blue"></b><span class="spbox"><i class="i2"></i>平台公告</span></a></li>
-
-			</ul>
-		</div>
-
-
-		<div class="rightBox fr">
-			<div class="cont">
-				<h2 class="h2til">${content.infoTitle}</h2>
-				<input type="hidden" id="infoType"
-					value="${content.investmentInfoType}">
-				<p class="authorBox">
-					<i class="i1"></i><span class="author">${content.sourceFrom}</span><i
-						class="i2"></i><span>${content.dateCreate}</span><i class="i3"></i><span>${content.viewCount}</span>
-				</p>
-				<div class="article width-full">${content.infoContent}</div>
-			</div>
-		</div>
+	<div class="locationBox">
+		所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>
+		<a href="<%=basePath%>frontHome/newsInfos.do?investmentInfoType=${content.investmentInfoType}" id="newsHelpTitle"></a>
+		<span>&gt;</span>详情
 	</div>
 </div>
+
+<body>
+<div class='center'>
+	<div class='cent-nav'>
+		<div class='fl clik'>
+			<div class='bato'>
+				<h1>${content.infoTitle}</h1>
+				<p>来源：<span>${content.sourceFrom}</span><span>${content.dateCreate}</span>点击量<span>${content.viewCount}</span></p>
+			</div>
+			<div class='text-p'>
+				<p>${content.infoContent}</p>
+			</div>
+			<%--<p class='fr pagp'><a href="">上一篇</a><i></i><a href="">下一篇</a></p><div class='clear'></div>--%>
+		</div>
+		<div class='fr ft-na'>
+			<div class='xim-qi'>
+				<p><i class='i-po'></i> <span>推荐救助</span></p>
+				<li><i></i><span><ul class='ul-o'  id="projectListD">
+
+				</ul></span></li>
+			</div>
+
+			<div class='xim-qi'>
+				<p><i></i> <span>推荐资讯</span></p>
+				<ul class='ul-o'>
+					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101710301402384897"><span>“帮你筹”网站公告</span></a></li>
+					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101710301359133576"><span>“帮你筹”：打通互联网医疗救助通道</span></a></li>
+					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101711030957481719"><span>科技引领创新 智能改变生活</span></a></li>
+				</ul>
+			</div>
+
+			<div class='xim-qi'>
+				<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
+				<li><i></i><span><ul class='ul-o'  id="helpCenterId">
+				</ul></span></li>
+				<%--<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>--%>
+			</div>
+		</div>
+		<div class='clear'></div>
+	</div>
+</div>
+<input type="hidden" id="typeFooter" value="4" />
+<script id="helpCenterTemplate" type="text/x-jquery-tmpl">
+	{{each(i,data) list}}
+		<li><i></i><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><span>{{= data.title}}</span></a></li>
+	{{/each}}
+</script>
+<!--常见问题--内容-->
+<script language="javascript"
+		src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>
+<script id="projectListTemp" type="text/x-jquery-tmpl">
+    {{each(i,data) pageResult.list}}
+    	<li><i></i><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}"><span>{{= data.projectName}}</span></a></li>
+    {{/each}}
+</script>
+<script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
+<script type="text/javascript"
+		src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
+<script language="javascript"
+		src="<%=basePath%>easy/js/newsInformation/newsInformation.js"></script>
+<script id="newsInfosTemplate" type="text/x-jquery-tmpl">
+	{{each(i,data) list}}
+		 <li><span class="fr gray9">{{= data.dateCreate}}</span><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}"><i class="ico"></i>{{= data.infoTitle}}</a></li>
+	{{/each}}
+</script>
+
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
 
 <script type="text/javascript"
 	src="<%=basePath%>js/common/jquery.tmpl.min.js"></script>
@@ -61,5 +98,5 @@
 	} else {
 
 	}
-	$("#helpTitle").html(newTitle);
+	$("#newsHelpTitle").html(newTitle);
 </script>

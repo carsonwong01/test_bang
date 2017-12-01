@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>      
+<!DOCTYPE configuration      
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"      
+     "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+
+    <!-- 定义实体类的别名 -->  
+    <typeAliases> 
+       <!-- <typeAlias type="com.dimeng.entity.TSysFunction" alias="TSysFunction" />
+       <typeAlias type="com.dimeng.entity.TSysModule" alias="TSysModule" />
+       <typeAlias type="com.dimeng.entity.TSysRole" alias="TSysRole" />
+       <typeAlias type="com.dimeng.entity.TSysRoleFunction" alias="TSysRoleFunction" />
+       <typeAlias type="com.dimeng.entity.TSysRoleUser" alias="TSysRoleUser" /> -->
+      <package name="com.dimeng.entity.table"/>
+      <package name="com.dimeng.entity.ext"/>
+    </typeAliases>
+</configuration>

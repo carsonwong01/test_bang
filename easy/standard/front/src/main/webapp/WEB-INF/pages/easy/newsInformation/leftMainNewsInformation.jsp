@@ -4,10 +4,10 @@
 	<ul id="sidemenu">
 		<li><a href="javaScript:void(0);"
 			onclick="newControler.getNewsInfosList('2');" class="active"><b
-				class="btn-blue"></b><span class="spbox"><i class="i1"></i>新闻资讯</span></a></li>
+				class="btn-blue"></b><span class="spbox"><i class="i1"></i>每日新闻</span></a></li>
 		<li><a href="javaScript:void(0);"
 			onclick="newControler.getNewsInfosList('1');"><b class="btn-blue"></b><span
-				class="spbox"><i class="i2"></i>平台公告</span></a></li>
+				class="spbox"><i class="i2"></i>企业SKR</span></a></li>
 	</ul>
 </div>
 

@@ -714,7 +714,7 @@ var ProjectStartController = DM.Controller.sub({
 				success:function(data){
 					if(data.code == '000000'){
 						$("#projectId").val(data.data.singleResult);
-						$("#successForm").attr("action",basePath+"user/project/projectValidChoose.do").submit();
+						$("#successForm").attr("action",basePath+"user/project/projectValidationStart.do").submit();
 						_this.clearFormCache($("#projectForm"));
 					}else{
 						Dialog.show(data.description,"error");

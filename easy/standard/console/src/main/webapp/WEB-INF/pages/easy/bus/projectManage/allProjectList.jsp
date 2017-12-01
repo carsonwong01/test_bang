@@ -145,4 +145,4 @@
 </script>
 
 
-<script language="javascript" src="<%=basePath %>js/easy/bus/projectManage/allProjectList.js"></script>
+<script language="javascript" src="<%=basePath %>js/easy/bus/projectManage/pendingProjectList.js"></script>

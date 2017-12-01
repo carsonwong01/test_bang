@@ -59,11 +59,26 @@ public class UserManageResp implements Serializable
      * 性别
      */
     private String sex;
-    
+
+
+    /**
+     * 用户类型
+     */
+    private String userType;
+
+
     /**
      * 注册时间
      */
     private String registerTime;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public String getUserId()
     {

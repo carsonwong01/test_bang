@@ -1,39 +1,66 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project-details.css">
 <script type="text/javascript">
-	var currUserId = "${currUser.userId}";//当前登录人ID
+    var currUserId = "${currUser.userId}";//当前登录人ID
 </script>
-<div class="p-detail-content">
-	<div class="layout clearfix">
-		<div class="leftbox fl">
-			<h2 class="p-til">${projectDetails.title}</h2>
-			<div class="p-headImg">
-				<img src="${projectDetails.coverImgUrl}" alt="" width="873"  height="423"> <a
-					class="collection <c:if test="${projectDetails.isFocus eq 1}">active</c:if>"
-					onclick="projectDetails.collect(this,'${projectDetails.id}');"></a>
-			</div>
-			<div class="p-detail">
-				<ul class="p-tabbox clearfix">
-					<a class="control active">项目详情<i></i></a>
-					<a class="control" id="dynamicTab">项目动态（<span class="num">${projectDetails.dynamicCount}</span>）<i></i></a>
-					<a class="control" id="commentTab">支持（<span class="num">${projectDetails.supportTimes}</span>）<i></i></a>
-				</ul>
-				<div class="p-tabCont">
-					<!-- 项目详情 -->
-					<div class="list width-full">${projectDetails.content}
-					  <!--项目图片  -->
-					  <div class="mod-project-pic clearfix">
-						<ul>
-						    <c:forEach var="imgs"   items="${projectDetails.imgs}">
-							     <li><div class="mod-project-padd"><img src="${imgs.addr}" alt="" width="197"  height="199"></div></li>
-							</c:forEach>
-						</ul>	
-					   </div>		
+
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
+<div class='center'>
+	<div class='cent-nav'>
+		<p	class='nav-po'><a href="">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
+		<h2 class="p-til">${projectDetails.title}</h2>
+		<div class='top-ns'>
+			<div class='fl img-b'><b></b><img src="${projectDetails.coverImgUrl}"></div>
+			<div class='fr frt-xq'>
+				<b></b>
+				<p class='pop-s'>已筹金额<span></br>${projectDetails.supportAmt}</span><span>&nbsp;元</span></p>
+				<div class='daohxi'>
+					<div><span class='fr'>捐款 <span>${projectDetails.supportTimes}</span>次</span><div class='clear'></div></div>
+					<div class='jqrt'>
+						<p>
+							<span><span id="progress"></span>%</span>
+						</p>
 					</div>
-					<!-- 项目详情 end-->
-					<!-- 项目动态 -->
+					<div><span class='fl'>剩余时间
+						<c:choose>
+							<c:when test="${projectDetails.projectStatus eq 1 && projectDetails.remainingDay >0}">${projectDetails.remainingDay}天</c:when>
+							<c:when test="${projectDetails.projectStatus eq 1 && projectDetails.remainingDay ==0}">即将结束</c:when>
+							<c:otherwise>已结束</c:otherwise>
+						</c:choose>
+					</span><span class='fr'>目标金额 <span>${projectDetails.facTarget}</span>元</span><div class='clear'></div></div>
+				</div>
+				<div class='img-wm'><img src="${projectDetails.qrcodeImg}"></br><span>扫码捐赠，更方便</span></div>
+			</div>
+			<div class='clear'></div>
+		</div>
+		<!-- 捐款说明 -->
+		<div class='fl clik'>
+			<ul>
+				<li data="#donations" class='actionk'>捐款说明</li>
+				<li data="#dynamicCount">项目进展（<span class="num">${projectDetails.dynamicCount}</span>）<i></i></li>
+				<li data="#record">捐款记录（<span class="num">${projectDetails.supportTimes}</span>）<i></i></li>
+				<div class='clear'></div>
+			</ul>
+			<div class='centsd'>
+				<div id='donations' class='donations'>
+					<div>${projectDetails.content}
+						<div class="mod-project-pic clearfix">
+							<ul>
+								<c:forEach var="imgs"   items="${projectDetails.imgs}">
+									<li><div class="mod-project-padd"><img src="${imgs.addr}" alt="" width="197"  height="199"></div></li>
+								</c:forEach>
+							</ul>
+						</div>
+					</div>
+					<span>
+						<img src="${projectDetails.qrcodeImg}"></br>
+						<span>扫码捐赠，更方便</span>
+					</span>
+				</div>
+				<div id='dynamicCount' class='dynamicCount'>
 					<form id="dynamicForm" method="post">
 						<input name="projectId" type="hidden"
-							value="${ projectDetails.id}">
+							   value="${ projectDetails.id}">
 						<div class="list">
 							<div class="dynamic" id="dynamicD"></div>
 							<!--项目动态分页-->
@@ -41,82 +68,36 @@
 							<!--项目动态分页  --END-->
 						</div>
 					</form>
-					<!-- 项目动态 end -->
-
-
-					<!-- 支持者 -->
-					<div class="list messageBox">
-						<form id="commentForm" method="post">
-							<input name="projectId" type="hidden"
-								value="${projectDetails.id}">
-							<div id="commentD"></div>
-							<!--项目动态分页-->
-							<div class="paging" id="commentPaging"></div>
-							<!--项目动态分页  --END-->
-						</form>
+				</div>
+				<div id='record' class='record'>
+					<div class='hidden'>
+						<!-- 支持者 -->
+						<div class="list messageBox">
+							<form id="commentForm" method="post">
+								<input name="projectId" type="hidden"
+									   value="${projectDetails.id}">
+								<div id="commentD"></div>
+								<!--项目动态分页-->
+								<div class="paging" id="commentPaging"></div>
+								<!--项目动态分页  --END-->
+							</form>
+						</div>
+						<!-- 支持者 end-->
 					</div>
-					<!-- 支持者 end-->
-			</div>
-		</div>
-    </div>
-
-		<!-- 项目详情右侧信息 -->
-		<div class="rightbox fr">
-			<div class="p-getMoney p-box">
-				<c:choose>
-					<c:when test="${projectDetails.projectStatus eq 1}">
-						<i class="p-statusIco"></i>
-					</c:when>
-					<c:when test="${projectDetails.projectStatus eq 2}">
-						<i class="p-statusIco p-successfulIco"></i>
-					</c:when>
-					<c:when test="${projectDetails.projectStatus eq 3}">
-						<i class="p-statusIco p-failureIco"></i>
-					</c:when>
-				</c:choose>
-				<h4 class="til">
-					已筹金额<i class="btn-blue"></i>
-				</h4>
-				<p class="g-money">
-					<span class="fz18px">￥</span><span class="fz36">${projectDetails.supportAmt}</span>
-				</p>
-				<p class="a-money">
-					目标金额<span>￥${projectDetails.facTarget}</span>
-				</p>
-				<p class="progressbox clearfix">
-					<span class="progress fl"><em class="btn-blue" data-progress=""></em></span> <span
-						class="fr"><span id="progress"></span>%</span>
-				</p>
-				<p class="clearfix support">
-					<span class="fl">支持人次：${projectDetails.supportTimes}</span> 
-					<span class="fr">剩余时间：
-					<c:choose>
-					<c:when test="${projectDetails.projectStatus eq 1 && projectDetails.remainingDay >0}">${projectDetails.remainingDay}天</c:when>
-					<c:when test="${projectDetails.projectStatus eq 1 && projectDetails.remainingDay ==0}">即将结束</c:when>
-					<c:otherwise>已结束</c:otherwise>
-					</c:choose>
-				   </span>
-				</p>
-				<c:if test="${projectDetails.type eq 6 || projectDetails.type eq 7 }">
-				  <p class="Notebox">
-				  <c:if test="${projectDetails.labels != null}">
-					<i></i> <span class="highlight">#${projectDetails.labels[0]}</span>
-					<c:if test="${projectDetails.labels[1] != null}">
-						<span class="highlight">#${projectDetails.labels[1]}</span>
-					</c:if>
-				  </c:if>
-				</p>
-				</c:if>
-				<div class="eqcbox">
-					<img src="${projectDetails.qrcodeImg}" alt="" width="136"  height="136"> <span>扫描左侧二维码<br>立即支持
-					</span>
+					<ul class='list'>
+						数据加载中，请稍后...
+					</ul>
+					<p class='jzgd-s'><a href="javascript:;"  onClick="moreload.loadMore();">加载更多>></a></p>
 				</div>
 			</div>
-			<div class="p-box">
-				<h4 class="til">
-					项目发起人<i class="btn-blue"></i><em class="bord"></em>
-				</h4>
-				<div class="">
+		</div>
+		<div class='fr ft-na'>
+			<div class='na-v'>
+				<b></b><a href="<%=basePath%>hospital/hospitalList.do">我要求助</a>
+			</div>
+			<div class='xim-qi'>
+				<p><i></i> <span>项目发起人</span></p>
+				<div class="xim-id">
 					<div class="promoter clearfix">
 						<img class="fl" src="${projectDetails.initiatorImgUrl}" alt="">
 						<div class="namebox fl">
@@ -126,151 +107,247 @@
 					</div>
 				</div>
 			</div>
-			<c:choose>
-				<c:when test="${projectDetails.type eq 6}">
-				    <div class="p-box order-des">
-				          <h4 class="til">
-					               运费说明和发货时间<i class="btn-blue"></i><em class="bord"></em>
-				         </h4>
-			             <div class="box">
-					     <p>运费说明：<b>${projectDetails.freight}</b></p>
-					     <p>发货时间：<b>${projectDetails.postTimeText}</b></p>
-				         </div>
-			        </div>
-					<div class="p-box p-profit">
-						<h4 class="til">
-							产品回报<i class="btn-blue"></i><em class="bord"></em>
-						</h4>
-						<div class="box">
-							<c:forEach var="dreamTarget"   items="${projectDetails.dreamTargets}">
-								<dl class="clearfix">
-									<dt>
-										<p class="fl">
-											支持<span class="Blue highlight">${dreamTarget.amount}</span>元
-										</p>
-										<c:choose>
-											<c:when test="${dreamTarget.remainingNum lt 0}">
-												<p class="fr">
-													支持<span class="Red">${dreamTarget.supportCount}</span>份
+			<div class='xim-qi'>
+				<p><i></i> <span>认证基金会</span></p>
+				<div class='xim-id'>
+					<img src="images/cn19.png" class='fl'>
+					<p class='fl'>
+						<a href=''>中国华侨基金会</a></br>
+						<span>捐助的所有款项由该基金会管理拨及付</span>
+					</p>
+					<div class='clear'></div>
+				</div>
+			</div>
+			<div class="p-detail-content">
+				<!-- 项目详情右侧信息 -->
+				<div class="rightbox fr">
+					<c:choose>
+						<c:when test="${projectDetails.type eq 6}">
+							<div class="p-box order-des">
+								<h4 class="til">
+									运费说明和发货时间<i class="btn-blue"></i><em class="bord"></em>
+								</h4>
+								<div class="box">
+									<p>运费说明：<b>${projectDetails.freight}</b></p>
+									<p>发货时间：<b>${projectDetails.postTimeText}</b></p>
+								</div>
+							</div>
+							<div class="p-box p-profit">
+								<h4 class="til">
+									产品回报<i class="btn-blue"></i><em class="bord"></em>
+								</h4>
+								<div class="box">
+									<c:forEach var="dreamTarget"   items="${projectDetails.dreamTargets}">
+										<dl class="clearfix">
+											<dt>
+												<p class="fl">
+													支持<span class="Blue highlight">${dreamTarget.amount}</span>元
 												</p>
+												<c:choose>
+													<c:when test="${dreamTarget.remainingNum lt 0}">
+														<p class="fr">
+															支持<span class="Red">${dreamTarget.supportCount}</span>份
+														</p>
+													</c:when>
+													<c:when test="${dreamTarget.remainingNum eq 0}">
+														<p class="fr">已售罄</p>
+													</c:when>
+													<c:otherwise>
+														<p class="fr">
+															支持<span class="Red">${dreamTarget.supportCount}</span>份 /
+															剩余<span class="red">${dreamTarget.remainingNum}</span>份
+														</p>
+													</c:otherwise>
+												</c:choose>
+											</dt>
+											<dd>
+												<img src="${dreamTarget.imgUrl}" alt="">
+												<p>${dreamTarget.content}</p>
+											</dd>
+										</dl>
+									</c:forEach>
+								</div>
+							</div>
+						</c:when>
+						<c:when test="${projectDetails.type eq 7}">
+							<div class="p-box">
+								<h4 class="til">梦想清单<i class="btn-blue"></i><em class="bord"></em></h4>
+								<div class="">
+									<div class="dreamList clearfix">
+										<ul>
+											<c:forEach var="dreamTarget"   items="${projectDetails.dreamTargets}">
+												<li>
+													<h6><span class="highlight">${dreamTarget.amount}</span>元</h6>
+													<p>${dreamTarget.content}</p>
+												</li>
+											</c:forEach>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="p-box authentication">
+								<h4 class="til">认证资料<i class="btn-blue"></i><br><span class="tips">提示：请确保您了解项目后再帮助</span><em class="bord"></em></h4>
+								<div class="">
+									<ul>
+										<c:choose>
+											<c:when test="${projectDetails.validationType == null}">
+												<li>
+													<span class="fl red">项目暂未认证</span>
+												</li>
 											</c:when>
-											<c:when test="${dreamTarget.remainingNum eq 0}">
-												<p class="fr">已售罄</p>
+											<c:when test="${projectDetails.type ==1 && projectDetails.validationType == 1 }">
+												<li>
+													<span class="fl">收款人身份信息</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+												<li>
+													<span class="fl">医院医疗证明</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+											</c:when>
+											<c:when test="${projectDetails.type ==1 && (projectDetails.validationType == 2 || projectDetails.validationType == 3)}">
+												<li>
+													<span class="fl">受助人（患者）身份信息</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+												<li>
+													<span class="fl">医院医疗证明</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+												<li>
+													<span class="fl">收款人身份信息</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+												<li>
+													<span class="fl">与受助人关系证明</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+											</c:when>
+											<c:when test="${projectDetails.type == 1 && projectDetails.validationType == 4 }">
+												<li>
+													<span class="fl">组织机构信息</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+												<li>
+													<span class="fl">与受助人关系证明</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+												<li>
+													<span class="fl">医院医疗证明</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
+											</c:when>
+											<c:when test="${(projectDetails.type == 2 || projectDetails.type == 3 ||projectDetails.type == 4
+							                   || projectDetails.type == 5) && projectDetails.validationType == 1 }">
+												<li>
+													<span class="fl">本人信息</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
 											</c:when>
 											<c:otherwise>
-												<p class="fr">
-													支持<span class="Red">${dreamTarget.supportCount}</span>份 /
-													剩余<span class="red">${dreamTarget.remainingNum}</span>份
-												</p>
+												<li>
+													<span class="fl">组织机构信息</span>
+													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
+												</li>
 											</c:otherwise>
 										</c:choose>
-									</dt>
-									<dd>
-										<img src="${dreamTarget.imgUrl}" alt="">
-										<p>${dreamTarget.content}</p>
-									</dd>
-								</dl>
-							</c:forEach>
-						</div>
-					</div>
-				</c:when>
-				<c:when test="${projectDetails.type eq 7}">
-					<div class="p-box">
-						<h4 class="til">梦想清单<i class="btn-blue"></i><em class="bord"></em></h4>
-						<div class="">
-							<div class="dreamList clearfix">
-								<ul>
-								<c:forEach var="dreamTarget"   items="${projectDetails.dreamTargets}">
-									<li>
-										<h6><span class="highlight">${dreamTarget.amount}</span>元</h6>
-										<p>${dreamTarget.content}</p>
-									</li>
-								</c:forEach>
-								</ul>			
+									</ul>
+									<div class="des">
+										<p>项目发起人已承诺，涉及本项目的文字、图片、证明等相关信息完全真实、有效，且不存在未经他人授权冒用他人名义进行求助的行为。</p>
+										<p>本人收到的全部救助款项将直接用于被救助人的救助，不另行挪作他用。若发起人存在违反上述承诺的行为，愿自行承担全部法律责任。</p>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-                   <div class="p-box authentication">
-						<h4 class="til">认证资料<i class="btn-blue"></i><br><span class="tips">提示：请确保您了解项目后再帮助</span><em class="bord"></em></h4>
-						<div class="">
-							<ul>
-							     <c:choose>
-							       <c:when test="${projectDetails.validationType == null}">
-							         <li>
-									    <span class="fl red">项目暂未认证</span>
-								    </li>
-							       </c:when>
-							       <c:when test="${projectDetails.type ==1 && projectDetails.validationType == 1 }">
-							           <li>
-									     <span class="fl">收款人身份信息</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-								       <li>
-									      <span class="fl">医院医疗证明</span>
-									      <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-							       </c:when>
-							       <c:when test="${projectDetails.type ==1 && (projectDetails.validationType == 2 || projectDetails.validationType == 3)}">
-							           <li>
-									     <span class="fl">受助人（患者）身份信息</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-								       <li>
-									      <span class="fl">医院医疗证明</span>
-									      <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-							           <li>
-									     <span class="fl">收款人身份信息</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-								       <li>
-									      <span class="fl">与受助人关系证明</span>
-									      <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-							       </c:when>
-							       <c:when test="${projectDetails.type == 1 && projectDetails.validationType == 4 }">
-							           <li>
-									     <span class="fl">组织机构信息</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-								       <li>
-									     <span class="fl">与受助人关系证明</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-								       <li>
-									      <span class="fl">医院医疗证明</span>
-									      <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-							       </c:when>
-							       <c:when test="${(projectDetails.type == 2 || projectDetails.type == 3 ||projectDetails.type == 4 
-							                   || projectDetails.type == 5) && projectDetails.validationType == 1 }">
-							           <li>
-									     <span class="fl">本人信息</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-							       </c:when>
-							       <c:otherwise>
-							           <li>
-									     <span class="fl">组织机构信息</span>
-									     <p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
-								       </li>
-							       </c:otherwise>
-							    </c:choose>
-							</ul>
-							<div class="des">
-								<p>项目发起人已承诺，涉及本项目的文字、图片、证明等相关信息完全真实、有效，且不存在未经他人授权冒用他人名义进行求助的行为。</p>
-								<p>本人收到的全部救助款项将直接用于被救助人的救助，不另行挪作他用。若发起人存在违反上述承诺的行为，愿自行承担全部法律责任。</p>
-							</div>
-						</div>
-					</div>
-				</c:otherwise>
-			</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<!-- 项目详情右侧信息 end-->
+				<div id="clear"></div>
+			</div>
+			<div class='xim-qi'>
+				<p><i></i> <span>推荐救助</span></p>
+				<li><i></i><span><ul class='ul-o'  id="projectListD">
+
+				</ul></span></li>
+			</div>
+			<div class='xim-qi'>
+				<p><i></i> <span>审核拨付流程</span></p>
+				<ul class='shbflc'>
+					<li>1.<span>初审</span>医院对项目材料进行初审</li>
+					<li>2.<span>验证</span>“帮你筹”公益项目办公室实地探访</li>
+					<li>3.<span>审批</span>“帮你筹”公益项目办公室综合评审项目</li>
+					<li>4.<span>款项拨付</span>善款拨付实施救助</li>
+				</ul>
+			</div>
+			<div class='xim-qi'>
+				<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
+				<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>
+			</div>
 		</div>
-		<!-- 项目详情右侧信息 end-->
-   </div>
+		<div class='clear'></div>
+	</div>
 </div>
+<script id="projectListTemp" type="text/x-jquery-tmpl">
+    {{each(i,data) pageResult.list}}
+    	<li><i></i><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}"><span>{{= data.projectName}}</span></a></li>
+    {{/each}}
+</script>
+<script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
+
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var withs=$('.jqrt>p>span').html();
+        $('.jqrt>p').css('width',withs)
+        if(parseInt(withs)<10){
+            $('.jqrt>p>span').css('left',-4)
+        }
+
+        $(".clik>ul>li").click(function(){
+            if(!$(this).hasClass('actionk')){
+                $(this).addClass('actionk').siblings('li').removeClass('actionk');
+                $($(this).attr('data')).css('display','block').siblings('div').css('display','none')
+            }
+        })
+    })
+    var _content = []; //临时存储li循环内容
+    var moreload = {
+        _default:15, //默认显示图片个数
+        _loading:5,  //每次点击按钮后加载的个数
+        init:function(){
+            var lis = $(".record .hidden li");
+            $(".record ul.list").html("");
+            for(var n=0;n<moreload._default;n++){
+                lis.eq(n).appendTo(".record ul.list");
+            }
+            for(var i=moreload._default;i<lis.length;i++){
+                _content.push(lis.eq(i));
+            }
+            $(".record .hidden").html("");
+        },
+        loadMore:function(){
+            var mLis = $(".record ul.list li").length;
+            for(var i =0;i<moreload._loading;i++){
+                var target = _content.shift();
+                if(!target){
+                    $('.record .jzgd-s').html("<a href='javascript:;'>全部加载完毕...</a>");
+                    break;
+                }
+                $(".record ul.list").append(target);
+                /*$(".record ul.list li").eq(mLis+i).each(function(){
+                    $(this).attr('src',$(this).attr('realSrc'));
+                });*/
+            }
+        }
+    }
+    moreload.init();
+
+
+</script>
+
+
 <link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />
 <script type="text/javascript"  src="<%=basePath %>easy/js/project/projectDetails.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
@@ -278,20 +355,20 @@
 <script type="text/javascript"  src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 
 <script id="dynamicTemp" type="text/x-jquery-tmpl">
-{{each(i,data) pageResult.list}}  
+{{each(i,data) pageResult.list}}
            <div class="schedule">
 				<h6>{{= data.dateCreate}}<i class="ico"></i></h6>
 				<p>{{= data.content}}</p>
                 <div class="mod-project-padd clearfix">
                 {{each(i,img) data.imgsUrl}}
                 <img src="{{= img.addr}}" alt="" width="90"  height="60" onclick=javascript:projectDetails.showImg(this);>
-                {{/each}}  
+                {{/each}}
                 </div>
 		   </div>
 {{/each}}
 </script>
 <script id="commentTemp" type="text/x-jquery-tmpl">
-{{each(i,data) pageResult.list}}  
+{{each(i,data) pageResult.list}}
                             <div class="messagelist">
 									<img src="{{= data.imageUrl}}" alt="" class="m-headImg">
 									<div class="userinfo">
@@ -323,21 +400,21 @@
                                         {{each(i,d) data.comments}}
                                             {{if i != 0}}
                                             <li>
-                                                {{if d.replyUserName == null}}  
+                                                {{if d.replyUserName == null}}
 												  <p><span class="highlight">
                                                   <a href="javascript:void(0)" class="highlight" onclick="projectDetails.showReplyDiv('{{= data.orderId}}',this,'{{= d.userId}}')">{{= d.nickName}}</a>
                                                   </span>：{{= d.content}}</p>
                                                 {{/if}}
-                                                {{if d.replyUserName != null}}  
+                                                {{if d.replyUserName != null}}
 												  <p><span class="highlight">
                                                   <a href="javascript:void(0)" class="highlight" onclick="projectDetails.showReplyDiv('{{= data.orderId}}',this,'{{= d.userId}}')">{{= d.nickName}}</a>
                                                   </span>回复<span class="highlight">
                                                   <a href="javascript:void(0)" class="highlight" onclick="projectDetails.showReplyDiv('{{= data.orderId}}',this,'{{= d.replyUserId}}')">{{= d.replyNickName}}</a>
                                                   </span>：{{= d.content}}</p>
                                                 {{/if}}
-                                             </li>    
-                                            {{/if}}    
-                                        {{/each}} 
+                                             </li>
+                                            {{/if}}
+                                        {{/each}}
 										</ul>
 										<div class="replyBox hide">
 											<form method="post"  id="{{= data.orderId}}">
@@ -354,20 +431,20 @@
 										<ul>
                                         {{each(i,d) data.comments}}
                                             <li>
-                                            {{if d.replyUserName == null}}  
+                                            {{if d.replyUserName == null}}
 												  <p><span class="highlight">
                                                   <a href="javascript:void(0)" class="highlight" onclick="projectDetails.showReplyDiv('{{= data.orderId}}',this,'{{= d.userId}}')">{{= d.nickName}}</a>
                                                   </span>：{{= d.content}}</p>
                                             {{/if}}
-                                            {{if d.replyUserName != null}}  
+                                            {{if d.replyUserName != null}}
 												  <p><span class="highlight">
                                                   <a href="javascript:void(0)" class="highlight" onclick="projectDetails.showReplyDiv('{{= data.orderId}}',this,'{{= d.userId}}')">{{= d.nickName}}</a>
                                                   </span>回复<span class="highlight">
                                                   <a href="javascript:void(0)" class="highlight" onclick="projectDetails.showReplyDiv('{{= data.orderId}}',this,'{{= d.replyUserId}}')">{{= d.replyNickName}}</a>
                                                   </span>：{{= d.content}}</p>
-                                            {{/if}}    
+                                            {{/if}}
                                             </li>
-                                        {{/each}} 
+                                        {{/each}}
 										</ul>
 										<div class="replyBox hide">
 											<form method="post"  id="{{= data.orderId}}">
@@ -383,13 +460,19 @@
 {{/each}}
 </script>
 <script type="text/javascript" >
-   var supportAmt = ${projectDetails.supportAmt};
-   var facTarget = ${projectDetails.facTarget};
-   var progress = parseInt(supportAmt/facTarget*100);
-   $("#progress").html(progress);
-   if(progress>100){
-	   progress = 100;
-   }
-   $(".progress").children().attr("data-progress",progress);
-   var projectStatus = ${projectDetails.projectStatus};
+    var supportAmt = ${projectDetails.supportAmt};
+    var facTarget = ${projectDetails.facTarget};
+    var progress = parseInt(supportAmt/facTarget*100);
+    $("#progress").html(progress);
+    if(progress>100){
+        progress = 100;
+    }
+    $(".progress").children().attr("data-progress",progress);
+    var projectStatus = ${projectDetails.projectStatus};
 </script>
+
+
+
+
+
+

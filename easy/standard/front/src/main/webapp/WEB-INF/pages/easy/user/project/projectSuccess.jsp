@@ -35,7 +35,7 @@ DM.Page.ready({
 			window.location.href = basePath+"project/projectDetails.do?projectId="+$("input[name=projectId]").val();
 		});
 		$("#projectValidationBtn").click(function(){
-			$("#form").attr("action",basePath+"user/project/projectValidChoose.do").submit();
+			$("#form").attr("action",basePath+"user/project/projectValidationStart.do").submit();
 		});
 		
 		// 分享引入配置

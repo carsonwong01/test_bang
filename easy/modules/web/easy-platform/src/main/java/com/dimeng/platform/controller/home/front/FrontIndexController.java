@@ -143,7 +143,7 @@ public class FrontIndexController extends BaseController
     }
     
     /**
-     * 用户注册
+     * 用户注册2
      * <功能详细描述>
      * @param httpEntity
      * @return

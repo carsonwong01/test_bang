@@ -28,12 +28,22 @@
 	<meta name="keywords" content="<%=siteInfo.getWebKeyword() %>"  />
 	<meta name="description" content="<%=siteInfo.getSiteDescr() %>"  />
 	<meta property="wb:webmaster" content="3e7a490b04ffe9d8" />
-	<link rel="icon" href="<%=basePath %>easy/images/favicon.ico" type="image/x-icon" /> 
+	<link rel="icon" href="<%=basePath %>easy/images/favicon.ico" type="image/x-icon" />
+
+	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/index_new.css">--%>
+	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/news.css">--%>
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/newsinformation.css">
+	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project.css">--%>
+	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project-details.css">--%>
+
+
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/base.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/index.css" />
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/front.css" />
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>easy/css/user.css" />
+	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/user.css" />
+
+
 	
 	<!-- 公用js -->
 	<script type="text/javascript" src="<%=basePath %>js/common/jquery-1.8.3.min.js"></script>
@@ -42,8 +52,10 @@
 	<script type="text/javascript" src="<%=basePath %>js/core/jquery.spine.framework.js"></script>
 	<script type="text/javascript" src="<%=basePath %>js/framework/DM.js?v=2015"></script>
 	<script type="text/javascript" src="<%=basePath %>js/framework/DM.Util.js"></script>
-	
-	
+
+
+
+
 	<script type="text/javascript" src="<%=basePath %>easy/js/home/Dialog.js"></script>
 	<script type="text/javascript" src="<%=basePath %>easy/js/home/common.js"></script>
 	<script type="text/javascript" src="<%=basePath %>easy/js/home/front.js"></script>

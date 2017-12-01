@@ -54,7 +54,7 @@ import com.dimeng.utils.SystemCache;
 @RequestMapping(value = "user/project")
 public class LaunchProjectController extends BaseController
 {
-    
+
     /**
      * 查询用户状态是否为拉黑
      * <功能详细描述>
@@ -282,16 +282,17 @@ public class LaunchProjectController extends BaseController
      * @param response
      * @return
      */
+/*
     @RequestMapping(value = "/projectValidChoose.do")
-    public Object projectValidChoose(String projectId, String projectType, HttpServletRequest request,
-        HttpServletResponse response)
+    public Object projectValidChoose(String projectId, String projectType,HttpServletRequest request,
+    HttpServletResponse response)
     {
         ModelAndView mv = new ModelAndView("easy/user/project/projectValidChoose.page");
         mv.addObject("projectId", projectId);
         mv.addObject("projectType", projectType);
         return mv;
     }
-    
+*/
     /**
      * 跳转新增项目验证页面
      * <功能详细描述>
@@ -306,7 +307,10 @@ public class LaunchProjectController extends BaseController
     public Object projectValidationStart(String projectId, String projectType, String validationType,
         HttpServletRequest request, HttpServletResponse response)
     {
-        ModelAndView mv = null;
+        validationType = ProjectValidationTypeEnum.ZZYZ.getDataBaseVal();
+        //所有项目（组织验证/企业验证）
+        ModelAndView mv = new ModelAndView("easy/user/project/projectValid/validation_group.page");
+        /*
         //大病救助
         if (ProjectValidationTypeEnum.BRYZ.getDataBaseVal().equals(validationType))
         {
@@ -335,6 +339,7 @@ public class LaunchProjectController extends BaseController
             //所有项目（组织验证/企业验证）
             mv = new ModelAndView("easy/user/project/projectValid/validation_group.page");
         }
+        */
         //图片模板（身份证示例图片、医疗证明示例图片）
         List<FindAllTSiteImageTemplateResp> imgList =
             (List<FindAllTSiteImageTemplateResp>)SystemCache.getCache(SystemConstant.CacheKey.IMAGE_MODEL_LIST);

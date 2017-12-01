@@ -91,20 +91,20 @@
 			<!-- PC首页 -->
 			<if test="opSource != null  and opSource == 1 and (sorting == null || sorting =='')">
 				ORDER BY ho.date_pc  DESC
-			</if> 
+			</if>
 			<!-- 微信首页 -->
 			<if test="opSource != null  and opSource == 2 and (sorting == null || sorting =='')">
 				ORDER BY ho.date_weixin  DESC
-			</if> 
+			</if>
 			<!-- APP首页 -->
 			<if test="opSource != null  and opSource == 3 and (sorting == null || sorting =='')">
 				ORDER BY ho.date_app  DESC
 			</if>
 			<if test=" sorting != null and sorting != ''">
 				ORDER BY ${sorting}  ${order}
-			</if>  
+			</if>
 		</where>
-	</select> 
+	</select>
 
 	<!-- PC首页3个热门推荐项目 -->
 	<select id="findRecommend" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" >
@@ -117,6 +117,8 @@
 			p.project_label projectTag,
 			p.project_type projectType,
 			FORMAT(p.raised_amount,0)  raiseTotal,
+			FORMAT(p.target_amount,0)  targetAmount,
+		  	(select IFNULL(count(1),0) from t_order_support where project_id = p.project_id and  `status` not in (1,2,9) and IFNULL(refund_type,0) IN(0,1,2)) supportCount,
   			IFNULL(LEFT(((p.raised_amount / p.target_amount)) ,4), 0.00 ) rate
 	FROM
 	t_site_home_project ho 

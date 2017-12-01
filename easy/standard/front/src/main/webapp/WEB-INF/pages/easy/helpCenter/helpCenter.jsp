@@ -1,7 +1,7 @@
 <div class="help-centerPage helpAndNewsPage">
 	<div class="layout">
 		<div class="locationBox">
-			所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>帮助中心<span>&gt;</span><span
+			所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>常见问题<span>&gt;</span><span
 				id="helpTitle"></span>
 		</div>
 	</div>
@@ -9,7 +9,7 @@
 		<%@include file="/WEB-INF/pages/easy/helpCenter/leftMain.jsp"%>
 		<form id="dataForm">
 			<input type="hidden" name="type" id="munuType" value="1" /> <input
-				type="hidden" id="typeFooter" value="${type}" />
+				type="hidden" id="typeFooter" value="${4}" /><%-- value="${type}"设置点击后默认出现的问题选项--%>
 			<div class="rightBox fr">
 				<div class="cont"  id="helpCenterId">
 					

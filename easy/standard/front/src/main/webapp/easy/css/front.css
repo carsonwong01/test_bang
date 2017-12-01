@@ -90,14 +90,14 @@
 
 /*郑雄升*/
 /* 项目详情页 */
-.p-detail-content{padding: 25px 0 40px;background-color: #f7f7f7}
+.p-detail-content{padding: 0px 0 40px;background-color: #f7f7f7}
 .p-detail-content .leftbox{width: 71.56%}
 .wrap-1002 .p-detail-content .leftbox{width: 65.56%}
 .p-detail-content .p-tabCont .list{display: none}
 .p-detail-content .p-tabCont .list:first-child{display: block;}
-.p-detail-content .rightbox{width: 327px;padding-top: 46px}
+.p-detail-content .rightbox{width: 360px;padding-top: 0px;margin-bottom: 18px}
 .p-detail-content .p-detail{background-color: #fff}
-.p-detail-content .p-til{font-size: 24px;color: #333;padding-bottom: 10px;height: 36px;line-height: 36px;}
+.p-detail-content .p-til{font-size: 16px;color: #333;padding-bottom: 10px;height: 36px;line-height: 36px;}
 .p-detail-content .p-headImg{position: relative;padding-bottom: 20px}
 .p-detail-content .p-headImg img{display: block;width: 100%}
 .p-detail-content .p-headImg .collection{position: absolute;cursor: pointer;right: 0;top: 0;width: 40px;height: 40px;background: url('../images/p_detail_icon.png') no-repeat;}
@@ -109,7 +109,7 @@
 .p-detail-content .p-tabbox .num{color: #ff2755}
 .p-detail-content .p-tabCont{padding: 30px 20px}
 .p-detail-content .p-box{background-color: #fff;margin-bottom: 20px;padding: 24px;position: relative;overflow: hidden;}
-.p-detail-content .p-box .til{padding: 0 0 15px 15px;position: relative;font-size: 18px;}
+.p-detail-content .p-box .til{padding: 0 0 15px 15px;position: relative;font-size: 16px;}
 .p-detail-content .p-box .til i{position: absolute;left: 0;top: 5px;width: 3px;height: 18px;}
 .p-detail-content .p-box .bord{position: absolute;left: 50%;margin-left: -200px ;width: 400px;border-bottom:1px solid #d8d8d8;bottom: 0}
 .p-detail-content .p-getMoney.p-box{overflow: visible}
@@ -177,12 +177,12 @@
 
 /* 认证资料 */
 .p-detail-content .authentication .tips{color: #999;font-size: 14px;}
-.p-detail-content .authentication li{clear: both;overflow: hidden;height: 60px;line-height: 60px;border-bottom: 1px dashed #ddd;font-size: 16px;}
+.p-detail-content .authentication li{clear: both;overflow: hidden;height: 60px;line-height: 60px;border-bottom: 1px dashed #ddd;font-size: 14px;}
 .p-detail-content .authentication li span, .p-detail-content .authentication li i{display: inline-block;vertical-align: middle;}
 .p-detail-content .authentication li i{background: url('../images/p_detail_icon.png') no-repeat;width: 15px;height: 15px;margin-right: 10px}
 .p-detail-content .authentication .status-yes{background-position: -91px 0}
 .p-detail-content .authentication .status-no{background-position: -91px -15px}
-.p-detail-content .authentication .des{padding-top: 10px}
+.p-detail-content .authentication .des{padding-top: 10px;font-size: 12px;}
 .p-detail-content .authentication .des p{line-height: 24px;text-align: justify;}
 
 

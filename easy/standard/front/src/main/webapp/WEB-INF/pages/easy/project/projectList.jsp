@@ -1,98 +1,102 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form id="projectListForm" method="post">
-    <!-- 项目状态查询条件 -->
-    <input type="hidden" name="projectType" id="projectType" value="${req.type }"/>
-    <!-- 项目标签类型查询条件 -->
-    <input type="hidden" name="tagType" id="tagType" value="${req.tagType }"/>
-    <!-- 排序字段查询条件 -->
-    <input type="hidden" name="sorting" id="sorting" value="${req.sorting }"/>
-    <!-- 升降序查询条件 -->
-    <input type="hidden" name="order" id="order" value="${req.order }"/>
-    <!-- 跳转项目详情页的项目ID -->
-    <input type="hidden" name="projectId" id="projectId"/>
-    <div class="main-content clearfix">
-        <div class="wrap">
-            <div class="xm-screening-con clearfix">
-                <div class="xm-leixing-con">
-                    <dl>
-                        <dt>项目类型：</dt>
-                        <dd id="typeDD">
-                            <%--<a href="javascript:void(0)" class="cur" onclick="projectList.typeQuery(this,'')">全部</a>--%>
-                            <a href="javascript:void(0)" class="cur" onclick="projectList.typeQuery(this,'1')">个人求助</a>
-                            <%--<a href="javascript:void(0)" onclick="projectList.typeQuery(this,'6')">产品急销</a>--%>
-                            <%--<a href="javascript:void(0)" onclick="projectList.typeQuery(this,'7')">实现梦想</a>--%>
-                        </dd>
-                    </dl>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project.css">
 
-                    <dl>
-                        <dt>项目标签：</dt>
-                        <dd id="tagTypeDD">
-                            <a href="javascript:void(0)" class="cur" onclick="projectList.tagTypeQuery(this,'')">全部</a>
-                            <c:forEach var="item" items="${allTProjectLabelType}">
-                                <a href="javascript:void(0)"
-                                   onclick="projectList.tagTypeQuery(this,',${item.labelName},')">${item.labelName}</a>
-                            </c:forEach>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>列表排序：</dt>
-                        <dd id="sortDD">
-                            <a href="" class="cur" onclick="projectList.sortQuery(this,'')">默认</a>
-                            <a href="javascript:void(0)" onclick="projectList.sortQuery(this,'p.date_create')">最新上线<i
-                                    class="down"></i></a>
-                            <a href="javascript:void(0)" onclick="projectList.sortQuery(this,'raiseTotal')">筹资金额<i
-                                    class="down"></i></a>
-                            <a href="javascript:void(0)" onclick="projectList.sortQuery(this,'supportCount')">支持人数<i
-                                    class="down"></i></a>
+<div class='center'>
+    <div class='bender'>
+        <div></div>
+    </div>
+    <!-- 本周推荐 -->
+    <div class='men-ded'>
+        <div class='top-io'>
+            <i></i><span>本周推荐</span>
+        </div>
+        <div class='fl fl-cen'>
+            <ul class='im-tx2'  id="projectListD">
 
-                        </dd>
-                    </dl>
-                </div>
+            </ul>
+            <div class='clear'></div>
+            <div class='top-io asy'>
+                <i></i><span>疾病救助</span>
+                <%--<a href="" class='fr'></a>--%>
+                <div class='clear'></div>
             </div>
-            <div class="wrap clearfix">
-                <div class="xm-project-con clearfix">
-                    <ul id="projectListD">
 
-                    </ul>
-                </div>
-                <!--分页-->
-                <div class="paging" id="paging"></div>
-                <!--分页  --END-->
+            <div class='im-ttx'>
+                <%@include file="pendingProjectList.jsp"%>
+            </div>
+            <%--<div class="paging" id="paging"></div>--%>
+        </div>
+        <div class='fr fr-nav'>
+            <div class='top-txt'>
+                <p><b></b><a href="<%=basePath%>hospital/hospitalList.do">我要求助</a></p>
+            </div>
+            <div class='loing'>
+                <p>&nbsp;&nbsp;“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长 ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...<a href="<%=basePath %>/home/index.do" class='fr'>详细</a></p>
+                <!-- 登录前 -->
+                <c:if test="${currUser.userName==null}">
+                    <div><a href="<%=basePath %>home/login.do">用户登录</a></div>
+                </c:if>
+                <!-- 登录前 end-->
+                <!--已登录-->
+                <c:if test="${currUser.userName!=null}">
+                    <div><a href="<%=basePath %>user/userCenter.do?to=wdzc">个人中心</a></div>
+                </c:if>
+                <!-- 登录后 end-->
+            </div>
+            <div class='problem'>
+                <p><i></i><span>审核拨付流程</span></p>
+                <ul>
+                    <li>1.<span>初审</span>医院对项目材料进行初审</li>
+                    <li>2.<span>验证</span>“帮你筹”公益项目办公室实地探访</li>
+                    <li>3.<span>审批</span>“帮你筹”公益项目办公室综合评审项目</li>
+                    <li>4.<span>款项拨付</span>善款拨付实施救助</li>
+                </ul>
+            </div>
+            <div class='xim-qi'>
+                <p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
+                <%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>
             </div>
         </div>
-</form>
-
-<script type="text/javascript" src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
+        <div class='clear'></div>
+    </div>
+</div>
+<script id="projectListTemp" type="text/x-jquery-tmpl">
+    {{each(i,data) pageResult.list}}
+    <li>
+            <img src="{{= data.projectImg}}">
+            <div class='detailed'>
+                <p class='ti-ou' style="width: 330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+                        <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
+                <p class='yi-b'><b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>中国华侨基金会</span></p>
+                 <div class='dao-t' id='dao-t'>
+                     <p><span id="progress">{{= data.rate*100}}%</span></p>
+                 </div>
+                <ul class='ul-nus'>
+                   <li>目标金额（元）</br> <span>{{= data.targetAmount}}</span></li>
+                   <li>已筹金额（元）</br> <span>{{= data.raiseTotal}}</span></li>
+                   <li>捐助人次（次）</br> <span>{{= data.supportCount}}</span></li>
+                   <div class='clear'></div>
+                </ul>
+                <p class='but-ab'><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">我要捐款</a></p>
+            </div>
+        </li>
+    {{/each}}
+</script>
+<script type="text/javascript" src="<%=basePath %>easy/js/project/pendingProjectList.js"></script>
 <script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
 
-<script id="projectListTemp" type="text/x-jquery-tmpl">
-{{each(i,data) pageResult.list}}  
-           <li class="xm-percent-box"><div class="item-project-bor item-project-padd1">
-                            {{if data.projectType == 6}}<div class="xm-biaodi-icon xm-biaodi-icon02"></div> {{/if}}
-                            {{if data.projectType == 7}}<div class="xm-biaodi-icon xm-biaodi-icon01"></div> {{/if}}
-							<div class="item-img-tu" onclick="projectList.goProjectDetails('{{= data.projectId}}');"><img src="{{= data.projectImg}}"></div>
-							<div class="item-title-t pt20 pb20"><div class="item-title-x">{{= data.projectName}}</div>
-							<p class="item-title-text pt5" title="{{= data.projectIntro}}">{{= data.projectIntro}}</p></div>
-							<div class="item-sj-con">
-								<div class="biaoqian-lab"><span class="icon-public bq-icon"></span>{{html data.tags}}</div>
-								<div class="item-sj-data pt10 clearfix">
-									<ul>
-										<li class="item-percent-l"><div class="item-shuju-bor item-shuju-list01">
-											<p class="f18 gray3"><span format=0>{{= data.rate*100}} </span>%</p>
-											<p class="gray8">筹资进度</p>
-										</div></li>
-										<li class="item-percent-c"><div class="item-shuju-bor item-shuju-list02">
-											<p class="f18 gray3">￥{{= data.raiseTotal}}</p>
-											<p class="gray8">已筹金额</p>
-										</div></li>
-										<li class="item-percent-l"><div class="item-shuju-bor item-shuju-list03 item-shuju-nobor">
-											<p class="f18 gray3">{{= data.supportCount}}次</p>
-											<p class="gray8">支持人次</p>
-										</div></li>
-									</ul>
-								</div>
-							</div>
-						</div></li>
-{{/each}}
-
+<script type="text/javascript" src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('#dao-t>p>span').each(function(){
+            var withs=$(this).html();
+            $(this).parents('p').css('width',withs)
+            if(parseInt(withs)<10){
+                $(this).css('left',0)
+            }
+        })
+    })
 </script>
+

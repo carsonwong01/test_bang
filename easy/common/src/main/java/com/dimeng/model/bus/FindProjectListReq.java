@@ -1,6 +1,5 @@
 package com.dimeng.model.bus;
 
-import com.dimeng.framework.utils.StringUtil;
 import com.dimeng.model.expand.FindExportExcelParamsReq;
 
 /**
@@ -86,6 +85,32 @@ public class FindProjectListReq extends FindExportExcelParamsReq
      * 项目删除时间止
      */
     private String delTimeEnd;
+
+    /**
+     * 项目所属医院名称
+     */
+    private String hospitalName;
+
+    /**
+     * 项目所属医院ID
+     */
+    private String hospitalId;
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getHospitalId() {
+        return hospitalId;
+    }
+
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
 
     public String getProjectNo()
     {
