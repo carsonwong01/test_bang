@@ -59,7 +59,17 @@ public class TProjectValidation
     private String organizationAptitudeId;
     
     private String organizationAptitudeUrl;
-    
+
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
+
     public String getValidationId()
     {
         return validationId;

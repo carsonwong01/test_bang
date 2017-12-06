@@ -95,6 +95,18 @@ public class FindProjectListReq extends FindExportExcelParamsReq
      * 项目所属医院ID
      */
     private String hospitalId;
+    /**
+     * 认领基金会
+     */
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
 
     public String getHospitalName() {
         return hospitalName;

@@ -152,7 +152,20 @@ public class ProjectValidationReq extends BaseReq
      * 受助人手持身份证照片ID集合
      */
     private String[] recipientCardImageIds;
-    
+
+    /**
+     * 基金会名称
+     */
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
+
     /**
      * @return 返回 validationId
      */

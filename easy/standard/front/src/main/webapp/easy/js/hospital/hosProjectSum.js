@@ -20,6 +20,8 @@ var hosProjectSum = DM.Controller.sub({
      * 分页回调
      */
     pageCallBack : function(data) {
+        // 清空表格数据
+        $("#hosProjectSumD").empty();
         // 填充数据
         $('#hosProjectSumTemp').tmpl(data.hosProjectSum).appendTo("#hosProjectSumD");
         DM.Event.formatChar();

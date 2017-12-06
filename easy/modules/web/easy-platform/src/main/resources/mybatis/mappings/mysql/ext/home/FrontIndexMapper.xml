@@ -45,12 +45,45 @@
 				AND  IFNULL(sup.refund_type,0) IN(0,1,2)
 			) as memberCount 
 	</select>
-	
-	<!-- 首页项目列表 -->
+
+
+
+	<!--查找众筹中的所有项目-->
+	<select id="findAllProject" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp"
+			parameterType="com.dimeng.model.home.FrontIndexReq">
+		SELECT
+		  thb.hospital_id hospitalId, thb.hospital_name hospitalName,
+		  (
+			SELECT COUNT(tos.order_id) FROM t_order_support tos
+			WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
+		  ) supportCount,
+		  tpi.project_id projectId,
+		  tpi.project_name projectName,
+		  floor(tpi.target_amount) targetAmount,
+		  tpi.project_type,
+		  floor(tpi.raised_amount) raiseTotal,
+		  datediff(tpi.date_raised_end, now()) remainingDay,
+		  tpv.foundation_name foundationName,
+		  tpi.project_status projectStatus,
+		  tpi.cover_image_url coverImageUrl,
+		  tpi.date_create dateCreate,
+		  IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
+		  (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
+		FROM t_project_info tpi
+		LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
+		LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
+		WHERE tpi.project_status = '1'
+		ORDER BY tpi.date_update DESC
+	</select>
+
+
+	<!-- 首页推荐项目列表 -->
 	<select id="findRecommendList" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" 
 	parameterType="com.dimeng.model.home.FrontIndexReq" >
 	 SELECT
+			thb.hospital_name hospitalName,
 			p.project_id projectId,
+			tpv.foundation_name foundationName,
 			u.nick_name nickName,
 			TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft,
 			p.cover_image_url projectImg,
@@ -66,6 +99,8 @@
 	t_site_home_project ho 
   	LEFT JOIN t_project_info p on ho.project_id = p.project_id
  	LEFT JOIN t_q_user_basic u on p.project_creator_id = u.user_id
+	LEFT JOIN t_hospital_basic thb on thb.hospital_id = p.project_creator_id
+	LEFT JOIN t_project_validation tpv on tpv.project_id = p.project_id
 	 <where> 
 			1 = 1
 			<if test=" tagType != null and tagType != ''">
@@ -109,7 +144,9 @@
 	<!-- PC首页3个热门推荐项目 -->
 	<select id="findRecommend" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" >
 	 SELECT
+	   		thb.hospital_name hospitalName,
 			p.project_id projectId,
+			tpv.foundation_name foundationName,
 			p.cover_image_url projectImg,
 		  	p.project_name projectName,
 		  	TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft, 
@@ -122,7 +159,9 @@
   			IFNULL(LEFT(((p.raised_amount / p.target_amount)) ,4), 0.00 ) rate
 	FROM
 	t_site_home_project ho 
-  	LEFT JOIN t_project_info p on ho.project_id = p.project_id 
+  	LEFT JOIN t_project_info p on ho.project_id = p.project_id
+  	LEFT JOIN t_hospital_basic thb on thb.hospital_id = p.project_creator_id
+  	LEFT JOIN t_project_validation tpv on tpv.project_id = p.project_id
 	WHERE  ho.recommend_pc = 1  
 	ORDER BY ho.date_pc DESC
 	LIMIT 0,3

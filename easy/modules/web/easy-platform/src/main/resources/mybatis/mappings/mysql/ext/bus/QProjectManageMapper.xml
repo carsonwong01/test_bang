@@ -30,6 +30,7 @@
         <result column="real_name" property="initiatorRealName"/>
         <result column="hospital_name" property="hospitalName"/>
         <result column="hospital_id" property="hospitalId"/>
+        <result column="foundation_name" property="foundationName"/>
     </resultMap>
 
     <!-- 项目详细信息 -->
@@ -62,6 +63,7 @@
         <result column="is_focus" property="isFocus"/>
         <result column="cover_image_id" property="coverImageId"/>
         <result column="shield_status" property="shieldStatus"/>
+        <result column="foundation_name" property="foundationName"/>
     </resultMap>
 
     <!-- 项目内容 -->
@@ -241,7 +243,7 @@
     <select id="projectDetails" resultMap="ProjectDetailsRespResultMap"
             parameterType="com.dimeng.model.bus.ProjectDetailsReq">
         select
-        tpi.project_id,tpi.project_name,tqub.nick_name,t.user_name,tqub.image_url,tpi.cover_image_url,tpi.shield_status,
+        tpi.project_id,tpi.project_name,tpv.foundation_name,   tqub.nick_name,t.user_name,tqub.image_url,tpi.cover_image_url,tpi.shield_status,
         (select count(*) from t_order_support where project_id=tpi.project_id
         and status NOT IN(1,2) AND IFNULL(refund_type,0) IN(0,1,2)) as support_times,tpi.cover_image_id,
         datediff(tpi.date_raised_end,NOW()) remaining_day,tpi.financing_days,tpi.is_nedd_addr,
@@ -289,7 +291,7 @@
         SELECT addr
         FROM t_project_attachment
         WHERE associated_id =
-              #{associatedId,jdbcType=VARCHAR} AND type = 6
+        #{associatedId,jdbcType=VARCHAR} AND type = 6
     </select>
 
     <!-- 后台-业务管理-项目管理-查看项目-项目详情 -->
@@ -308,12 +310,12 @@
     <select id="findProjectReturnList" resultMap="FindProjectReturnListRespResultMap"
             parameterType="com.dimeng.model.common.IdPageReq">
         SELECT
-            return_id,
-            support_amount,
-            return_describe,
-            upper_count,
-            image_url,
-            surplus_count
+        return_id,
+        support_amount,
+        return_describe,
+        upper_count,
+        image_url,
+        surplus_count
         FROM t_project_return
         WHERE project_id = #{id,jdbcType=VARCHAR}
     </select>
@@ -322,16 +324,16 @@
     <select id="findProjectReturnOrDreamList" resultMap="FindProjectReturnListRespResultMap"
             parameterType="com.dimeng.model.common.IdPageReq">
         SELECT
-            tpr.return_id,
-            floor(tpr.support_amount)                   support_amount,
-            tpr.return_describe,
-            tpr.image_url,
-            tpr.image_id,
-            tpr.surplus_count,
-            (SELECT IFNULL(SUM(support_count), 0)
-             FROM t_order_support
-             WHERE return_id = tpr.return_id AND status NOT IN (1, 2) AND
-                   IFNULL(refund_type, 0) IN (0, 1, 2)) support_count
+        tpr.return_id,
+        floor(tpr.support_amount)                   support_amount,
+        tpr.return_describe,
+        tpr.image_url,
+        tpr.image_id,
+        tpr.surplus_count,
+        (SELECT IFNULL(SUM(support_count), 0)
+        FROM t_order_support
+        WHERE return_id = tpr.return_id AND status NOT IN (1, 2) AND
+        IFNULL(refund_type, 0) IN (0, 1, 2)) support_count
         FROM t_project_return tpr
         WHERE tpr.project_id = #{id,jdbcType=VARCHAR}
     </select>
@@ -382,18 +384,14 @@
         tpi.raised_amount supportAmt,
         tpi.date_create,
         (select user_name from t_user where user_id = tpi.project_creator_id ) user_name,
-        tu.hospital_name,
-
-
         (select nick_name from t_q_user_basic where user_id = tpi.project_creator_id ) nick_name,
         tpi.financing_days financingDays,
         (select COUNT(1) from t_order_support where `status` in (3,4,5,6,7,8) and refund_type != 1 AND project_id =
         tpi.project_id) support_number,
         IF(IFNULL(hp.id,'-1') &lt; 0,'未推荐','已推荐') recommendStatus,
         hp.id recommendId
-        FROM t_user tu,
+        FROM
         t_project_info tpi LEFT JOIN t_site_home_project hp on tpi.project_id = hp.project_id
-        AND tu.hospital_id = tpi.project_creator_id
         where tpi.project_status = 1 and tpi.shield_status = 2
         <if test="projectNo != null and projectNo != ''">
             and tpi.project_no=#{projectNo,jdbcType=VARCHAR}

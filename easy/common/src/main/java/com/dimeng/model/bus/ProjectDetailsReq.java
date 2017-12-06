@@ -36,7 +36,19 @@ public class ProjectDetailsReq extends BaseReq
      * 用户id，判断该用户是否关注该项目使用
      */
     private String userId;
-    
+    /**
+     * 认领基金会
+     */
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
+
     public String getProjectId()
     {
         return projectId;

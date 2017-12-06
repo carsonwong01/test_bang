@@ -89,6 +89,8 @@
 				/project/query/v/projectList = anon
 				/hospital/v/findHospitalProject = anon
 				/hospital/v/findHosProjectSum = anon
+				/frontHome/v/recomNewsList = anon
+				/home/frontInfo/v/frontAllProject = anon
 
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon

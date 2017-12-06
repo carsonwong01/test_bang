@@ -10,11 +10,7 @@ import com.dimeng.entity.ext.home.front.HomeNoticeListResp;
 import com.dimeng.entity.ext.home.front.HomeTotalResp;
 import com.dimeng.entity.ext.user.FrontUserInfo;
 import com.dimeng.entity.ext.user.UserOpenidResp;
-import com.dimeng.entity.table.user.TUser;
-import com.dimeng.entity.table.user.TQUserBasic;
-import com.dimeng.entity.table.user.TUserThirdParty;
-import com.dimeng.entity.table.user.TUserCapitalAccount;
-import com.dimeng.entity.table.user.TUserNotify;
+import com.dimeng.entity.table.user.*;
 import com.dimeng.enums.ThirdTypeEnum;
 import com.dimeng.framework.abilitys.encryptors.RSAEncryptor;
 import com.dimeng.framework.constants.DigitalAndStringConstant;
@@ -43,13 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 
 /**
@@ -65,6 +55,28 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
     SpringBeanUtil springBeanUtil;
 
     private BaseDataResp resp = new BaseDataResp();
+
+    @Override
+    public BaseDataResp findAllProject(FrontIndexReq req) throws Exception {
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FrontIndexReq> event = new QueryEvent<FrontIndexReq>();
+        //分页属性
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(req.getMaxResults());
+        //分页开关，一定要设置成true，才会分页
+        page.setPagination(!StringUtil.isEmpty(req.getExportPath()) ? false : true);
+        event.setObj(req);
+        event.setStatement("findAllProject");
+        List<FindRecommendListResp> list = baseDao.findAllIsPageByCustom(event);
+
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
+
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -115,27 +127,6 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         event.setObj(req);
         event.setStatement("findRecommendList");
         List<FindRecommendListResp> list = baseDao.findAllIsPageByCustom(event);
-
-        //格式化标签为List
-        if (list != null && list.size() > 0)
-        {
-            List<String> projectTags = null;
-            for (FindRecommendListResp findRecommendListResp : list)
-            {
-                //格式化标签为数组List
-                projectTags = new ArrayList<String>();
-                String[] label = findRecommendListResp.getProjectTag().split(",");
-                for (String string : label)
-                {
-                    if (StringUtil.notEmpty(string))
-                    {
-                        projectTags.add(string);
-                    }
-                }
-                findRecommendListResp.setProjectTags(projectTags);
-                findRecommendListResp.setProjectTag(null);
-            }
-        }
 
         data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
 

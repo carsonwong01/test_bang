@@ -180,7 +180,7 @@ if("1" == type)
 		 else if("3" == type)
 			 $("#detailHtml").html("修改支持项目相关问题");
 			 else if("4" == type)
-				 $("#detailHtml").html("修改常见问题");
+				 $("#detailHtml").html("修改其他问题");  
 
 </script>
 

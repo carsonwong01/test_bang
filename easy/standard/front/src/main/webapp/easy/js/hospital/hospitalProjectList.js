@@ -20,6 +20,8 @@ var hospitalProjectList = DM.Controller.sub({
      * 分页回调
      */
     pageCallBack : function(data) {
+        // 清空表格数据
+        $("#hospitalProjectD").empty();
         // 填充数据
         $('#hospitalProjectTemp').tmpl(data.hospitalProjectList).appendTo("#hospitalProjectD");
         DM.Event.formatChar();

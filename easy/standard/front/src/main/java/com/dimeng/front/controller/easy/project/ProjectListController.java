@@ -38,7 +38,7 @@ public class ProjectListController extends BaseController
      */
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/projectList.do")
-    public Object projectList(HttpServletRequest request, HttpServletResponse response)
+    public Object recomProjectList(HttpServletRequest request, HttpServletResponse response)
     {
         ModelAndView mv = new ModelAndView("easy/project/projectList.page");
         return mv;
@@ -54,8 +54,8 @@ public class ProjectListController extends BaseController
      */
     @ResponseBody
     @RequestMapping(value = "/projectListAjax.do")
-    public Object projectListAjax(FrontIndexReq req, HttpServletRequest request,
-        HttpServletResponse response)
+    public Object recomProjectListAjax( HttpServletRequest request,
+        HttpServletResponse response,FrontIndexReq req)
     {
         Map<String, Object> map = new HashMap<String, Object>();
         req.setOpSource("1");

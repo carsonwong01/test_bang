@@ -1,19 +1,18 @@
 package com.dimeng.front.controller.easy.newsInformation;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.utils.StringUtil;
 import com.dimeng.model.site.media.FindInvestmentInfoReq;
 import com.dimeng.utils.CommonUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 新闻资讯
@@ -70,5 +69,5 @@ public class FrontNewsInfoController
         mv.addObject("content", content);
         return mv;
     }
-    
+
 }

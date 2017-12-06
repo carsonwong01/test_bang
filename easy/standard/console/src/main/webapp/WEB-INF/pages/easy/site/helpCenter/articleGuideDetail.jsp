@@ -140,7 +140,7 @@
 		 else if("3" == type)
 			 $("#detailHtml").html("查看支持项目相关问题");
 			 else if("4" == type)
-				 $("#detailHtml").html("查看常见问题");
+				 $("#detailHtml").html("查看其他问题");  
  
 </script>
 

@@ -45,6 +45,15 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String allRaisedAmount;
     private String allSupprotTimes;
     private String rate;
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
 
     public String getRate() {
         return rate;

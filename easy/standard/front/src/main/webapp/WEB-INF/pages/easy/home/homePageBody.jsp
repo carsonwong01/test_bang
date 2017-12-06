@@ -60,7 +60,7 @@
 				<div class='detailed'>
 					<p class='ti-m' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
 						<a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">{{= objInfo.projectName}}</a></p>
-					<p class='yi-b'><b></b><span>{{= objInfo.hospitalName}}</span><i></i> <span>中国华侨基金会</span></p>
+					<p class='yi-b'><b></b><span>{{= objInfo.hospitalName}}</span><i></i> <span>{{= objInfo.foundationName}}</span></p>
 					<div class='dao-t' id='dao-t'>
 						<p><span id="progress">{{= objInfo.rate*100}}%</span></p>
 					</div>
@@ -110,7 +110,7 @@
 					<li><a href="">重庆医科大学附儿童医院</a></li>
 					<li><a href="">北京海军总医院</a></li>
 					<li><a href="">北京空军总医院</a></li>
-					<li><a href="">江苏省南京市鼓医院</a></li>
+					<li><a href="">江苏省南京市鼓楼医院</a></li>
 					<li><a href="">北京空军总医院</a></li>
 					<li><a href="">北京空军总医院</a></li>
 					<li><a href="">北京空军总医院</a></li>

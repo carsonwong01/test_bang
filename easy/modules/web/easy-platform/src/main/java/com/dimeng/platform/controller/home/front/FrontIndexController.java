@@ -1,20 +1,5 @@
 package com.dimeng.platform.controller.home.front;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import net.sf.ehcache.Element;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.enums.ThirdTypeEnum;
@@ -31,6 +16,19 @@ import com.dimeng.modules.user.services.UserInfoManageService;
 import com.dimeng.utils.Base64Decoder;
 import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.LoginCache;
+import net.sf.ehcache.Element;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 前台首页
@@ -45,13 +43,24 @@ public class FrontIndexController extends BaseController
     
     @Resource
     FrontIndexService frontIndexService;
-    
+
     @Resource
     UserInfoManageService userManageService;
     
     @Resource
     private IMessageService msgService;
-    
+
+    @RequestMapping(value = "/{v}/frontAllProject", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value=HttpStatus.OK)
+    public Object findAllProject(HttpEntity<FrontIndexReq> httpEntity, HttpServletRequest request)
+            throws Exception{
+        return frontIndexService.findAllProject(httpEntity.getBody());
+    }
+
+
+
     /**
      * 前台首页-广告-累计
      * <功能详细描述>
@@ -208,7 +217,6 @@ public class FrontIndexController extends BaseController
      * 登 出
      * <功能详细描述>
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(value = "/{v}/logout", method = RequestMethod.POST, produces = {"application/json",

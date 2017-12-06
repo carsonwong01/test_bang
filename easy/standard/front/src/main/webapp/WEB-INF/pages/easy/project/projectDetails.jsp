@@ -110,9 +110,9 @@
 			<div class='xim-qi'>
 				<p><i></i> <span>认证基金会</span></p>
 				<div class='xim-id'>
-					<img src="images/cn19.png" class='fl'>
+					<%--<img src="images/cn19.png" class='fl'>--%>
 					<p class='fl'>
-						<a href=''>中国华侨基金会</a></br>
+						<a href=''>${projectDetails.foundationName}</a></br>
 						<span>捐助的所有款项由该基金会管理拨及付</span>
 					</p>
 					<div class='clear'></div>

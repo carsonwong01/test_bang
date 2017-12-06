@@ -30,6 +30,7 @@
     <result column="wedding_picture_url" property="weddingPictureUrl" jdbcType="VARCHAR" />
     <result column="organization_aptitude_id" property="organizationAptitudeId" jdbcType="VARCHAR" />
     <result column="organization_aptitude_url" property="organizationAptitudeUrl" jdbcType="VARCHAR" />
+    <result column="foundation_name" property="foundationName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="TProjectValidation_Column_List" >
     validation_id, project_id, validation_type, receive_real_name, receive_id_card, receive_id_card2, 
@@ -136,6 +137,9 @@
       <if test="aduitUserId != null" >
         aduit_user_id,
       </if>
+      <if test="foundationName != null">
+        foundation_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="validationId != null" >
@@ -221,6 +225,9 @@
       </if>
       <if test="aduitUserId != null" >
         #{aduitUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="foundationName != null">
+        #{foundationName, jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

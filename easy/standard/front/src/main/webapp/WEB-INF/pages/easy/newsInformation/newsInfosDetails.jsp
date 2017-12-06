@@ -30,16 +30,8 @@
 
 				</ul></span></li>
 			</div>
-
-			<div class='xim-qi'>
-				<p><i></i> <span>推荐资讯</span></p>
-				<ul class='ul-o'>
-					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101710301402384897"><span>“帮你筹”网站公告</span></a></li>
-					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101710301359133576"><span>“帮你筹”：打通互联网医疗救助通道</span></a></li>
-					<li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=101711030957481719"><span>科技引领创新 智能改变生活</span></a></li>
-				</ul>
-			</div>
-
+			<%--推荐资讯--%>
+			<%@include file="/WEB-INF/pages/easy/newsInformation/recommendNewsInfos.jsp" %>
 			<div class='xim-qi'>
 				<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
 				<li><i></i><span><ul class='ul-o'  id="helpCenterId">

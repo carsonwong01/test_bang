@@ -28,21 +28,25 @@
 						<li class="group"><span class="item"><i
 								class="icon-public user-zjgl-icon"></i>资金管理<em class="unfold"></em></span>
 							<ul class="child" style="display: block;">
-								<li id="wdqb" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/myWallet.do',$('#main_right'),0,'wdqb')">我的账户</a></li>
+								<%--<li id="wdqb" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/myWallet.do',$('#main_right'),0,'wdqb')">我的账户</a></li>--%>
 								<li id="jymx" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/findTradeList.do',$('#main_right'),0,'jymx')">交易明细</a></li>
 							</ul></li>
 						<li class="group"><span class="item"><i
 								class="icon-public user-xmgl-icon"></i>项目管理<em class="unfold"></em></span>
 							<ul class="child">
 								<li id="wzcd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/user/supportProjectList.do',$('#main_right'),0,'wzcd')">我支持的</a></li>
-								<li id="wfqd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/myInitProjectList.do',$('#main_right'),0,'wfqd')">我发起的</a></li>
+								<c:if test="${currUser.userType == 1}">
+									<li id="wfqd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/myInitProjectList.do',$('#main_right'),0,'wfqd')">我发起的</a></li>
+								</c:if>
+
+
 								<li id="wgzd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/myCollectionList.do',$('#main_right'),0,'wgzd')">我关注的</a></li>
 							</ul></li>
 						<li class="group"><span class="item"><i
 								class="icon-public user-grsz-icon"></i>个人设置<em class="unfold"></em></span>
 							<ul class="child">
 								<li id="grzl" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/userInfo.do',$('#main_right'),0,'grzl')">个人资料</a></li>
-								<li id="shdz" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/addressManage/userAddressList.do',$('#main_right'),0,'shdz')">收货地址</a></li>
+								<%--<li id="shdz" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/addressManage/userAddressList.do',$('#main_right'),0,'shdz')">收货地址</a></li>--%>
 								<li id="smrz" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/security/findAuthentication.do',$('#main_right'),0,'smrz')">实名认证</a></li>
 								<li id="yhkgl" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/bankCardManage/findCardList.do',$('#main_right'),0,'yhkgl')">银行卡管理</a></li>
 							</ul></li>
@@ -54,7 +58,7 @@
 		<!--左侧-->
 
 		<!--右侧-->
-		<div class="user-r clearfix"  id="main_right">
+		<div class="user-r"  id="main_right">
 			
 		</div>
 		<!--右侧-->

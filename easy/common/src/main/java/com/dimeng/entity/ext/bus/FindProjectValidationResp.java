@@ -157,6 +157,19 @@ public class FindProjectValidationResp implements Serializable
      * 审核状态
      */
     private String auditStatus;
+
+    /**
+     * 基金会名称
+     */
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
     
     /**
      * @return 返回 validationId

@@ -125,6 +125,9 @@
     <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="user_type" property="userType" jdbcType="CHAR" />
+    <result column="hospital_name" property="realName" jdbcType="VARCHAR" />
+    <result column="province" property="provinceId" jdbcType="VARCHAR" />
+    <result column="city" property="cityId" jdbcType="VARCHAR" />
 
   </resultMap>
 	 
@@ -137,6 +140,9 @@
 			tu.user_status,
 			tu.first_login,
 			tu.user_type,
+			tu.hospital_name,
+			(select province from t_hospital_basic WHERE hospital_id=tu.user_id) province,
+  			(select city from t_hospital_basic where hospital_id = tu.user_id ) city,
 			date_format(
 				tu.date_last_login,
 				'%Y-%m-%d %H:%i:%s'
@@ -149,7 +155,7 @@
 			tub.idcard_status,   
 			tu.fail_login_count,
 			tub.image_url 
-		from t_user tu 
+		from t_user tu
 		    left join t_q_user_basic tub on  tu.user_id = tub.user_id
 		where tu.user_name = #{userName,jdbcType=VARCHAR}
 	</select> 

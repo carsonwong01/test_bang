@@ -61,7 +61,7 @@ public class PendingProjectListController extends BaseController
         req.setMaxResults(9);
         req.setProjectStatus(ProjectStatusEnum.ZCZ.getDataBaseVal());
         String data =
-                new CommonUtil().callInterfaceMethod(req, "project/query/v/projectList", RequestMethod.POST, request);
+                new CommonUtil().callInterfaceMethod(req, "home/frontInfo/v/frontAllProject", RequestMethod.POST, request);
         map.put("pendingProjectList",CommonUtil.getJSONObject(data, null));
         map.put("req", req);
         return map;

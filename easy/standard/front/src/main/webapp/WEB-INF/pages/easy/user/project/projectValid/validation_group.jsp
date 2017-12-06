@@ -39,14 +39,14 @@
 						<dl>
 							<dt><span class="red">*</span>组织名称</dt>
 							<dd>
-								<input type="text" id="organizationName" name="organizationName" validate="q|leng" leng="1,30" maxlength="30" class="input_txt wid92"  placeholder="请填写收款组织名称">
+								<input type="text" id="organizationName" name="organizationName" validate="q|leng" leng="1,30" maxlength="30" class="input_txt wid92"   value="${currUser.realName}">
 								<p class="prompt" id="organizationNameMsg"></p>
 							</dd>
 						</dl>
 						<dl>
 							<dt><span class="red">*</span>联系手机</dt>
 							<dd>
-								<input type="text" id="organizationPhone" name="organizationPhone" validate="q|leng|m" leng="1,11" maxlength="11" class="input_txt" placeholder="请填写组织联系手机">
+								<input type="text" id="organizationPhone" name="organizationPhone" validate="q|leng|m" leng="1,11" maxlength="11" class="input_txt"  value="${currUser.userName}">
 								<p class="prompt" id="organizationPhoneMsg"></p>
 							</dd>
 						</dl>
@@ -113,7 +113,28 @@
 						<!-- 实现梦想 end -->
 					</div>
 				</div>
-				
+
+				<div class="sickwhiteBg">
+					<h3 class="til">支持基金会</h3>
+					<div class="formbox">
+						<dl>
+							<dt><span class="red">*</span>基金会名称</dt>
+							<dd>
+								<select id="foundationName" name="foundationName" regionId="" class="select_style foundation">
+									<%--<option value="0">请选择</option>--%>
+									<option value="中国华侨基金会">中国华侨基金会</option>
+									<option value="中华少年儿童慈善救助基金会">中华少年儿童慈善救助基金会</option>
+									<option value="中国少年儿童基金会">中国少年儿童基金会</option>
+									<option value="中华社会救助基金会">中华社会救助基金会 </option>
+									<option value="中国人口福利基金会">中国人口福利基金会</option>
+								</select>
+								<%--<input type="text" id="foundationName" name="foundationName" validate="q|leng" leng="1,30" maxlength="30" class="input_txt wid92"  placeholder="请填写基金会名称">--%>
+								<p class="prompt" id="foundationNameMsg"></p>
+							</dd>
+						</dl>
+					</div>
+				</div>
+
 				<!-- 大病救助组织机构验证受助人信息、医疗信息 start -->
 				<c:if test="${projectType eq '1'}">
 					<div class="sickwhiteBg">
@@ -172,17 +193,19 @@
 							<dl>
 								<dt><span class="red">*</span>医院名称</dt>
 								<dd>
-									<input type="text" id="hospitalName" name="hospitalName" validate="q|leng" leng="1,25" maxlength="25" class="input_txt wid92"  placeholder="请填写医院名称">
+									<input type="text" id="hospitalName" name="hospitalName" validate="q|leng" leng="1,25" maxlength="25" class="input_txt wid92"  value="${currUser.realName}">
 									<p class="prompt" id="hospitalNameMsg"></p>
 								</dd>
 							</dl>
 							<dl>
 								<dt><span class="red">*</span>医院地址</dt>
 								<dd>
-									<span class="input-midle">
-										<select name="province" regionId="" class="select_style province"></select>
-										<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>
-									</span>
+									<%--<span class="input-midle">--%>
+									<input type="text" id="province" name="province"  class="select_style province"  value="${currUser.provinceId}">
+									<input type="text" id="hospitalRegionId" name="hospitalRegionId" class="select_style city"  value="${currUser.cityId}">
+										<%--<select name="province" regionId="" class="select_style province"></select>--%>
+										<%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
+									<%--</span>--%>
 									<p class="prompt" id="hospitalRegionIdMsg"></p>
 								</dd>
 							</dl>

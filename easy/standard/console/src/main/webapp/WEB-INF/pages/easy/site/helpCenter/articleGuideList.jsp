@@ -164,7 +164,7 @@
 		 else if("3" == type)
 			 $("#detailHtml").html("支持项目相关问题");
 			 else if("4" == type)
-				 $("#detailHtml").html("常见问题");
+				 $("#detailHtml").html("其他问题"); 
 		 
 		 
 		 

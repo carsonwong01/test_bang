@@ -6,7 +6,7 @@
             <div class='im-ttx' id="pendingProListD" >
 
             </div>
-            <div class='clear'></div>
+            <%--<div class='clear'></div>--%>
         </div>
         <div class='clear'></div>
         <div class="paging" id="paging"></div>
@@ -17,15 +17,15 @@
         <img src="{{= data.projectImg}}">
         <div class='detailed'>
             <p class='ti-ou' style="width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-                    <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.title}}</a></p>
-            <p class='yi-b'><b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>中国华侨基金会</span></p>
+                    <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
+            <p class='yi-b'><b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
             <div class='dao-t' id='dao-t'>
                 <p><span id="progress">{{= data.rate*100}}%</span></p>
             </div>
             <ul class='ul-nus'>
-                <li>目标金额（元）</br> <span>{{= data.facTarget}}</span></li>
-                <li>已筹金额（元）</br> <span>{{= data.supportAmt}}</span></li>
-                <li>捐助人次（次）</br> <span>{{= data.supportNumber}}</span></li>
+                <li>目标金额（元）</br> <span>{{= data.targetAmount}}</span></li>
+                <li>已筹金额（元）</br> <span>{{= data.raiseTotal}}</span></li>
+                <li>捐助人次（次）</br> <span>{{= data.supportCount}}</span></li>
                 <div class='clear'></div>
             </ul>
             <p class='but-ab'><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">我要捐款</a></p>

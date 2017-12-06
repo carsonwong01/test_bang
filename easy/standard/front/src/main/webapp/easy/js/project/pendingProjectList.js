@@ -20,6 +20,8 @@ var pendingProjectList = DM.Controller.sub({
      * 分页回调
      */
     pendingPageCallBack : function(data) {
+        // 清空表格数据
+        $("#pendingProListD").empty();
         // 填充数据
         $('#pendingProjectListTemp').tmpl(data.pendingProjectList).appendTo("#pendingProListD");
         DM.Event.formatChar();
@@ -33,11 +35,6 @@ var pendingProjectList = DM.Controller.sub({
             "url" : basePath+"project/frontPendingProjectAjax.do",
             "toPageCallBack" : arguments.callee
         });
-    },
-    // 进入项目详情页
-    goHospitalDetails:function(projectId){
-        //跳转项目详情
-        window.location.href = basePath+"project/projectDetails.do?projectId=" + projectId;
     },
 });
 

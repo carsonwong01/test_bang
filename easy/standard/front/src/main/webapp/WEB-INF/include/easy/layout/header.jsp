@@ -1,4 +1,30 @@
+<script type="text/javascript">
+    //自适应宽度
+    function winWrap() {
+        var width = $(window).width();
+        if (width > 1300) {
+            $("body").attr("class", "wrap-1220");
+        } else {
+            $("body").attr("class", "wrap-1002");
+        }
+    };
+    $(window).resize(function () {
+        winWrap();
+    });
+    winWrap();
+</script>
+<!--底部-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.dimeng.entity.table.site.TSiteInfo" %>
+<%@page import="com.dimeng.utils.SystemCache" %>
+<%@page import="com.dimeng.constants.SystemConstant" %>
+<%
+    TSiteInfo siteInfo = (TSiteInfo) SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO);
+%>
+<!--头部-->
+<form id="projecttype_form" action="<%=basePath%>user/project/projectStart.do">
+    <input type="hidden" id="projectType" name="projectType" value="1"/>
+</form>
 <header>
     <div class='header'>
         <a href="<%=basePath%>home/index.do" class='fl logo'><img src="<%=basePath%>easy/images/logo2.png"></a>
@@ -8,12 +34,11 @@
             <li><a href="<%=basePath%>hospital/hospitalList.do">医院</a></li>
             <li><a href="<%=basePath%>home/aboutUs.do">关于我们</a></li>
             <li><a href="<%=basePath%>frontHome/newsInfos.do">新闻资讯</a></li>
-            <c:if test="${currUser.userName!=null}">
-                <c:if test="${currUser.userType == 1}">
-                    <li><a href="javascript:;" onclick="javascript:headTop.toInitProject();" class="btn-blue">发起项目</a></li>
-                </c:if>
-            </c:if>
-
+            <%--<c:if test="${currUser.userName!=null}">--%>
+                <%--<c:if test="${currUser.userType == 1}">--%>
+                <%--<li class='login'><a href="#" onclick="$('#projecttype_form').submit();" class="ind">发起项目</a></li>--%>
+                <%--</c:if>--%>
+            <%--</c:if>--%>
             <div class='clear'></div>
         </ul>
         <div class='fr loin'>
@@ -26,20 +51,18 @@
             <!--已登录-->
             <c:if test="${currUser.userName!=null}">
                 <c:if test="${currUser.userType == 1}">
-                    <%--<li><a href="javascript:;" onclick="javascript:headTop.toInitProject();" class="btn-public btn-w80 btn-blue">发起项目</a></li>--%>
+                    <a href="#" onclick="$('#projecttype_form').submit();" class="inc">发起项目</a>
                 </c:if>
-                <!--<li><a href="#" onclick="$('#projecttype_form').submit();" class="btn-public btn-w80 btn-blue">发起项目</a></li>-->
+                <%--<li><a href="#" onclick="$('#projecttype_form').submit();" class="btn-public btn-w80 btn-blue">发起项目</a></li>--%>
                 <a href="<%=basePath %>user/userCenter.do?to=wdzc" class='inc'>个人中心</a>
-                <%--<a href="<%=basePath%>home/logout.do" class='inc'>安全退出</a>--%>
+                <a href="<%=basePath%>home/logout.do" class='ind'>安全退出</a>
             </c:if>
 
             <!-- 登录后 end-->
         </div>
     </div>
 </header>
-
 <script type="text/javascript" src="<%=basePath %>easy/js/home/header.js"></script>
-
 <script>
     var hrefs = window.location.href;
     $("#HEADER_MENUS").find("a").removeClass("cur");

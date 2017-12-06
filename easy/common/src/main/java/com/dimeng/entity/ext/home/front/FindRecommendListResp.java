@@ -80,7 +80,32 @@ public class FindRecommendListResp implements Serializable
      * 项目类型
      */
     private String projectType;
-    
+
+    /**
+     * 基金会
+     */
+    private String foundationName;
+    /**
+     * 发起医院
+     */
+    private String hospitalName;
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
+
     public String getProjectId()
     {
         return projectId;

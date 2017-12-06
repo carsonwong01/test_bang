@@ -38,15 +38,10 @@
     <result column="support_times" property="supportTimes"/>
   </resultMap>
 
-  <!--<sql id="THospitalBasic_Column_List" >-->
-    <!--hospital_id,hospital_name,hospital_num,hospital_grade,hospital_Type,hospital_abstract,hospital_image_url,-->
-    <!--hospital_image_id,link_name,mobile_phone,office_tel,hospital_url,province,city,-->
-    <!--county,logo_url,logo_id,description_image_url,description_image_id,description-->
-  <!--</sql>-->
 <!--查询医院的基本信息-->
   <select id="findAllHospital" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
-    SELECT
+   SELECT
       hospital_id hospitalId,
       hospital_name hospitalName,
       hospital_num hospitalNum,
@@ -57,51 +52,44 @@
       logo_id logoId,
       t.allTargetAmount,t.allRaisedAmount,t.allSupprotTimes
     FROM
+      t_hospital_basic
+      LEFT JOIN
       (SELECT
          tpi.project_creator_id proCreatorId,
          sum(target_amount) allTargetAmount,
          sum(raised_amount) allRaisedAmount,
          sum((SELECT COUNT(tos.order_id) FROM t_order_support tos
          WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
-       FROM t_project_info tpi GROUP BY project_creator_id) t,
-      t_hospital_basic
-    WHERE t.proCreatorId = t_hospital_basic.hospital_id
+         FROM t_project_info tpi GROUP BY project_creator_id) t
+      ON t.proCreatorId = t_hospital_basic.hospital_id
   </select>
-<!--根据ID查找医院-->
+<!--根据ID查找医院详细信息-->
   <select id="findHospitalDetails" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
     SELECT
-    hospital_id hospitalId,
-    hospital_name hospitalName,
-    hospital_num hospitalNum,
-    hospital_grade hospitalGrade,
-    hospital_type hospitalType,
-    hospital_abstract hospitalAbstract,
-    hospital_image_url hospitalImageUrl,
-    hospital_image_id hospitalImageId,
-    link_name linkName,
-    hospital_mail hospitalMail,
-    mobile_phone mobilePhone,
-    office_tel officeTel,
-    hospital_url hospitalUrl,
-    province province,
-    city city,
-    county county,
-    logo_url logoUrl,
-    logo_id logoId,
-    description_image_url descriptionImageUrl,
-    description_image_id descriptionImageId,
-    description description,
-    found_time foundTime,
-      sum((
-        SELECT COUNT(tos.order_id) FROM t_order_support tos
-        WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
-        )) allSupprotTimes,
-      sum(floor(tpi.target_amount)) allTargetAmount,
-      sum(floor(tpi.raised_amount)) allRaisedAmount,
-      IFNULL(LEFT(((sum(floor(tpi.target_amount)) / sum(floor(tpi.raised_amount)))) ,4), 0.00 ) rate
+        hospital_id hospitalId,    hospital_name hospitalName,
+        hospital_num hospitalNum,    hospital_grade hospitalGrade,
+        hospital_type hospitalType,    hospital_abstract hospitalAbstract,
+        hospital_image_url hospitalImageUrl,    hospital_image_id hospitalImageId,
+        link_name linkName,    hospital_mail hospitalMail,
+        mobile_phone mobilePhone,    office_tel officeTel,
+        hospital_url hospitalUrl,    province province,
+        city city,    county county,    logo_url logoUrl,
+        logo_id logoId,    description_image_url descriptionImageUrl,
+        description_image_id descriptionImageId,    description description,
+        found_time foundTime,
+        t.allRaisedAmount, t.allSupprotTimes, t.allTargetAmount,
+        IFNULL(LEFT(((allRaisedAmount / allTargetAmount)) ,4), 0.00 ) rate
     FROM t_hospital_basic
-      LEFT JOIN t_project_info tpi ON tpi.project_creator_id = t_hospital_basic.hospital_id AND tpi.project_status!='4'
+    LEFT JOIN
+      (SELECT
+      tpi.project_creator_id proCreatorId,
+      sum(target_amount) allTargetAmount,
+      sum(raised_amount) allRaisedAmount,
+      sum((SELECT COUNT(tos.order_id) FROM t_order_support tos
+      WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
+      FROM t_project_info tpi GROUP BY project_creator_id) t
+    ON t.proCreatorId = t_hospital_basic.hospital_id
     where 1=1
     <choose>
       <when test="hospitalId != null and hospitalId != ''">and t_hospital_basic.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
@@ -112,7 +100,7 @@
   <!--根据医院查找项目-->
   <select id="findHospitalProject" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
-    SELECT
+      SELECT
       thb.hospital_id hospitalId, thb.hospital_name hospitalName,
       (
       SELECT COUNT(tos.order_id) FROM t_order_support tos
@@ -124,21 +112,28 @@
       tpi.project_type,
       floor(tpi.raised_amount) raisedAmount,
       datediff(tpi.date_raised_end, now()) remainingDay,
+      tpv.foundation_name foundationName,
       tpi.project_status projectStatus,
       tpi.cover_image_url coverImageUrl,
       tpi.date_create dateCreate,
       IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
       (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
-    FROM t_hospital_basic thb
-    LEFT JOIN t_project_info tpi ON tpi.project_creator_id = thb.hospital_id AND tpi.project_status!='4'
-
+    FROM t_project_info tpi
+    INNER JOIN t_project_info on tpi.project_status = '1'
+    LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
+    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id;
+    WHERE 1=1
+    <choose>
+      <when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
+      <otherwise>and thb.hospital_id=''</otherwise>
+    </choose>
     ORDER BY tpi.date_update DESC
   </select>
 
   <!--项目进度-->
   <select id="findHosProjectSum" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
-    SELECT
+   SELECT
       thb.hospital_id hospitalId, thb.hospital_name hospitalName,
       (
       SELECT COUNT(tos.order_id) FROM t_order_support tos
@@ -150,14 +145,20 @@
       tpi.project_type,
       floor(tpi.raised_amount) raisedAmount,
       datediff(tpi.date_raised_end, now()) remainingDay,
+      tpv.foundation_name foundationName,
       tpi.project_status projectStatus,
-      tpi.cover_image_url coverImageUrl,
-      DATE_FORMAT(tpi.date_create,'%Y-%m-%d') dateCreate,
+      tpi.date_create dateCreate,
       IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
       (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
-    FROM t_hospital_basic thb
-    LEFT JOIN t_project_info tpi ON tpi.project_creator_id = thb.hospital_id AND tpi.project_status!='4'
-
+    FROM t_project_info tpi
+    INNER JOIN t_project_info on tpi.project_status = '1'
+    LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
+    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id;
+    WHERE 1=1
+      <choose>
+          <when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
+          <otherwise>and thb.hospital_id=''</otherwise>
+      </choose>
     ORDER BY tpi.date_update DESC
   </select>
 

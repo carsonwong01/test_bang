@@ -64,7 +64,7 @@ header{
 	color: #00aaf6;
 }
 .loin{
-	width: 175px;
+	width: 256px;
 	height: 80px;
 	line-height: 80px;
 	text-align: center;
@@ -97,12 +97,24 @@ header{
 .inc{
 	box-sizing: border-box;
 	line-height: 32px;
-	width: 96px;
+	width: 72px;
 	height: 32px;
 	color: #333333;
 	font-size: 12px;
 	margin-top: 25px;
 	border: 1px solid #00aaf6;
+}
+.ind{
+	box-sizing: border-box;
+	line-height: 32px;
+	width: 64px;
+	height: 32px;
+	color: #333333;
+	font-size: 12px;
+	margin-top: 25px;
+	border: 1px solid #00aaf6;
+	background-color: #a3ff9e;
+
 }
 footer{
 	width: 100%;

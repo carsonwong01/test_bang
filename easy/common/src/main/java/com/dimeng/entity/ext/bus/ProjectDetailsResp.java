@@ -1,9 +1,9 @@
 package com.dimeng.entity.ext.bus;
 
-import java.util.List;
-
 import com.dimeng.entity.table.project.TProjectAttachment;
 import com.dimeng.framework.domain.BaseResp;
+
+import java.util.List;
 
 /**
  * 项目详情
@@ -173,7 +173,20 @@ public class ProjectDetailsResp extends BaseResp
      * 项目屏蔽状态，1-屏蔽，2未屏蔽
      */
     private String shieldStatus;
-    
+
+    /**
+     * 认领基金会
+     */
+    private String foundationName;
+
+    public String getFoundationName() {
+        return foundationName;
+    }
+
+    public void setFoundationName(String foundationName) {
+        this.foundationName = foundationName;
+    }
+
     public String getId()
     {
         return id;
