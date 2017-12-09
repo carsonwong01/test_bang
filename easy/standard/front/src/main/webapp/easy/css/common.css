@@ -189,7 +189,7 @@
 
 
 /*分页*/
-.paging{text-align:center; padding-top:50px; font-size:14px; color:#333;}
+.paging{text-align:center; padding:30px 0; font-size:14px; color:#333;}
 .paging a{padding: 0 10px;border: 1px solid #ddd;background:#fff;margin: 0 10px;display: inline-block;height: 20px;line-height: 20px;}
 .paging a:hover{ background:#1ea8fb; color: #fff; }
 .cpagebox{padding:0 10px;}
@@ -241,7 +241,7 @@
 .btn-gray,.btn-gray:hover{ background:#c5c5c5 !important;}/*灰色按钮*/
 
 /*主色-蓝色*/
-a:hover{color:#1ea8fb;}
+/*a:hover{color:#1ea8fb;}*/
 .highlight{color:#1ea8fb!important;}/*高亮文字*/
 .btn-blue{ background:#1ea8fb; }/*主色按钮*/
 .borderMain{border:1px solid #1ea8fb}/* 主色边框 */

@@ -2,22 +2,22 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/hospitaldetails.css">
-<script>
-	$(function () {
-		$("input").click(function () {
-            //获取点击ID
-			var hospitalId = ${hospitalDetails.hospitalId}
-            <%--var id = $(this).attr("${hospitalDetails.hospitalId}");--%>
-            alert("当前点击id:"+ hospitalId);
-        })
-    })
-</script>
+<%--<script>--%>
+	<%--$(function () {--%>
+		<%--$("input").click(function () {--%>
+            <%--//获取点击ID--%>
+			<%--var hospitalId = ${hospitalDetails.hospitalId}--%>
+            <%--&lt;%&ndash;var id = $(this).attr("${hospitalDetails.hospitalId}");&ndash;%&gt;--%>
+            <%--alert("当前点击id:"+ hospitalId);--%>
+        <%--})--%>
+    <%--})--%>
+<%--</script>--%>
 <div class='center'>
 	<div class='benderD'>
 		<p	class='nav-po'><a href="<%=basePath %>home/index.do">首页&nbsp;>&nbsp;</a>
 			<a href="<%=basePath %>hospital/hospitalList.do">医院&nbsp;>&nbsp;</a><span>医院详情</span></p>
 		<div class='top-ns'>
-			<div class='fl img-b'><b></b><img src="${hospitalDetails.hospitalImageUrl}"></div>
+			<div class='fl img-b'><b></b><img src="${hospitalDetails.logoUrl}"></div>
 			<div class='fr frt-xq'>
 				<p class='pop-s'>${hospitalDetails.hospitalName} <span>${hospitalDetails.hospitalGrade}</span><span>${hospitalDetails.hospitalType}</span></p>
 				<div class='daohxi'>
@@ -49,22 +49,39 @@
 			<div class='clear'></div>
 		</div>
 	</div>
-	<!-- 本周推荐 -->
 	<div class='men-ded'>
 
 		<div class='fl fl-cen'>
 			<ul>
-				<li data="#progress" class='actionk'>医院详情</li>
-				<li data="#donations" ><a href="#"><input type="submit" value="推荐项目"></a>
-
-				</li>
-
-				<li data="#record"><a href="#">项目汇总</a>
-				</li>
-				<input type="button" value=""/>
+				<li data="#donations" class='actionk ldr' datr='${hospitalDetails.hospitalId}'>推荐项目</li>
+				<li data="#progress">医院详情</li>
+				<li data="#record">项目汇总</li>
 				<div class='clear'></div>
 			</ul>
 			<div class='centsd'>
+				<div id='donations'>
+					<ul class='im-ttx' id="ttxou">
+
+						<li>
+							<img src="images/dfjjpw9076h.png">
+							<div class='detailed'>
+								<p class='ti-ou'><a href="">919紧急救助金／求助标题</a></p>
+								<p class='yi-b'><b  class='bba'></b><span>北京第三医院</span><u></u> <span>中国华侨基金会</span></p>
+								<div class='dao-t'id='dao-t'>
+									<p class='dao-p'><span>5%</span></p>
+								</div>
+								<ul class='ul-nus'>
+									<li>目标金额（元）</br> <span>30,000,000</span></li>
+									<li>目标金额（元）</br> <span>4569,636</span></li>
+									<li>捐助人次（次）</br> <span>564646</span></li>
+									<div class='clear'></div>
+								</ul>
+								<p class='but-ab'><a href="">我要捐款</a></p>
+							</div>
+						</li>
+						<div class='clear'></div>
+					</ul>
+				</div>
 				<div id='progress' class='progress'>
 					<h1>基本信息</h1>
 					<ul>
@@ -77,11 +94,6 @@
 					<h1>详细介绍</h1>
 					<p>${hospitalDetails.description}</p>
 				</div>
-				<div id='donations'>
-
-					<%@include file="hospitalProject.jsp"%>
-				</div>
-
 				<div id='record' class='record'>
 					<table>
 						<thead>
@@ -90,24 +102,93 @@
 							<th>受助人</th>
 							<th>求助标题</th>
 							<th>项目进度</th>
-							<th>项目状态</th>
-							<%--<th>--%>
-							<%--<div class='igb-d'>--%>
-							<%--<select name="select" id="select_k1" class="xla_k">--%>
-							<%--<option value="选择品牌">完成状态</option>--%>
-							<%--<option value="选择品牌1">筹款中</option>--%>
-							<%--<option value="选择品牌2">已完成</option>--%>
-							<%--</select>--%>
-							<%--<b></b>--%>
-							<%--</div>--%>
-							<%--</th>--%>
+							<th>
+								<div class='igb-d'>
+									<select name="select" id="select_k1" class="xla_k">
+										<option value="选择品牌">完成状态</option>
+										<option value="选择品牌1">筹款中</option>
+										<option value="选择品牌2">已完成</option>
+									</select>
+									<b></b>
+								</div>
+							</th>
 						</tr>
 						</thead>
-						<tbody id='hosProjectSumD' >
-
-						</tbody>
+						<%--<tbody id='list'>--%>
+						<%--<tr>--%>
+							<%--<td>2017-10-24</td>--%>
+							<%--<td>吴亦凡</td>--%>
+							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
+							<%--<td>--%>
+								<%--<div class='dao-he'>--%>
+									<%--<p><span>656565</span>元（<span class='baibi'>72%</span>）／ <span>546596</span>	元</p>--%>
+									<%--<span><i></i></span>--%>
+								<%--</div>--%>
+							<%--</td>--%>
+							<%--<td class='tdse'>筹款中</td>--%>
+						<%--</tr>--%>
+						<%--<tr>--%>
+							<%--<td>2017-10-24</td>--%>
+							<%--<td>吴亦凡</td>--%>
+							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
+							<%--<td>--%>
+								<%--<div class='dao-he'>--%>
+									<%--<p><span>656565</span>元（<span class='baibi'>25%</span>）／ <span>546596</span>	元</p>--%>
+									<%--<span><i></i></span>--%>
+								<%--</div>--%>
+							<%--</td>--%>
+							<%--<td class='tdse'>已完成</td>--%>
+						<%--</tr>--%>
+						<%--<tr>--%>
+							<%--<td>2017-10-24</td>--%>
+							<%--<td>吴亦凡</td>--%>
+							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
+							<%--<td>--%>
+								<%--<div class='dao-he'>--%>
+									<%--<p><span>656565</span>元（<span class='baibi'>72%</span>）／ <span>546596</span>	元</p>--%>
+									<%--<span><i></i></span>--%>
+								<%--</div>--%>
+							<%--</td>--%>
+							<%--<td class='tdse'>筹款中</td>--%>
+						<%--</tr>--%>
+						<%--<tr>--%>
+							<%--<td>2017-10-24</td>--%>
+							<%--<td>吴亦凡</td>--%>
+							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
+							<%--<td>--%>
+								<%--<div class='dao-he'>--%>
+									<%--<p><span>656565</span>元（<span class='baibi'>13%</span>）／ <span>546596</span>	元</p>--%>
+									<%--<span><i></i></span>--%>
+								<%--</div>--%>
+							<%--</td>--%>
+							<%--<td class='tdse'>已完成</td>--%>
+						<%--</tr>--%>
+						<%--<tr>--%>
+							<%--<td>2017-10-24</td>--%>
+							<%--<td>吴亦凡</td>--%>
+							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
+							<%--<td>--%>
+								<%--<div class='dao-he'>--%>
+									<%--<p><span>656565</span>元（<span class='baibi'>12%</span>）／ <span>546596</span>	元</p>--%>
+									<%--<span><i></i></span>--%>
+								<%--</div>--%>
+							<%--</td>--%>
+							<%--<td class='tdse'>筹款中</td>--%>
+						<%--</tr>--%>
+						<%--<tr>--%>
+							<%--<td>2017-10-24</td>--%>
+							<%--<td>吴亦凡</td>--%>
+							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
+							<%--<td>--%>
+								<%--<div class='dao-he'>--%>
+									<%--<p><span>656565</span>元（<span id='baibi'>100%</span>）／ <span>546596</span>	元</p>--%>
+									<%--<span><i></i></span>--%>
+								<%--</div>--%>
+							<%--</td>--%>
+							<%--<td class='tdse'>已完成</td>--%>
+						<%--</tr>--%>
+						<%--</tbody>--%>
 					</table>
-					<div class="paging" id="paging"></div>
 				</div>
 			</div>
 		</div>
@@ -158,23 +239,6 @@
 		<div class='clear'></div>
 	</div>
 </div>
-<script id="hosProjectSumTemp" type="text/x-jquery-tmpl">
-{{each(i,data) pageResult.list}}
-	<tr>
-		<td>{{= data.dateCreate}}</td>
-		<td>{{= data.recipientRealName}}</td>
-		<td><p>{{= data.projectName}}</p></td>
-		<td>
-		<div class='dao-he'>
-		<p><span>{{= data.targetAmount}}</span>元（<span class='baibi' id='dao-t'>{{= data.rate*100}}%</span>）／ <span>{{= data.raisedAmount}}</span>	元</p>
-		<span><i></i></span>
-		</div>
-		</td>
-		<td class='tdse'>筹款中</td>
-	</tr>
-{{/each}}
-</script>
-<script type="text/javascript" src="<%=basePath %>easy/js/hospital/hosProjectSum.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
@@ -301,6 +365,40 @@
                 $($(this).attr('data')).css('display','block').siblings('div').css('display','none')
             }
         })
+
+	var hospitalId=$('.ldr').attr('datr');
+        $.ajax({
+            type:'post',
+            data:hospitalId,
+            url:"<%=basePath %>hospital/hospitalProjectListAjax.do",
+            success:function(data){
+
+				var data=data.hospitalProjectList.pageResult;
+                var strs=$('#ttxou').html('');
+                var tod='';
+//                $.each(data,function(){
+//                    tod+="<li>"+
+//                   "<img src='images/dfjjpw9076h.png'>"+
+//                       "<div class='detailed'>"+
+//                        "<p class='ti-ou'><a href=''>919紧急救助金／求助标题</a></p>"+
+//                    "<p class='yi-b'><b  class='bba'></b><span>北京第三医院</span><u></u> <span>中国华侨基金会</span></p>"+
+//                   "<div class='dao-t'id='dao-t'>"+
+//                        "<p class='dao-p'><span>5%</span></p>"+
+//                    "</div>"+
+//                    "<ul class='ul-nus'>"+
+//                        "<li>目标金额（元）</br> <span>30,000,000</span></li>"+
+//                    "<li>目标金额（元）</br> <span>4569,636</span></li>"+
+//                    "<li>捐助人次（次）</br> <span>564646</span></li>"+
+//                    "<div class='clear'></div>"+
+//                    " </ul>"+
+//                    " <p class='but-ab'><a href=''>我要捐款</a></p>"+
+//                    "</div>"+
+//                    " </li>";
+//                    $("#ttxou").append(tod);
+//				})
+
+            }
+        });
     }(jQuery));
 </script>
 

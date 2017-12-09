@@ -23,6 +23,7 @@ public class FindAllHospitalResp implements Serializable {
     private String province;
     private String city;
     private String county;
+    private String addr;
     private String logoUrl;
     private String logoId;
     private String descriptionImageUrl;
@@ -46,6 +47,14 @@ public class FindAllHospitalResp implements Serializable {
     private String allSupprotTimes;
     private String rate;
     private String foundationName;
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
 
     public String getFoundationName() {
         return foundationName;

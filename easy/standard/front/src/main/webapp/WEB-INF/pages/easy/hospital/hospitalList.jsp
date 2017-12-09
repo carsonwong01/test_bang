@@ -1,6 +1,7 @@
 <!--所有医院列表-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <head>
     <meta charset="utf-8">
     <title>医院</title>
@@ -14,10 +15,10 @@
     </div>
     <!-- 本周推荐 -->
     <div class='men-ded'>
-        <%--<div class='top-io'>--%>
-            <%--<input type="text" placeholder="搜医院">--%>
-            <%--<button type="submit"></button>--%>
-        <%--</div>--%>
+        <div class='top-io'>
+            <input type="text" placeholder="搜医院">
+            <button type="submit"></button>
+        </div>
         <div class='fl fl-cen'>
             <ul id="hospitalListD">
 
@@ -29,8 +30,8 @@
                 <p>如需求助请搜索合作医院取得联系方式</p>
             </div>
             <div class='loing'>
-                <p>&nbsp;&nbsp;“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长 ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...</p>
-                <a href="<%=basePath %>home/index.do" class='fr'>详细</a><div class='clear'></div>
+                <p>&nbsp;&nbsp;“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长 ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...<a href="<%=basePath %>home/aboutUs.do" class='fr'>详细</a></p>
+
                 <!-- 登录前 -->
                 <c:if test="${currUser.userName==null}">
                     <div><a href="<%=basePath %>home/login.do">用户登录</a></div>
@@ -51,8 +52,8 @@
                     <li>4.<span>款项拨付</span>善款拨付实施救助</li>
                 </ul>
             </div>
-            <div class='xim-qi'>
-                <p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
+            <div class='problem'>
+                <p><i></i><span>常见问题</span></p>
                 <%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>
             </div>
         </div>
@@ -63,7 +64,7 @@
 <script id="hospitalListTemp" type="text/x-jquery-tmpl">
 {{each(i,data) pageResult.list}}
 <li>
-    <img src="{{= data.hospitalImageUrl}}" class='fl'>
+    <img src="{{= data.logoUrl}}" class='fl'>
     <div class='fr zkd'>
         <div class='h-hi'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">{{= data.hospitalName}}</a><span>{{= data.hospitalGrade}}</span><span>{{= data.hospitalType}}</span></div>
         <div class='msjj'>

@@ -40,7 +40,8 @@
   text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
-  -moz-binding: url("ellipsis.xml#ellipsis");}
+  /*-moz-binding: url("ellipsis.xml#ellipsis");*/
+}
 .biaoqian-lab{}
 .item-sj-con{ margin:15px 20px;}
 .bq-icon{ background-position:-5px 0; width:16px;}
@@ -90,7 +91,7 @@
 
 /*郑雄升*/
 /* 项目详情页 */
-.p-detail-content{padding: 0px 0 40px;background-color: #f7f7f7}
+.p-detail-content{background-color: #f7f7f7}
 .p-detail-content .leftbox{width: 71.56%}
 .wrap-1002 .p-detail-content .leftbox{width: 65.56%}
 .p-detail-content .p-tabCont .list{display: none}
@@ -177,7 +178,7 @@
 
 /* 认证资料 */
 .p-detail-content .authentication .tips{color: #999;font-size: 14px;}
-.p-detail-content .authentication li{clear: both;overflow: hidden;height: 60px;line-height: 60px;border-bottom: 1px dashed #ddd;font-size: 14px;}
+.p-detail-content .authentication li{clear: both;overflow: hidden;height: 50px;line-height: 50px;border-bottom: 1px dashed #ddd;font-size: 14px;}
 .p-detail-content .authentication li span, .p-detail-content .authentication li i{display: inline-block;vertical-align: middle;}
 .p-detail-content .authentication li i{background: url('../images/p_detail_icon.png') no-repeat;width: 15px;height: 15px;margin-right: 10px}
 .p-detail-content .authentication .status-yes{background-position: -91px 0}
@@ -257,7 +258,7 @@
 .sicknessbox .formbox .addCoverIcon{display: block;width: 139px;height: 70px;background: url('../images/sicknessRescue_Icon.png') no-repeat;cursor: pointer;text-align: center;padding-top: 83px}
 .sicknessbox .formbox .addCoverIcon span{font-size: 16px;color: #acacac;line-height: 24px;}
 .sicknessbox  .tips{line-height: 24px;}
-.sicknessbox  .formpage .limitWord, ..sicknessbox  .redCol{color: #ff2755}
+.sicknessbox  .formpage .limitWord, .sicknessbox  .redCol{color: #ff2755}
 .sicknessbox  .input-midle{padding-right: 10px}
 .sicknessbox .input-midle label, .sicknessbox  .input-midle{display: inline-block;vertical-align: middle;}
 .sicknessbox  .input-midle select{width: 145px;height: 48px;line-height: 48px;border: 1px solid #ddd}

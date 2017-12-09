@@ -4,6 +4,7 @@ import com.dimeng.entity.ext.user.ThirdPartyUserResp;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.exception.ServicesException;
+import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.user.AuthenticationReq;
 import com.dimeng.model.user.FindAccMoneyListReq;
 import com.dimeng.model.user.FindByUserIdReq;
@@ -22,6 +23,20 @@ import com.dimeng.model.user.NotPageUserIdReq;
  */
 public interface UserInfoManageService
 {
+
+    /**
+     * 后台--医院用户详情
+     * @param req
+     * @return
+     */
+    public BaseDataResp findHosUserDetails(HospitalBasicReq req);
+    /**
+     * 后台--医院用户管理列表
+     * @param req
+     * @return
+     */
+    public BaseDataResp findHospitalUser(HospitalBasicReq req);
+
     /**
      * 后台-用户管理列表
      * @param req

@@ -53,8 +53,8 @@
                     <li>4.<span>款项拨付</span>善款拨付实施救助</li>
                 </ul>
             </div>
-            <div class='xim-qi'>
-                <p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
+            <div class='problem'>
+                <p><i></i> <span>常见问题</span></p>
                 <%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>
             </div>
         </div>
@@ -66,9 +66,10 @@
     <li>
             <img src="{{= data.projectImg}}">
             <div class='detailed'>
-                <p class='ti-ou' style="width: 330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-                        <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
-                <p class='yi-b'><b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>中国华侨基金会</span></p>
+                <p class='ti-ou' style="width: 320px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+                     <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
+                <p class='yi-b' style="width: 320px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+                    <b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
                  <div class='dao-t' id='dao-t'>
                      <p><span id="progress">{{= data.rate*100}}%</span></p>
                  </div>

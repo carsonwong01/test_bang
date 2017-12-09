@@ -13,6 +13,7 @@
 		<result column="date_register" property="registerTime"/>
 		<result column="user_status" property="status"/> 
 		<result column="sex" property="sex"/> 
+		<result column="hospital_name" property="hospitalName"/>
 	</resultMap>
 		
 	<resultMap type="com.dimeng.entity.ext.user.UserInfoQscDetailResp" id="FindUserdetailResqResultMap">
@@ -32,6 +33,69 @@
 		<result column="crowdFundingCount" property="crowdFundingCount"/> 
 	</resultMap>
 	
+	<resultMap id="FindHospitalUserResultMap" type="com.dimeng.model.expand.HospitalBasicReq">
+		<result column="user_id" property="userId"/>
+		<result column="user_name" property="userName"/>
+		<result column="nick_name" property="nickName"/>
+		<result column="hospital_id" property="hospitalId"/>
+		<result column="hospital_name" property="hospitalName"/>
+		<result column="hospital_num" property="hospitalNum"/>
+		<result column="hospital_grade" property="hospitalGrade"/>
+		<result column="hospital_type" property="hospitalType"/>
+		<result column="hospital_abstract" property="hospitalAbstract"/>
+		<result column="hospital_image_url" property="hospitalImageUrl"/>
+		<result column="description" property="description"/>
+		<result column="link_name" property="linkName"/>
+		<result column="mobile_phone" property="mobilePhone"/>
+		<result column="hospital_mail" property="hospitalMail"/>
+		<result column="office_tel" property="officeTel"/>
+		<result column="hospital_url" property="hospitalUrl"/>
+		<result column="province" property="province"/>
+		<result column="city" property="city"/>
+		<result column="county" property="county"/>
+		<result column="addr" property="addr"/>
+		<result column="found_time" property="foundTime"/>
+		<result column="source" property="source"/>
+		<result column="date_register" property="registerTime"/>
+		<result column="user_status" property="status"/>
+	</resultMap>
+
+	<!--后台-用户管理-医院用户信息列表-->
+	<select id="findHospitalUser" resultMap="FindHospitalUserResultMap" parameterType="com.dimeng.model.expand.HospitalBasicReq">
+		SELECT
+			u.user_name, ba.nick_name, thb.hospital_name,thb.hospital_num,
+			thb.hospital_grade,thb.hospital_type,thb.link_name,thb.mobile_phone,
+			thb.hospital_mail,thb.office_tel,
+			u.source,u.user_status,u.date_register
+		FROM t_hospital_basic thb
+		LEFT JOIN t_user u ON thb.hospital_id = t_user.user_id
+		LEFT JOIN t_q_user_basic ba ON u.user_id = ba.user_id
+	</select>
+
+	<!--后台-用户管理-查看医院用户详情信息-->
+	<select id="findHosUserDetails" resultMap="FindHospitalUserResultMap" parameterType="com.dimeng.model.expand.HospitalBasicReq">
+		SELECT
+		  u.user_id ,u.user_name, thb.hospital_name,thb.hospital_num,thb.hospital_grade,
+		  thb.hospital_abstract, thb.province,thb.city,thb.found_time,
+		  IFNULL(t.allRaisedAmount,0) allRaisedAmount,
+		  IFNULL(t.allSupprotTimes,0) allSupprotTimes,
+		  IFNULL(t.allTargetAmount,0) allTargetAmount,
+		  IFNULL(LEFT(((allRaisedAmount / allTargetAmount)) ,4), 0.00 ) rate
+		FROM t_hospital_basic thb
+		  LEFT JOIN
+		  (SELECT
+			 tpi.project_creator_id proCreatorId,
+			 sum(target_amount) allTargetAmount,
+			 sum(raised_amount) allRaisedAmount,
+			 sum((SELECT COUNT(tos.order_id) FROM t_order_support tos
+			 WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
+		   FROM t_project_info tpi GROUP BY project_creator_id) t
+			ON t.proCreatorId = thb.hospital_id
+		  LEFT JOIN t_user u ON thb.hospital_id = u.user_id
+		WHERE u.user_id = #{userId}
+	</select>
+
+	
 	<!-- 后台-用户管理-信息列表 -->
 	<select id="findUserInfoList" resultMap="FindUserListResqResultMap" parameterType="com.dimeng.model.user.FindUserListReq">
 		 SELECT
@@ -43,11 +107,12 @@
 			u.user_status,
 			ba.nick_name,
 			ba.real_name,
-			ba.id_card 
+			ba.id_card,
+			u.hospital_name
 		FROM
 			t_user u
 		LEFT JOIN t_q_user_basic ba ON u.user_id = ba.user_id
-        WHERE  1=1 
+        WHERE  1=1
 		<if test="userName != null and userName != ''">
 			and u.user_name LIKE CONCAT ('%',trim(#{userName,jdbcType=VARCHAR}),'%')
 		</if>
@@ -78,6 +143,9 @@
 		
 		<if test="endTime != null and endTime != ''">
 			and DATE_FORMAT(u.date_register,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+		<if test="hospitalName != null and hospitalName != '' ">
+			and u.hospital_name = #{hospitalName,jdbcType=VARCHAR}
 		</if>
 		ORDER BY  u.date_register DESC
 	</select>
@@ -128,8 +196,13 @@
     <result column="hospital_name" property="realName" jdbcType="VARCHAR" />
     <result column="province" property="provinceId" jdbcType="VARCHAR" />
     <result column="city" property="cityId" jdbcType="VARCHAR" />
-
   </resultMap>
+
+
+
+
+
+
 	 
 	<!-- 根据手机号查询用户信息 登录用-->
 	<select id="findLoginUserInfo" resultMap="FrontUserLoginResultMap" parameterType="com.dimeng.model.user.FindUserListReq">

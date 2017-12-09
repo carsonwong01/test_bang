@@ -23,16 +23,16 @@
 		<!-- 每日新闻 -->
 		<div class='fl clik'>
 			<ul>
-				<li><a href="javaScript:void(0);"
+				<li class='actionk'><a href="javaScript:void(0);"
 					   onclick="newControler.getNewsInfosList('2');" class="active"><b
-						class="btn-blue"></b><span class="spbox"><i class="i1"></i>每日新闻</span></a></li>
+						class="btn-blue"></b><span class="spbox"><i class="i1"></i>新闻动态</span></a></li>
 				<li><a href="javaScript:void(0);"
 					   onclick="newControler.getNewsInfosList('1');"><b class="btn-blue"></b><span
-						class="spbox"><i class="i2"></i>企业SKR</span></a></li>
+						class="spbox"><i class="i2"></i>网站公告</span></a></li>
 			</ul>
 			<div class='centsd'>
 				<div id='donations' class="donations">
-					<ul  class="f-news_list clearfix" id="newsInfosId">
+					<ul id="newsInfosId">
 
 					</ul>
 					<!--分页-->
@@ -45,20 +45,31 @@
 		<div class='fr ft-na'>
 			<div class='xim-qi'>
 				<p><i class='i-po'></i> <span>推荐救助</span></p>
-				<li><i></i><span><ul class='ul-o'  id="projectListD">
+				<ul class='ul-o'  id="projectListD">
 
-				</ul></span></li>
+				</ul>
 			</div>
 			<%--推荐资讯--%>
 			<%@include file="/WEB-INF/pages/easy/newsInformation/recommendNewsInfos.jsp" %>
 			<div class='xim-qi'>
-				<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
-				<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>
+				<p><i></i><span>常见问题</span></p>
+				<ul  class='cjwt-s' id="helpCenterId">
+				</ul>
+				<%--<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>--%>
 			</div>
 		</div>
 		<div class='clear'></div>
 	</div>
 </div>
+<input type="hidden" id="typeFooter" value="4" />
+<script id="helpCenterTemplate" type="text/x-jquery-tmpl">
+	{{each(i,data) list}}
+		<li><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><i></i>{{= data.title}}</a></li>
+	{{/each}}
+</script>
+<!--常见问题--内容-->
+<script language="javascript"
+		src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>
 <script id="projectListTemp" type="text/x-jquery-tmpl">
     {{each(i,data) pageResult.list}}
     	<li><i></i><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}"><span>{{= data.projectName}}</span></a></li>
@@ -72,7 +83,8 @@
 		src="<%=basePath%>easy/js/newsInformation/newsInformation.js"></script>
 <script id="newsInfosTemplate" type="text/x-jquery-tmpl">
 	{{each(i,data) list}}
-		 <li><span class="fr gray9">{{= data.dateCreate}}</span><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}"><i class="ico"></i>{{= data.infoTitle}}</a></li>
+		 <li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}">{{= data.infoTitle}} <span class='fr'>{{= data.dateCreate}}</span><div class='clear'></div></a></li>
+		 <%--<li><span class="fr gray9">{{= data.dateCreate}}</span><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}"><i class="ico"></i>{{= data.infoTitle}}</a></li>--%>
 	{{/each}}
 </script>
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>

@@ -9,7 +9,7 @@
             <%--<div class='clear'></div>--%>
         </div>
         <div class='clear'></div>
-        <div class="paging" id="paging"></div>
+        <%--<div class="paging" id="paging"></div>--%>
 
 <script id="pendingProjectListTemp" type="text/x-jquery-tmpl">
     {{each(i,data) pageResult.list}}
@@ -18,7 +18,8 @@
         <div class='detailed'>
             <p class='ti-ou' style="width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
                     <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
-            <p class='yi-b'><b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
+            <p class='yi-b' style="width: 210px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+                <b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
             <div class='dao-t' id='dao-t'>
                 <p><span id="progress">{{= data.rate*100}}%</span></p>
             </div>

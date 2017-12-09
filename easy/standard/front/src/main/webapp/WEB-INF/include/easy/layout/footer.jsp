@@ -30,33 +30,37 @@
 				<p><span>公司邮箱：</span><%=siteInfo.getServiceEmail()%></p>
 			</div>
 			<div class='fl wxin'>
-				<a href=""><!-- 微信公众号 -->
+				<!-- 微信公众号 -->
 					<%
 						if(attentionList!=null&&attentionList.get(0).getPictureUrl()!=null){
 
 					%>
-					<li><img style="width: 79px;height: 89px" src="<%=attentionList.get(0).getPictureUrl()%>"><p><%=attentionList.get(0).getTitle()%></p></li>
+					<a href=""><img src="<%=attentionList.get(0).getPictureUrl()%>"></br><span><%=attentionList.get(0).getTitle()%></span></a>
+					<%--<li><img style="width: 79px;height: 89px" src="<%=attentionList.get(0).getPictureUrl()%>"><p><%=attentionList.get(0).getTitle()%></p></li>--%>
 
 					<%
 					}else{
 					%>
-					<li><img style="width: 79px;height: 89px" src="<%=basePath %>easy/images/code.jpg"></li>
+					<%--<li><img style="width: 79px;height: 89px" src="<%=basePath %>easy/images/code.jpg"></li>--%>
+					<a href=""><img src="<%=attentionList.get(0).getPictureUrl()%>"></br><span><%=attentionList.get(0).getTitle()%></span></a>
 					<%
 						}
-					%></a>
-				<a href=""><!-- app客户端 -->
+					%>
+				<!-- app客户端 -->
 					<%
 						if(attentionList!=null&&attentionList.get(1).getPictureUrl()!=null&&attentionList.get(1).getPictureUrl()!=""){
 
 					%>
-					<li class="ml20"><img style="width: 79px;height: 89px" src="<%=attentionList.get(1).getPictureUrl()%>"><p><%=attentionList.get(1).getTitle()%></p></li>
+					<a href=""><img src="<%=attentionList.get(1).getPictureUrl()%>"></br><span><%=attentionList.get(1).getTitle()%></span></a>
+					<%--<li class="ml20"><img style="width: 79px;height: 89px" src="<%=attentionList.get(1).getPictureUrl()%>"><p><%=attentionList.get(1).getTitle()%></p></li>--%>
 					<%
 					}else{
 					%>
-					<li class="ml20"><img style="width: 79px;height: 89px" src="<%=basePath %>easy/images/code.jpg"></li>
+					<a href=""><img src="<%=attentionList.get(1).getPictureUrl()%>"></br><span><%=attentionList.get(1).getTitle()%></span></a>
+					<%--<li class="ml20"><img style="width: 79px;height: 89px" src="<%=basePath %>easy/images/code.jpg"></li>--%>
 					<%
 						}
-					%></a>
+					%>
 				<div class='clear'></div>
 			</div>
 		</div>

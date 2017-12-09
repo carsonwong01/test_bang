@@ -1,32 +1,11 @@
 package com.dimeng.front.controller.easy.home;
 
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import net.sf.ehcache.Element;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.dimeng.abilitys.annotation.SystemFrontLog;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
-import com.dimeng.entity.ext.site.NoticeAndNewsInfoResp;
+import com.dimeng.entity.ext.home.front.FrontNoticeAndNewsInfoResp;
 import com.dimeng.entity.ext.user.FrontUserInfo;
 import com.dimeng.entity.ext.user.ThirdPartyUserResp;
 import com.dimeng.enums.ThirdTypeEnum;
@@ -39,6 +18,24 @@ import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.LoginCache;
 import com.dimeng.utils.SessionManage;
 import com.dimeng.utils.SystemCache;
+import net.sf.ehcache.Element;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * 前台主页注册-登录-首页信息控制层
@@ -397,19 +394,29 @@ public class FrontHomeController extends BaseController
         //首页统计
         data.put("indexTotalMessage", CommonUtil.getJSONObject(json, "statResult"));
         //新闻资讯SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO)
-        
-        List<NoticeAndNewsInfoResp> newsInfoResps =
-            (List<NoticeAndNewsInfoResp>)SystemCache.getCache(SystemConstant.CacheKey.NEWS_INFO);
+
+        List<FrontNoticeAndNewsInfoResp> newsInfoResps =
+            (List<FrontNoticeAndNewsInfoResp>)SystemCache.getCache(SystemConstant.CacheKey.NEWS_INFO);
+        List<FrontNoticeAndNewsInfoResp> investmentInfoResps =
+                (List<FrontNoticeAndNewsInfoResp>)SystemCache.getCache(SystemConstant.CacheKey.AFFICHE_INFO);
         if (newsInfoResps != null)
         {
-            for (NoticeAndNewsInfoResp noticeAndNewsInfoResp : newsInfoResps)
+            for (FrontNoticeAndNewsInfoResp noticeAndNewsInfoResp : newsInfoResps)
+            {
+                noticeAndNewsInfoResp.setInfoContent(Html2Text(noticeAndNewsInfoResp.getInfoContent()));
+            }
+        }
+
+        if (investmentInfoResps != null)
+        {
+            for (FrontNoticeAndNewsInfoResp noticeAndNewsInfoResp : investmentInfoResps)
             {
                 noticeAndNewsInfoResp.setInfoContent(Html2Text(noticeAndNewsInfoResp.getInfoContent()));
             }
         }
         data.put("InvestmentDynamicInfo", newsInfoResps);
         //公告
-        data.put("InvestmentInfo", SystemCache.getCache(SystemConstant.CacheKey.AFFICHE_INFO));
+        data.put("InvestmentInfo", investmentInfoResps);
         //合作伙伴
         data.put("friendshipUrl", SystemCache.getCache(SystemConstant.CacheKey.FRIENDSHIP_INFO));
         String proJson =

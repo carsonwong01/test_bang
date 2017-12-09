@@ -8,8 +8,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.dimeng.entity.ext.expand.FindAllHospitalResp;
+import com.dimeng.framework.constants.IResultCode;
+import com.dimeng.model.expand.HospitalBasicReq;
 import net.sf.ehcache.Element;
 
+import net.sf.ehcache.ObjectExistsException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +75,64 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
 {
     @Autowired
     private INciicService iNciicService;
-    
+
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findHosUserDetails(HospitalBasicReq req){
+        BaseDataResp resp = new BaseDataResp();
+        Map<String,Object> data = new HashMap<String,Object>();
+        QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
+
+        event.setStatement("findHosUserDetails");
+        event.setObj(req);
+
+        FindAllHospitalResp result = (FindAllHospitalResp) baseDao.findOneByCustom(event);
+        if (result == null)
+        {
+            resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
+            return resp;
+        }
+        data.put(CommonConstant.JSON_KEY_PAGERESULT,result);
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findHospitalUser(HospitalBasicReq req){
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
+        //分页
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(req.getMaxResults());
+
+        page.setPagination(!StringUtil.isEmpty(req.getExportPath()) ? false : true);
+        event.setStatement("findHospitalUser");
+        List<FindAllHospitalResp> list = baseDao.findAllIsPageByCustom(event);
+        data.put(CommonConstant.JSON_KEY_PAGERESULT,new PageResult(page,list));
+        //用户状态码,查看用户状态
+        if (!StringUtil.isEmpty(req.getExportPath()))
+        {
+            Map<String, String> enumsValue = new HashMap<String, String>();
+            //导出的一些状态码
+            enumsValue.put("status", "com.dimeng.enums.UserStatusEnum");
+            enumsValue.put("source", "com.dimeng.enums.UserSourceEnum");
+            req.setEnumsValue(enumsValue);
+            ExportUtil.export(req, list);
+        }
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+
+
     @SuppressWarnings("unchecked")
     @Override
     public BaseDataResp findUserList(FindUserListReq req)

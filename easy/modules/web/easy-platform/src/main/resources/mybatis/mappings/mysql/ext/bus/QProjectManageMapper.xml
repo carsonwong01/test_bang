@@ -135,7 +135,7 @@
         select tpi.project_id,tpi.project_no,tpi.project_name,tpi.shield_status,
         tqub.nick_name,tu.user_name,
         tu.hospital_id, tu.hospital_name,
-
+        tpv.foundation_name,
         tpi.project_type,tpi.project_status,floor(tpi.target_amount) target_amount,floor(tpi.raised_amount)
         raised_amount,
         IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
@@ -173,6 +173,7 @@
         from t_project_info tpi INNER JOIN t_q_user_basic tqub ON
         tpi.project_creator_id=tqub.user_id INNER JOIN t_user tu on
         tqub.user_id = tu.user_id
+        LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
         where 1 = 1
         <if test="projectNo != null and projectNo != ''">
             and tpi.project_no LIKE CONCAT('%',trim(#{projectNo,jdbcType=VARCHAR}),'%')
@@ -268,7 +269,6 @@
         on
         tpi.project_id=tpv.project_id
         where 1=1
-        <!-- 2016-12-16-wenguanhai:由if改为choose-when -->
         <choose>
             <when test="projectId != null and projectId != ''">and tpi.project_id=#{projectId,jdbcType=VARCHAR}</when>
             <when test="projectNo != null and projectNo != ''">and tpi.project_no=#{projectNo,jdbcType=VARCHAR}</when>
@@ -375,6 +375,7 @@
             parameterType="com.dimeng.model.bus.FindProjectListReq">
         SELECT * FROM(
         SELECT
+        tpv.foundation_name,
         tpi.project_id,
         tpi.project_no,
         hp.date_opt,
@@ -392,6 +393,7 @@
         hp.id recommendId
         FROM
         t_project_info tpi LEFT JOIN t_site_home_project hp on tpi.project_id = hp.project_id
+        LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
         where tpi.project_status = 1 and tpi.shield_status = 2
         <if test="projectNo != null and projectNo != ''">
             and tpi.project_no=#{projectNo,jdbcType=VARCHAR}

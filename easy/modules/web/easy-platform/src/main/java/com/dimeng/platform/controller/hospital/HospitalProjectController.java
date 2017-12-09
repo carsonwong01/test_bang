@@ -1,7 +1,6 @@
 package com.dimeng.platform.controller.hospital;
 
 import com.dimeng.constants.IDiMengResultCode;
-import com.dimeng.entity.table.hospital.THospitalBasic;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.model.expand.HospitalBasicReq;
@@ -40,8 +39,6 @@ public class HospitalProjectController extends BaseController
     @ResponseStatus(value = HttpStatus.OK)
     public Object findHospitalProject(HttpEntity<HospitalBasicReq> httpEntity, HttpServletRequest request)throws Exception{
         BaseDataResp resp = this.validator(httpEntity);
-        THospitalBasic hospitalBasic = new THospitalBasic();
-        httpEntity.getBody().setHospitalId(hospitalBasic.getHospitalId());
         if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
         {
             return resp;

@@ -3,7 +3,7 @@
 <%@page import="com.dimeng.utils.SystemCache"%>
 <%@page import="com.dimeng.constants.SystemConstant"%>
 <%@page import="com.dimeng.entity.ext.site.SiteAttentionResp"%>
-
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <% 
  TSiteInfo siteInfo=(TSiteInfo)SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO);
  List<SiteAttentionResp> attentionList=(List<SiteAttentionResp>)SystemCache.getCache(SystemConstant.CacheKey.SITE_ATTENTION_LIST);
@@ -86,6 +86,17 @@ $("#returnTop a").click(function(){
 	$("html,body").animate({scrollTop:0},1000);
 	
 });
+
+if (!!window.chrome)$('.palt-cen>p').addClass('spa');
+$(function(){
+    $('.dao-t>p>span').each(function(){
+        var withs=$(this).html();
+        $(this).parents('p').css('width',withs)
+        if(parseInt(withs)<10){
+            $(this).css('left',0)
+        }
+    })
+})
 
 </script>
 <!-- add by wsh *******************-->

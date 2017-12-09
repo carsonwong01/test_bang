@@ -28,6 +28,10 @@
 	height: 360px;
 	position: relative;
 }
+.img-b>img{
+	width: 640px;
+	height: 360px;
+}
 .img-b>b{
 	position: absolute;
 	top: 0;
@@ -365,7 +369,7 @@ appearance:none;
 	margin-bottom: 10px;
 }
 .im-ttx>li{
-	box-shadow: 0px 4px 20px #d9d9d9;
+	box-shadow: 0px 7px 12px #d9d9d9;
 	width: 255px;
 	float: left;
 	margin-top: 22px;
@@ -575,13 +579,14 @@ appearance:none;
     color: #333333;
     line-height: 25px;
 }
-.loing>a{
+.loing>p>a{
 	font-size: 12px;
 	color: #00aaf6;
 }
 .loing>div{
 	width:100%;
 	text-align: center;
+	padding-top: 20px;
 }
 .loing>div>a{
 	display: inline-block;

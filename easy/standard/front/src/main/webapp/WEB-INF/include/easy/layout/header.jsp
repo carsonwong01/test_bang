@@ -18,6 +18,7 @@
 <%@page import="com.dimeng.entity.table.site.TSiteInfo" %>
 <%@page import="com.dimeng.utils.SystemCache" %>
 <%@page import="com.dimeng.constants.SystemConstant" %>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <%
     TSiteInfo siteInfo = (TSiteInfo) SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO);
 %>
@@ -29,7 +30,7 @@
     <div class='header'>
         <a href="<%=basePath%>home/index.do" class='fl logo'><img src="<%=basePath%>easy/images/logo2.png"></a>
         <ul class='fl head-n' id="HEADER_MENUS">
-            <li><a href="<%=basePath%>home/index.do">首页</a></li>
+            <li class=""><a href="<%=basePath%>home/index.do">首页</a></li>
             <li><a href="<%=basePath%>project/projectList.do">项目</a></li>
             <li><a href="<%=basePath%>hospital/hospitalList.do">医院</a></li>
             <li><a href="<%=basePath%>home/aboutUs.do">关于我们</a></li>
@@ -65,16 +66,16 @@
 <script type="text/javascript" src="<%=basePath %>easy/js/home/header.js"></script>
 <script>
     var hrefs = window.location.href;
-    $("#HEADER_MENUS").find("a").removeClass("cur");
-    if (hrefs.indexOf("/home/") > 0) {
-        $("#HEADER_MENUS").find("a:eq(0)").addClass("cur");
+    $("#HEADER_MENUS").find("li").removeClass("actiog");
+    if (hrefs.indexOf("/home/index") > 0) {
+        $("#HEADER_MENUS").find("li:eq(0)").addClass("actiog");
     } else if (hrefs.indexOf("/project/") > 0) {
-        $("#HEADER_MENUS").find("a:eq(1)").addClass("cur");
+        $("#HEADER_MENUS").find("li:eq(1)").addClass("actiog");
     } else if (hrefs.indexOf("/hospital/hospitalList") > 0) {
-        $("#HEADER_MENUS").find("a:eq(2)").addClass("cur");
-    } else if (hrefs.indexOf("/frontHome/helpCenter") > 0) {
-        $("#HEADER_MENUS").find("a:eq(4)").addClass("cur");
+        $("#HEADER_MENUS").find("li:eq(2)").addClass("actiog");
+    } else if (hrefs.indexOf("/home/aboutUs") > 0) {
+        $("#HEADER_MENUS").find("li:eq(3)").addClass("actiog");
     } else if (hrefs.indexOf("/frontHome/newsInfos") > 0) {
-        $("#HEADER_MENUS").find("a:eq(3)").addClass("cur");
+        $("#HEADER_MENUS").find("li:eq(4)").addClass("actiog");
     }
 </script>

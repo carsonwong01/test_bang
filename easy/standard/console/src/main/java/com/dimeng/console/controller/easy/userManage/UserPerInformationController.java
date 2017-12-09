@@ -1,11 +1,17 @@
 package com.dimeng.console.controller.easy.userManage;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.dimeng.abilitys.annotation.SystemConsoleLog;
+import com.dimeng.constants.CommonConstant;
+import com.dimeng.framework.controller.BaseController;
+import com.dimeng.model.bus.FindProListByUserIdReq;
+import com.dimeng.model.expand.HospitalBasicReq;
+import com.dimeng.model.finance.FindPaymentListReq;
+import com.dimeng.model.user.FindUserListReq;
+import com.dimeng.model.user.NotPageUserIdReq;
+import com.dimeng.utils.Common;
+import com.dimeng.utils.CommonUtil;
+import com.dimeng.utils.Download;
+import com.dimeng.utils.ExportUtil;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
@@ -14,17 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dimeng.abilitys.annotation.SystemConsoleLog;
-import com.dimeng.constants.CommonConstant; 
-import com.dimeng.framework.controller.BaseController;
-import com.dimeng.model.bus.FindProListByUserIdReq;
-import com.dimeng.model.finance.FindPaymentListReq;
-import com.dimeng.model.user.FindUserListReq; 
-import com.dimeng.model.user.NotPageUserIdReq;
-import com.dimeng.utils.Common;
-import com.dimeng.utils.CommonUtil;
-import com.dimeng.utils.Download;
-import com.dimeng.utils.ExportUtil; 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户管理 
@@ -35,6 +34,61 @@ import com.dimeng.utils.ExportUtil;
 @RequestMapping("userManage")
 public class UserPerInformationController extends BaseController
 {
+
+    /**
+     * 医院用户详细信息页面
+     */
+    @RequestMapping(value = "/hospitalUserList.do",method = RequestMethod.GET)
+    public Object findHospitalUser(HospitalBasicReq req,HttpServletRequest request,
+                                   HttpServletResponse response){
+        ModelAndView mv = new ModelAndView("pages/easy/user/hosUserInfo");
+        return mv;
+    }
+
+    /**
+     * 医院用户列表信息
+     */
+    @RequestMapping(value = "/hospitalUserListAjax.do")
+    @ResponseBody
+    public Object findHospitalUserAjax(HospitalBasicReq req,HttpServletRequest request,
+                                       HttpServletResponse response){
+        String hospitalUser =
+                new CommonUtil().callInterfaceMethod(req,
+                        "user/userManage/v/findHospitalUser",
+                        RequestMethod.POST,
+                        request);
+        return CommonUtil.getJSONObject(hospitalUser, null);
+    }
+
+    /**
+     * 跳网医院用户详情界面
+     */
+    @RequestMapping(value = "/hosUserDetails.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Object hosUserDetails(FindUserListReq userReq, HttpServletRequest req, HttpServletResponse response,String userId)
+    {
+        ModelAndView  mv = new ModelAndView("pages/easy/user/hosUserDetails");
+        mv.addObject("userId", userId);
+        return mv;
+    }
+
+    /**
+     * 医院用户详情信息
+     */
+    @RequestMapping(value = "/findHosUserDetailsAjax.do")
+    @ResponseBody
+    public Object findHosUserDetailsAjax(HospitalBasicReq req,HttpServletRequest request,
+                                         HttpServletResponse response){
+        //医院详情信息
+        String hosUserDetails =
+                new CommonUtil().callInterfaceMethod(req,
+                        "user/userManage/v/findHosUserDetails",
+                        RequestMethod.POST,
+                        request);
+        return CommonUtil.getJSONObject(hosUserDetails, null);
+    }
+
+
     /**
      * 跳转到用户中心个人信息列表页面
      * @param request
@@ -48,7 +102,7 @@ public class UserPerInformationController extends BaseController
         ModelAndView mv = new ModelAndView("pages/easy/user/perInformation");
         return mv;
     }
-    
+
     /**
      *ajax 获取用户列表数据
      * <功能详细描述>
@@ -91,7 +145,6 @@ public class UserPerInformationController extends BaseController
       
     /**
      * 解锁/锁定/拉黑/取消拉黑 
-     * @param request
      * @param response
      * @return
      */
@@ -112,7 +165,6 @@ public class UserPerInformationController extends BaseController
     
     /**
      * 跳往用户详情页面
-     * @param request
      * @param response
      * @return
      */

@@ -54,6 +54,7 @@
           <th>昵称</th>
           <th>真实姓名</th>
           <th>项目类型</th>
+          <th>支持基金会</th>
           <th>筹资目标（元）</th>
           <th>已筹金额（元）</th>
           <th>支持人次</th>
@@ -80,6 +81,7 @@
           <th exp-name="initiatorNickName">昵称</th>
 				<th exp-name="initiatorRealName">真实姓名</th>
           <th exp-name="type">项目类型</th>
+          <th exp-name="foundationName">支持基金会</th>
           <th exp-name="facTarget">筹资目标（元）</th>
           <th exp-name="supportAmt">已筹金额（元）</th>
            <th exp-name="supportNumber">支持人次</th>
@@ -111,6 +113,7 @@
 	       	 实现梦想
 	      {{/if}}
           </td>
+          <td>{{= data.foundationName}}</td>
           <td>{{= data.facTarget}}</td>
           <td>{{= data.supportAmt}}</td>
 		  <td>{{= data.supportNumber}}</td>

@@ -43,6 +43,21 @@ public class FrontHospitalDetailsController extends BaseController
         return mv;
     }
 
+    /**
+     * 前台--跳往项目列表页面
+     */
+    @RequestMapping(value = "/hospitalProjectList.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Object hospitalProjectList(HospitalBasicReq req, HttpServletRequest request,
+                                      HttpServletResponse response,String hospitalId){
+        ModelAndView mv = new ModelAndView("easy/hospital/hospitalProject.page");
+        mv.addObject("hospitalId",hospitalId);
+        return mv;
+    }
+
+    /**
+     * 前台-医院下项目列表信息
+     */
     @ResponseBody
     @RequestMapping(value = "/hospitalProjectListAjax.do")
     public Object findHosProjectList(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){
@@ -58,6 +73,21 @@ public class FrontHospitalDetailsController extends BaseController
         return map;
     }
 
+    /**
+     * 前台-跳往项目进度页面
+     */
+    @RequestMapping(value = "/hospitalProjectSum.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Object hospitalProjectSum(HospitalBasicReq req, HttpServletRequest request,
+                                     HttpServletResponse response,String hospitalId){
+        ModelAndView mv = new ModelAndView("easy/hospital/hospitalProSum");
+        mv.addObject("hospitalId",hospitalId);
+        return mv;
+    }
+
+    /**
+     * 前台- 医院下项目进度的信息
+     */
     @ResponseBody
     @RequestMapping(value = "/hospitalProjectSumAjax.do")
     public Object findHosProjectSum(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){

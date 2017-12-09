@@ -1,6 +1,6 @@
 
 <%@page import="com.dimeng.framework.utils.FrameworkConfigurer"%>
-
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <!-- 头部菜单栏  菜单索引   begin -->
 <input type="hidden" id="head_menus_index" value="H_GYWM"/>
 <!-- 头部菜单栏  菜单索引   end -->

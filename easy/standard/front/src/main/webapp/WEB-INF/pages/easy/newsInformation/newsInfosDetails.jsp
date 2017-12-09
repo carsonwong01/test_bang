@@ -1,18 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!--主体内容-->
-<div class="help-centerPage newsInfoPage helpAndNewsPage">
-<div class="layout">
-	<div class="locationBox">
-		所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>
-		<a href="<%=basePath%>frontHome/newsInfos.do?investmentInfoType=${content.investmentInfoType}" id="newsHelpTitle"></a>
-		<span>&gt;</span>详情
-	</div>
-</div>
+<%--<div class="help-centerPage newsInfoPage helpAndNewsPage">--%>
+<%--<div class="layout">--%>
+	<%--<div class="locationBox">--%>
+		<%--所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>--%>
+		<%--<a href="<%=basePath%>frontHome/newsInfos.do?investmentInfoType=${content.investmentInfoType}" id="newsHelpTitle"></a>--%>
+		<%--<span>&gt;</span>详情--%>
+	<%--</div>--%>
+<%--</div>--%>
 
 <body>
 <div class='center'>
 	<div class='cent-nav'>
+		<p class='navoi'><a href="<%=basePath%>home/index.do">首页 > </a><a href="<%=basePath%>frontHome/newsInfos.do?investmentInfoType=${content.investmentInfoType}">新闻资讯 > </a><span>资讯详情</span></p>
 		<div class='fl clik'>
 			<div class='bato'>
 				<h1>${content.infoTitle}</h1>

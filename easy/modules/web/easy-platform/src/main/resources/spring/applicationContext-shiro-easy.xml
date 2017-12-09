@@ -91,6 +91,7 @@
 				/hospital/v/findHosProjectSum = anon
 				/frontHome/v/recomNewsList = anon
 				/home/frontInfo/v/frontAllProject = anon
+				/home/frontInfo/v/findSiteInvestment = anon
 
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon

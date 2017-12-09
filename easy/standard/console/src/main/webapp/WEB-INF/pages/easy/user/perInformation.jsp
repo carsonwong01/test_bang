@@ -15,6 +15,7 @@
        <li><span class="display-ib mr5">昵称：</span>
           <input type="text" name="nickName" class="text border pl5 mr20" value="${findUserListReq.nickName }"/>
         </li>
+
         <li><span class="display-ib mr5">真实姓名：</span>
           <input type="text" name="realName" class="text border pl5 mr20" value="${findUserListReq.realName }" />
         </li>
@@ -60,6 +61,7 @@
           <th class="tc">序号</th>
           <th>用户名</th>
           <th>昵称</th>
+          <th>用户类型</th>
           <th>真实姓名</th> 
           <th>身份证</th>  
           <th>注册来源</th>
@@ -80,7 +82,8 @@
           <th exp-name="index">序号</th>
           <th exp-name="userName">用户名</th>
           <th exp-name="nickName">昵称</th>
-          <th exp-name="realName">真实姓名</th> 
+          <th exp-name="hospitalName">用户类型</th>
+          <th exp-name="realName">真实姓名</th>
           <th exp-name="idCard">身份证</th> 
           <th exp-name="source">注册来源</th>
           <th exp-name="status">状态</th>
@@ -102,7 +105,8 @@
  			<tr>
 	          <td class="tc">{{= i+1}}</td>
 	          <td>{{= data.userName}}</td>
-			   <td>{{= data.nickName}}</td>
+			  <td>{{= data.nickName}}</td>
+			  <td>{{= data.hospitalName}}</td>
               <td>{{= data.realName}}</td> 
 	          <td>{{= data.idCard}}</td>
 			  {{if data.source=="1"}}    

@@ -4,10 +4,10 @@
 .texthiden{white-space: nowrap;text-overflow:ellipsis;overflow: hidden;}
 
 /* 焦点图 */
-.banner{width:100%;height:500px; margin:0 auto;position:relative; z-index:1; overflow:hidden;}
+.banner{width:100%;height:420px; margin:0 auto;position:relative; z-index:1; overflow:hidden;}
 .rslides{position:relative;list-style:none;padding:0}
-.rslides li{width:100%;height:500px;}
-.rslides li a{ display:block;height:500px;}
+.rslides li{width:100%;height:420px;}
+.rslides li a{ display:block;height:420px;}
 .rslides_nav{display:none;}
 .rslides_tabs{text-align:center; position:absolute;bottom:10px;width:auto; left:50%; margin-left:-20px;}
 .rslides_tabs li{float:left;margin-right:3px;}

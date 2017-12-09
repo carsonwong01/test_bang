@@ -72,6 +72,19 @@ public class UserManageResp implements Serializable
      */
     private String registerTime;
 
+    /**
+     * 医院名
+     */
+    private String hospitalName;
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
     public String getUserType() {
         return userType;
     }

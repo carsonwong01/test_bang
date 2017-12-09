@@ -33,6 +33,7 @@
 	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/index_new.css">--%>
 	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/news.css">--%>
 	<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/newsinformation.css">
+
 	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project.css">--%>
 	<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project-details.css">--%>
 

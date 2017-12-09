@@ -48,9 +48,11 @@
       hospital_grade hospitalGrade,
       hospital_type hospitalType,
       hospital_abstract hospitalAbstract,
+      hospital_image_url hospitalImageUrl,
       logo_url logoUrl,
       logo_id logoId,
-      t.allTargetAmount,t.allRaisedAmount,t.allSupprotTimes
+      IFNULL(t.allTargetAmount,0) allTargetAmount , IFNULL(t.allRaisedAmount,0) allRaisedAmount,
+      IFNULL(t.allSupprotTimes,0) allSupprotTimes
     FROM
       t_hospital_basic
       LEFT JOIN
@@ -78,7 +80,8 @@
         logo_id logoId,    description_image_url descriptionImageUrl,
         description_image_id descriptionImageId,    description description,
         found_time foundTime,
-        t.allRaisedAmount, t.allSupprotTimes, t.allTargetAmount,
+        IFNULL(t.allRaisedAmount,0) allRaisedAmount,  IFNULL(t.allSupprotTimes,0) allSupprotTimes,
+        IFNULL(t.allTargetAmount,0) allTargetAmount,
         IFNULL(LEFT(((allRaisedAmount / allTargetAmount)) ,4), 0.00 ) rate
     FROM t_hospital_basic
     LEFT JOIN
@@ -100,7 +103,7 @@
   <!--根据医院查找项目-->
   <select id="findHospitalProject" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
-      SELECT
+      SELECT DISTINCT
       thb.hospital_id hospitalId, thb.hospital_name hospitalName,
       (
       SELECT COUNT(tos.order_id) FROM t_order_support tos
@@ -121,7 +124,7 @@
     FROM t_project_info tpi
     INNER JOIN t_project_info on tpi.project_status = '1'
     LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
-    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id;
+    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
     WHERE 1=1
     <choose>
       <when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
@@ -133,7 +136,7 @@
   <!--项目进度-->
   <select id="findHosProjectSum" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
-   SELECT
+   SELECT DISTINCT
       thb.hospital_id hospitalId, thb.hospital_name hospitalName,
       (
       SELECT COUNT(tos.order_id) FROM t_order_support tos
@@ -153,7 +156,7 @@
     FROM t_project_info tpi
     INNER JOIN t_project_info on tpi.project_status = '1'
     LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
-    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id;
+    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
     WHERE 1=1
       <choose>
           <when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
@@ -164,11 +167,3 @@
 
 </mapper>
 
-
-<!--
-where 1=1
-<choose>
-<when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
-<otherwise>and thb.hospital_id=''</otherwise>
-</choose>
--->

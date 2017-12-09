@@ -33,6 +33,10 @@
 	height: 360px;
 	position: relative;
 }
+.img-b img{
+	width: 640px;
+	height: 360px;
+}
 .img-b>b{
 	position: absolute;
 	top: 0;
@@ -98,7 +102,6 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 30%;
 	height: 5px;
 	background: #00aaf6;
 	border-radius: 5px;
@@ -194,6 +197,10 @@
 	display: inline-block;
 	width: 100%;
 	text-align: center;
+}
+.donations>span>img{
+	width:90px;
+	height: 90px;
 }
 .donations>span>span{
 	font-size: 12px;
@@ -328,10 +335,14 @@
 }
 .xim-id{
 	padding: 20px 34px;
-}   
+}
+.xim-id img{
+	width: 50px;
+	height: 50px;
+}
 .xim-id>p{
 	padding-left: 10px;
-	font-size: 14px;
+	font-size: 12px;
 	padding-top: 7px;
 }
 .xim-id>p>a{

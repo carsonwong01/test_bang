@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dimeng.model.expand.HospitalBasicReq;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.protocol.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -71,7 +73,29 @@ public class UserManageController extends BaseController
     
     @Resource
     private IMessageService msgService;
-    
+
+    @RequestMapping(value="/{v}/findHosUserDetails", method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findHosUserDetails(HttpEntity<HospitalBasicReq> req) throws Exception{
+        return userManageService.findHosUserDetails(req.getBody());
+    }
+
+    /**
+     * 后台管理-医院用户信息列表查询
+     * @param req
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/{v}/findHospitalUser",method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value=HttpStatus.OK)
+    public Object findHospitalUser(HttpEntity<HospitalBasicReq> req) throws Exception{
+        return userManageService.findHospitalUser(req.getBody());
+    }
+
     /**
      * 后台用户管理-用户信息列表查询
      * @return

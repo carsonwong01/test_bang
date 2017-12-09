@@ -37,7 +37,7 @@ header{
 	margin-top: 20px;
 }
 .head-n{
-	margin-left: 95px;
+	margin-left: 117px;
 	height: 80px;
 	box-sizing: border-box;
 }
@@ -89,14 +89,14 @@ header{
 	box-sizing: border-box;
 	width: 50px;
 	height: 32px;
-	line-height: 32px;
+	line-height: 30px;
 	color: #333333;
 	font-size: 12px;
 	border: 1px solid #00aaf6;
 }
 .inc{
 	box-sizing: border-box;
-	line-height: 32px;
+	line-height: 30px;
 	width: 72px;
 	height: 32px;
 	color: #333333;
@@ -106,7 +106,7 @@ header{
 }
 .ind{
 	box-sizing: border-box;
-	line-height: 32px;
+	line-height: 30px;
 	width: 64px;
 	height: 32px;
 	color: #333333;
@@ -197,6 +197,10 @@ footer{
 }
 .wxin{
 	margin-top: 50px;
+}
+.wxin img{
+	width:90px;
+	height: 90px;
 }
 .wxin>a{
 	float: left;

@@ -207,6 +207,10 @@
     .pagelist .jump.disabled{
       pointer-events: none;
     }
+.fl-cen>ul>li>img{
+	width: 270px;
+	height: 152px;
+}
 /*右*/
 .fr-nav{
 	width: 362px;
@@ -242,13 +246,14 @@
     color: #333333;
     line-height: 25px;
 }
-.loing>a{
+.loing>p>a{
 	font-size: 12px;
 	color: #00aaf6;
 }
 .loing>div{
 	width:100%;
 	text-align: center;
+	padding-top: 20px;
 }
 .loing>div>a{
 	display: inline-block;

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/index_new.css">
+
 <!--banner 首页滚动广告图片-->
 {{if advertise!=null && advertise.length>0}}
 <div class="banner clearfix">
@@ -60,7 +61,8 @@
 				<div class='detailed'>
 					<p class='ti-m' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
 						<a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">{{= objInfo.projectName}}</a></p>
-					<p class='yi-b'><b></b><span>{{= objInfo.hospitalName}}</span><i></i> <span>{{= objInfo.foundationName}}</span></p>
+					<p class='yi-b' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+						<b></b><span>{{= objInfo.hospitalName}}</span><i></i> <span>{{= objInfo.foundationName}}</span></p>
 					<div class='dao-t' id='dao-t'>
 						<p><span id="progress">{{= objInfo.rate*100}}%</span></p>
 					</div>
@@ -76,7 +78,7 @@
 			{{/each}}
 			<div class='clear'></div>
 		</ul>
-		<h3 class="til"><a href="<%=basePath%>project/projectList.do" target="_blank" class="more">查看更多&gt;</a></h3>
+		<%--<h3 class="til"><a href="<%=basePath%>project/projectList.do" target="_blank" class="more">查看更多&gt;</a></h3>--%>
 	</div>
 </div>
 <!-- 合作医院 -->
@@ -133,8 +135,23 @@
 			</div>
 			<ul class='xiw-k'>
 				{{each(sta, obj) InvestmentDynamicInfo}}
-				<li><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= obj.id}}"><i></i>{{= obj.infoTitle}}<span>{{= obj.dateCreate}}</span></a></li>
+				<li>
+					<a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= obj.id}}">
+						<p class='fl dats'>
+							<b>{{= obj.viewCount}}</b></br>
+							<span>{{= obj.dateCreate}}</span>
+						</p>
+						<div class='fl di-w'>
+							<h1>{{= obj.infoTitle}}</h1>
+							<p>{{= obj.infoContent}}</p>
+						</div>
+						<div class='clear'></div>
+					</a>
+				</li>
 				{{/each}}
+				<%--{{each(sta, obj) InvestmentDynamicInfo}}--%>
+				<%--<li><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= obj.id}}"><i></i>{{= obj.infoTitle}}<span>{{= obj.dateCreate}}</span></a></li>--%>
+				<%--{{/each}}--%>
 			</ul>
 			<a href="<%=basePath%>frontHome/toNewsInfos.do?investmentInfoType=2" target="_blank" class='fr gd-n'></a>
 		</div>
@@ -146,8 +163,23 @@
 			</div>
 			<ul class='xiw-k'>
 				{{each(sta, obj) InvestmentInfo}}
-				<li><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= obj.id}}"><i></i>{{= obj.infoTitle}}<span>{{= obj.dateCreate}}</span></a></li>
+				<li>
+					<a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= obj.id}}">
+						<p class='fl dats'>
+							<b>{{= obj.viewCount}}</b></br>
+							<span>{{= obj.dateCreate}}</span>
+						</p>
+						<div class='fl di-w'>
+							<h1>{{= obj.infoTitle}}</h1>
+							<p>{{= obj.infoContent}}</p>
+						</div>
+						<div class='clear'></div>
+					</a>
+				</li>
 				{{/each}}
+				<%--{{each(sta, obj) InvestmentInfo}}--%>
+				<%--<li><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= obj.id}}"><i></i>{{= obj.infoTitle}}<span>{{= obj.dateCreate}}</span></a></li>--%>
+				<%--{{/each}}--%>
 			</ul>
 			<a href="<%=basePath%>frontHome/toNewsInfos.do?investmentInfoType=1" target="_blank" class='fr gd-n'></a>
 		</div>
@@ -165,3 +197,4 @@
                     中国人口福利基金会</span><div class='clear'></div></p>
 	</div>
 </div>
+

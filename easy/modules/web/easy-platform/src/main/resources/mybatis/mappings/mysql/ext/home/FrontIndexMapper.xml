@@ -48,7 +48,7 @@
 
 
 
-	<!--查找众筹中的所有项目-->
+	<!--查找已认证的-众筹中的所有项目-->
 	<select id="findAllProject" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp"
 			parameterType="com.dimeng.model.home.FrontIndexReq">
 		SELECT
@@ -57,6 +57,7 @@
 			SELECT COUNT(tos.order_id) FROM t_order_support tos
 			WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
 		  ) supportCount,
+		  tpi.cover_image_url projectImg,
 		  tpi.project_id projectId,
 		  tpi.project_name projectName,
 		  floor(tpi.target_amount) targetAmount,
@@ -69,10 +70,11 @@
 		  tpi.date_create dateCreate,
 		  IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
 		  (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
-		FROM t_project_info tpi
+		FROM  t_project_validation tpv
+		LEFT JOIN t_project_info tpi ON tpv.project_id = tpi.project_id
 		LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
-		LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
-		WHERE tpi.project_status = '1'
+
+		WHERE tpi.project_status = '1' AND tpv.audit_status = '3'
 		ORDER BY tpi.date_update DESC
 	</select>
 

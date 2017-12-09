@@ -7,8 +7,8 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <div class='center'>
 	<div class='cent-nav'>
-		<p	class='nav-po'><a href="">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
-		<h2 class="p-til">${projectDetails.title}</h2>
+		<p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
+		<%--<h2 class="p-til">${projectDetails.title}</h2>--%>
 		<div class='top-ns'>
 			<div class='fl img-b'><b></b><img src="${projectDetails.coverImgUrl}"></div>
 			<div class='fr frt-xq'>
@@ -98,29 +98,32 @@
 			<div class='xim-qi'>
 				<p><i></i> <span>项目发起人</span></p>
 				<div class="xim-id">
-					<div class="promoter clearfix">
-						<img class="fl" src="${projectDetails.initiatorImgUrl}" alt="">
-						<div class="namebox fl">
-							<p class="name">${projectDetails.initiatorNickName}</p>
-							<p class="time">${projectDetails.dateCreate}发起</p>
-						</div>
-					</div>
+					<img src="${projectDetails.initiatorImgUrl}" class='fl'>
+					<p class='fl'>
+						<a>${projectDetails.initiatorNickName}</a></br>
+						<span>${projectDetails.dateCreate}发起</span>
+					</p>
+					<div class='clear'></div>
+
+
 				</div>
 			</div>
 			<div class='xim-qi'>
 				<p><i></i> <span>认证基金会</span></p>
 				<div class='xim-id'>
 					<%--<img src="images/cn19.png" class='fl'>--%>
-					<p class='fl'>
-						<a href=''>${projectDetails.foundationName}</a></br>
-						<span>捐助的所有款项由该基金会管理拨及付</span>
-					</p>
-					<div class='clear'></div>
+						<img src="<%=basePath%>easy/images/cn19.png" class='fl'>
+						<p class='fl'>
+							<a href=''>${projectDetails.foundationName}</a></br>
+							<span>捐助的所有款项由该基金会管理拨及付</span>
+						</p>
+						<div class='clear'></div>
+
 				</div>
 			</div>
 			<div class="p-detail-content">
 				<!-- 项目详情右侧信息 -->
-				<div class="rightbox fr">
+				<div class="rightbox">
 					<c:choose>
 						<c:when test="${projectDetails.type eq 6}">
 							<div class="p-box order-des">
@@ -188,7 +191,7 @@
 						</c:when>
 						<c:otherwise>
 							<div class="p-box authentication">
-								<h4 class="til">认证资料<i class="btn-blue"></i><br><span class="tips">提示：请确保您了解项目后再帮助</span><em class="bord"></em></h4>
+								<h4 class="til">认证资料<i class="btn-blue"></i><br><em class="bord"></em></h4>
 								<div class="">
 									<ul>
 										<c:choose>
@@ -282,8 +285,19 @@
 				</ul>
 			</div>
 			<div class='xim-qi'>
-				<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
-				<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>
+				<p><i></i> <span>常见问题</span></p>
+				<ul class='cjwt-s' id="helpCenterId">
+				</ul>
+
+				<input type="hidden" id="typeFooter" value="4" />
+				<script id="helpCenterTemplate" type="text/x-jquery-tmpl">
+	{{each(i,data) list}}
+		<li><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><i></i>{{= data.title}}</a></li>
+	{{/each}}
+</script>
+				<!--常见问题--内容-->
+				<script language="javascript"
+						src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>
 			</div>
 		</div>
 		<div class='clear'></div>
