@@ -33,86 +33,86 @@
 			<input type="hidden" name="validationType" value="${validationType}">
 			<!-- 非产品急销企业验证 start -->
 			<c:if test="${projectType ne '6'}">
-				<div class="sickwhiteBg">
-					<h3 class="til">组织机构信息</h3>
-					<div class="formbox">
-						<dl>
-							<dt><span class="red">*</span>组织名称</dt>
-							<dd>
-								<input type="text" id="organizationName" name="organizationName" validate="q|leng" leng="1,30" maxlength="30" class="input_txt wid92"   value="${currUser.realName}">
-								<p class="prompt" id="organizationNameMsg"></p>
-							</dd>
-						</dl>
-						<dl>
-							<dt><span class="red">*</span>联系手机</dt>
-							<dd>
-								<input type="text" id="organizationPhone" name="organizationPhone" validate="q|leng|m" leng="1,11" maxlength="11" class="input_txt"  value="${currUser.userName}">
-								<p class="prompt" id="organizationPhoneMsg"></p>
-							</dd>
-						</dl>
-						<dl>
-							<dt><span class="red">*</span>组织机构资质<br>证明</dt>
-							<dd>
-								<ul id="organizationAptitude" class="addCover clearfix">
-									<li class="fileListAfter">
-										<a id="organizationAptitudePicker" class="addCoverIcon">
-											<span>上传资质<br>证明照片</span>
-										</a>
-									</li>
-								</ul>
-								<input type="hidden" id="organizationAptitudeId" name="organizationAptitudeId">
-								<input type="hidden" id="organizationAptitudeUrl" name="organizationAptitudeUrl">
-								<p class="prompt" id="organizationAptitudeMsg"></p>
-								<p class="tips">请提供组织机构证明照片</p>
-							</dd>
-						</dl>
-						<!-- 灾难救助、动物保护、扶贫助学、其他救助 start -->
-						<c:if test="${projectType eq '2' || projectType eq '3' || projectType eq '4' || projectType eq '5'}">
-							<dl>
-								<dt><span class="red">*</span>资金用途证明（可多张）</dt>
-								<dd>
-									<ul id="useProveImgIds" class="addCover clearfix">
-										<li class="fileListAfter">
-											<a id="useProveImgIdsPicker" class="addCoverIcon">
-												<span>
-													上传项目<br>
-													<c:if test="${projectType eq '2'}">受灾证明照片</c:if>
-													<c:if test="${projectType eq '3' || projectType eq '4' || projectType eq '5'}">资金用途证明</c:if>
-												</span>
-											</a>
-										</li>
-									</ul>
-									<p class="prompt" id="useProveImgIdsMsg"></p>
-									<p class="tips">
-										<c:if test="${projectType eq '2'}">请提供正规的受灾证明照片</c:if>
-										<c:if test="${projectType eq '3'}">请提供资金用途证明或正规发票</c:if>
-										<c:if test="${projectType eq '4'}">请提供贫困证明（或低保证明）和学校资质证明</c:if>
-										<c:if test="${projectType eq '5'}">请提供可以证明需要他人帮助的证明材料</c:if>
-									</p>
-								</dd>
-							</dl>
-						</c:if>
-						<!-- 灾难救助、动物保护、扶贫助学、其他救助 end -->
-						<!-- 实现梦想 start -->
-						<c:if test="${projectType eq '7'}">
-							<dl>
-								<dt><span class="red">*</span>项目相关证明材料（可多张）</dt>
-								<dd>
-									<ul id="projectProveImgIds" class="addCover clearfix">
-										<li class="fileListAfter">
-											<a id="projectProveImgIdsPicker" class="addCoverIcon">
-												<span>上传项目<br>相关证明材料</span>
-											</a>
-										</li>
-									</ul>
-									<p class="prompt" id="projectProveImgIdsMsg"></p>
-									<p class="tips">项目相关证明材料上的所有信息必须清晰可见</p>
-								</dd>
-							</dl>
-						</c:if>
-						<!-- 实现梦想 end -->
-					</div>
-				</div>
+				<%--<div class="sickwhiteBg">--%>
+					<%--<h3 class="til">组织机构信息</h3>--%>
+					<%--<div class="formbox">--%>
+						<%--<dl>--%>
+							<%--<dt><span class="red">*</span>组织名称</dt>--%>
+							<%--<dd>--%>
+								<%--<input type="text" id="organizationName" name="organizationName" validate="q|leng" leng="1,30" maxlength="30" class="input_txt wid92"   value="${currUser.realName}">--%>
+								<%--<p class="prompt" id="organizationNameMsg"></p>--%>
+							<%--</dd>--%>
+						<%--</dl>--%>
+						<%--<dl>--%>
+							<%--<dt><span class="red">*</span>联系手机</dt>--%>
+							<%--<dd>--%>
+								<%--<input type="text" id="organizationPhone" name="organizationPhone" validate="q|leng|m" leng="1,11" maxlength="11" class="input_txt"  value="${currUser.userName}">--%>
+								<%--<p class="prompt" id="organizationPhoneMsg"></p>--%>
+							<%--</dd>--%>
+						<%--</dl>--%>
+						<%--<dl>--%>
+							<%--<dt><span class="red">*</span>组织机构资质<br>证明</dt>--%>
+							<%--<dd>--%>
+								<%--<ul id="organizationAptitude" class="addCover clearfix">--%>
+									<%--<li class="fileListAfter">--%>
+										<%--<a id="organizationAptitudePicker" class="addCoverIcon">--%>
+											<%--<span>上传资质<br>证明照片</span>--%>
+										<%--</a>--%>
+									<%--</li>--%>
+								<%--</ul>--%>
+								<%--<input type="hidden" id="organizationAptitudeId" name="organizationAptitudeId">--%>
+								<%--<input type="hidden" id="organizationAptitudeUrl" name="organizationAptitudeUrl">--%>
+								<%--<p class="prompt" id="organizationAptitudeMsg"></p>--%>
+								<%--<p class="tips">请提供组织机构证明照片</p>--%>
+							<%--</dd>--%>
+						<%--</dl>--%>
+						<%--<!-- 灾难救助、动物保护、扶贫助学、其他救助 start -->--%>
+						<%--<c:if test="${projectType eq '2' || projectType eq '3' || projectType eq '4' || projectType eq '5'}">--%>
+							<%--<dl>--%>
+								<%--<dt><span class="red">*</span>资金用途证明（可多张）</dt>--%>
+								<%--<dd>--%>
+									<%--<ul id="useProveImgIds" class="addCover clearfix">--%>
+										<%--<li class="fileListAfter">--%>
+											<%--<a id="useProveImgIdsPicker" class="addCoverIcon">--%>
+												<%--<span>--%>
+													<%--上传项目<br>--%>
+													<%--<c:if test="${projectType eq '2'}">受灾证明照片</c:if>--%>
+													<%--<c:if test="${projectType eq '3' || projectType eq '4' || projectType eq '5'}">资金用途证明</c:if>--%>
+												<%--</span>--%>
+											<%--</a>--%>
+										<%--</li>--%>
+									<%--</ul>--%>
+									<%--<p class="prompt" id="useProveImgIdsMsg"></p>--%>
+									<%--<p class="tips">--%>
+										<%--<c:if test="${projectType eq '2'}">请提供正规的受灾证明照片</c:if>--%>
+										<%--<c:if test="${projectType eq '3'}">请提供资金用途证明或正规发票</c:if>--%>
+										<%--<c:if test="${projectType eq '4'}">请提供贫困证明（或低保证明）和学校资质证明</c:if>--%>
+										<%--<c:if test="${projectType eq '5'}">请提供可以证明需要他人帮助的证明材料</c:if>--%>
+									<%--</p>--%>
+								<%--</dd>--%>
+							<%--</dl>--%>
+						<%--</c:if>--%>
+						<%--<!-- 灾难救助、动物保护、扶贫助学、其他救助 end -->--%>
+						<%--<!-- 实现梦想 start -->--%>
+						<%--<c:if test="${projectType eq '7'}">--%>
+							<%--<dl>--%>
+								<%--<dt><span class="red">*</span>项目相关证明材料（可多张）</dt>--%>
+								<%--<dd>--%>
+									<%--<ul id="projectProveImgIds" class="addCover clearfix">--%>
+										<%--<li class="fileListAfter">--%>
+											<%--<a id="projectProveImgIdsPicker" class="addCoverIcon">--%>
+												<%--<span>上传项目<br>相关证明材料</span>--%>
+											<%--</a>--%>
+										<%--</li>--%>
+									<%--</ul>--%>
+									<%--<p class="prompt" id="projectProveImgIdsMsg"></p>--%>
+									<%--<p class="tips">项目相关证明材料上的所有信息必须清晰可见</p>--%>
+								<%--</dd>--%>
+							<%--</dl>--%>
+						<%--</c:if>--%>
+						<%--<!-- 实现梦想 end -->--%>
+					<%--</div>--%>
+				<%--</div>--%>
 
 				<div class="sickwhiteBg">
 					<h3 class="til">支持基金会</h3>
@@ -197,18 +197,18 @@
 									<p class="prompt" id="hospitalNameMsg"></p>
 								</dd>
 							</dl>
-							<dl>
-								<dt><span class="red">*</span>医院地址</dt>
-								<dd>
-									<%--<span class="input-midle">--%>
-									<input type="text" id="province" name="province"  class="select_style province"  value="${currUser.provinceId}">
-									<input type="text" id="hospitalRegionId" name="hospitalRegionId" class="select_style city"  value="${currUser.cityId}">
-										<%--<select name="province" regionId="" class="select_style province"></select>--%>
-										<%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
-									<%--</span>--%>
-									<p class="prompt" id="hospitalRegionIdMsg"></p>
-								</dd>
-							</dl>
+							<%--<dl>--%>
+								<%--<dt><span class="red">*</span>医院地址</dt>--%>
+								<%--<dd>--%>
+									<%--&lt;%&ndash;<span class="input-midle">&ndash;%&gt;--%>
+									<%--<input type="text" id="province" name="province"  class="select_style province"  value="${currUser.provinceId}">--%>
+									<%--<input type="text" id="hospitalRegionId" name="hospitalRegionId" class="select_style city"  value="${currUser.cityId}">--%>
+										<%--&lt;%&ndash;<select name="province" regionId="" class="select_style province"></select>&ndash;%&gt;--%>
+										<%--&lt;%&ndash;<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>&ndash;%&gt;--%>
+									<%--&lt;%&ndash;</span>&ndash;%&gt;--%>
+									<%--<p class="prompt" id="hospitalRegionIdMsg"></p>--%>
+								<%--</dd>--%>
+							<%--</dl>--%>
 							<dl>
 								<dt><span class="red">*</span>医疗诊断证明</dt>
 								<dd>

@@ -306,7 +306,7 @@
 										<li class="mb20">
 											<div class="pr mh30 pl160">
 												<span class="display-ib w140 lh30 tr mr5 pa left0 top0">医院所在省市：</span>
-												<div class="tl h30 lh30">${validationDetail.hospitalRegionName }</div>
+												<div class="tl h30 lh30">${validationDetail.province }${validationDetail.city }</div>
 											</div>
 										</li>
 										<li class="mb20">
@@ -353,13 +353,13 @@
 										<li class="mb20">
 											<div class="pr mh30 pl160">
 												<span class="display-ib w140 lh30 tr mr5 pa left0 top0">组织名称：</span>
-												<div class="tl h30 lh30">${validationDetail.organizationName }</div>
+												<div class="tl h30 lh30">${validationDetail.hospitalName }</div>
 											</div>
 										</li>
 										<li class="mb20">
 											<div class="pr mh30 pl160">
 												<span class="display-ib w140 lh30 tr mr5 pa left0 top0">联系电话：</span>
-												<div class="tl h30 lh30">${validationDetail.organizationPhone }</div>
+												<div class="tl h30 lh30">${validationDetail.mobilePhone }</div>
 											</div>
 										</li>
 

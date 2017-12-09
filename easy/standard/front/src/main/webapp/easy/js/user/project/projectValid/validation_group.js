@@ -154,12 +154,12 @@ var ProjectValidController = DM.Controller.sub({
         {
             case '1':
                 //资质证明/营业执照图片必填验证
-                if ($("#organizationAptitude li.upload-state-done") && $("#organizationAptitude li.upload-state-done").length > 0) {
-                    $("#organizationAptitudeMsg").hide();
-                }else{
-                    $("#organizationAptitudeMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
-                    return;
-                }
+                // if ($("#organizationAptitude li.upload-state-done") && $("#organizationAptitude li.upload-state-done").length > 0) {
+                //     $("#organizationAptitudeMsg").hide();
+                // }else{
+                //     $("#organizationAptitudeMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
+                //     return;
+                // }
                 //受助人身份证图片必填验证
                 if ($("#recipientCardImageIds li.upload-state-done") && $("#recipientCardImageIds li.upload-state-done").length > 0) {
                     $("#recipientCardImageIdsMsg").hide();
@@ -167,13 +167,13 @@ var ProjectValidController = DM.Controller.sub({
                     $("#recipientCardImageIdsMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
                     return;
                 }
-                //医院省市验证
-                if($("#hospitalRegionId").val() == null || $("#hospitalRegionId").val() == ''){
-                    $("#hospitalRegionIdMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
-                    return;
-                }else{
-                    $("#hospitalRegionIdMsg").hide();
-                }
+                // //医院省市验证
+                // if($("#hospitalRegionId").val() == null || $("#hospitalRegionId").val() == ''){
+                //     $("#hospitalRegionIdMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
+                //     return;
+                // }else{
+                //     $("#hospitalRegionIdMsg").hide();
+                // }
                 //医疗证明图片必填验证
                 if ($("#proveImgIds li.upload-state-done") && $("#proveImgIds li.upload-state-done").length > 0) {
                     $("#proveImgIdsMsg").hide();
