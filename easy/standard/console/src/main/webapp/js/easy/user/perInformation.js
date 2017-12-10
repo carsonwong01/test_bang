@@ -100,7 +100,7 @@ DM.Page.ready({
 			DM.exportExcel({
 				"tableId" : "exportTable",
 				"formId" : "dataForm",
-				"fileName" : "个人用户信息列表.xls",
+				"fileName" : "用户信息列表.xls",
 				"url" : "userManage/perInformationExport.do"
 			});
 		});

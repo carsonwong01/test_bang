@@ -60,13 +60,57 @@ public class FindUserListReq extends FindExportExcelParamsReq
      * 结束时间
      */
     private String endTime;
-
     private String hospitalName;
     private String mobilePhone;
     private String province;
     private String city;
     private String county;
     private String addr;
+    private String hospitalGrade;
+    private String hospitalType;
+    private String linkName;
+    private String hospitalMail;
+    private String officeTel;
+
+    public String getHospitalGrade() {
+        return hospitalGrade;
+    }
+
+    public void setHospitalGrade(String hospitalGrade) {
+        this.hospitalGrade = hospitalGrade;
+    }
+
+    public String getHospitalType() {
+        return hospitalType;
+    }
+
+    public void setHospitalType(String hospitalType) {
+        this.hospitalType = hospitalType;
+    }
+
+    public String getLinkName() {
+        return linkName;
+    }
+
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+
+    public String getHospitalMail() {
+        return hospitalMail;
+    }
+
+    public void setHospitalMail(String hospitalMail) {
+        this.hospitalMail = hospitalMail;
+    }
+
+    public String getOfficeTel() {
+        return officeTel;
+    }
+
+    public void setOfficeTel(String officeTel) {
+        this.officeTel = officeTel;
+    }
 
     public String getHospitalName() {
         return hospitalName;

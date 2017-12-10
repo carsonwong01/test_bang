@@ -1,34 +1,9 @@
 package com.dimeng.modules.user.services.impl;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.dimeng.entity.ext.expand.FindAllHospitalResp;
-import com.dimeng.framework.constants.IResultCode;
-import com.dimeng.model.expand.HospitalBasicReq;
-import net.sf.ehcache.Element;
-
-import net.sf.ehcache.ObjectExistsException;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
-import com.dimeng.entity.ext.user.FindAccInfoResp;
-import com.dimeng.entity.ext.user.FindAuthenticationResp;
-import com.dimeng.entity.ext.user.FindUserThirdPartyResp;
-import com.dimeng.entity.ext.user.FrontUserAccHomeResp;
-import com.dimeng.entity.ext.user.FrontUserInfo;
-import com.dimeng.entity.ext.user.ThirdPartyUserResp;
-import com.dimeng.entity.ext.user.UserInfoQscDetailResp;
-import com.dimeng.entity.ext.user.UserManageResp;
-import com.dimeng.entity.ext.user.UserOpenidResp;
+import com.dimeng.entity.ext.expand.FindAllHospitalResp;
+import com.dimeng.entity.ext.user.*;
 import com.dimeng.entity.table.user.TQUserBasic;
 import com.dimeng.entity.table.user.TUser;
 import com.dimeng.entity.table.user.TUserCapitalAccount;
@@ -46,24 +21,17 @@ import com.dimeng.framework.mybatis.utils.page.PageResult;
 import com.dimeng.framework.service.impl.BaseServiceImpl;
 import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.framework.utils.StringUtil;
-import com.dimeng.model.user.AuthenticationReq;
-import com.dimeng.model.user.FindAccMoneyListReq;
-import com.dimeng.model.user.FindByUserIdReq;
-import com.dimeng.model.user.FindFreezeProReq;
-import com.dimeng.model.user.FindIdCardUniqueCpReq;
-import com.dimeng.model.user.FindThirdPartyReq;
-import com.dimeng.model.user.FindTradeListReq;
-import com.dimeng.model.user.FindUserByOpendIdReq;
-import com.dimeng.model.user.FindUserListReq;
-import com.dimeng.model.user.IsExsitIdCardReq;
-import com.dimeng.model.user.NotPageUserIdReq;
+import com.dimeng.model.expand.HospitalBasicReq;
+import com.dimeng.model.user.*;
 import com.dimeng.modules.user.services.UserInfoManageService;
 import com.dimeng.service.INciicService;
-import com.dimeng.utils.Base64Decoder;
-import com.dimeng.utils.Base64Encoder;
-import com.dimeng.utils.ExportUtil;
-import com.dimeng.utils.SystemCache;
-import com.dimeng.utils.UUIDGenerate;
+import com.dimeng.utils.*;
+import net.sf.ehcache.Element;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 /**
  * 用户管理service
@@ -87,7 +55,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         event.setStatement("findHosUserDetails");
         event.setObj(req);
 
-        FindAllHospitalResp result = (FindAllHospitalResp) baseDao.findOneByCustom(event);
+        HospitalBasicReq result = (HospitalBasicReq) baseDao.findOneByCustom(event);
         if (result == null)
         {
             resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
@@ -404,7 +372,6 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
      * <功能详细描述>
      * @param idCard
      * @return
-     * @throws ParseException
      */
     private String analyzeIdCard(String idCard)
     {

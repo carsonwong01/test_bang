@@ -76,6 +76,78 @@ public class UserManageResp implements Serializable
      * 医院名
      */
     private String hospitalName;
+    private String hospitalGrade;
+    private String hospitalType;
+    private String linkName;
+    private String mobilePhone;
+    private String hospitalMail;
+    private String officeTel;
+    private String province;
+    private String city;
+
+    public String getHospitalGrade() {
+        return hospitalGrade;
+    }
+
+    public void setHospitalGrade(String hospitalGrade) {
+        this.hospitalGrade = hospitalGrade;
+    }
+
+    public String getHospitalType() {
+        return hospitalType;
+    }
+
+    public void setHospitalType(String hospitalType) {
+        this.hospitalType = hospitalType;
+    }
+
+    public String getLinkName() {
+        return linkName;
+    }
+
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    public String getHospitalMail() {
+        return hospitalMail;
+    }
+
+    public void setHospitalMail(String hospitalMail) {
+        this.hospitalMail = hospitalMail;
+    }
+
+    public String getOfficeTel() {
+        return officeTel;
+    }
+
+    public void setOfficeTel(String officeTel) {
+        this.officeTel = officeTel;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getHospitalName() {
         return hospitalName;

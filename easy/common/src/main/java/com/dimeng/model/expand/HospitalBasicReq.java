@@ -28,6 +28,7 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String descriptionImageUrl;
     private String descriptionImageId;
     private String foundTime;
+    private String organizationAptitudeUrl;
 
     private String projectId;
     private String projectName;
@@ -47,6 +48,70 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String allSupprotTimes;
     private String rate;
     private String foundationName;
+    private String userName;
+    private String nickName;
+    private String source;
+    private String status;
+    private String registerTime;
+    private String userId;
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime;
+    }
+
+    @Override
+    public String getUserId() {
+        return userId;
+    }
+
+    @Override
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getOrganizationAptitudeUrl() {
+        return organizationAptitudeUrl;
+    }
+
+    public void setOrganizationAptitudeUrl(String organizationAptitudeUrl) {
+        this.organizationAptitudeUrl = organizationAptitudeUrl;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getAddr() {
         return addr;

@@ -15,13 +15,12 @@
        <li><span class="display-ib mr5">昵称：</span>
           <input type="text" name="nickName" class="text border pl5 mr20" value="${findUserListReq.nickName }"/>
         </li>
-
         <li><span class="display-ib mr5">真实姓名：</span>
           <input type="text" name="realName" class="text border pl5 mr20" value="${findUserListReq.realName }" />
         </li>
         <li><span class="display-ib mr5">身份证：</span>
           <input type="text" name="idCard" class="text border pl5 mr20" value="${findUserListReq.idCard }" />
-        </li> 
+        </li>
         <li><span class="display-ib mr5">注册来源：</span>
           <select class="border mr20 h32 mw100" name="source">
 		            <option value="">全部</option>
@@ -84,7 +83,17 @@
           <th exp-name="nickName">昵称</th>
           <th exp-name="hospitalName">用户类型</th>
           <th exp-name="realName">真实姓名</th>
-          <th exp-name="idCard">身份证</th> 
+          <th exp-name="idCard">身份证</th>
+
+          <th exp-name="hospitalGrade">医院等级</th>
+          <th exp-name="hospitalType">医院类型</th>
+          <th exp-name="linkName">联系人</th>
+          <th exp-name="mobilePhone">联系电话</th>
+          <th exp-name="hospitalMail">医院邮箱</th>
+          <th exp-name="officeTel">固定电话</th>
+          <th exp-name="province">所在省</th>
+          <th exp-name="city">所在市</th>
+
           <th exp-name="source">注册来源</th>
           <th exp-name="status">状态</th>
           <th exp-name="registerTime">注册时间</th>

@@ -60,33 +60,33 @@ public class UserPerInformationController extends BaseController
         return CommonUtil.getJSONObject(hospitalUser, null);
     }
 
-    /**
-     * 跳网医院用户详情界面
-     */
-    @RequestMapping(value = "/hosUserDetails.do", method = RequestMethod.GET)
-    @ResponseBody
-    public Object hosUserDetails(FindUserListReq userReq, HttpServletRequest req, HttpServletResponse response,String userId)
-    {
-        ModelAndView  mv = new ModelAndView("pages/easy/user/hosUserDetails");
-        mv.addObject("userId", userId);
-        return mv;
-    }
-
-    /**
-     * 医院用户详情信息
-     */
-    @RequestMapping(value = "/findHosUserDetailsAjax.do")
-    @ResponseBody
-    public Object findHosUserDetailsAjax(HospitalBasicReq req,HttpServletRequest request,
-                                         HttpServletResponse response){
-        //医院详情信息
-        String hosUserDetails =
-                new CommonUtil().callInterfaceMethod(req,
-                        "user/userManage/v/findHosUserDetails",
-                        RequestMethod.POST,
-                        request);
-        return CommonUtil.getJSONObject(hosUserDetails, null);
-    }
+//    /**
+//     * 跳往医院用户详情界面
+//     */
+//    @RequestMapping(value = "/hosUserDetails.do", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Object hosUserDetails(FindUserListReq userReq, HttpServletRequest req, HttpServletResponse response,String userId)
+//    {
+//        ModelAndView  mv = new ModelAndView("pages/easy/user/hosUserDetails");
+//        mv.addObject("userId", userId);
+//        return mv;
+//    }
+//
+//    /**
+//     * 医院用户详情信息
+//     */
+//    @RequestMapping(value = "/findHosUserDetailsAjax.do")
+//    @ResponseBody
+//    public Object findHosUserDetailsAjax(HospitalBasicReq req,HttpServletRequest request,
+//                                         HttpServletResponse response){
+//        //医院详情信息
+//        String hosUserDetails =
+//                new CommonUtil().callInterfaceMethod(req,
+//                        "user/userManage/v/findHosUserDetails",
+//                        RequestMethod.POST,
+//                        request);
+//        return CommonUtil.getJSONObject(hosUserDetails, null);
+//    }
 
 
     /**

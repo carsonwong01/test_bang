@@ -11,7 +11,11 @@
 				<shiro:hasPermission name="YHGL_YHXX_GRXX_MU">
 					<li><a href="javascript:void(0);" class="click-link select-a"
 						data-url="userManage/perInformation.do">用户信息</a></li>
-				</shiro:hasPermission> 
+				</shiro:hasPermission>
+				<shiro:hasPermission name="YHGL_YHXX_GRXX_MU">
+					<li><a href="javascript:void(0);" class="click-link select-a"
+						   data-url="userManage/hospitalUserList.do">医院用户信息</a></li>
+				</shiro:hasPermission>
 			</ul>
 		</dd>
 	</dl>
