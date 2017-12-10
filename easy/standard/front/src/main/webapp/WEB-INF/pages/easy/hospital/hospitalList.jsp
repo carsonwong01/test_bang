@@ -64,7 +64,7 @@
 <script id="hospitalListTemp" type="text/x-jquery-tmpl">
 {{each(i,data) pageResult.list}}
 <li>
-    <img src="{{= data.logoUrl}}" class='fl'>
+    <img src="{{= data.logoUrl}}" class='fl' onclick="location.href='<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}'"/>
     <div class='fr zkd'>
         <div class='h-hi'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">{{= data.hospitalName}}</a><span>{{= data.hospitalGrade}}</span><span>{{= data.hospitalType}}</span></div>
         <div class='msjj'>
@@ -86,8 +86,8 @@
 
 <script type="text/javascript"
         src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="js/public/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/public/vue.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
 <script type="text/javascript">
     $(function(){
         /*var withs=$('#dao-t>p>span').html();

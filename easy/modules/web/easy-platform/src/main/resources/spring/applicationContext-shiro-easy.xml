@@ -92,6 +92,8 @@
 				/frontHome/v/recomNewsList = anon
 				/home/frontInfo/v/frontAllProject = anon
 				/home/frontInfo/v/findSiteInvestment = anon
+				/home/frontInfo/v/findHomeHosList = anon
+				/home/frontInfo/v/findPartnerList = anon
 
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon

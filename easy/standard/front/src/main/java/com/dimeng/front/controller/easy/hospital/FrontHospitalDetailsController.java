@@ -80,7 +80,7 @@ public class FrontHospitalDetailsController extends BaseController
     @ResponseBody
     public Object hospitalProjectSum(HospitalBasicReq req, HttpServletRequest request,
                                      HttpServletResponse response,String hospitalId){
-        ModelAndView mv = new ModelAndView("easy/hospital/hospitalProSum");
+        ModelAndView mv = new ModelAndView("easy/hospital/hospitalProSum.page");
         mv.addObject("hospitalId",hospitalId);
         return mv;
     }
@@ -104,10 +104,10 @@ public class FrontHospitalDetailsController extends BaseController
     /**
      * Test
      */
-    @RequestMapping(value = "/hospitalProject.do")
+    @RequestMapping(value = "/test.do")
     public Object test(HttpServletRequest request,
                                   HttpServletResponse response,HospitalBasicReq req){
-        ModelAndView mv = new ModelAndView("easy/hospital/hospitalProject.page");
+        ModelAndView mv = new ModelAndView("easy/hospital/perInformation.page");
         return mv;
     }
 

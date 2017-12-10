@@ -64,7 +64,7 @@
 <script id="projectListTemp" type="text/x-jquery-tmpl">
     {{each(i,data) pageResult.list}}
     <li>
-            <img src="{{= data.projectImg}}">
+            <img src="{{= data.projectImg}}" onclick="location.href='<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}'"/>
             <div class='detailed'>
                 <p class='ti-ou' style="width: 320px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
                      <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>

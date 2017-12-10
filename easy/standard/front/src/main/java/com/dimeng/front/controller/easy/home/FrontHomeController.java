@@ -423,7 +423,13 @@ public class FrontHomeController extends BaseController
             new CommonUtil().callInterfaceMethod("", "home/frontInfo/v/findRecommend", RequestMethod.POST, request);
         //热门项目
         data.put("hotProject", CommonUtil.getJSONObject(proJson, "recommendList"));
-        
+        //首页医院
+        String hosJson = new CommonUtil().callInterfaceMethod("","home/frontInfo/v/findHomeHosList",RequestMethod.POST, request);
+        data.put("homeHosList",CommonUtil.getJSONObject(hosJson,"homeHosList"));
+        //首页合作伙伴
+        String partnerJson = new CommonUtil().callInterfaceMethod("","home/frontInfo/v/findPartnerList",RequestMethod.POST, request);
+        data.put("partnersList",CommonUtil.getJSONObject(partnerJson,"partnersList"));
+
         return data;
     }
     

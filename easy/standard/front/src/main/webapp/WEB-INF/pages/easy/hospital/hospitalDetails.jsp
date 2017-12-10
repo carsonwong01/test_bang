@@ -60,27 +60,27 @@
 			</ul>
 			<div class='centsd'>
 				<div id='donations'>
-					<ul class='im-ttx' id="ttxou">
+					<%--<ul class='im-ttx' id="ttxou">--%>
 
-						<li>
-							<img src="images/dfjjpw9076h.png">
-							<div class='detailed'>
-								<p class='ti-ou'><a href="">919紧急救助金／求助标题</a></p>
-								<p class='yi-b'><b  class='bba'></b><span>北京第三医院</span><u></u> <span>中国华侨基金会</span></p>
-								<div class='dao-t'id='dao-t'>
-									<p class='dao-p'><span>5%</span></p>
-								</div>
-								<ul class='ul-nus'>
-									<li>目标金额（元）</br> <span>30,000,000</span></li>
-									<li>目标金额（元）</br> <span>4569,636</span></li>
-									<li>捐助人次（次）</br> <span>564646</span></li>
-									<div class='clear'></div>
-								</ul>
-								<p class='but-ab'><a href="">我要捐款</a></p>
-							</div>
-						</li>
-						<div class='clear'></div>
-					</ul>
+						<%--<li>--%>
+							<%--<img src="images/dfjjpw9076h.png">--%>
+							<%--<div class='detailed'>--%>
+								<%--<p class='ti-ou'><a href="">919紧急救助金／求助标题</a></p>--%>
+								<%--<p class='yi-b'><b  class='bba'></b><span>北京第三医院</span><u></u> <span>中国华侨基金会</span></p>--%>
+								<%--<div class='dao-t'id='dao-t'>--%>
+									<%--<p class='dao-p'><span>5%</span></p>--%>
+								<%--</div>--%>
+								<%--<ul class='ul-nus'>--%>
+									<%--<li>目标金额（元）</br> <span>30,000,000</span></li>--%>
+									<%--<li>目标金额（元）</br> <span>4569,636</span></li>--%>
+									<%--<li>捐助人次（次）</br> <span>564646</span></li>--%>
+									<%--<div class='clear'></div>--%>
+								<%--</ul>--%>
+								<%--<p class='but-ab'><a href="">我要捐款</a></p>--%>
+							<%--</div>--%>
+						<%--</li>--%>
+						<%--<div class='clear'></div>--%>
+					<%--</ul>--%>
 				</div>
 				<div id='progress' class='progress'>
 					<h1>基本信息</h1>
@@ -126,66 +126,6 @@
 								<%--</div>--%>
 							<%--</td>--%>
 							<%--<td class='tdse'>筹款中</td>--%>
-						<%--</tr>--%>
-						<%--<tr>--%>
-							<%--<td>2017-10-24</td>--%>
-							<%--<td>吴亦凡</td>--%>
-							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
-							<%--<td>--%>
-								<%--<div class='dao-he'>--%>
-									<%--<p><span>656565</span>元（<span class='baibi'>25%</span>）／ <span>546596</span>	元</p>--%>
-									<%--<span><i></i></span>--%>
-								<%--</div>--%>
-							<%--</td>--%>
-							<%--<td class='tdse'>已完成</td>--%>
-						<%--</tr>--%>
-						<%--<tr>--%>
-							<%--<td>2017-10-24</td>--%>
-							<%--<td>吴亦凡</td>--%>
-							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
-							<%--<td>--%>
-								<%--<div class='dao-he'>--%>
-									<%--<p><span>656565</span>元（<span class='baibi'>72%</span>）／ <span>546596</span>	元</p>--%>
-									<%--<span><i></i></span>--%>
-								<%--</div>--%>
-							<%--</td>--%>
-							<%--<td class='tdse'>筹款中</td>--%>
-						<%--</tr>--%>
-						<%--<tr>--%>
-							<%--<td>2017-10-24</td>--%>
-							<%--<td>吴亦凡</td>--%>
-							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
-							<%--<td>--%>
-								<%--<div class='dao-he'>--%>
-									<%--<p><span>656565</span>元（<span class='baibi'>13%</span>）／ <span>546596</span>	元</p>--%>
-									<%--<span><i></i></span>--%>
-								<%--</div>--%>
-							<%--</td>--%>
-							<%--<td class='tdse'>已完成</td>--%>
-						<%--</tr>--%>
-						<%--<tr>--%>
-							<%--<td>2017-10-24</td>--%>
-							<%--<td>吴亦凡</td>--%>
-							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
-							<%--<td>--%>
-								<%--<div class='dao-he'>--%>
-									<%--<p><span>656565</span>元（<span class='baibi'>12%</span>）／ <span>546596</span>	元</p>--%>
-									<%--<span><i></i></span>--%>
-								<%--</div>--%>
-							<%--</td>--%>
-							<%--<td class='tdse'>筹款中</td>--%>
-						<%--</tr>--%>
-						<%--<tr>--%>
-							<%--<td>2017-10-24</td>--%>
-							<%--<td>吴亦凡</td>--%>
-							<%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
-							<%--<td>--%>
-								<%--<div class='dao-he'>--%>
-									<%--<p><span>656565</span>元（<span id='baibi'>100%</span>）／ <span>546596</span>	元</p>--%>
-									<%--<span><i></i></span>--%>
-								<%--</div>--%>
-							<%--</td>--%>
-							<%--<td class='tdse'>已完成</td>--%>
 						<%--</tr>--%>
 						<%--</tbody>--%>
 					</table>
@@ -366,39 +306,41 @@
             }
         })
 
-	var hospitalId=$('.ldr').attr('datr');
-        $.ajax({
-            type:'post',
-            data:hospitalId,
-            url:"<%=basePath %>hospital/hospitalProjectListAjax.do",
-            success:function(data){
+//	var hospitalId=$('.ldr').attr('datr');
+        <%--var hospitalId=$("#hospitalId").val();--%>
+        <%--var _self=this;--%>
+        <%--DM.ajax({--%>
+            <%--type:'post',--%>
+            <%--url:"<%=basePath %>hospital/hospitalProjectSumAjax.do",--%>
+            <%--data:{hospitalId:hospitalId},--%>
+            <%--success:function(data){--%>
 
-				var data=data.hospitalProjectList.pageResult;
-                var strs=$('#ttxou').html('');
-                var tod='';
-//                $.each(data,function(){
-//                    tod+="<li>"+
-//                   "<img src='images/dfjjpw9076h.png'>"+
-//                       "<div class='detailed'>"+
-//                        "<p class='ti-ou'><a href=''>919紧急救助金／求助标题</a></p>"+
-//                    "<p class='yi-b'><b  class='bba'></b><span>北京第三医院</span><u></u> <span>中国华侨基金会</span></p>"+
-//                   "<div class='dao-t'id='dao-t'>"+
-//                        "<p class='dao-p'><span>5%</span></p>"+
-//                    "</div>"+
-//                    "<ul class='ul-nus'>"+
-//                        "<li>目标金额（元）</br> <span>30,000,000</span></li>"+
-//                    "<li>目标金额（元）</br> <span>4569,636</span></li>"+
-//                    "<li>捐助人次（次）</br> <span>564646</span></li>"+
-//                    "<div class='clear'></div>"+
-//                    " </ul>"+
-//                    " <p class='but-ab'><a href=''>我要捐款</a></p>"+
-//                    "</div>"+
-//                    " </li>";
-//                    $("#ttxou").append(tod);
-//				})
+				<%--var data=data.pageResult;--%>
+                <%--var strs=$('#ttxou').html('');--%>
+                <%--var tod='';--%>
+                <%--$.each(data,function(){--%>
+                    <%--tod+="<li>"+--%>
+                   <%--"<img src='images/dfjjpw9076h.png'>"+--%>
+                       <%--"<div class='detailed'>"+--%>
+                        <%--"<p class='ti-ou'><a href=''>919紧急救助金／求助标题</a></p>"+--%>
+                    <%--"<p class='yi-b'><b  class='bba'></b><span>北京第三医院</span><u></u> <span>中国华侨基金会</span></p>"+--%>
+                   <%--"<div class='dao-t'id='dao-t'>"+--%>
+                        <%--"<p class='dao-p'><span>5%</span></p>"+--%>
+                    <%--"</div>"+--%>
+                    <%--"<ul class='ul-nus'>"+--%>
+                        <%--"<li>目标金额（元）</br> <span>30,000,000</span></li>"+--%>
+                    <%--"<li>目标金额（元）</br> <span>4569,636</span></li>"+--%>
+                    <%--"<li>捐助人次（次）</br> <span>564646</span></li>"+--%>
+                    <%--"<div class='clear'></div>"+--%>
+                    <%--" </ul>"+--%>
+                    <%--" <p class='but-ab'><a href=''>我要捐款</a></p>"+--%>
+                    <%--"</div>"+--%>
+                    <%--" </li>";--%>
+                    <%--$("#ttxou").append(tod);--%>
+				<%--})--%>
 
-            }
-        });
+            <%--}--%>
+        <%--});--%>
     }(jQuery));
 </script>
 

@@ -8,8 +8,11 @@ var hosProjectSum = DM.Controller.sub({
      * 项目列表
      */
     loadRecord : function() {
+        var hospitalId = $("#hospitalId").val();
+        alert(hospitalId);
         // 查询数据
         DM.ajax({
+            "data":{hospitalId:hospitalId},
             "formId" : "hospProjectForm",
             "serialize" : true,
             "url" : "hospital/hospitalProjectSumAjax.do",

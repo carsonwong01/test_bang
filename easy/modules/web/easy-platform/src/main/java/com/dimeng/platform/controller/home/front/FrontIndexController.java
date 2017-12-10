@@ -59,8 +59,6 @@ public class FrontIndexController extends BaseController
         return frontIndexService.findAllProject(httpEntity.getBody());
     }
 
-
-
     /**
      * 前台首页-广告-累计
      * <功能详细描述>
@@ -111,7 +109,30 @@ public class FrontIndexController extends BaseController
     {
         return frontIndexService.findRecommend();
     }
-    
+    /**
+     * 首页医院列表
+     */
+    @RequestMapping(value = "/{v}/findHomeHosList", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findHomeHosList(HttpServletRequest request)throws Exception{
+        return frontIndexService.findHomeHosList();
+    }
+
+    /**
+     * 首页合作伙伴
+     */
+    @RequestMapping(value = "/{v}/findPartnerList", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findPartnerList(HttpServletRequest request)throws Exception{
+        return frontIndexService.findPartnerList();
+    }
+
+
+
     /**
      * 用户登录
      * <功能详细描述>

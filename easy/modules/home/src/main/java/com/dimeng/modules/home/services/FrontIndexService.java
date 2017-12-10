@@ -1,6 +1,7 @@
 package com.dimeng.modules.home.services;
 
 import com.dimeng.framework.domain.BaseDataResp;
+import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.home.FrontIndexReq;
 import com.dimeng.model.home.FrontLoginCheckReq;
 import com.dimeng.model.home.FrontRegisterReq;
@@ -50,7 +51,17 @@ public interface FrontIndexService
      */
     public BaseDataResp findRecommend()
         throws Exception;
-    
+    /**
+     * 首页医院列表
+     */
+    public BaseDataResp findHomeHosList()
+        throws Exception;
+    /**
+     * 首页合作伙伴
+     */
+    public BaseDataResp findPartnerList()
+        throws Exception;
+
     /**
      * 前台用户登录检验
      * <功能详细描述>

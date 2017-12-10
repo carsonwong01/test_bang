@@ -167,7 +167,31 @@
 	WHERE  ho.recommend_pc = 1  
 	ORDER BY ho.date_pc DESC
 	LIMIT 0,3
-	</select> 
+	</select>
+
+	<!--首页医院列表-->
+	<select id="homePageHospital" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+				parameterType="com.dimeng.model.expand.HospitalBasicReq">
+		SELECT
+			hospital_id hospitalId,
+			hospital_name hospitalName
+		FROM
+			t_hospital_basic
+		ORDER BY t_hospital_basic.hospital_id DESC
+		LIMIT 0,17
+	</select>
+	<!--首页合作伙伴列表-->
+	<select id="findHomePartner" resultType="com.dimeng.entity.ext.expand.FindPartnerResp"
+			parameterType="com.dimeng.model.expand.CooPartnerReq">
+		SELECT
+			partner_id partnerId,partner_name partnerName,
+    		partner_type partnerType
+    	FROM
+    		cooperation_partner
+    	ORDER BY cooperation_partner.partner_id
+	</select>
+
+
 	<delete id="deleteByProjectId" parameterType="java.util.Map">
 		delete from t_site_home_project where project_id=#{projectId,jdbcType=VARCHAR} limit 1
 	</delete>

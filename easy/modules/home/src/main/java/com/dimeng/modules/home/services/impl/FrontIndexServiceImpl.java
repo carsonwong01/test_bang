@@ -3,7 +3,9 @@ package com.dimeng.modules.home.services.impl;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
+import com.dimeng.entity.ext.expand.FindAllHospitalResp;
 import com.dimeng.entity.ext.expand.FindAllTSiteImageTemplateResp;
+import com.dimeng.entity.ext.expand.FindPartnerResp;
 import com.dimeng.entity.ext.home.front.FindRecommendListResp;
 import com.dimeng.entity.ext.home.front.HomeAdvertiseResp;
 import com.dimeng.entity.ext.home.front.HomeNoticeListResp;
@@ -22,6 +24,8 @@ import com.dimeng.framework.mybatis.utils.page.PageResult;
 import com.dimeng.framework.service.impl.BaseServiceImpl;
 import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.framework.utils.StringUtil;
+import com.dimeng.model.expand.CooPartnerReq;
+import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.home.FrontIndexReq;
 import com.dimeng.model.home.FrontLoginCheckReq;
 import com.dimeng.model.home.FrontRegisterReq;
@@ -129,6 +133,37 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         List<FindRecommendListResp> list = baseDao.findAllIsPageByCustom(event);
 
         data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
+
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findHomeHosList()
+        throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
+        event.setStatement("homePageHospital");
+
+        List<FindAllHospitalResp> homeHosList = baseDao.findAllIsPageByCustom(event);
+        data.put("homeHosList",homeHosList);
+
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findPartnerList()throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<CooPartnerReq> event = new QueryEvent<CooPartnerReq>();
+        event.setStatement("findHomePartner");
+
+        List<FindPartnerResp> partnersList = baseDao.findAllIsPageByCustom(event);
+        data.put("partnersList",partnersList);
 
         resp.setData(data);
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
