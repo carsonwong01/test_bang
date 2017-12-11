@@ -79,11 +79,17 @@
 <script type="text/javascript"
 		src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <!-- end -->
+<a style=""></a>
 <script language="javascript"
 		src="<%=basePath%>easy/js/newsInformation/newsInformation.js"></script>
 <script id="newsInfosTemplate" type="text/x-jquery-tmpl">
 	{{each(i,data) list}}
-		 <li><i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}">{{= data.infoTitle}} <span class='fr'>{{= data.dateCreate}}</span><div class='clear'></div></a></li>
+		 <li><i></i><a
+
+		 href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}" >
+		 {{= data.infoTitle}}</a>
+
+		 <span class='fr'>{{= data.dateCreate}}</span><div class='clear'></div></li>
 		 <%--<li><span class="fr gray9">{{= data.dateCreate}}</span><a href="<%=basePath%>frontHome/newsInfosDetails.do?id={{= data.id}}"><i class="ico"></i>{{= data.infoTitle}}</a></li>--%>
 	{{/each}}
 </script>

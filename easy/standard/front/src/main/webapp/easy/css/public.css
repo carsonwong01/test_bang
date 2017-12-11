@@ -15,9 +15,9 @@ fieldset,img{border:0;}
 a { text-decoration: none; color: #666; background: none }
 ul, ol { list-style: none; }
 :focus{ outline:none;}
-/*.clearfix{ clear: both; content: ""; display: block; overflow: hidden }*/
-.clearfix{    -moz-box-shadow: 0px 10px 20px #ebebeb;
-			box-shadow: 0px 10px 20px #ebebeb;}
+.clearfix{ clear: both; content: ""; display: block; overflow: hidden }
+/*.clearfix{    -moz-box-shadow: 0px 10px 20px #ebebeb;*/
+			/*box-shadow: 0px 10px 20px #ebebeb;}*/
 .clear{clear: both;}
 #clear1{height: 26px}
 .fl{ float: left; }

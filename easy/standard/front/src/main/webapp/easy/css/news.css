@@ -54,7 +54,7 @@
 	line-height: 50px;
 	height: 50px;
 	border-bottom: 1px solid #ececec;
-	font-size:14;
+	font-size:14px;
 }
 .donations>ul>li>i{
 	display: inline-block;
@@ -65,7 +65,7 @@
     -webkit-border-radius: 50px;
     border-radius: 50px;
     background: #999999;
-    margin-bottom: 1px;
+    margin-bottom: 20px;
     margin-right: 10px;
 }
 .donations>ul>li span{
@@ -75,7 +75,14 @@
 .donations>ul>li:hover i{
 	background: #00aaf6
 }
-.donations>ul>li a{}
+.donations>ul>li>a{
+	display:inline-block;
+	width:596px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size:14px;
+}
 .donations>ul>li:hover,.donations>ul>li:hover a,.donations>ul>li:hover span{
 	color: #00aaf6;
 }

@@ -1,8 +1,5 @@
 package com.dimeng.modules.bus.services.impl.base;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.table.project.TProjectInfo;
 import com.dimeng.enums.ProjectStatusEnum;
@@ -17,6 +14,9 @@ import com.dimeng.framework.utils.FrameworkConfigurer;
 import com.dimeng.util.QRCodeUtil;
 import com.dimeng.util.SerialNumberUtil;
 import com.dimeng.utils.SystemCache;
+
+import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * 基础业务实现
@@ -175,13 +175,14 @@ public class BaseCommonService extends UserCapitalCommonService
      * @param projectId
      * @return
      * @throws Exception
+     * .append("/?#index/index/projectDetails/")
      */
     public String getQRCodeAddr(String projectId)
         throws Exception
     {
         String content =
             (new StringBuilder()).append(SystemCache.getProperty(TrustVariables.WX_SERVICE_ADDR))
-                .append("/?#index/index/projectDetails/")
+                .append("/project/projectDetails.do?projectId=")
                 .append(projectId)
                 .toString();
         String destPath =

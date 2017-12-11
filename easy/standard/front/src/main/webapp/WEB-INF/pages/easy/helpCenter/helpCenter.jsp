@@ -1,9 +1,12 @@
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project-details.css">
 <div class="help-centerPage helpAndNewsPage">
 	<div class="layout">
-		<div class="locationBox">
-			所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>常见问题<span>&gt;</span><span
-				id="helpTitle"></span>
-		</div>
+		<%--<div class="locationBox">--%>
+			<%--所在位置：<a href="<%=basePath%>home/index.do">首页</a><span>&gt;</span>常见问题<span>&gt;</span><span--%>
+				<%--id="helpTitle"></span>--%>
+		<%--</div>--%>
+		<p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="#">常见问题<span class="arrow">&gt;</span></a><span id="helpTitle"></span></p>
+
 	</div>
 	<div class="layout clearfix minHeiBox">
 		<%@include file="/WEB-INF/pages/easy/helpCenter/leftMain.jsp"%>

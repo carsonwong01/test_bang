@@ -4,15 +4,31 @@
     var currUserId = "${currUser.userId}";//当前登录人ID
 </script>
 
+<%--<div class="p-detail-content">--%>
+	<%--<div class="">--%>
+		<%--<div class="">--%>
+			<%--<h2 class="p-til">${projectDetails.title}</h2>--%>
+			<%--<div class="p-headImg">--%>
+				<%--<img src="${projectDetails.coverImgUrl}" alt="" width="873"  height="423"><a--%>
+					<%--class="collection <c:if test="${projectDetails.isFocus eq 1}">active</c:if>"--%>
+					<%--onclick="projectDetails.collect(this,'${projectDetails.id}');"></a>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+	<%--</div>--%>
+<%--</div>--%>
+
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <div class='center'>
 	<div class='cent-nav'>
 		<p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
 		<%--<h2 class="p-til">${projectDetails.title}</h2>--%>
 		<div class='top-ns'>
-			<div class='fl img-b'><b></b><img src="${projectDetails.coverImgUrl}"></div>
+			<div class='fl img-b'><a class="collection <c:if test="${projectDetails.isFocus eq 1}">active</c:if>"
+									 onclick="projectDetails.collect(this,'${projectDetails.id}');"></a>
+				<img src="${projectDetails.coverImgUrl}">
+			</div>
 			<div class='fr frt-xq'>
-				<b></b>
+				<a></a>
 				<p class='pop-s'>已筹金额<span></br>${projectDetails.supportAmt}</span><span>&nbsp;元</span></p>
 				<div class='daohxi'>
 					<div><span class='fr'>捐款 <span>${projectDetails.supportTimes}</span>次</span><div class='clear'></div></div>
@@ -112,12 +128,12 @@
 				<p><i></i> <span>认证基金会</span></p>
 				<div class='xim-id'>
 					<%--<img src="images/cn19.png" class='fl'>--%>
-						<img src="<%=basePath%>easy/images/cn19.png" class='fl'>
-						<p class='fl'>
-							<a href=''>${projectDetails.foundationName}</a></br>
-							<span>捐助的所有款项由该基金会管理拨及付</span>
-						</p>
-						<div class='clear'></div>
+					<img src="<%=basePath%>easy/images/cn19.png" class='fl'>
+					<p class='fl'>
+						<a href=''>${projectDetails.foundationName}</a></br>
+						<span>捐助的所有款项由该基金会管理拨及付</span>
+					</p>
+					<div class='clear'></div>
 
 				</div>
 			</div>

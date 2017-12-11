@@ -48,7 +48,7 @@
 
 
 </div>
-
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/expend.css">
 <!-- 模板 -->
 <script id="homeContentTmpl" type="text/x-jquery-tmpl">
 	<%@include file="/WEB-INF/pages/easy/home/homePageBody.jsp" %>
