@@ -306,13 +306,13 @@
             }
         })
 
-//	var hospitalId=$('.ldr').attr('datr');
-        <%--var hospitalId=$("#hospitalId").val();--%>
-        <%--var _self=this;--%>
+	<%--var hospitalId=$('.ldr').attr('datr');--%>
+    <%--alert(hospitalId);--%>
+        <%--&lt;%&ndash;var _self=this;&ndash;%&gt;--%>
         <%--DM.ajax({--%>
             <%--type:'post',--%>
             <%--url:"<%=basePath %>hospital/hospitalProjectSumAjax.do",--%>
-            <%--data:{hospitalId:hospitalId},--%>
+            <%--data:{hospiId:hospitalId},--%>
             <%--success:function(data){--%>
 
 				<%--var data=data.pageResult;--%>
@@ -341,6 +341,7 @@
 
             <%--}--%>
         <%--});--%>
+
     }(jQuery));
 </script>
 

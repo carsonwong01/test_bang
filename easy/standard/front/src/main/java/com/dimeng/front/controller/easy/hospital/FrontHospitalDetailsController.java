@@ -62,14 +62,11 @@ public class FrontHospitalDetailsController extends BaseController
     @RequestMapping(value = "/hospitalProjectListAjax.do")
     public Object findHosProjectList(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> map = new HashMap<String, Object>();
-        req.setOpSource("1");
-        req.setMaxResults(9);
         //查找众筹中的项目，注释后是查找所有项目
         //req.setProjectStatus(ProjectStatusEnum.ZCZ.getDataBaseVal());
         String data =
                 new CommonUtil().callInterfaceMethod(req, "hospital/v/findHospitalProject", RequestMethod.POST, request);
         map.put("hospitalProjectList",CommonUtil.getJSONObject(data, null));
-        map.put("req", req);
         return map;
     }
 
@@ -92,12 +89,12 @@ public class FrontHospitalDetailsController extends BaseController
     @RequestMapping(value = "/hospitalProjectSumAjax.do")
     public Object findHosProjectSum(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> map = new HashMap<String, Object>();
-        req.setOpSource("1");
-        req.setMaxResults(10);
+//        req.setOpSource("1");
+//        req.setMaxResults(10);
         String data =
                 new CommonUtil().callInterfaceMethod(req, "hospital/v/findHosProjectSum", RequestMethod.POST, request);
         map.put("hosProjectSum",CommonUtil.getJSONObject(data, null));
-        map.put("req", req);
+//        map.put("req", req);
         return map;
     }
 

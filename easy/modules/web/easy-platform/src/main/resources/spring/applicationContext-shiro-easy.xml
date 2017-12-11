@@ -94,7 +94,7 @@
 				/home/frontInfo/v/findSiteInvestment = anon
 				/home/frontInfo/v/findHomeHosList = anon
 				/home/frontInfo/v/findPartnerList = anon
-
+				user/userManage/v/findInitiateProList = anon
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon
                  <!-- 分享 -->
