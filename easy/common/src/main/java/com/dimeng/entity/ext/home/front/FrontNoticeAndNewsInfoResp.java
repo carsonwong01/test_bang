@@ -11,6 +11,15 @@ public class FrontNoticeAndNewsInfoResp implements Serializable{
         private String investmentInfoType;
         private String infoContent;
         private String viewCount;
+        private String dateCreateDay;
+
+    public String getDateCreateDay() {
+        return dateCreateDay;
+    }
+
+    public void setDateCreateDay(String dateCreateDay) {
+        this.dateCreateDay = dateCreateDay;
+    }
 
     public String getViewCount() {
         return viewCount;
