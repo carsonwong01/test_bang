@@ -166,7 +166,7 @@
   	LEFT JOIN t_project_validation tpv on tpv.project_id = p.project_id
 	WHERE  ho.recommend_pc = 1  
 	ORDER BY ho.date_pc DESC
-	LIMIT 0,3
+	LIMIT 0,6
 	</select>
 
 	<!--首页医院列表-->

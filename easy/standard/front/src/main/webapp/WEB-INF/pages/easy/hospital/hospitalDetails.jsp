@@ -105,10 +105,7 @@
                         <%--<span><i></i></span>--%>
                         <%--</div>--%>
                         <%--</td>--%>
-                            <%--<c:if test="n.projectStatus == 1">--%>
-                                <%--<td class='tdse'>筹款中</td>--%>
-                            <%--</c:if>--%>
-                            <%----%>
+                        <%--<td class='tdse'>筹款中</td>--%>
                         <%--</tr>--%>
                         </tbody>
                     </table>
@@ -167,6 +164,7 @@
 <script type="text/javascript" src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $('#dao-t>p>span').each(function () {
@@ -311,10 +309,12 @@
                     tod += "<li>" +
                         "<img src='"+ n.coverImageUrl+"'>" +
                         "<div class='detailed'>" +
-                        "<p class='ti-ou'><a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'>" + n.projectName + "</a></p>" +
-                        "<p class='yi-b'><b  class='bba'></b><span>" + n.hospitalName + "</span><u></u> <span>"+ n.foundationName +"</span></p>" +
+                        "<p class='ti-ou' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +
+                        "<a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'>" + n.projectName + "</a></p>" +
+                        "<p class='yi-b' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +
+                        "<b  class='bba'></b><span>" + n.hospitalName + "</span><u></u> <span>"+ n.foundationName +"</span></p>" +
                         "<div class='dao-t'id='dao-t'>" +
-                        "<p class='dao-p'><span>" + n.rate + "%</span></p>" +
+                        "<p class='dao-p'><span>" + n.rate*100 + "%</span></p>" +
                         "</div>" +
                         "<ul class='ul-nus'>" +
                         "<li>目标金额（元）</br> <span>"+n.targetAmount +"</span></li>" +
@@ -345,7 +345,7 @@
                             "<td >"+ n.recipientRealName+"</td>" +
                             "<td><p>"+n.projectName+"</p></td>" +
                             "<td>" +
-                            "<div class='dao-he'>" +
+                            "<div class='dao-he' id='dao-he'>" +
                             " <p><span>"+n.targetAmount +"</span>元（<span class='baibi'>"+n.rate*100+"%</span>）／ <span>"+n.raisedAmount+"</span>	元</p>" +
                             "<span><i></i></span>" +
                             "</div>" +
@@ -361,6 +361,14 @@
         });
 
     }(jQuery));
+</script>
+<script type="text/javascript">
+    $(function(){
+        $('.dao-he .baibi').each(function () {
+            var withs = $(this).html();
+            $(this).parents('p').siblings('span').children('i').css('width', withs)
+        })
+    })
 </script>
 
 

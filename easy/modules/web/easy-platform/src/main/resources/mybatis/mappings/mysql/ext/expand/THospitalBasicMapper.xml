@@ -82,7 +82,7 @@
         found_time foundTime,
         IFNULL(t.allRaisedAmount,0) allRaisedAmount,  IFNULL(t.allSupprotTimes,0) allSupprotTimes,
         IFNULL(t.allTargetAmount,0) allTargetAmount,
-        IFNULL(LEFT(((allRaisedAmount / allTargetAmount)) ,4), 0.00 ) rate
+        IFNULL(LEFT(((allRaisedAmount / allTargetAmount)) ,4), 0)*100 rate
     FROM t_hospital_basic
     LEFT JOIN
       (SELECT
