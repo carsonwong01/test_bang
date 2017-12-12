@@ -15,17 +15,11 @@
 </script>
 <!--底部-->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.dimeng.entity.table.site.TSiteInfo" %>
-<%@page import="com.dimeng.utils.SystemCache" %>
-<%@page import="com.dimeng.constants.SystemConstant" %>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
-<%
-    TSiteInfo siteInfo = (TSiteInfo) SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO);
-%>
 <!--头部-->
-<form id="projecttype_form" action="<%=basePath%>user/project/projectStart.do">
-    <input type="hidden" id="projectType" name="projectType" value="1"/>
-</form>
+<%--<form id="projecttype_form" action="<%=basePath%>user/project/projectStart.do">--%>
+    <%--<input type="hidden" id="projectType" name="projectType" value="${1}"/>--%>
+<%--</form>--%>
 <header>
     <div class='header'>
         <a href="<%=basePath%>home/index.do" class='fl logo'><img src="<%=basePath%>easy/images/logo2.png"></a>
@@ -36,9 +30,9 @@
             <li><a href="<%=basePath%>home/aboutUs.do">关于我们</a></li>
             <li><a href="<%=basePath%>frontHome/newsInfos.do">新闻资讯</a></li>
             <%--<c:if test="${currUser.userName!=null}">--%>
-                <%--<c:if test="${currUser.userType == 1}">--%>
-                <%--<li class='login'><a href="#" onclick="$('#projecttype_form').submit();" class="ind">发起项目</a></li>--%>
-                <%--</c:if>--%>
+            <%--<c:if test="${currUser.userType == 1}">--%>
+            <%--<li class='login'><a href="#" onclick="$('#projecttype_form').submit();" class="ind">发起项目</a></li>--%>
+            <%--</c:if>--%>
             <%--</c:if>--%>
             <div class='clear'></div>
         </ul>
@@ -52,7 +46,8 @@
             <!--已登录-->
             <c:if test="${currUser.userName!=null}">
                 <c:if test="${currUser.userType == 1}">
-                    <a href="#" onclick="$('#projecttype_form').submit();" class="inc">发起项目</a>
+                    <a href="<%=basePath%>/user/project/projectStart.do?projectType=1" class="inc">发起项目</a>
+                    <%--<a href="#" onclick="$('#projecttype_form').submit();" class="inc">发起项目</a>--%>
                 </c:if>
                 <%--<li><a href="#" onclick="$('#projecttype_form').submit();" class="btn-public btn-w80 btn-blue">发起项目</a></li>--%>
                 <a href="<%=basePath %>user/userCenter.do?to=wdzc" class='inc'>个人中心</a>

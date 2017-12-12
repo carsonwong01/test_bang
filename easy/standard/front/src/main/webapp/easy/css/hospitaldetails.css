@@ -1,3 +1,5 @@
+.collection{position: absolute;cursor: pointer;right: 0;top: 0;width: 40px;height: 40px;background: url('../images/p_detail_icon.png') no-repeat;}
+
 .center{
 	background: #f7f7f7;
 }

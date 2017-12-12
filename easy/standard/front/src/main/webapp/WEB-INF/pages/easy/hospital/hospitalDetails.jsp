@@ -17,7 +17,9 @@
 		<p	class='nav-po'><a href="<%=basePath %>home/index.do">首页&nbsp;>&nbsp;</a>
 			<a href="<%=basePath %>hospital/hospitalList.do">医院&nbsp;>&nbsp;</a><span>医院详情</span></p>
 		<div class='top-ns'>
-			<div class='fl img-b'><b></b><img src="${hospitalDetails.logoUrl}"></div>
+			<div class='fl img-b'><a class="collection <c:if test="${projectDetails.isFocus eq 1}">active</c:if>"
+									 onclick="projectDetails.collect(this,'${projectDetails.id}');"></a>
+				<img src="${hospitalDetails.logoUrl}"></div>
 			<div class='fr frt-xq'>
 				<p class='pop-s'>${hospitalDetails.hospitalName} <span>${hospitalDetails.hospitalGrade}</span><span>${hospitalDetails.hospitalType}</span></p>
 				<div class='daohxi'>

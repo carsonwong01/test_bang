@@ -3,20 +3,6 @@
 <script type="text/javascript">
     var currUserId = "${currUser.userId}";//当前登录人ID
 </script>
-
-<%--<div class="p-detail-content">--%>
-	<%--<div class="">--%>
-		<%--<div class="">--%>
-			<%--<h2 class="p-til">${projectDetails.title}</h2>--%>
-			<%--<div class="p-headImg">--%>
-				<%--<img src="${projectDetails.coverImgUrl}" alt="" width="873"  height="423"><a--%>
-					<%--class="collection <c:if test="${projectDetails.isFocus eq 1}">active</c:if>"--%>
-					<%--onclick="projectDetails.collect(this,'${projectDetails.id}');"></a>--%>
-			<%--</div>--%>
-		<%--</div>--%>
-	<%--</div>--%>
-<%--</div>--%>
-
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <div class='center'>
 	<div class='cent-nav'>
