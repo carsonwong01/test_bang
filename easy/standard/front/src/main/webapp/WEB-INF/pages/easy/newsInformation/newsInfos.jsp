@@ -11,7 +11,7 @@
 	<div></div>
 </div>
 <!--主体内容-->
-<div class="help-centerPage newsInfoPage helpAndNewsPage">
+<div class="newsInfoPage helpAndNewsPage">
 	<input id="infoType" type="hidden" value="${infoType}">
 	<form id="dataForm">
 		<input type="hidden" name="investmentInfoType"

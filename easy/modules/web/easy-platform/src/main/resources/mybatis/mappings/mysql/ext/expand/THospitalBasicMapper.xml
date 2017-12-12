@@ -100,40 +100,40 @@
     </choose>
   </select>
 
-  <!--根据医院查找项目-->
-  <select id="findHospitalProject" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
-          parameterType="com.dimeng.model.expand.HospitalBasicReq">
-      SELECT DISTINCT
-      thb.hospital_id hospitalId, thb.hospital_name hospitalName,
-      (
-      SELECT COUNT(tos.order_id) FROM t_order_support tos
-      WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
-      ) supportTimes,
-      tpi.project_id projectId,
-      tpi.project_name projectName,
-      floor(tpi.target_amount) targetAmount,
-      tpi.project_type,
-      floor(tpi.raised_amount) raisedAmount,
-      datediff(tpi.date_raised_end, now()) remainingDay,
-      tpv.foundation_name foundationName,
-      tpi.project_status projectStatus,
-      tpi.cover_image_url coverImageUrl,
-      tpi.date_create dateCreate,
-      IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
-      (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
-    FROM t_project_info tpi
-    INNER JOIN t_project_info on tpi.project_status = '1'
-    LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
-    LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
-    WHERE 1=1
-    <choose>
-      <when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
-      <otherwise>and thb.hospital_id=''</otherwise>
-    </choose>
-    ORDER BY tpi.date_update DESC
-  </select>
+  <!--&lt;!&ndash;根据医院查找项目&ndash;&gt;-->
+  <!--<select id="findHospitalProject" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"-->
+          <!--parameterType="com.dimeng.model.expand.HospitalBasicReq">-->
+      <!--SELECT DISTINCT-->
+      <!--thb.hospital_id hospitalId, thb.hospital_name hospitalName,-->
+      <!--(-->
+      <!--SELECT COUNT(tos.order_id) FROM t_order_support tos-->
+      <!--WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id-->
+      <!--) supportTimes,-->
+      <!--tpi.project_id projectId,-->
+      <!--tpi.project_name projectName,-->
+      <!--floor(tpi.target_amount) targetAmount,-->
+      <!--tpi.project_type,-->
+      <!--floor(tpi.raised_amount) raisedAmount,-->
+      <!--datediff(tpi.date_raised_end, now()) remainingDay,-->
+      <!--tpv.foundation_name foundationName,-->
+      <!--tpi.project_status projectStatus,-->
+      <!--tpi.cover_image_url coverImageUrl,-->
+      <!--tpi.date_create dateCreate,-->
+      <!--IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,-->
+      <!--(SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName-->
+    <!--FROM t_project_info tpi-->
+    <!--INNER JOIN t_project_info on tpi.project_status = '1'-->
+    <!--LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id-->
+    <!--LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id-->
+    <!--WHERE 1=1-->
+    <!--<choose>-->
+      <!--<when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>-->
+      <!--<otherwise>and thb.hospital_id=''</otherwise>-->
+    <!--</choose>-->
+    <!--ORDER BY tpi.date_update DESC-->
+  <!--</select>-->
 
-  <!--项目进度-->
+  <!--根据医院查询项目信息和进度-->
   <select id="findHosProjectSum" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
           parameterType="com.dimeng.model.expand.HospitalBasicReq">
    SELECT DISTINCT
@@ -150,11 +150,11 @@
       datediff(tpi.date_raised_end, now()) remainingDay,
       tpv.foundation_name foundationName,
       tpi.project_status projectStatus,
-      tpi.date_create dateCreate,
+      DATE_FORMAT(tpi.date_create,'%Y-%m-%d') dateCreate,
+      tpi.cover_image_url coverImageUrl,
       IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
       (SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
     FROM t_project_info tpi
-    INNER JOIN t_project_info on tpi.project_status = '1'
     LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
     LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
     WHERE 1=1
@@ -162,8 +162,8 @@
           <when test="hospitalId != null and hospitalId != ''">and thb.hospital_id=#{hospitalId,jdbcType=VARCHAR}</when>
           <otherwise>and thb.hospital_id=''</otherwise>
       </choose>
-    ORDER BY tpi.date_update DESC
-  </select>
+    ORDER BY tpi.project_status,tpi.date_update DESC
+</select>
 
 </mapper>
 
