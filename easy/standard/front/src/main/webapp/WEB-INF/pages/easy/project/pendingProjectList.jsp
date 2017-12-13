@@ -9,7 +9,7 @@
             <%--<div class='clear'></div>--%>
         </div>
         <div class='clear'></div>
-        <%--<div class="paging" id="paging"></div>--%>
+        <div class="paging" id="paging"></div>
 
 <script id="pendingProjectListTemp" type="text/x-jquery-tmpl">
     {{each(i,data) pageResult.list}}

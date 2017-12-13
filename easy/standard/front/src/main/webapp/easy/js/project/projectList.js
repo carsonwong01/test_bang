@@ -24,6 +24,19 @@ var projectList = DM.Controller.sub({
                 $("#projectListD").empty();
 				// 填充数据
 				$('#projectListTemp').tmpl(data.projectList).appendTo("#projectListD");
+                if (data.projectList.pageResult.hasNextPage == false) {
+					// 初始化分页标签
+                    DM.PageTags.init({
+                        "divId" : "paging",
+                        "formId" : "projectListForm",
+                        "curPage" : data.projectList.pageResult.pageIndex,
+                        "totalCount" : data.projectList.pageResult.recordCount,
+                        "pageCount" : data.projectList.pageResult.pageTotal,
+                        "url" : basePath+"project/projectListAjax.do",
+                        "toPageCallBack" : arguments.callee
+                    });
+                }
+
 			},
 		});
 

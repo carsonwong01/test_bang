@@ -64,6 +64,12 @@
          WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
          FROM t_project_info tpi GROUP BY project_creator_id) t
       ON t.proCreatorId = t_hospital_basic.hospital_id
+
+      where 1 = 1
+      <if test="hospitalName != null and hospitalName != ''">
+          and t_hospital_basic.hospital_name LIKE CONCAT
+          ('%',trim(#{hospitalName,jdbcType=VARCHAR}),'%')
+      </if>
   </select>
 <!--根据ID查找医院详细信息-->
   <select id="findHospitalDetails" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"

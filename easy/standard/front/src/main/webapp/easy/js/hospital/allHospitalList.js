@@ -26,15 +26,17 @@ var hospitalList = DM.Controller.sub({
         $('#hospitalListTemp').tmpl(data.hospitalList).appendTo("#hospitalListD");
         DM.Event.formatChar();
         // 初始化分页标签
-        DM.PageTags.init({
-            "divId" : "paging",
-            "formId" : "hospitalListForm",
-            "curPage" : data.hospitalList.pageResult.pageIndex,
-            "totalCount" : data.hospitalList.pageResult.recordCount,
-            "pageCount" : data.hospitalList.pageResult.pageTotal,
-            "url" : basePath+"hospital/hospitalListAjax.do",
-            "toPageCallBack" : arguments.callee
-        });
+        if (data.hospitalList.pageResult.recordCount == true) {
+            DM.PageTags.init({
+                "divId" : "paging",
+                "formId" : "hospitalListForm",
+                "curPage" : data.hospitalList.pageResult.pageIndex,
+                "totalCount" : data.hospitalList.pageResult.recordCount,
+                "pageCount" : data.hospitalList.pageResult.pageTotal,
+                "url" : basePath+"hospital/hospitalListAjax.do",
+                "toPageCallBack" : arguments.callee
+            });
+        }
     },
     // 进入项目详情页
     goHospitalDetails:function(projectId){

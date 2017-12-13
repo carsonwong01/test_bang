@@ -16,8 +16,11 @@
     <!-- 本周推荐 -->
     <div class='men-ded'>
         <div class='top-io'>
-            <input type="text" placeholder="搜医院">
-            <button type="submit"></button>
+            <ul class='top-io'>
+            <input type="text" id="ldr" name="hospitalName" value="" placeholder="搜医院"/>
+            <%--<li><div class="item-box"><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick="hospitalList.loadRecord();"><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></div></li>--%>
+            <button onclick="hospitalList.loadRecord();"></button>
+            </ul>
         </div>
         <div class='fl fl-cen'>
             <ul id="hospitalListD">
@@ -82,12 +85,73 @@
 </li>
 {{/each}}
 </script>
-<script type="text/javascript" src="<%=basePath %>easy/js/hospital/allHospitalList.js"></script>
+<%--<script type="text/javascript" src="<%=basePath %>easy/js/hospital/allHospitalList.js"></script>--%>
 
 <script type="text/javascript"
         src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
+<script type="text/javascript">
+    /**
+     * 前台-项目列表
+     */
+    var hospitalList = DM.Controller.sub({
+        init : function() {
+        },
+        /*
+         * 项目列表
+         */
+        loadRecord : function() {
+            var hospitalName = $('#ldr').attr('value');
+//            alert(hospitalName);
+            // 查询数据
+            DM.ajax({
+                "formId" : "hospitalListForm",
+                "serialize" : true,
+                "url" : "hospital/hospitalListAjax.do",
+                "data":{hospitalName:hospitalName},
+                "success" : this.pageCallBack
+            });
+        },
+        /*
+         * 分页回调
+         */
+        pageCallBack : function(data) {
+            var _self = this;
+            // 清空表格数据
+            $("#hospitalListD").empty();
+            // 填充数据
+            $('#hospitalListTemp').tmpl(data.hospitalList).appendTo("#hospitalListD");
+            DM.Event.formatChar();
+            // 初始化分页标签
+            DM.PageTags.init({
+                "divId" : "paging",
+                "formId" : "hospitalListForm",
+                "curPage" : data.hospitalList.pageResult.pageIndex,
+                "totalCount" : data.hospitalList.pageResult.recordCount,
+                "pageCount" : data.hospitalList.pageResult.pageTotal,
+                "url" : basePath+"hospital/hospitalListAjax.do",
+                "toPageCallBack" : function(data) { // 返回函数
+                    _self.pageCallBack(data.data);
+                }
+            });
+        },
+        // 进入项目详情页
+        goHospitalDetails:function(projectId){
+            //跳转项目详情
+            window.location.href = basePath+"project/projectDetails.do?projectId=" + projectId;
+        },
+    });
+
+    //实例化控制器
+    var hospitalList = new hospitalList();
+    // 页面加载时调用
+    DM.Page.ready({
+        "监控" : function() {
+            hospitalList.loadRecord();
+        }
+    });
+</script>
 <script type="text/javascript">
     $(function(){
         /*var withs=$('#dao-t>p>span').html();

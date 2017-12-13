@@ -39,7 +39,7 @@
 					<div class="paging" id="pagingNews"></div>
 					<!--分页  --END-->
 				</div>
-				<div id='progress'>企业SKR</div>
+				<%--<div id='progress'>企业SKR</div>--%>
 			</div>
 		</div>
 		<div class='fr ft-na'>
