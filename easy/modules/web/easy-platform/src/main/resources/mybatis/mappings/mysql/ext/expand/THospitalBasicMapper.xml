@@ -63,7 +63,9 @@
          sum((SELECT COUNT(tos.order_id) FROM t_order_support tos
          WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
          FROM t_project_info tpi
+         LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
          WHERE tpi.project_status != '4' AND tpi.shield_status != '1'
+         AND tpv.validation_type = '4'
       GROUP BY project_creator_id) t
       ON t.proCreatorId = t_hospital_basic.hospital_id
 
@@ -101,7 +103,9 @@
       sum((SELECT COUNT(tos.order_id) FROM t_order_support tos
       WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id)) allSupprotTimes
       FROM t_project_info tpi
+      LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
       WHERE tpi.project_status != '4' AND tpi.shield_status != '1'
+      AND tpv.validation_type = '4'
       GROUP BY project_creator_id) t
     ON t.proCreatorId = t_hospital_basic.hospital_id
     where 1=1

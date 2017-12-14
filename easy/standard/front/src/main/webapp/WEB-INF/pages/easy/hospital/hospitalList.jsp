@@ -125,9 +125,10 @@
         success: function (data) {
         $('.modil').css('display','block');
         $('#spl0').text(data.hospitalLink.singleResult.hospitalName);
-        $('#spl1').text(data.hospitalLink.singleResult.hospitalMail);
-         $('#spl2').text(data.hospitalLink.singleResult.officeTel);
-         $('#spl3').text(data.hospitalLink.singleResult.city);
+        $('#spl1').text(data.hospitalLink.singleResult.officeTel);
+         $('#spl2').text(data.hospitalLink.singleResult.hospitalMail);
+         $('#spl3').text(data.hospitalLink.singleResult.province).append(data.hospitalLink.singleResult.city)
+                .append(data.hospitalLink.singleResult.county).append(data.hospitalLink.singleResult.addr);
         }
         });
     }
