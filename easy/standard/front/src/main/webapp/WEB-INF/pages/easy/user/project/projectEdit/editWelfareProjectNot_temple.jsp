@@ -77,11 +77,11 @@ var file = {};
 					<input type="hidden" id="coverImageId" validate="q" info="q:请至少上传一张图片" name="coverImageId" value="${projectDetail.coverImageId}">
 					<input type="hidden" id="coverImageUrl" name="coverImageUrl" value="${projectDetail.coverImgUrl}">
 					<p class="tips">
-						<c:if test="${projectDetail.type eq '1'}">大病救助项目，建议上传患者治疗中的照片、患者患病前后生活照对比、医院诊断证明等照片，提高项目可信度。建议图片尺寸大小870px * 420px。</c:if>
-						<c:if test="${projectDetail.type eq '2'}">灾难救助项目，建议上传受灾情况照片和受灾证明图片，提高项目可信度。建议图片尺寸大小870px * 420px。</c:if>
-						<c:if test="${projectDetail.type eq '3'}">动物保护项目，建议上传动物拍照，提高项目可信度。建议图片尺寸大小870px * 420px。</c:if>
-						<c:if test="${projectDetail.type eq '4'}">扶贫助学项目，建议上传家庭经济情况、财产证明和贫穷状况等照片，提高项目可信度。建议图片尺寸大小870px * 420px。</c:if>
-						<c:if test="${projectDetail.type eq '5'}">其他救助项目，建议上传患者治疗中的照片、患者患病前后生活照对比、医院诊断证明等照片，提高项目可信度。建议图片尺寸大小870px * 420px。</c:if>
+						<c:if test="${projectDetail.type eq '1'}">大病救助项目，建议上传患者治疗中的照片、患者患病前后生活照对比、医院诊断证明等照片，提高项目可信度。建议图片尺寸大小640px * 360px。</c:if>
+						<c:if test="${projectDetail.type eq '2'}">灾难救助项目，建议上传受灾情况照片和受灾证明图片，提高项目可信度。建议图片尺寸大小640px * 360px。</c:if>
+						<c:if test="${projectDetail.type eq '3'}">动物保护项目，建议上传动物拍照，提高项目可信度。建议图片尺寸大小640px * 360px。</c:if>
+						<c:if test="${projectDetail.type eq '4'}">扶贫助学项目，建议上传家庭经济情况、财产证明和贫穷状况等照片，提高项目可信度。建议图片尺寸大小640px * 360px。</c:if>
+						<c:if test="${projectDetail.type eq '5'}">其他救助项目，建议上传患者治疗中的照片、患者患病前后生活照对比、医院诊断证明等照片，提高项目可信度。建议图片尺寸大小640px * 360pxpx。</c:if>
 					</p>
 				</dd>
 			</dl>

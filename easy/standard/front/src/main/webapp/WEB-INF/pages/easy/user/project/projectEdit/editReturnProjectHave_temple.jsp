@@ -138,7 +138,7 @@
 				<ul id="returnImageUl" class="addCover pic_delete clearfix">
 				  <li class="fileListAfter addto""><a id="returnFilePicker" class="addCoverIcon"><i class="ico_add"></i><p>添加图片<br>(只限1张)</p></a></li>
 				</ul>
-				<p class="gray9">请上传清晰的产品图片，建议图片尺寸大小870px * 420px。</p>
+				<p class="gray9">请上传清晰的产品图片，建议图片尺寸大小640px * 360px。</p>
 				<p class="prompt" id="returnImageMsg"></p>
 			</div>
 		</li>          

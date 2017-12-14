@@ -116,7 +116,7 @@ var fileTemp = {};
 					<p class="prompt" id="coverImageIdMsg"></p>
 					<input type="hidden" id="coverImageId" validate="q" info="q:请至少上传一张图片" name="coverImageId" value="${projectDetail.coverImageId}">
 					<input type="hidden" id="coverImageUrl" name="coverImageUrl" value="${projectDetail.coverImgUrl}">
-					<p class="tips">请上传清晰的产品图片，建议图片尺寸大小870px * 420px。</p>
+					<p class="tips">请上传清晰的产品图片，建议图片尺寸大小640px * 360px。</p>
 				</dd>
 			</dl>
 		</div>
@@ -219,7 +219,7 @@ var fileTemp = {};
 				<ul id="returnImageUl" class="addCover pic_delete clearfix">
 				  <li class="fileListAfter addto""><a id="returnFilePicker" class="addCoverIcon"><i class="ico_add"></i><p>添加图片<br>(只限1张)</p></a></li>
 				</ul>
-				<p class="gray9">请上传清晰的产品图片，建议图片尺寸大小870px * 420px。</p>
+				<p class="gray9">请上传清晰的产品图片，建议图片尺寸大小640px * 360px。</p>
 				<p class="prompt" id="returnImageMsg"></p>
 			</div>
 		</li>          
