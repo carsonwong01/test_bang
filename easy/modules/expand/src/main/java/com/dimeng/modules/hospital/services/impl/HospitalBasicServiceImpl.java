@@ -64,6 +64,22 @@ public class HospitalBasicServiceImpl extends BaseServiceImpl implements IHospit
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
+    //医院弹窗显示联系方式
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp getLinkMethod(HospitalBasicReq req) throws Exception {
+        QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
+        event.setStatement("findLinkMethod");
+        event.setObj(req);
+        FindAllHospitalResp findLinkMethod = (FindAllHospitalResp)baseDao.findOneByCustom(event);
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT,findLinkMethod);
+
+        BaseDataResp resp = new BaseDataResp();
+        resp.setData(map);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
 }
         /*
         //查询附件

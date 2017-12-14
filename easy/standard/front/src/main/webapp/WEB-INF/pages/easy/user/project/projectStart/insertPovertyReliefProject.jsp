@@ -56,7 +56,7 @@
 						<p class="prompt" id="coverImageIdMsg"></p>
 						<input type="hidden" id="coverImageId" validate="q" info="q:请至少上传一张图片" name="coverImageId">
 						<input type="hidden" id="coverImageUrl" name="coverImageUrl">
-						<p class="tips">扶贫助学项目，建议上传家庭经济情况、财产证明和贫穷状况等照片，提高项目可信度。建议图片尺寸大小<br>870px * 420px。</p>
+						<p class="tips">扶贫助学项目，建议上传家庭经济情况、财产证明和贫穷状况等照片，提高项目可信度。建议图片尺寸大小<br>640px * 360x。</p>
 					</dd>
 				</dl>
 			</div>

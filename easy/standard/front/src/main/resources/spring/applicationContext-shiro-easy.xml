@@ -57,6 +57,9 @@
 				/hospital/** = anon
 				<!-- 第三方回调地址 -->
 				/thirdCallback/callback.do = anon
+
+				/MP_verify_9gG5rWsB0zCedtxb.txt = anon
+
 				/**/* = authc
 			</value>
 		</property>

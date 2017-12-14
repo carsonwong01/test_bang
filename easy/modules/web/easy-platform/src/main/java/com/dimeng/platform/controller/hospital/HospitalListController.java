@@ -46,6 +46,10 @@ public class HospitalListController extends BaseController
         }
         return hospitalBasicService.findHospitalList(httpEntity.getBody());
     }
+
+    /**
+     * 医院详情
+     */
     @RequestMapping(value = "/{v}/hospitalDetails",method = RequestMethod.POST,
             produces = {"application/json", "application/xml"})
     @ResponseBody
@@ -57,6 +61,21 @@ public class HospitalListController extends BaseController
             return resp;
         }
         return hospitalBasicService.getHospitalDetails(httpEntity.getBody());
+    }
+    /**
+     * 医院联系方式--弹窗
+     */
+    @RequestMapping(value = "/{v}/linkMethod",method = RequestMethod.POST,
+            produces = {"application/json", "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object getLinkMethod(HttpEntity<HospitalBasicReq> httpEntity, HttpServletRequest request)throws Exception{
+        BaseDataResp resp = this.validator(httpEntity);
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        return hospitalBasicService.getLinkMethod(httpEntity.getBody());
     }
 }
 

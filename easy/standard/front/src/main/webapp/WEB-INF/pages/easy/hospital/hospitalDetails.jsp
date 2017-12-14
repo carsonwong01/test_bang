@@ -115,7 +115,7 @@
         <div class='fr fr-nav'>
             <div class='loing'>
                 <p>&nbsp;&nbsp;“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长
-                    ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...<a href="<%=basePath %>/home/index.do"
+                    ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...<a href="<%=basePath %>/home/aboutUs.do"
                                                                              class='fr'>详细</a></p>
                 <!-- 登录前 -->
                 <c:if test="${currUser.userName==null}">
@@ -307,12 +307,13 @@
                 var boy = '';
                 $.each(data, function (i, n) {
                     tod += "<li>" +
-                        "<img src='"+ n.coverImageUrl+"'>" +
+                        "<img src='"+ n.coverImageUrl+"'" +
+                        "onclick=\"location.href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'\"  >" +
                         "<div class='detailed'>" +
                         "<p class='ti-ou' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +
                         "<a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'>" + n.projectName + "</a></p>" +
                         "<p class='yi-b' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +
-                        "<b  class='bba'></b><span>" + n.hospitalName + "</span><u></u> <span>"+ n.foundationName +"</span></p>" +
+                        "<b  class='bba'></b><span>" + n.hospitalName + "</span><u></u> <span>"+ (n.foundationName?n.foundationName:'') +"</span></p>" +
                         "<div class='dao-t'id='dao-t'>" +
                         "<p class='dao-p'><span>" + n.rate*100 + "%</span></p>" +
                         "</div>" +
@@ -322,13 +323,13 @@
                         "<li>捐助人次（次）</br> <span>"+n.supportTimes+"</span></li>" +
                         "<div class='clear'></div>" +
                         " </ul>" +
-                        " <p class='but-ab'><a href=''>我要捐款</a></p>" +
+                        " <p class='but-ab'><a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'>我要捐款</a></p>" +
                         "</div>" +
                         " </li>";
                     if(n.projectStatus==1){
                         bady += "<tr>" +
                             "<td >"+ n.dateCreate +"</td>" +
-                            "<td >"+ n.recipientRealName+"</td>" +
+                            "<td >"+(n.recipientRealName?n.recipientRealName:'')+"</td>" +
                             "<td><p>"+n.projectName+"</p></td>" +
                             "<td>" +
                             "<div class='dao-he'>" +

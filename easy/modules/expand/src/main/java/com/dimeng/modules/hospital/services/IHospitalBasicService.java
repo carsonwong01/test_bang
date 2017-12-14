@@ -16,4 +16,9 @@ public interface IHospitalBasicService {
      */
     BaseDataResp getHospitalDetails(HospitalBasicReq req)
             throws Exception;
+    /**
+     * 弹窗显示医院联系方式
+     */
+    BaseDataResp getLinkMethod(HospitalBasicReq req)
+            throws Exception;
 }

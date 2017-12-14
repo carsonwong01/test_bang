@@ -64,6 +64,23 @@
     </div>
 </div>
 
+
+<%--<!-- 弹出框 -->--%>
+<%--<div class='modil'>--%>
+    <%--<div class='banr'>--%>
+        <%--<div class='cantion'>--%>
+            <%--<p class='top-ht'><b></b><span id="'spl0"></span></p>--%>
+            <%--<div class='txt-diz'>--%>
+                <%--<p>请联系本医院办公室获取求助</p>--%>
+                <%--<p><span>医院联系电话：</span><span id="'spl1"></span></p>--%>
+                <%--<p><span>医院联系邮箱：</span><span id="'spl2"></span></p>--%>
+                <%--<p><span>医院联系地址：</span><span id="'spl3"></span></p>--%>
+            <%--</div>--%>
+            <%--<div class='but'><a href="#">确定</a></div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
 <script id="hospitalListTemp" type="text/x-jquery-tmpl">
 {{each(i,data) pageResult.list}}
 <li>
@@ -79,153 +96,182 @@
         <p>已筹金额：<span>{{= data.allRaisedAmount}}</span>元</p>
         <p>目标金额：<span>{{= allTargetAmount}}</span>元</p>
         <p>捐款人次：<span>{{= data.allSupprotTimes}}</span>次</p>
-        <div class='wyjkjz'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">我要捐款</a><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">我要求助</a></div>
+        <div class='wyjkjz'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">我要捐款</a>
+        <a data="{{= data.hospitalId}}"href="javascript:void(0);" class='abut' onclick="js_method(this)">我要求助</a></div>
+        <%--<input type="button" name="button" value="我要求助" onclick="javasript:window.open('<%=basePath %>hospital/hospitalLink.do?hospitalId={{= data.hospitalId}}')">--%>
     </div>
     <div class='clear'></div>
 </li>
 {{/each}}
 </script>
-<%--<script type="text/javascript" src="<%=basePath %>easy/js/hospital/allHospitalList.js"></script>--%>
+<script type="text/javascript" src="<%=basePath %>easy/js/hospital/allHospitalList.js"></script>
 
 <script type="text/javascript"
         src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
-<script type="text/javascript">
-    /**
-     * 前台-项目列表
-     */
-    var hospitalList = DM.Controller.sub({
-        init : function() {
-        },
-        /*
-         * 项目列表
-         */
-        loadRecord : function() {
-            var hospitalName = $('#ldr').attr('value');
-//            alert(hospitalName);
-            // 查询数据
-            DM.ajax({
-                "formId" : "hospitalListForm",
-                "serialize" : true,
-                "url" : "hospital/hospitalListAjax.do",
-                "data":{hospitalName:hospitalName},
-                "success" : this.pageCallBack
-            });
-        },
-        /*
-         * 分页回调
-         */
-        pageCallBack : function(data) {
-            var _self = this;
-            // 清空表格数据
-            $("#hospitalListD").empty();
-            // 填充数据
-            $('#hospitalListTemp').tmpl(data.hospitalList).appendTo("#hospitalListD");
-            DM.Event.formatChar();
-            // 初始化分页标签
-            DM.PageTags.init({
-                "divId" : "paging",
-                "formId" : "hospitalListForm",
-                "curPage" : data.hospitalList.pageResult.pageIndex,
-                "totalCount" : data.hospitalList.pageResult.recordCount,
-                "pageCount" : data.hospitalList.pageResult.pageTotal,
-                "url" : basePath+"hospital/hospitalListAjax.do",
-                "toPageCallBack" : function(data) { // 返回函数
-                    _self.pageCallBack(data.data);
-                }
-            });
-        },
-        // 进入项目详情页
-        goHospitalDetails:function(projectId){
-            //跳转项目详情
-            window.location.href = basePath+"project/projectDetails.do?projectId=" + projectId;
-        },
-    });
 
-    //实例化控制器
-    var hospitalList = new hospitalList();
-    // 页面加载时调用
-    DM.Page.ready({
-        "监控" : function() {
-            hospitalList.loadRecord();
+<%--
+<script type="text/javascript">
+    $('.top-ht>b,.but>a').click(function(){
+        $('.modil').css('display','none')
+    })
+    function js_method(a){
+        var hospitalId=$(a).attr("data");
+        console.log(hospitalId)
+        DM.ajax({
+        type: 'post',
+        url: "<%=basePath %>hospital/hospitalLink.do",
+        data: {hospitalId: hospitalId},
+        success: function (data) {
+//        alert(data)
+        $('.modil').css('display','block');
+        $('#spl0').text();
+        $('#spl1').text();
+         $('#spl2').text();
+         $('#spl3').text();
         }
-    });
+        });
+    }
 </script>
-<script type="text/javascript">
-    $(function(){
-        /*var withs=$('#dao-t>p>span').html();
-        $('#dao-t>p').css('width',withs);
-        if(parseInt(withs)<10){
-            $('#dao-t>p>span').css('left',0)
-        }*/
-        $('#dao-t>p>span').each(function(){
-            var withs=$(this).html();
-            $(this).parents('p').css('width',withs)
-            if(parseInt(withs)<10){
-                $(this).css('left',0)
-            }
-        })
-    })
-    /*分页*/
-    var newlist = new Vue({
-        el: '#app',
-        data: {
-            current_page: 1, //当前页
-            pages: 50, //总页数
-            changePage:'',//跳转页
-            nowIndex:0
-        },
-        computed:{
-            show:function(){
-                return this.pages && this.pages !=1
-            },
-            pstart: function() {
-                return this.current_page == 1;
-            },
-            pend: function() {
-                return this.current_page == this.pages;
-            },
-            efont: function() {
-                if (this.pages <= 7) return false;
-                return this.current_page > 5
-            },
-            ebehind: function() {
-                if (this.pages <= 7) return false;
-                var nowAy = this.indexs;
-                return nowAy[nowAy.length - 1] != this.pages;
-            },
-            indexs: function() {
-                var left = 1,
-                    right = this.pages,
-                    ar = [];
-                if (this.pages >= 7) {
-                    if (this.current_page > 5 && this.current_page < this.pages - 4) {
-                        left = Number(this.current_page) - 3;
-                        right = Number(this.current_page) + 3;
-                    } else {
-                        if (this.current_page <= 5) {
-                            left = 1;
-                            right = 7;
-                        } else {
-                            right = this.pages;
+--%>
 
-                            left = this.pages - 6;
-                        }
-                    }
-                }
-                while (left <= right) {
-                    ar.push(left);
-                    left++;
-                }
-                return ar;
-            },
-        },
-        methods: {
-            jumpPage: function(id) {
-                this.current_page = id;
-            },
-        },
-    })
-</script>
+
+<%--<script type="text/javascript">--%>
+    <%--/**--%>
+     <%--* 前台-项目列表--%>
+     <%--*/--%>
+    <%--var hospitalList = DM.Controller.sub({--%>
+        <%--init : function() {--%>
+        <%--},--%>
+        <%--/*--%>
+         <%--* 项目列表--%>
+         <%--*/--%>
+        <%--loadRecord : function() {--%>
+            <%--var hospitalName = $('#ldr').attr('value');--%>
+<%--//            alert(hospitalName);--%>
+            <%--// 查询数据--%>
+            <%--DM.ajax({--%>
+                <%--"formId" : "hospitalListForm",--%>
+                <%--"serialize" : true,--%>
+                <%--"url" : "hospital/hospitalListAjax.do",--%>
+                <%--"data":{hospitalName:hospitalName},--%>
+                <%--"success" : this.pageCallBack--%>
+            <%--});--%>
+        <%--},--%>
+        <%--/*--%>
+         <%--* 分页回调--%>
+         <%--*/--%>
+        <%--pageCallBack : function(data) {--%>
+            <%--var _self = this;--%>
+            <%--// 清空表格数据--%>
+            <%--$("#hospitalListD").empty();--%>
+            <%--// 填充数据--%>
+            <%--$('#hospitalListTemp').tmpl(data.hospitalList).appendTo("#hospitalListD");--%>
+            <%--DM.Event.formatChar();--%>
+            <%--// 初始化分页标签--%>
+            <%--DM.PageTags.init({--%>
+                <%--"divId" : "paging",--%>
+                <%--"formId" : "hospitalListForm",--%>
+                <%--"curPage" : data.hospitalList.pageResult.pageIndex,--%>
+                <%--"totalCount" : data.hospitalList.pageResult.recordCount,--%>
+                <%--"pageCount" : data.hospitalList.pageResult.pageTotal,--%>
+                <%--"url" : basePath+"hospital/hospitalListAjax.do",--%>
+                <%--"toPageCallBack" : function(data) { // 返回函数--%>
+                    <%--_self.pageCallBack(data.data);--%>
+                <%--}--%>
+            <%--});--%>
+        <%--},--%>
+        <%--// 进入项目详情页--%>
+        <%--goHospitalDetails:function(projectId){--%>
+            <%--//跳转项目详情--%>
+            <%--window.location.href = basePath+"project/projectDetails.do?projectId=" + projectId;--%>
+        <%--},--%>
+    <%--});--%>
+
+    <%--//实例化控制器--%>
+    <%--var hospitalList = new hospitalList();--%>
+    <%--// 页面加载时调用--%>
+    <%--DM.Page.ready({--%>
+        <%--"监控" : function() {--%>
+            <%--hospitalList.loadRecord();--%>
+        <%--}--%>
+    <%--});--%>
+<%--</script>--%>
+<%--<script type="text/javascript">--%>
+    <%--$(function(){--%>
+        <%--/*var withs=$('#dao-t>p>span').html();--%>
+        <%--$('#dao-t>p').css('width',withs);--%>
+        <%--if(parseInt(withs)<10){--%>
+            <%--$('#dao-t>p>span').css('left',0)--%>
+        <%--}*/--%>
+        <%--$('#dao-t>p>span').each(function(){--%>
+            <%--var withs=$(this).html();--%>
+            <%--$(this).parents('p').css('width',withs)--%>
+            <%--if(parseInt(withs)<10){--%>
+                <%--$(this).css('left',0)--%>
+            <%--}--%>
+        <%--})--%>
+    <%--})--%>
+    <%--/*分页*/--%>
+    <%--var newlist = new Vue({--%>
+        <%--el: '#app',--%>
+        <%--data: {--%>
+            <%--current_page: 1, //当前页--%>
+            <%--pages: 50, //总页数--%>
+            <%--changePage:'',//跳转页--%>
+            <%--nowIndex:0--%>
+        <%--},--%>
+        <%--computed:{--%>
+            <%--show:function(){--%>
+                <%--return this.pages && this.pages !=1--%>
+            <%--},--%>
+            <%--pstart: function() {--%>
+                <%--return this.current_page == 1;--%>
+            <%--},--%>
+            <%--pend: function() {--%>
+                <%--return this.current_page == this.pages;--%>
+            <%--},--%>
+            <%--efont: function() {--%>
+                <%--if (this.pages <= 7) return false;--%>
+                <%--return this.current_page > 5--%>
+            <%--},--%>
+            <%--ebehind: function() {--%>
+                <%--if (this.pages <= 7) return false;--%>
+                <%--var nowAy = this.indexs;--%>
+                <%--return nowAy[nowAy.length - 1] != this.pages;--%>
+            <%--},--%>
+            <%--indexs: function() {--%>
+                <%--var left = 1,--%>
+                    <%--right = this.pages,--%>
+                    <%--ar = [];--%>
+                <%--if (this.pages >= 7) {--%>
+                    <%--if (this.current_page > 5 && this.current_page < this.pages - 4) {--%>
+                        <%--left = Number(this.current_page) - 3;--%>
+                        <%--right = Number(this.current_page) + 3;--%>
+                    <%--} else {--%>
+                        <%--if (this.current_page <= 5) {--%>
+                            <%--left = 1;--%>
+                            <%--right = 7;--%>
+                        <%--} else {--%>
+                            <%--right = this.pages;--%>
+
+                            <%--left = this.pages - 6;--%>
+                        <%--}--%>
+                    <%--}--%>
+                <%--}--%>
+                <%--while (left <= right) {--%>
+                    <%--ar.push(left);--%>
+                    <%--left++;--%>
+                <%--}--%>
+                <%--return ar;--%>
+            <%--},--%>
+        <%--},--%>
+        <%--methods: {--%>
+            <%--jumpPage: function(id) {--%>
+                <%--this.current_page = id;--%>
+            <%--},--%>
+        <%--},--%>
+    <%--})--%>
+<%--</script>--%>
 </body>

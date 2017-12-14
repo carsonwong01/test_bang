@@ -56,7 +56,7 @@
 						<p class="prompt" id="coverImageIdMsg"></p>
 						<input type="hidden" id="coverImageId" validate="q" info="q:请至少上传一张图片" name="coverImageId">
 						<input type="hidden" id="coverImageUrl" name="coverImageUrl">
-						<p class="tips">大病救助项目，建议上传患者治疗中的照片、患者患病前后生活照对比、医院诊断证明等照片，提高项目可信度。建议图片尺寸大小870px * 420px。</p>
+						<p class="tips">大病救助项目，建议上传患者治疗中的照片、患者患病前后生活照对比、医院诊断证明等照片，提高项目可信度。建议图片尺寸大小640px * 360x。</p>
 					</dd>
 				</dl>
 			</div>

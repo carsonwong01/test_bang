@@ -8,11 +8,13 @@ var hospitalList = DM.Controller.sub({
      * 项目列表
      */
     loadRecord : function() {
+        var hospitalName = $('#ldr').attr('value');
         // 查询数据
         DM.ajax({
             "formId" : "hospitalListForm",
             "serialize" : true,
             "url" : "hospital/hospitalListAjax.do",
+            "data":{hospitalName:hospitalName},
             "success" : this.pageCallBack
         });
     },
@@ -26,22 +28,20 @@ var hospitalList = DM.Controller.sub({
         $('#hospitalListTemp').tmpl(data.hospitalList).appendTo("#hospitalListD");
         DM.Event.formatChar();
         // 初始化分页标签
-        if (data.hospitalList.pageResult.recordCount == true) {
-            DM.PageTags.init({
-                "divId" : "paging",
-                "formId" : "hospitalListForm",
-                "curPage" : data.hospitalList.pageResult.pageIndex,
-                "totalCount" : data.hospitalList.pageResult.recordCount,
-                "pageCount" : data.hospitalList.pageResult.pageTotal,
-                "url" : basePath+"hospital/hospitalListAjax.do",
-                "toPageCallBack" : arguments.callee
-            });
-        }
+        DM.PageTags.init({
+            "divId" : "paging",
+            "formId" : "hospitalListForm",
+            "curPage" : data.hospitalList.pageResult.pageIndex,
+            "totalCount" : data.hospitalList.pageResult.recordCount,
+            "pageCount" : data.hospitalList.pageResult.pageTotal,
+            "url" : basePath+"hospital/hospitalListAjax.do",
+            "toPageCallBack" : arguments.callee
+        });
     },
     // 进入项目详情页
     goHospitalDetails:function(projectId){
-    //跳转项目详情
-    window.location.href = basePath+"project/projectDetails.do?projectId=" + projectId;
+        //跳转项目详情
+        window.location.href = basePath+"project/projectDetails.do?projectId=" + projectId;
     },
 });
 

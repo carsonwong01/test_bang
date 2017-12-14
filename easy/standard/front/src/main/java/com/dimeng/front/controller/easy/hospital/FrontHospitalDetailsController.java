@@ -35,12 +35,24 @@ public class FrontHospitalDetailsController extends BaseController
     public Object hospitalDetails(HttpServletRequest request,
                                   HttpServletResponse response,HospitalBasicReq req){
         ModelAndView mv = new ModelAndView("easy/hospital/hospitalDetails.page");
-        Map<String, Object> map = new HashMap<String, Object>();
+//        Map<String, Object> map = new HashMap<String, Object>();
         String data = new CommonUtil().callInterfaceMethod(req,
                 "hospital/v/hospitalDetails",RequestMethod.POST,request);
         JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
         mv.addObject("hospitalDetails",object);
         return mv;
+    }
+    /**
+     * 弹窗--获取医院联系方式
+     */
+    @RequestMapping(value = "/hospitalLink.do")
+    public Object getLinkMethod(HttpServletRequest request,
+                                HttpServletResponse response,HospitalBasicReq req){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String data =
+                new CommonUtil().callInterfaceMethod(req,"hospital/v/linkMethod",RequestMethod.POST,request);
+        map.put("hospitalLink",CommonUtil.getJSONObject(data, null));
+        return map;
     }
 
     /**
@@ -89,12 +101,9 @@ public class FrontHospitalDetailsController extends BaseController
     @RequestMapping(value = "/hospitalProjectSumAjax.do")
     public Object findHosProjectSum(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> map = new HashMap<String, Object>();
-//        req.setOpSource("1");
-//        req.setMaxResults(10);
         String data =
                 new CommonUtil().callInterfaceMethod(req, "hospital/v/findHosProjectSum", RequestMethod.POST, request);
         map.put("hosProjectSum",CommonUtil.getJSONObject(data, null));
-//        map.put("req", req);
         return map;
     }
 

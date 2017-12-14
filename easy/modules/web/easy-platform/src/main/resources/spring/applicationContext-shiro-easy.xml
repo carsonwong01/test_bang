@@ -27,6 +27,7 @@
 		<!-- shiro连接约束配置 -->
 		<property name="filterChainDefinitions">
 			<value>
+				 
 				/system/basicInfoSet/v/projectBaseTypeInfo = anon
 				/bankCard/bindBankCardNotify.do=anon
 				/bankCard/bindBankCardResp.do=anon
@@ -94,12 +95,15 @@
 				/home/frontInfo/v/findSiteInvestment = anon
 				/home/frontInfo/v/findHomeHosList = anon
 				/home/frontInfo/v/findPartnerList = anon
-				user/userManage/v/findInitiateProList = anon
+				/user/userManage/v/findInitiateProList = anon
+				/hospital/v/linkMethod = anon
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon
                  <!-- 分享 -->
                  /share/*/** = anon
                  
+				 /MP_verify_9gG5rWsB0zCedtxb.txt = anon
+				 
 				/**/* = authc
 			</value>
 		</property>

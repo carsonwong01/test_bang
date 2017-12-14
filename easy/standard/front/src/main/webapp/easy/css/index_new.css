@@ -363,14 +363,22 @@
 	font-weight: lighter;
 	text-shadow:1px 1px 1px #000;
 }
-.palt-cen>p>span{
-	float: left;
+/*.palt-cen>p>span{*/
+	/*float: left;*/
+	/*font-weight: normal;*/
+	/*font-weight: 300;*/
+	/*text-shadow:2px 1px 1px #000;*/
+	 /*padding:10px 0; color:#FFF;*/
+	/*display: inline-block;*/
+/*}*/
+.palt-cen>p>span{float: left;
 	font-weight: normal;
-	font-weight: 300;
-	text-shadow:2px 1px 1px #000;
-	 padding:10px 0; color:#FFF;
+	font-weight: 400;
+	padding: 10px 0;
+	color: #1a1a11;
 	display: inline-block;
 }
+
 .palt-cen>p>span:nth-child(1){
 		width: 120px;
 	text-align: justify;
