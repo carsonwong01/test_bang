@@ -151,6 +151,7 @@
     SELECT
         hospital_mail hospitalMail,
         hospital_id hospitalId,
+        hospital_name hospitalName,
         office_tel officeTel,
         province province,
         city city,
