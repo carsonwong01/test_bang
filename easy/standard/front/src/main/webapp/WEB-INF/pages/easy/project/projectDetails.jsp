@@ -20,7 +20,7 @@
 					<div><span class='fr'>捐款 <span>${projectDetails.supportTimes}</span>次</span><div class='clear'></div></div>
 					<div class='jqrt'>
 						<p>
-							<span><span id="progress"></span>%</span>
+							<span id="progress"></span>
 						</p>
 					</div>
 					<div><span class='fl'>剩余时间
@@ -479,7 +479,7 @@
     var supportAmt = ${projectDetails.supportAmt};
     var facTarget = ${projectDetails.facTarget};
     var progress = parseInt(supportAmt/facTarget*100);
-    $("#progress").html(progress);
+    $("#progress").html(progress+"%");
     if(progress>100){
         progress = 100;
     }

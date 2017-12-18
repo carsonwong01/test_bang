@@ -88,9 +88,9 @@
     <div class='fr zkd'>
         <div class='h-hi'><a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">{{= data.hospitalName}}</a><span>{{= data.hospitalGrade}}</span><span>{{= data.hospitalType}}</span></div>
         <div class='msjj'>
-            <p>{{= data.hospitalAbstract}}
-            </p>
-            <a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}" class='fr'>详情</a>
+            <a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}">{{= data.hospitalAbstract}}
+            </a>
+            <%--<a href="<%=basePath %>hospital/hospitalDetails.do?hospitalId={{= data.hospitalId}}" class='fr'>详情</a>--%>
             <div class='clear'></div>
         </div>
         <p>已筹金额：<span>{{= data.allRaisedAmount}}</span>元</p>

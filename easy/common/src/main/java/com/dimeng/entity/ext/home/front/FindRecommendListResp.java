@@ -1,7 +1,6 @@
 package com.dimeng.entity.ext.home.front;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 前台项目列表resp
@@ -49,12 +48,12 @@ public class FindRecommendListResp implements Serializable
     /**
      * 项目标签
      */
-    private String projectTag;
+//    private String projectTag;
     
     /**
      * 项目标签列表
      */
-    private List<String> projectTags;
+//    private List<String> projectTags;
     
     /**
      * 支持人数
@@ -166,15 +165,15 @@ public class FindRecommendListResp implements Serializable
         this.projectIntro = projectIntro;
     }
     
-    public String getProjectTag()
-    {
-        return projectTag;
-    }
-    
-    public void setProjectTag(String projectTag)
-    {
-        this.projectTag = projectTag;
-    }
+//    public String getProjectTag()
+//    {
+//        return projectTag;
+//    }
+//
+//    public void setProjectTag(String projectTag)
+//    {
+//        this.projectTag = projectTag;
+//    }
     
     public String getSupportCount()
     {
@@ -216,15 +215,15 @@ public class FindRecommendListResp implements Serializable
         this.rate = rate;
     }
 
-    public List<String> getProjectTags()
-    {
-        return projectTags;
-    }
-
-    public void setProjectTags(List<String> projectTags)
-    {
-        this.projectTags = projectTags;
-    }
+//    public List<String> getProjectTags()
+//    {
+//        return projectTags;
+//    }
+//
+//    public void setProjectTags(List<String> projectTags)
+//    {
+//        this.projectTags = projectTags;
+//    }
 
     public String getProjectType()
     {

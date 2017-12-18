@@ -95,7 +95,7 @@
 }
 .jqrt>p>span{
 	position: absolute;
-	top: -6px;
+	top: -7.5px;
 	right: -4px;
 	display: inline-block;
 	width: 40px;
@@ -474,7 +474,7 @@ appearance:none;
 	width: 34px;
 	height: 16px;
 	line-height: 16px;
-	top: -7px;
+	top: -8px;
 }
 .dao-t>p{
 	position: absolute;

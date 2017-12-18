@@ -78,7 +78,6 @@
 		ORDER BY tpi.date_update DESC
 	</select>
 
-
 	<!-- 首页推荐项目列表 -->
 	<select id="findRecommendList" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" 
 	parameterType="com.dimeng.model.home.FrontIndexReq" >
@@ -91,7 +90,7 @@
 			p.cover_image_url projectImg,
 		  	p.project_name projectName,
 		  	p.project_intro projectIntro,
-			p.project_label projectTag,
+
 		  	(select IFNULL(count(1),0) from t_order_support where project_id = p.project_id and  `status` not in (1,2,9) and IFNULL(refund_type,0) IN(0,1,2)) supportCount,
 		  	floor(p.target_amount) targetAmount,
 		  	floor(p.raised_amount) raiseTotal,
@@ -153,7 +152,6 @@
 		  	p.project_name projectName,
 		  	TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft, 
 		  	p.project_intro projectIntro,
-			p.project_label projectTag,
 			p.project_type projectType,
 			FORMAT(p.raised_amount,0)  raiseTotal,
 			FORMAT(p.target_amount,0)  targetAmount,

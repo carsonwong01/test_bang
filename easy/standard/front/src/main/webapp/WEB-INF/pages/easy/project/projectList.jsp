@@ -32,7 +32,7 @@
                 <p><b></b><a href="<%=basePath%>hospital/hospitalList.do">我要求助</a></p>
             </div>
             <div class='loing'>
-                <p>&nbsp;&nbsp;“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长 ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...<a href="<%=basePath %>/home/index.do" class='fr'>详细</a></p>
+                <p>&nbsp;&nbsp;“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长 ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起发起，与...<a href="<%=basePath %>home/aboutUs.do" class='fr'>详细</a></p>
                 <!-- 登录前 -->
                 <c:if test="${currUser.userName==null}">
                     <div><a href="<%=basePath %>home/login.do">用户登录</a></div>
