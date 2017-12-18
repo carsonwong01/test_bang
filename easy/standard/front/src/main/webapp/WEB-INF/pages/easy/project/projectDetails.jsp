@@ -4,6 +4,7 @@
     var currUserId = "${currUser.userId}";//当前登录人ID
 </script>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
+
 <div class='center'>
 	<div class='cent-nav'>
 		<p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
@@ -39,8 +40,8 @@
 		<div class='fl clik'>
 			<ul>
 				<li data="#donations" class='actionk'>捐款说明</li>
-				<li data="#dynamicCount">项目进展（<span class="num">${projectDetails.dynamicCount}</span>）<i></i></li>
-				<li data="#record">捐款记录（<span class="num">${projectDetails.supportTimes}</span>）<i></i></li>
+				<li data="#dynamicCount" class="control" id="dynamicTab">项目进展（<span class="num">${projectDetails.dynamicCount}</span>）<i></i></li>
+				<li data="#record" class="control" id="commentTab">捐款记录（<span class="num">${projectDetails.supportTimes}</span>）<i></i></li>
 				<div class='clear'></div>
 			</ul>
 			<div class='centsd'>
@@ -78,7 +79,7 @@
 							<form id="commentForm" method="post">
 								<input name="projectId" type="hidden"
 									   value="${projectDetails.id}">
-								<div id="commentD"></div>
+								<div class="record" id="commentD"></div>
 								<!--项目动态分页-->
 								<div class="paging" id="commentPaging"></div>
 								<!--项目动态分页  --END-->
@@ -106,14 +107,11 @@
 						<span>${projectDetails.dateCreate}发起</span>
 					</p>
 					<div class='clear'></div>
-
-
 				</div>
 			</div>
 			<div class='xim-qi'>
 				<p><i></i> <span>认证基金会</span></p>
 				<div class='xim-id'>
-					<%--<img src="images/cn19.png" class='fl'>--%>
 					<img src="<%=basePath%>easy/images/cn19.png" class='fl'>
 					<p class='fl'>
 						<a href=''>${projectDetails.foundationName}</a></br>
@@ -305,63 +303,7 @@
 		<div class='clear'></div>
 	</div>
 </div>
-<script id="projectListTemp" type="text/x-jquery-tmpl">
-    {{each(i,data) pageResult.list}}
-    	<li><i></i><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}"><span>{{= data.projectName}}</span></a></li>
-    {{/each}}
-</script>
-<script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
 
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        var withs=$('.jqrt>p>span').html();
-        $('.jqrt>p').css('width',withs)
-        if(parseInt(withs)<10){
-            $('.jqrt>p>span').css('left',-4)
-        }
-
-        $(".clik>ul>li").click(function(){
-            if(!$(this).hasClass('actionk')){
-                $(this).addClass('actionk').siblings('li').removeClass('actionk');
-                $($(this).attr('data')).css('display','block').siblings('div').css('display','none')
-            }
-        })
-    })
-    var _content = []; //临时存储li循环内容
-    var moreload = {
-        _default:15, //默认显示图片个数
-        _loading:5,  //每次点击按钮后加载的个数
-        init:function(){
-            var lis = $(".record .hidden li");
-            $(".record ul.list").html("");
-            for(var n=0;n<moreload._default;n++){
-                lis.eq(n).appendTo(".record ul.list");
-            }
-            for(var i=moreload._default;i<lis.length;i++){
-                _content.push(lis.eq(i));
-            }
-            $(".record .hidden").html("");
-        },
-        loadMore:function(){
-            var mLis = $(".record ul.list li").length;
-            for(var i =0;i<moreload._loading;i++){
-                var target = _content.shift();
-                if(!target){
-                    $('.record .jzgd-s').html("<a href='javascript:;'>全部加载完毕...</a>");
-                    break;
-                }
-                $(".record ul.list").append(target);
-                /*$(".record ul.list li").eq(mLis+i).each(function(){
-                    $(this).attr('src',$(this).attr('realSrc'));
-                });*/
-            }
-        }
-    }
-    moreload.init();
-
-
-</script>
 
 
 <link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />
@@ -372,15 +314,18 @@
 
 <script id="dynamicTemp" type="text/x-jquery-tmpl">
 {{each(i,data) pageResult.list}}
-           <div class="schedule">
-				<h6>{{= data.dateCreate}}<i class="ico"></i></h6>
+           <ul class="schedule">
+           <li>
+           <b></b>
+				<p>{{= data.dateCreate}}<p>
 				<p>{{= data.content}}</p>
                 <div class="mod-project-padd clearfix">
                 {{each(i,img) data.imgsUrl}}
-                <img src="{{= img.addr}}" alt="" width="90"  height="60" onclick=javascript:projectDetails.showImg(this);>
+                <img src="{{= img.addr}}" alt="" width="140"  height="80" onclick=javascript:projectDetails.showImg(this);>
                 {{/each}}
                 </div>
-		   </div>
+           </li>
+		   </ul>
 {{/each}}
 </script>
 <script id="commentTemp" type="text/x-jquery-tmpl">
@@ -475,6 +420,66 @@
 								</div>
 {{/each}}
 </script>
+<script id="projectListTemp" type="text/x-jquery-tmpl">
+    {{each(i,data) pageResult.list}}
+    	<li><i></i><a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}"><span>{{= data.projectName}}</span></a></li>
+    {{/each}}
+</script>
+<script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
+
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var withs=$('.jqrt>p>span').html();
+        $('.jqrt>p').css('width',withs)
+        if(parseInt(withs)<10){
+            $('.jqrt>p>span').css('left',-4)
+        }
+
+        $(".clik>ul>li").click(function(){
+            if(!$(this).hasClass('actionk')){
+                $(this).addClass('actionk').siblings('li').removeClass('actionk');
+                $($(this).attr('data')).css('display','block').siblings('div').css('display','none')
+            }
+        })
+    })
+    var _content = []; //临时存储li循环内容
+    var moreload = {
+        _default:15, //默认显示图片个数
+        _loading:5,  //每次点击按钮后加载的个数
+        init:function(){
+            var lis = $(".record .hidden li");
+            $(".record ul.list").html("");
+            for(var n=0;n<moreload._default;n++){
+                lis.eq(n).appendTo(".record ul.list");
+            }
+            for(var i=moreload._default;i<lis.length;i++){
+                _content.push(lis.eq(i));
+            }
+            $(".record .hidden").html("");
+        },
+        loadMore:function(){
+            var mLis = $(".record ul.list li").length;
+            for(var i =0;i<moreload._loading;i++){
+                var target = _content.shift();
+                if(!target){
+                    $('.record .jzgd-s').html("<a href='javascript:;'>全部加载完毕...</a>");
+                    break;
+                }
+                $(".record ul.list").append(target);
+                /*$(".record ul.list li").eq(mLis+i).each(function(){
+                    $(this).attr('src',$(this).attr('realSrc'));
+                });*/
+            }
+        }
+    }
+    moreload.init();
+</script>
+<link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />
+<script type="text/javascript"  src="<%=basePath %>easy/js/project/projectDetails.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
+<script language="javascript" src="<%=basePath %>js/common/lytebox.js"></script>
+<script type="text/javascript"  src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <script type="text/javascript" >
     var supportAmt = ${projectDetails.supportAmt};
     var facTarget = ${projectDetails.facTarget};
@@ -486,9 +491,3 @@
     $(".progress").children().attr("data-progress",progress);
     var projectStatus = ${projectDetails.projectStatus};
 </script>
-
-
-
-
-
-
