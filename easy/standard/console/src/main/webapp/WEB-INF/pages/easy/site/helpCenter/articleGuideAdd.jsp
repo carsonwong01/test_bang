@@ -67,7 +67,7 @@ if("1" == type)
 		 else if("3" == type)
 			 $("#detailHtml").html("新增支持项目相关问题");
 			 else if("4" == type)
-				 $("#detailHtml").html("新增其他问题");  
+				 $("#detailHtml").html("新增常见问题");
 
 //增加校验模式
 dmCheck.init("#mForm");
