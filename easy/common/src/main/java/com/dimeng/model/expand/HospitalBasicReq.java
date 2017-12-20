@@ -23,6 +23,7 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String city;
     private String county;
     private String addr;
+    private String area;
     private String logoUrl;
     private String logoId;
     private String descriptionImageUrl;
@@ -54,6 +55,14 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String status;
     private String registerTime;
     private String userId;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public String getSource() {
         return source;

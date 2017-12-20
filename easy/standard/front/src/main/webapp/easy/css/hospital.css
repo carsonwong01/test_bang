@@ -196,16 +196,18 @@
 	-webkit-line-clamp:2;
 	overflow: hidden;
 	position: relative;
+	height: 40px;
+	margin-bottom: 10px;
 }
 .msjj>a::after{
 	content: "详情";
 	font-size: 12px;
 	color: #00aaf6;
 	position: absolute; bottom: -2px; right: 0; padding-left: 35px;
-	background: -webkit-linear-gradient(left, transparent, #ffffff 50%);
-	background: -o-linear-gradient(right, transparent, #ffffff 50%);
-	background: -moz-linear-gradient(right, transparent, #ffffff 50%);
-	background: linear-gradient(to right, transparent, #ffffff 50%);
+	background: -webkit-linear-gradient(left, transparent, #ffffff 10%);
+	background: -o-linear-gradient(right, transparent, #ffffff 10%);
+	background: -moz-linear-gradient(right, transparent, #ffffff 10%);
+	background: linear-gradient(to right, transparent, #ffffff 10%);
 }
 /*分页*/
 .fen-page{

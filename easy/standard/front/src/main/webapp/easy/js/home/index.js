@@ -15,6 +15,7 @@ $(function() {
         pager: true,
         nav: true,
         speed: 700,
+        timeout:3000,
         minwidth: 1680
     }); 
 

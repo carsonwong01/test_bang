@@ -20,9 +20,21 @@
 				<p>来源：<span>${content.sourceFrom}</span><span>${content.dateCreate}</span>点击量<span>${content.viewCount}</span></p>
 			</div>
 			<div class='text-p'>
-				<p>${content.infoContent}</p>
+				${content.infoContent}
 			</div>
-			<%--<p class='fr pagp'><a href="">上一篇</a><i></i><a href="">下一篇</a></p><div class='clear'></div>--%>
+			<c:if test="${content.preId==''}">
+				<p class='fr pagp'><a>暂无上一篇</a>
+			</c:if>
+			<c:if test="${content.preId!=''}">
+				<p class='fr pagp'><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=${content.preId}">上一篇</a>
+			</c:if>
+			<c:if test="${content.nextId==''}">
+				<i></i><a>暂无下一篇</a></p><div class='clear'></div>
+			<p></p>
+			</c:if>
+			<c:if test="${content.nextId!=''}">
+				<i></i><a href="<%=basePath%>frontHome/newsInfosDetails.do?id=${content.nextId}">下一篇</a></p><div class='clear'></div>
+			</c:if>
 		</div>
 		<div class='fr ft-na'>
 			<div class='xim-qi'>

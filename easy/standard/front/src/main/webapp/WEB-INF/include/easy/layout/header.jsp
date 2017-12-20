@@ -66,7 +66,7 @@
         $("#HEADER_MENUS").find("li:eq(0)").addClass("actiog");
     } else if (hrefs.indexOf("/project/") > 0) {
         $("#HEADER_MENUS").find("li:eq(1)").addClass("actiog");
-    } else if (hrefs.indexOf("/hospital/hospitalList") > 0) {
+    } else if (hrefs.indexOf("/hospital/") > 0) {
         $("#HEADER_MENUS").find("li:eq(2)").addClass("actiog");
     } else if (hrefs.indexOf("/home/aboutUs") > 0) {
         $("#HEADER_MENUS").find("li:eq(3)").addClass("actiog");

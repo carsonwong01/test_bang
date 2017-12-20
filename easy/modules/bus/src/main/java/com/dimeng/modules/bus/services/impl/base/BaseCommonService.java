@@ -182,7 +182,7 @@ public class BaseCommonService extends UserCapitalCommonService
     {
         String content =
             (new StringBuilder()).append(SystemCache.getProperty(TrustVariables.WX_SERVICE_ADDR))
-                .append("/project/projectDetails.do?projectId=")
+                .append("/weixin/#index/index/projectDetails/")
                 .append(projectId)
                 .toString();
         String destPath =

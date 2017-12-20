@@ -12,7 +12,7 @@
 		<%--<div class="locationBox">所在位置：<a name="h_menu" action="home/index.do">首页</a>--%>
         <%--<span class="arrow">&gt;</span>关于我们<span class="arrow">&gt;</span><span id="spanId"></span></div>--%>
         <!--面包屑-->
-            <p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="#">关于我们<span class="arrow">&gt;</span></a><span id="spanId"></span></p>
+            <p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="#">关于我们<span class="arrow">&nbsp;&gt;&nbsp;</span></a><span id="spanId"></span></p>
 
 
     </div>
