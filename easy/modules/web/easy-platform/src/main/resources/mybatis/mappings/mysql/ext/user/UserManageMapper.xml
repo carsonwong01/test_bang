@@ -23,6 +23,7 @@
 		<result column="office_tel" property="officeTel"/>
 		<result column="city" property="city"/>
 		<result column="province" property="province"/>
+		<result column="area" property="area"/>
 	</resultMap>
 		
 	<resultMap type="com.dimeng.entity.ext.user.UserInfoQscDetailResp" id="FindUserdetailResqResultMap">
@@ -67,34 +68,81 @@
 		<result column="source" property="source"/>
 		<result column="date_register" property="registerTime"/>
 		<result column="user_status" property="status"/>
+		<result column="area" property="area"/>
 	</resultMap>
 
-	<!--后台-用户管理-医院用户信息列表-->
-	<select id="findHospitalUser" resultMap="FindHospitalUserResultMap" parameterType="com.dimeng.model.expand.HospitalBasicReq">
+
+
+
+	<!-- 后台-用户管理-信息列表 -->
+	<select id="findHospitalUser" resultMap="FindUserListResqResultMap" parameterType="com.dimeng.model.user.FindUserListReq">
 		SELECT
-			u.user_id,u.user_name, ba.nick_name, thb.hospital_name,thb.hospital_num,
-			thb.hospital_grade,thb.hospital_type,thb.link_name,thb.mobile_phone,
-			thb.hospital_mail,thb.office_tel,thb.province,thb.city,
-			u.source,u.user_status,
-			DATE_FORMAT(u.date_register,'%Y-%m-%d  %T') date_register
-		FROM t_hospital_basic thb
+		u.user_id,		u.user_name,		u.mobile,
+		u.source,		DATE_FORMAT(u.date_register,'%Y-%m-%d  %T') date_register,
+		u.user_status,		ba.nick_name,		ba.real_name,
+		ba.id_card,		t.area,		t.hospitalName,
+		t.hospitalType,		t.hospitalGrade,
+		thb.link_name,thb.mobile_phone,
+		thb.hospital_mail,thb.office_tel,thb.province,thb.city
+		FROM  t_hospital_basic thb
 		LEFT JOIN t_user u ON thb.hospital_id = u.user_id
 		LEFT JOIN t_q_user_basic ba ON u.user_id = ba.user_id
+		INNER JOIN (SELECT CONCAT(IFNULL(th.province,''),	IFNULL(th.city,''),IFNULL(th.county,'')) area,
+			th.hospital_name hospitalName,th.hospital_type hospitalType,
+			th.hospital_grade hospitalGrade,
+		th.hospital_id
+		FROM t_hospital_basic th
+		) t ON t.hospital_id = thb.hospital_id
 		WHERE  1=1
-		<if test="userId != null and userId != ''">
-			and u.user_name LIKE CONCAT ('%',trim(#{userId,jdbcType=VARCHAR}),'%')
+		<if test="hospitalName != null and hospitalName != ''">
+			and t.hospitalName LIKE CONCAT ('%',trim(#{hospitalName,jdbcType=VARCHAR}),'%')
 		</if>
+
+		<if test="hospitalType != null and hospitalType != ''">
+			and t.hospitalType LIKE CONCAT ('%',trim(#{hospitalType,jdbcType=VARCHAR}),'%')
+		</if>
+
+		<if test="hospitalGrade != null and hospitalGrade != ''">
+			and t.hospitalGrade LIKE CONCAT ('%',trim(#{hospitalGrade,jdbcType=VARCHAR}),'%')
+		</if>
+
+		<if test="area != null and area != ''">
+			and t.area LIKE CONCAT ('%',trim(#{area,jdbcType=VARCHAR}),'%')
+		</if>
+
 		<if test="userName != null and userName != ''">
 			and u.user_name LIKE CONCAT ('%',trim(#{userName,jdbcType=VARCHAR}),'%')
 		</if>
+
 		<if test="nickName != null and nickName != ''">
 			and ba.nick_name LIKE CONCAT ('%',trim(#{nickName,jdbcType=VARCHAR}),'%')
 		</if>
+
+		<if test="realName != null and realName != ''">
+			and ba.real_name LIKE CONCAT ('%',trim(#{realName,jdbcType=VARCHAR}),'%')
+		</if>
+
+		<if test="status != null and status != ''">
+			and u.`user_status` = #{status,jdbcType=VARCHAR}
+		</if>
+
+		<if test="idCard != null and idCard != ''">
+			and ba.`id_card` = #{idCard,jdbcType=VARCHAR}
+		</if>
+
+		<if test="source != null and source != ''">
+			and u.`source` = #{source,jdbcType=VARCHAR}
+		</if>
+
+		<if test="staTime != null and staTime != ''">
+			and DATE_FORMAT(u.date_register,'%Y%m%d') &gt;= DATE_FORMAT(#{staTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
+
+		<if test="endTime != null and endTime != ''">
+			and DATE_FORMAT(u.date_register,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
+		</if>
 		<if test="hospitalName != null and hospitalName != '' ">
 			and u.hospital_name = #{hospitalName,jdbcType=VARCHAR}
-		</if>
-		<if test="hospitalNum != null and hospitalNum != '' ">
-			and u.hospital_num = #{hospitalNum,jdbcType=VARCHAR}
 		</if>
 		<if test="hospitalGrade != null and hospitalGrade != '' ">
 			and thb.hospital_grade = #{hospitalGrade,jdbcType=VARCHAR}
@@ -120,14 +168,62 @@
 		<if test="city != null and city != '' ">
 			and thb.city = #{city,jdbcType=VARCHAR}
 		</if>
+
+		ORDER BY  u.date_register DESC
+	</select>
+
+
+
+
+	<!--后台-用户管理-医院用户信息列表  findHospitalUser-->
+	<select id="findHos" resultMap="FindHospitalUserResultMap" parameterType="com.dimeng.model.expand.HospitalBasicReq">
+		SELECT
+			u.user_id,u.user_name, ba.nick_name, thb.hospital_name,thb.hospital_num,
+			thb.hospital_grade,thb.hospital_type,thb.link_name,thb.mobile_phone,
+			thb.hospital_mail,thb.office_tel,thb.province,thb.city,thb.county,
+			u.source,u.user_status,
+			DATE_FORMAT(u.date_register,'%Y-%m-%d  %T') date_register,
+			t.area
+		FROM t_hospital_basic thb
+		LEFT JOIN t_user u ON thb.hospital_id = u.user_id
+		LEFT JOIN t_q_user_basic ba ON u.user_id = ba.user_id
+		INNER JOIN (SELECT CONCAT(IFNULL(th.province,''),	IFNULL(th.city,''),IFNULL(th.county,'')) area,
+			th.hospital_id
+			FROM t_hospital_basic th
+			) t ON t.hospital_id = thb.hospital_id
+		WHERE  1=1
+		<if test="area != null and area != ''">
+			and t.area LIKE CONCAT('%',trim(#{area,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="hospitalName != null and hospitalName != ''">
+			and thb.hospital_name LIKE CONCAT('%',trim(#{hospitalName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="hospitalType != null and hospitalType != ''">
+			and thb.hospital_type LIKE CONCAT('%',trim(#{hospitalType,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="hospitalGrade != null and hospitalGrade != ''">
+			and thb.hospital_grade LIKE CONCAT('%',trim(#{hospitalGrade,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userId != null and userId != ''">
+			and u.user_name LIKE CONCAT ('%',trim(#{userId,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="hospitalName != null and hospitalName != '' ">
+			and thb.hospital_name = #{hospitalName,jdbcType=VARCHAR}
+		</if>
+		<if test="hospitalGrade != null and hospitalGrade != '' ">
+			and thb.hospital_grade = #{hospitalGrade,jdbcType=VARCHAR}
+		</if>
+		<if test="hospitalType != null and hospitalType != '' ">
+			and thb.hospital_type = #{hospitalType,jdbcType=VARCHAR}
+		</if>
+		<if test="province != null and province != '' ">
+			and thb.province = #{province,jdbcType=VARCHAR}
+		</if>
+		<if test="city != null and city != '' ">
+			and thb.city = #{city,jdbcType=VARCHAR}
+		</if>
 		<if test="status != null and status != ''">
 			and u.`user_status` = #{status,jdbcType=VARCHAR}
-		</if>
-		<if test="source != null and source != ''">
-			and u.`source` = #{source,jdbcType=VARCHAR}
-		</if>
-		<if test="endTime != null and endTime != ''">
-			and DATE_FORMAT(u.date_register,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
 		</if>
 		ORDER BY  u.date_register DESC
 	</select>
@@ -177,6 +273,9 @@
 		LEFT JOIN t_q_user_basic ba ON u.user_id = ba.user_id
 		LEFT JOIN t_hospital_basic thb ON thb.hospital_id = u.hospital_id
         WHERE  1=1
+		<if test="hospitalName != null and hospitalName != ''">
+			and u.hospital_name LIKE CONCAT ('%',trim(#{hospitalName,jdbcType=VARCHAR}),'%')
+		</if>
 		<if test="userName != null and userName != ''">
 			and u.user_name LIKE CONCAT ('%',trim(#{userName,jdbcType=VARCHAR}),'%')
 		</if>

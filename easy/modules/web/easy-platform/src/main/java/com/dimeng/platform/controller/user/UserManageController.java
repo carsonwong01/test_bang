@@ -1,23 +1,5 @@
 package com.dimeng.platform.controller.user;
 
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.dimeng.model.expand.HospitalBasicReq;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.protocol.HTTP;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.ext.user.FrontUserInfo;
@@ -29,22 +11,14 @@ import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.utils.FrameworkConfigurer;
 import com.dimeng.model.bus.FindProListByUserIdReq;
+import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.home.ThirdTypeReq;
 import com.dimeng.model.message.InsertSystemVerifyCodeReq;
 import com.dimeng.model.thirdParty.loginHelp.QqLoginHelper;
 import com.dimeng.model.thirdParty.loginHelp.WbLoginHelper;
 import com.dimeng.model.thirdParty.loginHelp.WxLoginHelper;
 import com.dimeng.model.thirdParty.thirdUser.ThirdPartyUser;
-import com.dimeng.model.user.AuthenticationReq;
-import com.dimeng.model.user.FindAccMoneyListReq;
-import com.dimeng.model.user.FindByUserIdReq;
-import com.dimeng.model.user.FindFreezeProReq;
-import com.dimeng.model.user.FindThirdPartyReq;
-import com.dimeng.model.user.FindTradeListReq;
-import com.dimeng.model.user.FindUserByOpendIdReq;
-import com.dimeng.model.user.FindUserListReq;
-import com.dimeng.model.user.IsExsitIdCardReq;
-import com.dimeng.model.user.NotPageUserIdReq;
+import com.dimeng.model.user.*;
 import com.dimeng.modules.bus.services.IProjectService;
 import com.dimeng.modules.expand.services.ICommonService;
 import com.dimeng.modules.message.services.IMessageService;
@@ -52,6 +26,20 @@ import com.dimeng.modules.user.services.UserInfoManageService;
 import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.LoginCache;
 import com.dimeng.utils.SystemCache;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 /**
  * 用户管理controller
@@ -88,13 +76,16 @@ public class UserManageController extends BaseController
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/{v}/findHospitalUser",method = RequestMethod.POST,
-            produces = {"application/json","application/xml"})
+    @RequestMapping(value = "/{v}/findHospitalUser", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
     @ResponseBody
-    @ResponseStatus(value=HttpStatus.OK)
-    public Object findHospitalUser(HttpEntity<HospitalBasicReq> req) throws Exception{
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findHospitalUser(HttpEntity<FindUserListReq> req)
+            throws Exception
+    {
         return userManageService.findHospitalUser(req.getBody());
     }
+
 
     /**
      * 后台用户管理-用户信息列表查询

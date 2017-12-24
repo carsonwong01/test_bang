@@ -4,7 +4,6 @@ import com.dimeng.abilitys.annotation.SystemConsoleLog;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.model.bus.FindProListByUserIdReq;
-import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.finance.FindPaymentListReq;
 import com.dimeng.model.user.FindUserListReq;
 import com.dimeng.model.user.NotPageUserIdReq;
@@ -34,59 +33,40 @@ import java.util.Map;
 @RequestMapping("userManage")
 public class UserPerInformationController extends BaseController
 {
-
     /**
      * 医院用户详细信息页面
+     * @param request
+     * @param response
+     * @return
      */
-    @RequestMapping(value = "/hospitalUserList.do",method = RequestMethod.GET)
-    public Object findHospitalUser(HospitalBasicReq req,HttpServletRequest request,
-                                   HttpServletResponse response){
+    @RequestMapping(value = "/hospitalUserList.do", method = RequestMethod.GET)
+    public Object findHospitalUser(FindUserListReq findUserListReq, HttpServletRequest request,
+                                 HttpServletResponse response)
+    {
         ModelAndView mv = new ModelAndView("pages/easy/user/hosUserInfo");
         return mv;
     }
 
     /**
-     * 医院用户列表信息
+     *ajax 获取用户列表数据 --医院用户列表信息
+     * <功能详细描述>
+     * @param request
+     * @param response
+     * @return
      */
     @RequestMapping(value = "/hospitalUserListAjax.do")
     @ResponseBody
-    public Object findHospitalUserAjax(HospitalBasicReq req,HttpServletRequest request,
-                                       HttpServletResponse response){
-        String hospitalUser =
-                new CommonUtil().callInterfaceMethod(req,
+    @RequiresPermissions("YHGL_YHXX_GRXX_MU")
+    public Object findHospitalUserAjax(FindUserListReq findUserListReq, HttpServletRequest request,
+                                     HttpServletResponse response)
+    {
+        String perInformation =
+                new CommonUtil().callInterfaceMethod(findUserListReq,
                         "user/userManage/v/findHospitalUser",
                         RequestMethod.POST,
                         request);
-        return CommonUtil.getJSONObject(hospitalUser, null);
+        return CommonUtil.getJSONObject(perInformation, null);
     }
-
-//    /**
-//     * 跳往医院用户详情界面
-//     */
-//    @RequestMapping(value = "/hosUserDetails.do", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Object hosUserDetails(FindUserListReq userReq, HttpServletRequest req, HttpServletResponse response,String userId)
-//    {
-//        ModelAndView  mv = new ModelAndView("pages/easy/user/hosUserDetails");
-//        mv.addObject("userId", userId);
-//        return mv;
-//    }
-//
-//    /**
-//     * 医院用户详情信息
-//     */
-//    @RequestMapping(value = "/findHosUserDetailsAjax.do")
-//    @ResponseBody
-//    public Object findHosUserDetailsAjax(HospitalBasicReq req,HttpServletRequest request,
-//                                         HttpServletResponse response){
-//        //医院详情信息
-//        String hosUserDetails =
-//                new CommonUtil().callInterfaceMethod(req,
-//                        "user/userManage/v/findHosUserDetails",
-//                        RequestMethod.POST,
-//                        request);
-//        return CommonUtil.getJSONObject(hosUserDetails, null);
-//    }
 
 
     /**

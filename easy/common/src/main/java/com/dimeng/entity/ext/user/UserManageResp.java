@@ -84,6 +84,15 @@ public class UserManageResp implements Serializable
     private String officeTel;
     private String province;
     private String city;
+    private String area;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public String getHospitalGrade() {
         return hospitalGrade;

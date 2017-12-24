@@ -71,6 +71,15 @@ public class FindUserListReq extends FindExportExcelParamsReq
     private String linkName;
     private String hospitalMail;
     private String officeTel;
+    private String area;
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
 
     public String getHospitalGrade() {
         return hospitalGrade;

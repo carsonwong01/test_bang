@@ -35,7 +35,7 @@ public interface UserInfoManageService
      * @param req
      * @return
      */
-    public BaseDataResp findHospitalUser(HospitalBasicReq req);
+    public BaseDataResp findHospitalUser(FindUserListReq req);
 
     /**
      * 后台-用户管理列表

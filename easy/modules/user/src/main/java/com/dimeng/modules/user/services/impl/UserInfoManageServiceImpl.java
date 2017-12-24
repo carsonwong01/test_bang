@@ -2,7 +2,6 @@ package com.dimeng.modules.user.services.impl;
 
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
-import com.dimeng.entity.ext.expand.FindAllHospitalResp;
 import com.dimeng.entity.ext.user.*;
 import com.dimeng.entity.table.user.TQUserBasic;
 import com.dimeng.entity.table.user.TUser;
@@ -68,23 +67,28 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
     }
 
 
-
     @SuppressWarnings("unchecked")
     @Override
-    public BaseDataResp findHospitalUser(HospitalBasicReq req){
+    public BaseDataResp findHospitalUser(FindUserListReq req)
+    {
         BaseDataResp resp = new BaseDataResp();
+        if (req != null && StringUtils.isNoneBlank(req.getIdCard()))
+        {
+            req.setIdCard(Base64Encoder.encode(req.getIdCard()));
+        }
         Map<String, Object> data = new HashMap<String, Object>();
-        QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
-        //分页
+        List<UserManageResp> userList = new ArrayList<>();
+        QueryEvent<FindUserListReq> event = new QueryEvent<FindUserListReq>();
+        //分页属性
         PageContext page = PageContext.getContext();
         page.setCurrentPage(req.getReqPageNum());
         page.setPageSize(req.getMaxResults());
-
+        //分页开关，一定要设置成true，才会分页
         page.setPagination(!StringUtil.isEmpty(req.getExportPath()) ? false : true);
+        event.setObj(req);
         event.setStatement("findHospitalUser");
-        List<FindAllHospitalResp> list = baseDao.findAllIsPageByCustom(event);
-        data.put(CommonConstant.JSON_KEY_PAGERESULT,new PageResult(page,list));
-        //用户状态码,查看用户状态
+        List<UserManageResp> list = baseDao.findAllIsPageByCustom(event);
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
         if (!StringUtil.isEmpty(req.getExportPath()))
         {
             Map<String, String> enumsValue = new HashMap<String, String>();
@@ -98,7 +102,6 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
-
 
 
     @SuppressWarnings("unchecked")

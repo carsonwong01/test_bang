@@ -1,9 +1,9 @@
 /**
  * 用户信息列表js
  */
-var hospitalUserControler=DM.constructor.sub({
+var PerInformationControler=DM.constructor.sub({
     //查询的Ajax
-    getHosUserList:function(){
+    getPerInformationList:function(){
         var _self=this;
         /* myfn.AjaxFn("user/perInformation.do",$(".viewFramework-content"),$("#dataForm").serialize());*/
         DM.ajax({
@@ -11,7 +11,7 @@ var hospitalUserControler=DM.constructor.sub({
             data:$("#dataForm").serialize(),
             success:function(data){
                 if(data){
-                    _self.setHosUserAjaxQuery(data);
+                    _self.setperInformationAjaxQuery(data);
                 }
             },
             error:function(data){
@@ -20,11 +20,11 @@ var hospitalUserControler=DM.constructor.sub({
         });
     },
     //用户信息列表填充
-    setHosUserAjaxQuery:function(data){
+    setperInformationAjaxQuery:function(data){
         var _self=this;
-        $("#hosUserId").empty();
+        $("#hosInformationId").empty();
         //填充数据
-        $('#hosUserTemplate').tmpl(data.pageResult).appendTo("#hosUserId");
+        $('#perInformationTemplate').tmpl(data.pageResult).appendTo("#hosInformationId");
         //初始化分页标签
         DM.PageTags.init({
             divId:"paging",     //放入分页的div的id
@@ -36,7 +36,7 @@ var hospitalUserControler=DM.constructor.sub({
             url:basePath+"userManage/hospitalUserListAjax.do",  //请求路径
             isAjax:true,  //是否为ajax提交  true 为是  false为表单提交
             toPageCallBack:function(data){   //返回函数
-                _self.setHosUserAjaxQuery(data);
+                _self.setperInformationAjaxQuery(data);
             }
         });
     },
@@ -65,7 +65,7 @@ var hospitalUserControler=DM.constructor.sub({
             url:"userManage/updateStatus.do",
             data:data,
             success:function(data){
-                _self.getHosUserList();
+                _self.getPerInformationList();
                 if(data.code=="000000"){
                     Dialog.confirm(wenzi+"成功！",{
                         title:"提示消息",
@@ -74,7 +74,7 @@ var hospitalUserControler=DM.constructor.sub({
                         picClass:"success", //需要时设置,该属性用来显示提示信息成功或失败的图标（success，error,tip）
                         callBack:function(){
                             //回调函数
-                            _self.getHosUserList();
+                            _self.getPerInformationList();
                         }
                     });
                 }
@@ -86,12 +86,12 @@ var hospitalUserControler=DM.constructor.sub({
     }
 });
 
-var controler=new hospitalUserControler();
+var controler=new PerInformationControler();
 //页面加载时调用
 DM.Page.ready({
 
     "用户管理":function(){
-        controler.getHosUserList();
+        controler.getPerInformationList();
     },
 
     "导出列表":function(){

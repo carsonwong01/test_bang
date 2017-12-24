@@ -6,50 +6,28 @@
 <form  id="dataForm" method="GET">
     <div class="p20">
         <div class="border">
-            <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>医院用户信息</div>
-            <%--<div class="content-container pl40 pt30 pr40">--%>
-                <%--<ul class="gray6 input-list-container clearfix">--%>
-                    <%--<li><span class="display-ib mr5">用户名：</span>--%>
-                        <%--<input type="text" name="userName" class="text border pl5 mr20" value="${HospitalBasicReq.userName }"/>--%>
-                    <%--</li>--%>
-                    <%--<li><span class="display-ib mr5">医院名称：</span>--%>
-                        <%--<input type="text" name="hospitalName" class="text border pl5 mr20" value="${HospitalBasicReq.hospitalName }"/>--%>
-                    <%--</li>--%>
-
-                    <%--<li><span class="display-ib mr5">医院类型：</span>--%>
-                        <%--<input type="text" name="hospitalType" class="text border pl5 mr20" value="${HospitalBasicReq.hospitalType }" />--%>
-                    <%--</li>--%>
-                    <%--<li><span class="display-ib mr5">注册来源：</span>--%>
-                    <%--<select class="border mr20 h32 mw100" name="source">--%>
-                    <%--<option value="">全部</option>--%>
-                    <%--<option value="1">PC</option>--%>
-                    <%--<option value="2">微信</option>--%>
-                    <%--<option value="3">安卓</option>--%>
-                    <%--<option value="4">IOS</option>--%>
-                    <%--</select>--%>
-                    <%--</li>--%>
-                    <%--<li><span class="display-ib mr5">状态：</span>--%>
-                        <%--<select class="border mr20 h32 mw100" name="status">--%>
-                            <%--<option value="">全部</option>--%>
-                            <%--<option value="1">正常</option>--%>
-                            <%--<option value="2">锁定</option>--%>
-                            <%--<option value="3">拉黑</option>--%>
-                        <%--</select>--%>
-                    <%--</li>--%>
-                    <%--<li><span class="display-ib mr5">注册时间：</span>--%>
-                        <%--<input class="text border pl5 w120 date" type=text name="staTime" id="staTime" onclick="WdatePicker({maxDate: '#F{$dp.$D(\'endTime\')}'})"  >--%>
-                        <%--<span class="pl5 pr5">至</span>--%>
-                        <%--<input class="text border pl5 w120 mr20 date" type=text name="endTime" id="endTime" onclick="WdatePicker({minDate: '#F{$dp.$D(\'staTime\')}'})">--%>
-                    <%--</li>--%>
-                    <%--<li><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick="controler.getHosUserList();"><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></li>--%>
-
-                    <%--<li>--%>
-                        <%--<shiro:hasPermission name="YHGL_YHXX_GRXX_DC">--%>
-                            <%--<a class="btn btn-blue radius-6 mr5  pl1 pr15" id="export"><i class="icon-i w30 h30 va-middle export-icon "></i>导出</a>--%>
-                        <%--</shiro:hasPermission>--%>
-                    <%--</li>--%>
-                <%--</ul>--%>
-            <%--</div>--%>
+            <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>用户信息</div>
+            <div class="content-container pl40 pt30 pr40">
+                <ul class="gray6 input-list-container clearfix">
+                    <li><span class="display-ib mr5">医院名称：</span>
+                        <input type="text" name="hospitalName" class="text border pl5 mr20" value="${findUserListReq.hospitalName }"/>
+                    </li>
+                    <li><span class="display-ib mr5">医院类型：</span>
+                        <input type="text" name="hospitalType" class="text border pl5 mr20" value="${findUserListReq.hospitalType }"/>
+                    </li>
+                    <li><span class="display-ib mr5">医院等级：</span>
+                        <input type="text" name="hospitalGrade" class="text border pl5 mr20" value="${findUserListReq.hospitalGrade }"/>
+                    </li>
+                    <li><span class="display-ib mr5">所在地区：</span>
+                        <input type="text" name="area" class="text border pl5 mr20" value="${findUserListReq.area }"/>
+                    </li>
+                    <li><span class="display-ib mr5">用户名：</span>
+                        <input type="text" name="userName" class="text border pl5 mr20" value="${findUserListReq.userName }"/>
+                    </li>
+                    <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick="controler.getPerInformationList();"><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></li>
+                    <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick=""><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></li>
+                </ul>
+            </div>
         </div>
         <div class="mt20 table-container">
             <table class="table table-style gray6 tc">
@@ -70,7 +48,7 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody class="f12" id="hosUserId">
+                <tbody class="f12" id="hosInformationId">
                 </tbody>
             </table>
         </div>
@@ -109,11 +87,11 @@
 
 <script language="javascript" src="<%=basePath %>js/easy/user/hosUserInfo.js"></script>
 <!--主体内容-->
-<script id="hosUserTemplate" type="text/x-jquery-tmpl">
+<script id="perInformationTemplate" type="text/x-jquery-tmpl">
 	{{each(i,data) list}}
  			<tr>
 	          <td class="tc">{{= i+1}}</td>
-	          <td>{{= data.userName}}</td>
+	           <td>{{= data.userName}}</td>
 			  <td>{{= data.hospitalName}}</td>
 			  <td>{{= data.hospitalType}}</td>
               <td>{{= data.hospitalGrade}}</td>

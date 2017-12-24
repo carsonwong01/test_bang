@@ -192,17 +192,18 @@
             	
             </ul>
             <ul>
-				<li>性别： 
-					{{if sex=="1"}}男{{/if}}
-					{{if sex=="2"}}女{{/if}}
-				</li> 
+				<%--<li>性别： --%>
+					<%--{{if sex=="1"}}男{{/if}}--%>
+					<%--{{if sex=="2"}}女{{/if}}--%>
+				<%--</li> --%>
+				<li>身份证号：{{= idCard}}</li>
 				<li>累计提现金额：{{= withdrawAmt}}元</li>
 				<li>累计支持次数：{{= supportCount}}次</li> 
 				<li>累计众筹成功数：{{= crowdFundingCount}}个</li>
    			</ul>
- 			<ul>
-				<li>身份证号：{{= idCard}}</li> 
-   		   </ul>
+ 			<%--<ul>--%>
+				<%--<li>身份证号：{{= idCard}}</li>--%>
+   		   <%--</ul>--%>
 </script>
 
 
