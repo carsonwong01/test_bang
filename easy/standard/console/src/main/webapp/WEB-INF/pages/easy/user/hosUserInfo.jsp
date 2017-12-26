@@ -25,7 +25,7 @@
                         <input type="text" name="userName" class="text border pl5 mr20" value="${findUserListReq.userName }"/>
                     </li>
                     <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick="controler.getPerInformationList();"><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></li>
-                    <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick=""><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></li>
+                    <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" href="<%=basePath%>userManage/addHospitalUser.do"><i class="icon-i w30 h30 va-middle"></i>添加</a></li>
                 </ul>
             </div>
         </div>

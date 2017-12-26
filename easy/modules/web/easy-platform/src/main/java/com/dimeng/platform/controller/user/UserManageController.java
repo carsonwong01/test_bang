@@ -12,6 +12,8 @@ import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.utils.FrameworkConfigurer;
 import com.dimeng.model.bus.FindProListByUserIdReq;
 import com.dimeng.model.expand.HospitalBasicReq;
+import com.dimeng.model.expand.InsertHospitalReq;
+import com.dimeng.model.home.FrontRegisterReq;
 import com.dimeng.model.home.ThirdTypeReq;
 import com.dimeng.model.message.InsertSystemVerifyCodeReq;
 import com.dimeng.model.thirdParty.loginHelp.QqLoginHelper;
@@ -62,6 +64,42 @@ public class UserManageController extends BaseController
     @Resource
     private IMessageService msgService;
 
+    /**
+     * 插入医院
+     */
+    @RequestMapping(value="/{v}/insertHosUser", method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object insertHospitalUser(HttpEntity<InsertHospitalReq> httpEntity, HttpServletRequest request)
+            throws Exception{
+        BaseDataResp resp = this.validator(httpEntity);
+//        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+//        {
+//            return resp;
+//        }
+        InsertHospitalReq req = httpEntity.getBody();
+        resp = userManageService.insertHospitalInfo(req);
+        return  resp;
+    }
+
+    /**
+     * 修改医院信息
+     */
+    @RequestMapping(value = "/{v}/updateHosInfo", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object updateHospitalInfo(HttpEntity<InsertHospitalReq> req)
+            throws Exception{
+        return userManageService.updateHosInfo(req.getBody());
+    }
+
+
+
+    /**
+     * 医院详情
+     */
     @RequestMapping(value="/{v}/findHosUserDetails", method = RequestMethod.POST,
             produces = {"application/json","application/xml"})
     @ResponseBody

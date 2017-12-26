@@ -1,8 +1,11 @@
-package com.dimeng.entity.table.hospital;
+package com.dimeng.model.expand;
 
-import java.io.Serializable;
+import com.dimeng.framework.domain.BaseReq;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
-public class THospitalBasic implements Serializable{
+public class InsertHospitalReq extends BaseReq {
+
     private String userId;
     //医院ID
     private String hospitalId;
@@ -15,6 +18,8 @@ public class THospitalBasic implements Serializable{
     private String hospitalImageId;
     private String description;
     private String linkName;
+
+    @NotBlank
     private String mobilePhone;
     private String hospitalMail;
     private String officeTel;
@@ -23,6 +28,7 @@ public class THospitalBasic implements Serializable{
     private String city;
     private String county;
     private String addr;
+    private String area;
     private String logoUrl;
     private String logoId;
     private String descriptionImageUrl;
@@ -30,18 +36,71 @@ public class THospitalBasic implements Serializable{
     private String foundTime;
     private String organizationAptitudeUrl;
     private String organizationAptitudeId;
-    private String publishStatus;
-    private String recommendStatus;
-    private String userName;
 
-    public String getUserName() {
-        return userName;
-    }
+    private String publishStatus;//是否发布
+    private String recommendStatus;//是否推荐
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    /**
+     * 来源 1 PC \r\n       2 微信\r\n       3 安卓  4IOS
+     */
+    private String source;
 
+    /**
+     * 用户头像-第三方
+     */
+    private String headPortrait;
+
+    /**
+     * 用户昵称-第三方
+     */
+    private String nickname;
+
+    /**
+     * 性别 - 第三方
+     */
+    private String sex;
+
+    /**
+     * 注册IP
+     */
+    @Length(max = 30)
+    private String lastLoginIp;
+
+    /**
+     * 注册时，手机发送的验证码
+     */
+    @NotBlank
+    private String telCode;
+
+    /**
+     * 用户认证token
+     */
+    @NotBlank
+    public String token;
+
+    /**
+     * 用户标识
+     */
+    @NotBlank
+    public String openid;
+
+    /**
+     * 授权码授权时间
+     */
+    public String tokenTime;
+
+    /**
+     * 登录授权方式-1 手机  2 微信 3 微博 4 QQ
+     */
+    @NotBlank
+    public String thirdType;
+
+    /**
+     * tonken失效时间
+     */
+    public String tokenExpireIn;
+
+    public String unionId;
     public String getPublishStatus() {
         return publishStatus;
     }
@@ -58,12 +117,119 @@ public class THospitalBasic implements Serializable{
         this.recommendStatus = recommendStatus;
     }
 
-    public String getAddr() {
-        return addr;
+
+    public String getHeadPortrait() {
+        return headPortrait;
     }
 
-    public void setAddr(String addr) {
-        this.addr = addr;
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getTelCode() {
+        return telCode;
+    }
+
+    public void setTelCode(String telCode) {
+        this.telCode = telCode;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getTokenTime() {
+        return tokenTime;
+    }
+
+    public void setTokenTime(String tokenTime) {
+        this.tokenTime = tokenTime;
+    }
+
+    public String getThirdType() {
+        return thirdType;
+    }
+
+    public void setThirdType(String thirdType) {
+        this.thirdType = thirdType;
+    }
+
+    public String getTokenExpireIn() {
+        return tokenExpireIn;
+    }
+
+    public void setTokenExpireIn(String tokenExpireIn) {
+        this.tokenExpireIn = tokenExpireIn;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    @Override
+    public String getUserId() {
+        return userId;
+    }
+
+    @Override
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getOrganizationAptitudeUrl() {
@@ -74,20 +240,12 @@ public class THospitalBasic implements Serializable{
         this.organizationAptitudeUrl = organizationAptitudeUrl;
     }
 
-    public String getOrganizationAptitudeId() {
-        return organizationAptitudeId;
+    public String getAddr() {
+        return addr;
     }
 
-    public void setOrganizationAptitudeId(String organizationAptitudeId) {
-        this.organizationAptitudeId = organizationAptitudeId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAddr(String addr) {
+        this.addr = addr;
     }
 
     public String getHospitalId() {
@@ -266,4 +424,11 @@ public class THospitalBasic implements Serializable{
         this.foundTime = foundTime;
     }
 
+    public String getOrganizationAptitudeId() {
+        return organizationAptitudeId;
+    }
+
+    public void setOrganizationAptitudeId(String organizationAptitudeId) {
+        this.organizationAptitudeId = organizationAptitudeId;
+    }
 }

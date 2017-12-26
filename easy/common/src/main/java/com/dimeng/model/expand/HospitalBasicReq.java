@@ -1,11 +1,9 @@
 package com.dimeng.model.expand;
 
-import java.util.List;
-
 public class HospitalBasicReq extends FindExportExcelParamsReq {
+    private String userId;
     //医院ID
     private String hospitalId;
-    private List<String> hospitalTypes;
     private String hospitalName;
     private String hospitalNum;
     private String hospitalGrade;
@@ -54,7 +52,7 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String source;
     private String status;
     private String registerTime;
-    private String userId;
+
 
     public String getArea() {
         return area;
@@ -168,14 +166,6 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
 
     public void setAllSupprotTimes(String allSupprotTimes) {
         this.allSupprotTimes = allSupprotTimes;
-    }
-
-    public List<String> getHospitalTypes() {
-        return hospitalTypes;
-    }
-
-    public void setHospitalTypes(List<String> hospitalTypes) {
-        this.hospitalTypes = hospitalTypes;
     }
 
     public String getHospitalId() {

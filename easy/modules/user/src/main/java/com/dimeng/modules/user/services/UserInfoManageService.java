@@ -5,16 +5,8 @@ import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.exception.ServicesException;
 import com.dimeng.model.expand.HospitalBasicReq;
-import com.dimeng.model.user.AuthenticationReq;
-import com.dimeng.model.user.FindAccMoneyListReq;
-import com.dimeng.model.user.FindByUserIdReq;
-import com.dimeng.model.user.FindFreezeProReq;
-import com.dimeng.model.user.FindThirdPartyReq;
-import com.dimeng.model.user.FindTradeListReq;
-import com.dimeng.model.user.FindUserByOpendIdReq;
-import com.dimeng.model.user.FindUserListReq;
-import com.dimeng.model.user.IsExsitIdCardReq;
-import com.dimeng.model.user.NotPageUserIdReq;
+import com.dimeng.model.expand.InsertHospitalReq;
+import com.dimeng.model.user.*;
 
 /**
  * 用户管理service
@@ -23,6 +15,17 @@ import com.dimeng.model.user.NotPageUserIdReq;
  */
 public interface UserInfoManageService
 {
+    /**
+     * 修改插入的医院信息
+     */
+    public BaseDataResp updateHosInfo(InsertHospitalReq req)
+            throws Exception;
+    /**
+     * 插入医院信息
+     * InsertHospitalReq
+     */
+    public BaseDataResp insertHospitalInfo(InsertHospitalReq req )
+            throws Exception;
 
     /**
      * 后台--医院用户详情

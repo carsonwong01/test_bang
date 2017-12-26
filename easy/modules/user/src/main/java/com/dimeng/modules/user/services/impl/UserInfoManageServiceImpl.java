@@ -3,10 +3,8 @@ package com.dimeng.modules.user.services.impl;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.ext.user.*;
-import com.dimeng.entity.table.user.TQUserBasic;
-import com.dimeng.entity.table.user.TUser;
-import com.dimeng.entity.table.user.TUserCapitalAccount;
-import com.dimeng.entity.table.user.TUserThirdParty;
+import com.dimeng.entity.table.hospital.THospitalBasic;
+import com.dimeng.entity.table.user.*;
 import com.dimeng.enums.IdCardStatusEnum;
 import com.dimeng.enums.ThirdTypeEnum;
 import com.dimeng.enums.variable.SystemVariable;
@@ -21,6 +19,7 @@ import com.dimeng.framework.service.impl.BaseServiceImpl;
 import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.framework.utils.StringUtil;
 import com.dimeng.model.expand.HospitalBasicReq;
+import com.dimeng.model.expand.InsertHospitalReq;
 import com.dimeng.model.user.*;
 import com.dimeng.modules.user.services.UserInfoManageService;
 import com.dimeng.service.INciicService;
@@ -29,6 +28,7 @@ import net.sf.ehcache.Element;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
@@ -674,5 +674,140 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
-    
+
+    /**
+     * console --insert插入医院信息
+     * InsertHospitalReq
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp insertHospitalInfo(InsertHospitalReq insertReq)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        //1.1 、新增医院信息表t_hospital_basic
+        THospitalBasic tHospitalBasic =  new THospitalBasic();
+        tHospitalBasic.setUserId(UUIDGenerate.generateShortUuid());
+        tHospitalBasic.setHospitalId(tHospitalBasic.getUserId());
+        tHospitalBasic.setHospitalName(insertReq.getHospitalName());
+        tHospitalBasic.setHospitalGrade(insertReq.getHospitalGrade());
+        tHospitalBasic.setHospitalType(insertReq.getHospitalType());
+        tHospitalBasic.setProvince(insertReq.getProvince());
+        tHospitalBasic.setCity(insertReq.getCity());
+        tHospitalBasic.setCounty(insertReq.getCounty());
+        tHospitalBasic.setAddr(insertReq.getAddr());
+        tHospitalBasic.setLogoUrl(insertReq.getLogoUrl());
+        tHospitalBasic.setHospitalAbstract(insertReq.getHospitalAbstract());
+        tHospitalBasic.setDescription(insertReq.getDescription());
+        tHospitalBasic.setOrganizationAptitudeUrl(insertReq.getOrganizationAptitudeUrl());
+        tHospitalBasic.setHospitalUrl(insertReq.getHospitalUrl());
+        tHospitalBasic.setLinkName(insertReq.getLinkName());
+        tHospitalBasic.setMobilePhone(insertReq.getMobilePhone());
+        tHospitalBasic.setOfficeTel(insertReq.getOfficeTel());
+        tHospitalBasic.setHospitalMail(insertReq.getHospitalMail());
+        tHospitalBasic.setPublishStatus(insertReq.getPublishStatus());
+        tHospitalBasic.setRecommendStatus(insertReq.getRecommendStatus());
+//      baseDao.insert(tHospitalBasic);
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tHospitalBasic))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+        }
+        //2、新增用户总表
+        TUser tuser = new TUser();
+        tuser.setUserId(tHospitalBasic.getUserId());
+        tuser.setUserName(tHospitalBasic.getMobilePhone());
+        tuser.setHospitalName(tHospitalBasic.getHospitalName());
+        tuser.setHospitalId(tuser.getUserId());
+        tuser.setUserType("1");
+        tuser.setSource("1");
+        tuser.setSourceType(CommonConstant.FOUR);
+        tuser.setMobile(tHospitalBasic.getMobilePhone());
+        tuser.setDateLastLogin(DateUtil.getNow());
+//      baseDao.insert(tuser);
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tuser))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+        }
+        //3、新增用户基本信息表 -登录授权方式，如果不是sj则说明是第三方授权登录的
+        TQUserBasic userBase = new TQUserBasic();
+        userBase.setUserId(tuser.getUserId());
+        userBase.setNickName(tHospitalBasic.getHospitalName());
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userBase))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+        }
+
+        //4、新增用户资金信息表
+        TUserCapitalAccount acc = new TUserCapitalAccount();
+        acc.setUserId(tuser.getUserId());
+        acc.setDateUpdate(DateUtil.getNow());
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(acc))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+        }
+        //5、新增用户免打扰设置信息
+        TUserNotify userNotify = new TUserNotify();
+        userNotify.setUserId(tuser.getUserId());
+        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userNotify))
+        {
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+        }
+
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+    /**
+     * 修改插入的医院信息----??????
+     */
+    @SuppressWarnings("unchecked")
+    @ResponseBody
+//    @RequiresPermissions(value = {"YHGL_YHXX_GRXX_SD", "YHGL_YHXX_GRXX_JS","YHGL_YHXX_GRXX_LH","YHGL_YHXX_GRXX_JH"}, logical = Logical.OR)
+    public BaseDataResp updateHosInfo(InsertHospitalReq updateReq)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+
+        //1、修改医院基本信息表中的内容
+        THospitalBasic tHospitalBasic = new THospitalBasic();
+
+        tHospitalBasic.setUserId(updateReq.getUserId());        //有没有必要？
+        tHospitalBasic.setHospitalId(updateReq.getUserId());    //有没有必要？
+        tHospitalBasic.setHospitalName(updateReq.getHospitalName());
+        tHospitalBasic.setHospitalGrade(updateReq.getHospitalGrade());
+        tHospitalBasic.setHospitalType(updateReq.getHospitalType());
+        tHospitalBasic.setProvince(updateReq.getProvince());
+        tHospitalBasic.setCity(updateReq.getCity());
+        tHospitalBasic.setCounty(updateReq.getCounty());
+        tHospitalBasic.setAddr(updateReq.getAddr());
+        tHospitalBasic.setLogoUrl(updateReq.getLogoUrl());//？？？？？
+        tHospitalBasic.setHospitalAbstract(updateReq.getHospitalAbstract());
+        tHospitalBasic.setDescription(updateReq.getDescription());
+        tHospitalBasic.setOrganizationAptitudeUrl(updateReq.getOrganizationAptitudeUrl());
+        tHospitalBasic.setHospitalUrl(updateReq.getHospitalUrl());
+        tHospitalBasic.setLinkName(updateReq.getLinkName());
+        tHospitalBasic.setMobilePhone(updateReq.getMobilePhone());
+        tHospitalBasic.setOfficeTel(updateReq.getOfficeTel());
+        tHospitalBasic.setHospitalMail(updateReq.getHospitalMail());
+        tHospitalBasic.setPublishStatus(updateReq.getPublishStatus());
+        tHospitalBasic.setRecommendStatus(updateReq.getRecommendStatus());
+        baseDao.update(tHospitalBasic);
+//        if (baseDao.update(tHospitalBasic) != 1)
+//        {
+//            logs.info("数据更新出错");
+//            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+//        }
+
+//        //2、修改用户表中对应医院的电话号码和用户名、医院名等
+//        TUser user = new TUser();
+//        user.setUserId(tHospitalBasic.getUserId());          //有没有必要？
+//        user.setUserName(tHospitalBasic.getMobilePhone());
+//        user.setMobile(tHospitalBasic.getMobilePhone());
+//        user.setHospitalName(tHospitalBasic.getHospitalName());
+//        if (baseDao.update(user) != 1)
+//        {
+//            logs.info("数据更新出错");
+//            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+//        }
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
 }
