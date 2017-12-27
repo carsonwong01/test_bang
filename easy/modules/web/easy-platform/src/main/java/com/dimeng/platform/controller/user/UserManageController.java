@@ -73,14 +73,7 @@ public class UserManageController extends BaseController
     @ResponseStatus(value = HttpStatus.OK)
     public Object insertHospitalUser(HttpEntity<InsertHospitalReq> httpEntity, HttpServletRequest request)
             throws Exception{
-        BaseDataResp resp = this.validator(httpEntity);
-//        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
-//        {
-//            return resp;
-//        }
-        InsertHospitalReq req = httpEntity.getBody();
-        resp = userManageService.insertHospitalInfo(req);
-        return  resp;
+        return userManageService.insertHospitalInfo(httpEntity.getBody());
     }
 
     /**

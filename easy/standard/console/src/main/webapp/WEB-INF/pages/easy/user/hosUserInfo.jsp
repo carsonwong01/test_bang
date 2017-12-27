@@ -3,7 +3,7 @@
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 
 <!--个人基础信息-->
-<form  id="dataForm" method="GET">
+<form  id="dataForm" method="post">
     <div class="p20">
         <div class="border">
             <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>用户信息</div>
@@ -25,7 +25,9 @@
                         <input type="text" name="userName" class="text border pl5 mr20" value="${findUserListReq.userName }"/>
                     </li>
                     <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick="controler.getPerInformationList();"><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></li>
-                    <li><a class="btn btn-blue radius-6 mr5 pl1 pr15" href="<%=basePath%>userManage/addHospitalUser.do"><i class="icon-i w30 h30 va-middle"></i>添加</a></li>
+                    <%--<li><a class="btn btn-blue radius-6 mr5 pl1 pr15" href="<%=basePath%>userManage/addHospitalUser.do"><i class="icon-i w30 h30 va-middle"></i>添加</a></li>--%>
+                    <li><a class="btn btn-blue radius-6 mr5  pl1 pr15 click-link" data-url="userManage/addHospitalUser.do" ><i class="icon-i w30 h30 va-middle add-icon"></i>新增</a><li>
+
                 </ul>
             </div>
         </div>
@@ -84,6 +86,13 @@
     </div>
 
 </form>
+<script type="text/javascript" language="javascript">
+function back() {
+    $("#backHome").function(
+    myfn.AjaxFn("userManage/addHospitalUser.do",$(".viewFramework-content")));
+}
+</script>
+
 
 <script language="javascript" src="<%=basePath %>js/easy/user/hosUserInfo.js"></script>
 <!--主体内容-->
@@ -125,6 +134,12 @@
     <a data-url="userManage/userInfoDetail.do?userId={{= data.userId}}" class="link-blue mr20 click-link" >查看</a>
 </shiro:hasPermission>
 
+
+<%--<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">--%>
+    <%--<a data-url="userManage/userInfoDetail.do?userId={{= data.userId}}" class="link-blue mr20 click-link" >推荐</a>--%>
+<%--</shiro:hasPermission>--%>
+
+
 				 {{if data.status=="1"}}
 				<shiro:hasPermission name="YHGL_YHXX_GRXX_SD">
     <a href="javascript:void(0);" class="link-blue mr20" onclick="controler.locking('2','{{= data.userId}}','锁定');">锁定</a>
@@ -154,3 +169,6 @@
 	        </tr>
 	{{/each}}
 </script>
+
+
+
