@@ -29,6 +29,10 @@ public class FindAllHospitalResp implements Serializable {
     private String descriptionImageUrl;
     private String descriptionImageId;
     private String foundTime;
+    private String recommendStatus;
+    private String publishStatus;
+    private String organizationAptitudeId;
+    private String organizationAptitudeUrl;
 
     private String projectId;
     private String projectName;
@@ -47,6 +51,38 @@ public class FindAllHospitalResp implements Serializable {
     private String allSupprotTimes;
     private String rate;
     private String foundationName;
+
+    public String getOrganizationAptitudeId() {
+        return organizationAptitudeId;
+    }
+
+    public void setOrganizationAptitudeId(String organizationAptitudeId) {
+        this.organizationAptitudeId = organizationAptitudeId;
+    }
+
+    public String getOrganizationAptitudeUrl() {
+        return organizationAptitudeUrl;
+    }
+
+    public void setOrganizationAptitudeUrl(String organizationAptitudeUrl) {
+        this.organizationAptitudeUrl = organizationAptitudeUrl;
+    }
+
+    public String getRecommendStatus() {
+        return recommendStatus;
+    }
+
+    public void setRecommendStatus(String recommendStatus) {
+        this.recommendStatus = recommendStatus;
+    }
+
+    public String getPublishStatus() {
+        return publishStatus;
+    }
+
+    public void setPublishStatus(String publishStatus) {
+        this.publishStatus = publishStatus;
+    }
 
     public String getAddr() {
         return addr;

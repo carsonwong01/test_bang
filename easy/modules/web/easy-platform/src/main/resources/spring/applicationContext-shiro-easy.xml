@@ -99,6 +99,8 @@
 				/hospital/v/linkMethod = anon
 				/user/userManage/v/updateHosInfo = anon
 				/user/userManage/v/insertHosUser = anon
+				/user/userManage/v/findHosUserInfo = anon
+				/user/userManage/v/updateHosRecStatus = anon
 
 
 

@@ -41,6 +41,51 @@ var PerInformationControler=DM.constructor.sub({
         });
     },
 
+    //修改hospital User 推荐 取消推荐弹窗
+    recommend:function(recommendStatus,userid,wenzi){
+        var _self=this;
+        Dialog.confirm("确认"+wenzi+"该用户?",{
+            title:wenzi+"确认",
+            sureName:"确定",
+            cancelName:"取消",
+            showCancel:true,
+            picClass:"tip", //需要时设置,该属性用来显示提示信息成功或失败的图标（success，error,tip）
+            callBack:function(){
+                _self.recommendAjax(recommendStatus,userid,wenzi);
+                //回调函数
+            }
+        });
+    },
+    //推荐  取消推荐 Ajax跳转
+    //锁定、解锁Ajax跳转
+    recommendAjax:function(recommendStatus,userId,wenzi){
+        var _self=this;
+        var data= {"recommendStatus":recommendStatus,"userId":userId};
+        DM.ajax({
+            url:"userManage/updateHosRecStatus.do",
+            data:data,
+            success:function(data){
+                _self.getPerInformationList();
+                if(data.code=="000000"){
+                    Dialog.confirm(wenzi+"成功！",{
+                        title:"提示消息",
+                        sureName:"确定",
+                        showCancel:false,                //是否显示confirm弹框的取消按钮
+                        picClass:"success", //需要时设置,该属性用来显示提示信息成功或失败的图标（success，error,tip）
+                        callBack:function(){
+                            //回调函数
+                            _self.getPerInformationList();
+                        }
+                    });
+                }
+            },
+            error:function(data){
+
+            }
+        });
+    },
+
+
     //锁定、解锁、拉黑、取消拉黑弹窗
     locking:function(userStatus,userid,wenzi){
         var _self=this;

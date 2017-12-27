@@ -175,6 +175,7 @@
 			hospital_name hospitalName
 		FROM
 			t_hospital_basic
+		WHERE t_hospital_basic.recommend_status = '1'
 		ORDER BY t_hospital_basic.hospital_id DESC
 		LIMIT 0,17
 	</select>

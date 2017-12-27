@@ -52,7 +52,7 @@ public class HospitalUserManagerController extends BaseController {
      * 修改医院信息
      */
     @ResponseBody
-    @RequestMapping("/updateHospitalInfo.do")
+    @RequestMapping("/updateHospitalInfoAjax.do")
     public Object updateHospitalInfo(InsertHospitalReq req,HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> map = new HashMap<String, Object>();
         String hospitalInfo =
@@ -62,5 +62,31 @@ public class HospitalUserManagerController extends BaseController {
         map.put("code", code);
         return map;
     }
+    /**
+     * 获取医院info--后台--医院详情
+     */
+    @RequestMapping(value = "/updateHosUserInfo.do")
+    public Object findHosUserInfo(HttpServletRequest request,
+                                  HttpServletResponse response,HospitalBasicReq req){
+        ModelAndView mv = new ModelAndView("pages/easy/user/updateHosUser");
+        String data = new CommonUtil().callInterfaceMethod(req,
+                "user/userManage/v/findHosUserInfo",RequestMethod.POST,request);
+        JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
+        mv.addObject("updateHosUserInfo",object);
+        return mv;
+    }
 
+    /**
+     * 修改医院用户的推荐状态
+     */
+    @RequestMapping(value = "/updateHosRecStatus.do")
+    public Object updateHosRecStatus(HttpServletRequest request,HttpServletResponse response,
+                                HospitalBasicReq req){
+        Map<String, Object> map = new HashMap<String, Object>();
+        String data = new CommonUtil().callInterfaceMethod(req,"user/userManage/v/updateHosRecStatus",
+                                RequestMethod.POST,request);
+        String code = CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_CODE).toString();
+        map.put("code", code);
+        return map;
+    }
 }

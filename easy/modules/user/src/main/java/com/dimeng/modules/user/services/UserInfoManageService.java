@@ -16,6 +16,16 @@ import com.dimeng.model.user.*;
 public interface UserInfoManageService
 {
     /**
+     * 修改医院的推荐状态
+     */
+    public BaseDataResp updateHosRecStatus(HospitalBasicReq req)
+            throws Exception;
+    /**
+     * 修改医院信息时先获取已有的信息
+     */
+    public BaseDataResp findHosUserInfo(HospitalBasicReq req)
+            throws Exception;
+    /**
      * 修改插入的医院信息
      */
     public BaseDataResp updateHosInfo(InsertHospitalReq req)

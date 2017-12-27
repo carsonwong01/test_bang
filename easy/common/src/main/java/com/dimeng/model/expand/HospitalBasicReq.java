@@ -28,6 +28,9 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String descriptionImageId;
     private String foundTime;
     private String organizationAptitudeUrl;
+    private String organizationAptitudeId;
+    private String recommendStatus;
+    private String publishStatus;
 
     private String projectId;
     private String projectName;
@@ -53,6 +56,29 @@ public class HospitalBasicReq extends FindExportExcelParamsReq {
     private String status;
     private String registerTime;
 
+    public String getOrganizationAptitudeId() {
+        return organizationAptitudeId;
+    }
+
+    public void setOrganizationAptitudeId(String organizationAptitudeId) {
+        this.organizationAptitudeId = organizationAptitudeId;
+    }
+
+    public String getRecommendStatus() {
+        return recommendStatus;
+    }
+
+    public void setRecommendStatus(String recommendStatus) {
+        this.recommendStatus = recommendStatus;
+    }
+
+    public String getPublishStatus() {
+        return publishStatus;
+    }
+
+    public void setPublishStatus(String publishStatus) {
+        this.publishStatus = publishStatus;
+    }
 
     public String getArea() {
         return area;

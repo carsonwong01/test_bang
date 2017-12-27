@@ -76,6 +76,7 @@
         ON t.proCreatorId = t_hospital_basic.hospital_id
 
         where 1 = 1
+        AND  t_hospital_basic.publish_status = '1'
         <if test="hospitalName != null and hospitalName != ''">
             and t_hospital_basic.hospital_name LIKE CONCAT
             ('%',trim(#{hospitalName,jdbcType=VARCHAR}),'%')
@@ -92,7 +93,7 @@
         hospital_image_url hospitalImageUrl,    hospital_image_id hospitalImageId,
         link_name linkName,    hospital_mail hospitalMail,
         mobile_phone mobilePhone,    office_tel officeTel,
-        hospital_url hospitalUrl,    province province,
+        hospital_url hospitalUrl,    province province, addr addr,
         city city,    county county,    logo_url logoUrl,
         logo_id logoId,    description_image_url descriptionImageUrl,
         description_image_id descriptionImageId,    description description,

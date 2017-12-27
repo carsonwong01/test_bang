@@ -133,7 +133,8 @@
                 <ul class='loko'>
                     <li>医院联系电话：${hospitalDetails.officeTel}</li>
                     <li>医院联系邮箱：${hospitalDetails.hospitalMail}</li>
-                    <li>医院联系地址：${hospitalDetails.city}</li>
+                    <li>医院联系地址：${hospitalDetails.province}${hospitalDetails.city}
+                        ${hospitalDetails.county}${hospitalDetails.addr}</li>
                 </ul>
             </div>
             <div class='problem'>

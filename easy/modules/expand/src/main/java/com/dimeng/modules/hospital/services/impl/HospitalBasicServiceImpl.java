@@ -51,7 +51,6 @@ public class HospitalBasicServiceImpl extends BaseServiceImpl implements IHospit
     @SuppressWarnings("unchecked")
     @Override
     public BaseDataResp getHospitalDetails(HospitalBasicReq req) throws Exception {
-        //去掉前后空格
         QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
         event.setStatement("findHospitalDetails");
         event.setObj(req);

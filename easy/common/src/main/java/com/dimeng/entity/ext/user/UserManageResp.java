@@ -85,6 +85,25 @@ public class UserManageResp implements Serializable
     private String province;
     private String city;
     private String area;
+    private String publishStatus;
+    private String recommendStatus;
+
+    public String getPublishStatus() {
+        return publishStatus;
+    }
+
+    public void setPublishStatus(String publishStatus) {
+        this.publishStatus = publishStatus;
+    }
+
+    public String getRecommendStatus() {
+        return recommendStatus;
+    }
+
+    public void setRecommendStatus(String recommendStatus) {
+        this.recommendStatus = recommendStatus;
+    }
+
 
     public String getArea() {
         return area;

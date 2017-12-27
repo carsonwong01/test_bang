@@ -2,6 +2,7 @@ package com.dimeng.modules.user.services.impl;
 
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
+import com.dimeng.entity.ext.expand.FindAllHospitalResp;
 import com.dimeng.entity.ext.user.*;
 import com.dimeng.entity.table.hospital.THospitalBasic;
 import com.dimeng.entity.table.user.*;
@@ -42,6 +43,44 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
 {
     @Autowired
     private INciicService iNciicService;
+
+    /**
+     * 修改医院的推荐状态
+     */
+    public BaseDataResp updateHosRecStatus(HospitalBasicReq req)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        THospitalBasic tHospitalBasic = new THospitalBasic();
+        tHospitalBasic.setUserId(req.getUserId());
+        tHospitalBasic.setRecommendStatus(req.getRecommendStatus());
+        if (baseDao.update(tHospitalBasic) != 1)
+        {
+            logs.info("数据更新出错");
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+        }
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+    /**
+     * 修改医院信息前获取医院现有的信息
+     * @param req
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findHosUserInfo(HospitalBasicReq req) throws Exception{
+        QueryEvent<HospitalBasicReq> event = new QueryEvent<HospitalBasicReq>();
+        event.setStatement("findHospitalInfo");
+        event.setObj(req);
+        FindAllHospitalResp findAllHospitalResp = (FindAllHospitalResp) baseDao.findOneByCustom(event);
+        Map<String, Object> data = new HashMap<String, Object>();
+        data.put(CommonConstant.JSON_KEY_SINGLE_RESULT, findAllHospitalResp);
+
+        BaseDataResp resp = new BaseDataResp();
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
 
 
     @SuppressWarnings("unchecked")
@@ -761,7 +800,6 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
      */
     @SuppressWarnings("unchecked")
     @ResponseBody
-//    @RequiresPermissions(value = {"YHGL_YHXX_GRXX_SD", "YHGL_YHXX_GRXX_JS","YHGL_YHXX_GRXX_LH","YHGL_YHXX_GRXX_JH"}, logical = Logical.OR)
     public BaseDataResp updateHosInfo(InsertHospitalReq updateReq)
             throws Exception{
         BaseDataResp resp = new BaseDataResp();
@@ -797,16 +835,16 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
 //        }
 
 //        //2、修改用户表中对应医院的电话号码和用户名、医院名等
-//        TUser user = new TUser();
-//        user.setUserId(tHospitalBasic.getUserId());          //有没有必要？
-//        user.setUserName(tHospitalBasic.getMobilePhone());
-//        user.setMobile(tHospitalBasic.getMobilePhone());
-//        user.setHospitalName(tHospitalBasic.getHospitalName());
-//        if (baseDao.update(user) != 1)
-//        {
-//            logs.info("数据更新出错");
-//            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
-//        }
+        TUser user = new TUser();
+        user.setUserId(tHospitalBasic.getUserId());          //有没有必要？
+        user.setUserName(tHospitalBasic.getMobilePhone());
+        user.setMobile(tHospitalBasic.getMobilePhone());
+        user.setHospitalName(tHospitalBasic.getHospitalName());
+        if (baseDao.update(user) != 1)
+        {
+            logs.info("数据更新出错");
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+        }
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }

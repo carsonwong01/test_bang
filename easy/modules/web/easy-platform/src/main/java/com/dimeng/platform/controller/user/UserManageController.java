@@ -88,6 +88,40 @@ public class UserManageController extends BaseController
         return userManageService.updateHosInfo(req.getBody());
     }
 
+    /**
+     * 后台用户管理-医院用户推荐信息修改(推荐，取消推荐)
+     * @param req
+     * @return
+     * @author "song"
+     * @throws Exception
+     */
+    @RequestMapping(value = "/{v}/updateHosRecStatus", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object recommendHosUser(HttpEntity<HospitalBasicReq> req)
+            throws Exception
+    {
+        return userManageService.updateHosRecStatus(req.getBody());
+    }
+
+
+
+    /**
+     * 医院info
+     */
+    @RequestMapping(value="/{v}/findHosUserInfo", method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findHosUserInfo(HttpEntity<HospitalBasicReq> httpEntity) throws Exception{
+        BaseDataResp resp = this.validator(httpEntity);
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        return userManageService.findHosUserInfo(httpEntity.getBody());
+    }
 
 
     /**
@@ -133,7 +167,7 @@ public class UserManageController extends BaseController
     {
         return userManageService.findUserList(req.getBody());
     }
-    
+
     /**
      * 后台用户管理-用户信息修改(锁定、解锁、拉黑、取消拉黑)
      * @param req

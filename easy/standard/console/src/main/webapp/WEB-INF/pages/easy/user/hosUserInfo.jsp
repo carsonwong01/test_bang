@@ -86,13 +86,6 @@
     </div>
 
 </form>
-<script type="text/javascript" language="javascript">
-function back() {
-    $("#backHome").function(
-    myfn.AjaxFn("userManage/addHospitalUser.do",$(".viewFramework-content")));
-}
-</script>
-
 
 <script language="javascript" src="<%=basePath %>js/easy/user/hosUserInfo.js"></script>
 <!--主体内容-->
@@ -135,9 +128,20 @@ function back() {
 </shiro:hasPermission>
 
 
-<%--<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">--%>
-    <%--<a data-url="userManage/userInfoDetail.do?userId={{= data.userId}}" class="link-blue mr20 click-link" >推荐</a>--%>
-<%--</shiro:hasPermission>--%>
+<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">
+    <a data-url="userManage/updateHosUserInfo.do?userId={{= data.userId}}" class="link-blue mr20 click-link" >编辑</a>
+</shiro:hasPermission>
+
+	 {{if data.recommendStatus=="1"}}
+				<shiro:hasPermission name="YHGL_YHXX_GRXX_SD">
+    <a href="javascript:void(0);" class="link-blue mr20" onclick="controler.recommend('2','{{= data.userId}}','取消推荐');">取消推荐</a>
+</shiro:hasPermission>
+				 {{/if}}
+{{if data.recommendStatus=="2"}}
+				<shiro:hasPermission name="YHGL_YHXX_GRXX_SD">
+    <a href="javascript:void(0);" class="link-blue mr20" onclick="controler.recommend('1','{{= data.userId}}','推荐');">推荐</a>
+</shiro:hasPermission>
+				 {{/if}}
 
 
 				 {{if data.status=="1"}}

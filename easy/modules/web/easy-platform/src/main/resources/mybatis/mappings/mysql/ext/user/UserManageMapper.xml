@@ -24,6 +24,8 @@
 		<result column="city" property="city"/>
 		<result column="province" property="province"/>
 		<result column="area" property="area"/>
+		<result column="publish_status" property="publishStatus"/>
+		<result column="recommend_status" property="recommendStatus"/>
 	</resultMap>
 		
 	<resultMap type="com.dimeng.entity.ext.user.UserInfoQscDetailResp" id="FindUserdetailResqResultMap">
@@ -71,7 +73,31 @@
 		<result column="area" property="area"/>
 	</resultMap>
 
+	<!--根据ID查找医院详细信息-用于在修改医院信息时展示-->
+	<select id="findHospitalInfo" resultType="com.dimeng.entity.ext.expand.FindAllHospitalResp"
+			parameterType="com.dimeng.model.expand.HospitalBasicReq">
+		SELECT
+		user_id userId,
+		hospital_id hospitalId,    hospital_name hospitalName,
+		hospital_num hospitalNum,    hospital_grade hospitalGrade,
+		hospital_type hospitalType,    hospital_abstract hospitalAbstract,
+		hospital_image_url hospitalImageUrl,    hospital_image_id hospitalImageId,
+		link_name linkName,    hospital_mail hospitalMail,
+		mobile_phone mobilePhone,    office_tel officeTel,
+		hospital_url hospitalUrl,    province province, addr addr,
+		city city,    county county,    logo_url logoUrl,
+		logo_id logoId,    description_image_url descriptionImageUrl,
+		description_image_id descriptionImageId,    description description,
+		found_time foundTime, publish_status publishStatus, recommend_status recommendStatus,
+		organization_aptitude_id organizationAptitudeId, organization_aptitude_url organizationAptitudeUrl
 
+		FROM t_hospital_basic
+		where 1=1
+		<choose>
+			<when test="userId != null and userId != ''">and t_hospital_basic.user_id=#{userId,jdbcType=VARCHAR}</when>
+			<otherwise>and t_hospital_basic.user_id = ''</otherwise>
+		</choose>
+	</select>
 
 
 	<!-- 后台-用户管理-医院用户信息列表 -->
@@ -83,7 +109,8 @@
 		ba.id_card,		t.area,
 		thb.hospital_name, thb.hospital_grade, thb.hospital_type,
 		thb.link_name,thb.mobile_phone,
-		thb.hospital_mail,thb.office_tel,thb.province,thb.city
+		thb.hospital_mail,thb.office_tel,thb.province,thb.city,
+		thb.publish_status,thb.recommend_status
 		FROM  t_hospital_basic thb
 		LEFT JOIN t_user u ON thb.hospital_id = u.user_id
 		LEFT JOIN t_q_user_basic ba ON u.user_id = ba.user_id
@@ -326,12 +353,6 @@
     <result column="city" property="cityId" jdbcType="VARCHAR" />
   </resultMap>
 
-
-
-
-
-
-	 
 	<!-- 根据手机号查询用户信息 登录用-->
 	<select id="findLoginUserInfo" resultMap="FrontUserLoginResultMap" parameterType="com.dimeng.model.user.FindUserListReq">
 		select 
