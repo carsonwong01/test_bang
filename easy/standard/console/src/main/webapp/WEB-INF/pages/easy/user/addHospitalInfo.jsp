@@ -1,6 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/easy/user/css/public.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/easy/user/css/entryinformation.css">
-<!--新手指南新增-->
+<!--新增-->
 <div class='base'>
 <form method="post" id="mForm">
     <div class='utop'>医院基本信息</div>
@@ -43,7 +44,7 @@
         <label class='fl'>＊医院封面图片</label>
         <img class='fl' id="show1"></span>
         <p class='fl p-iut'>
-            <input type="file" name='' value='' onchange="cover()" id="file1" >
+            <input type="file" name="logoFile" value='' onchange="cover()" id="file1" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -59,14 +60,14 @@
         <div class='clear'></div>
     </div>
     <%--<li class="mb20">--%>
-        <%--<div class="pr mh30 pl120"><span class="display-ib w100 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>内容</span>--%>
-            <%--<div class="pr tl clearfix">--%>
-                <%--<div class="ww60 fl">--%>
-                    <%--<textarea cols="100" rows="4" style="width:700px;height:300px;visibility:hidden;" class="border h200 ww100" validate="q" name="content" id="content"></textarea>--%>
-                <%--</div>--%>
-                <%--<div class="fl ww40"><span class="pl10 pr10 display-ib"></span></div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
+    <%--<div class="pr mh30 pl120"><span class="display-ib w100 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>内容</span>--%>
+    <%--<div class="pr tl clearfix">--%>
+    <%--<div class="ww60 fl">--%>
+    <%--<textarea cols="100" rows="4" style="width:700px;height:300px;visibility:hidden;" class="border h200 ww100" validate="q" name="content" id="content"></textarea>--%>
+    <%--</div>--%>
+    <%--<div class="fl ww40"><span class="pl10 pr10 display-ib"></span></div>--%>
+    <%--</div>--%>
+    <%--</div>--%>
     <%--</li>--%>
     <div class='hostms'>
         <label>＊医院网址</label>
@@ -101,21 +102,64 @@
         </p>
     </div>
     <div class='but-sibm'>
-        <a class="" onclick="addUser()">提交</a>
+        <a class="" id="addHosUser" href="javascript:void(0);">提交</a>
         <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
-
+        <%--onclick="addUser()"  id="addHosUser" href="javascript:void(0);" --%>
     </div>
     <%--<div class="tl pl120 f16 pb20"><a href="javascript:void(0);" id="addAdvert" class="btn-blue2 btn white radius-6 pl20 pr20 ml20 mr20">发布</a>--%>
-        <%--<a href="javascript:void(0)" onclick="closeInfo()" class="btn btn-gray radius-6 pl20 pr20 ml20 mr20">取消</a>--%>
+    <%--<a href="javascript:void(0)" onclick="closeInfo()" class="btn btn-gray radius-6 pl20 pr20 ml20 mr20">取消</a>--%>
     <%--</div>--%>
 
-<%--<div class="pr mh30 pl120"><span class="display-ib"><em class="red pr5">*</em>标题</span>--%>
-        <%--<div class="pr">--%>
-            <%--<input type="text" class="focus_text"  validate="q" name="title" id=""  maxlength="20">--%>
+    <%--<div class="pr mh30 pl120"><span class="display-ib"><em class="red pr5">*</em>标题</span>--%>
+    <%--<div class="pr">--%>
+    <%--<input type="text" class="focus_text"  validate="q" name="title" id=""  maxlength="20">--%>
+    <%--</div>--%>
+    <%--</div>--%>
+
+    <%--<div class="fl">--%>
+        <%--<!--标题-->--%>
+            <%--<ul class="gray6 pt50">--%>
+                <%--<li class="mb20">--%>
+                    <%--<div class="pr mh30 pl120"><span class="display-ib w100 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>广告图片</span>--%>
+                        <%--<div class="pr tl clearfix">--%>
+                            <%--<div class="clearfix">--%>
+                                <%--<img src="<%=basePath%>images/agency-icon-3.png" id="showPic1" class="border p2 fl mr10" width="160" height="160">--%>
+                                <%--<div class="fl w400"><input type="file" name="logoFile" id="advertImage" class="ui-upload-input"/><span class="pl10 pr10 display-ib fl">最佳分辨率 PC端：1920px*500px APP端：750px*430px 支持jpg、png、jpeg格式</span></div>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</li>--%>
+            <%--</ul>--%>
+            <%--<div class="tl pl120 f16 pb20"><a href="javascript:void(0);" id="addHosUser" class="btn-blue2 btn white radius-6 pl20 pr20 ml20 mr20">发布</a><a href="javascript:void(0)" onclick="closeInfo()" class="btn btn-gray radius-6 pl20 pr20 ml20 mr20">取消</a></div>--%>
         <%--</div>--%>
     <%--</div>--%>
 </form>
 </div>
+
+<script type="text/javascript" src="<%=basePath%>js/easy/user/addHospitalInfo.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#advertImage").uploadPreview({ Img: "showPic1" });//图片预览
+    });
+
+    DM.Page.ready({
+        "初始化":function(){
+            //ajax表单提交
+            var controller=new AdvertImageRecord();
+            DM.Util.ajaxForm({
+                formId:"mForm",        //表单id
+                url:"userManage/addHospitalUserAjax.do",//后台处理地址
+                success:controller.returnPageBasic  // 提交后的回调函数
+            });
+        }
+    })
+
+    $("#backHome").click(function(){
+        myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
+    });
+
+</script>
 <script>
     function c () {
         var r= new FileReader();
@@ -136,41 +180,35 @@
         };
     }
 </script>
-<script type="text/javascript" language="javascript">
-    //增加校验模式
-    dmCheck.init("#mForm");
-    function addUser(){
-        if(!dmCheck.check("#mForm")){
-            return false;
-        }
-        //提交数据
-        DM.ajax({
-            url:"userManage/addHospitalUserAjax.do",
-            type:"post",
-            data:$('#mForm').serialize(),
-            success:function(data){
-                //显示提示信息
-                if("000000"==data.code){
-                    Dialog.show("新增成功","success");
-                    myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
-                } else if(data.code=='600007'){
-                    Dialog.show("保存失败，输入的文章內容过大","error");
-                } else{
-                    Dialog.show(data.description,"error");
-                }
-            },
-            error:function(){
-                Dialog.show("新增失败","error");
-            }});
-    }
 
-    $("#backHome").click(function(){
-        /*if(dmCheck.check("#projectForm")){
-        }*/
-        myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
-
-    });
-</script>
+<%--<script type="text/javascript" language="javascript">--%>
+    <%--//增加校验模式--%>
+    <%--dmCheck.init("#mForm");--%>
+    <%--function addUser(){--%>
+        <%--if(!dmCheck.check("#mForm")){--%>
+            <%--return false;--%>
+        <%--}--%>
+        <%--//提交数据--%>
+        <%--DM.ajax({--%>
+            <%--url:"userManage/addHospitalUserAjax.do",--%>
+            <%--type:"post",--%>
+            <%--data:$('#mForm').serialize(),--%>
+            <%--success:function(data){--%>
+                <%--//显示提示信息--%>
+                <%--if("000000"==data.code){--%>
+                    <%--Dialog.show("新增成功","success");--%>
+                    <%--myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));--%>
+                <%--} else if(data.code=='600007'){--%>
+                    <%--Dialog.show("保存失败，输入的文章內容过大","error");--%>
+                <%--} else{--%>
+                    <%--Dialog.show(data.description,"error");--%>
+                <%--}--%>
+            <%--},--%>
+            <%--error:function(){--%>
+                <%--Dialog.show("新增失败","error");--%>
+            <%--}});--%>
+    <%--}--%>
+<%--</script>--%>
 
 <script type="text/javascript">
     var editor1;

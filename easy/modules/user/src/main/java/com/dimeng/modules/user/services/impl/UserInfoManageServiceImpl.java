@@ -44,6 +44,27 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
     private INciicService iNciicService;
 
     /**
+     * 插入医院的logo
+     */
+    public BaseDataResp insertHosLogo(HospitalBasicReq req)
+            throws Exception{
+
+
+        return null;
+    }
+
+    /**
+     * 插入医院的组织机构证明
+     */
+    public BaseDataResp insertHosptitude(HospitalBasicReq req)
+            throws Exception{
+
+
+
+        return null;
+    }
+
+    /**
      * 修改医院的推荐状态
      */
     public BaseDataResp updateHosRecStatus(HospitalBasicReq req)

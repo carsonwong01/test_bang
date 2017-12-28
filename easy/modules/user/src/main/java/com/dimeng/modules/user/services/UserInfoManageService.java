@@ -16,6 +16,16 @@ import com.dimeng.model.user.*;
 public interface UserInfoManageService
 {
     /**
+     * 插入医院的组织机构证明
+     */
+    public BaseDataResp insertHosptitude(HospitalBasicReq req)
+            throws Exception;
+    /**
+     * 插入医院的logo
+     */
+    public BaseDataResp insertHosLogo(HospitalBasicReq req)
+            throws Exception;
+    /**
      * 修改医院的推荐状态
      */
     public BaseDataResp updateHosRecStatus(HospitalBasicReq req)
