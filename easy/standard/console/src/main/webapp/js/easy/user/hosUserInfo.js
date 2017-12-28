@@ -57,7 +57,6 @@ var PerInformationControler=DM.constructor.sub({
         });
     },
     //推荐  取消推荐 Ajax跳转
-    //锁定、解锁Ajax跳转
     recommendAjax:function(recommendStatus,userId,wenzi){
         var _self=this;
         var data= {"recommendStatus":recommendStatus,"userId":userId};

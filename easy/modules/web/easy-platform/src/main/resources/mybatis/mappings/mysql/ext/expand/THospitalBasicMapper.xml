@@ -378,8 +378,8 @@
     <update id="updateTHospitalBasic" parameterType="com.dimeng.entity.table.hospital.THospitalBasic">
         UPDATE t_hospital_basic
         <set>
-            <if test="userName != null" >
-                user_name = #{userName,jdbcType=VARCHAR},
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=VARCHAR},
             </if>
             <if test="hospitalId != null" >
                 hospital_id = #{hospitalId,jdbcType=VARCHAR},
@@ -454,13 +454,13 @@
                 organization_aptitude_url = #{organizationAptitudeUrl,jdbcType=VARCHAR},
             </if>
             <if test="organizationAptitudeId != null" >
-                organization_aptitude_id = #{organizationAptitudeId,jdbcType=VARCHAR}
+                organization_aptitude_id = #{organizationAptitudeId,jdbcType=VARCHAR},
             </if>
             <if test="publishStatus != null" >
-                publish_status = #{publishStatus,jdbcType=VARCHAR}
+                publish_status = #{publishStatus,jdbcType=VARCHAR},
             </if>
             <if test="recommendStatus != null" >
-                recommend_status = #{recommendStatus,jdbcType=VARCHAR}
+                recommend_status = #{recommendStatus,jdbcType=VARCHAR},
             </if>
         </set>
         where user_id = #{userId,jdbcType=VARCHAR}

@@ -29,7 +29,6 @@ import net.sf.ehcache.Element;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 
@@ -799,11 +798,9 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
      * 修改插入的医院信息----??????
      */
     @SuppressWarnings("unchecked")
-    @ResponseBody
     public BaseDataResp updateHosInfo(InsertHospitalReq updateReq)
             throws Exception{
         BaseDataResp resp = new BaseDataResp();
-
         //1、修改医院基本信息表中的内容
         THospitalBasic tHospitalBasic = new THospitalBasic();
 
@@ -827,19 +824,20 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         tHospitalBasic.setHospitalMail(updateReq.getHospitalMail());
         tHospitalBasic.setPublishStatus(updateReq.getPublishStatus());
         tHospitalBasic.setRecommendStatus(updateReq.getRecommendStatus());
-        baseDao.update(tHospitalBasic);
-//        if (baseDao.update(tHospitalBasic) != 1)
-//        {
-//            logs.info("数据更新出错");
-//            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
-//        }
+//        baseDao.update(tHospitalBasic);
+        if (baseDao.update(tHospitalBasic) != 1)
+        {
+            logs.info("数据更新出错");
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+        }
 
 //        //2、修改用户表中对应医院的电话号码和用户名、医院名等
         TUser user = new TUser();
-        user.setUserId(tHospitalBasic.getUserId());          //有没有必要？
+        user.setUserId(tHospitalBasic.getHospitalId());          //有没有必要？
         user.setUserName(tHospitalBasic.getMobilePhone());
         user.setMobile(tHospitalBasic.getMobilePhone());
         user.setHospitalName(tHospitalBasic.getHospitalName());
+//        baseDao.update(user);
         if (baseDao.update(user) != 1)
         {
             logs.info("数据更新出错");
@@ -848,4 +846,5 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
+
 }

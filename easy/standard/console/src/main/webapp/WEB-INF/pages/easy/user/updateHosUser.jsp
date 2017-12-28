@@ -114,6 +114,7 @@
             <%--<input type="text" class="focus_text"  validate="q" name="title" id=""  maxlength="20">--%>
         <%--</div>--%>
     <%--</div>--%>
+    <li class='ldr' datr='${updateHosUserInfo.userId}'></li>
 </form>
 </div>
 <script>
@@ -137,6 +138,8 @@
     }
 </script>
 <script type="text/javascript" language="javascript">
+    var userId = $('.ldr').attr('datr');
+//    alert(userId);
     //增加校验模式
     dmCheck.init("#mForm");
     function updateUser(){
@@ -145,7 +148,7 @@
         }
         //提交数据
         DM.ajax({
-            url:"userManage/updateHospitalInfoAjax.do",
+            url:"userManage/updateHospitalInfoAjax.do?userId="+userId,
             type:"post",
             data:$('#mForm').serialize(),
             success:function(data){
@@ -160,7 +163,7 @@
                 }
             },
             error:function(){
-                Dialog.show("新增失败","error");
+                Dialog.show("修改失败","error");
             }});
     }
 

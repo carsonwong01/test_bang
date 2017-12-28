@@ -16,9 +16,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jsp-api" level="project" />
-    <orderEntry type="library" name="servlet-api" level="project" />
-    <orderEntry type="library" name="tiles-api-3.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.dimeng.platform.base.modules:Base-web-platform:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.dimeng.platform.base.modules:Base-service-message:2.0.0" level="project" />
     <orderEntry type="module" module-name="Base-smses-service-weilaiwuxian" />

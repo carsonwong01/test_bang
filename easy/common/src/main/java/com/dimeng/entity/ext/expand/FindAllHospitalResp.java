@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class FindAllHospitalResp implements Serializable {
+    private String userId;
     //医院ID
     private List<String> hospitalTypes;
     private String hospitalId;
@@ -51,6 +52,14 @@ public class FindAllHospitalResp implements Serializable {
     private String allSupprotTimes;
     private String rate;
     private String foundationName;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getOrganizationAptitudeId() {
         return organizationAptitudeId;
