@@ -44,6 +44,7 @@ public class HospitalUserManagerController extends BaseController {
     @ResponseBody
     @RequestMapping("/addHospitalUserAjax.do")
     public Object addHospitalUserAjax(@RequestParam(value = "logoFile",required = false) MultipartFile logoFile,
+                                      @RequestParam(value = "aptitudeFile",required = false) MultipartFile aptitudeFile,
                               HttpServletRequest request, HttpServletResponse response,InsertHospitalReq req){
         response.setContentType("text/html;charset=utf-8");
         response.setHeader("Cache-Control", "no-cache");
@@ -60,6 +61,18 @@ public class HospitalUserManagerController extends BaseController {
             req.setLogoUrl((String)map.get("url"));
             req.setUserId(user.getUserId());
         }
+        if (aptitudeFile != null && !aptitudeFile.isEmpty()) {
+            if (!StringUtil.isEmpty(req.getOrganizationAptitudeId())) {
+                new FilesHandleUtil();
+                FilesHandleUtil.deleteFile(req.getOrganizationAptitudeId());
+            }
+
+            new FilesHandleUtil();
+            Map<String, String> map = FilesHandleUtil.saveFile(aptitudeFile, user.getUserId());
+            req.setOrganizationAptitudeId((String)map.get("batchNumber"));
+            req.setOrganizationAptitudeUrl((String)map.get("url"));
+            req.setUserId(user.getUserId());
+        }
         String data =
                 new CommonUtil().callInterfaceMethod(req, "user/userManage/v/insertHosUser",
                         RequestMethod.POST, request);
@@ -71,14 +84,37 @@ public class HospitalUserManagerController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/updateHospitalInfoAjax.do")
-    public Object updateHospitalInfo(InsertHospitalReq req,HttpServletRequest request, HttpServletResponse response){
-        Map<String, Object> map = new HashMap<String, Object>();
+    public Object updateHospitalInfo(@RequestParam(value = "logoFile",required = false) MultipartFile logoFile,
+                                     @RequestParam(value = "aptitudeFile",required = false) MultipartFile aptitudeFile,
+            InsertHospitalReq req,HttpServletRequest request, HttpServletResponse response){
+        response.setContentType("text/html;charset=utf-8");
+        response.setHeader("Cache-Control", "no-cache");
+        if (aptitudeFile != null && !aptitudeFile.isEmpty()) {
+            if (!StringUtil.isEmpty(req.getOrganizationAptitudeId())) {
+                new FilesHandleUtil();
+                FilesHandleUtil.deleteFile(req.getOrganizationAptitudeId());
+            }
+
+            new FilesHandleUtil();
+            Map<String, String> map = FilesHandleUtil.saveFile(aptitudeFile, (String)null);
+            req.setOrganizationAptitudeId((String)map.get("batchNumber"));
+            req.setOrganizationAptitudeUrl((String)map.get("url"));
+        }
+        if (logoFile != null && !logoFile.isEmpty()) {
+            if (!StringUtil.isEmpty(req.getLogoId())) {
+                new FilesHandleUtil();
+                FilesHandleUtil.deleteFile(req.getLogoId());
+            }
+
+            new FilesHandleUtil();
+            Map<String, String> map = FilesHandleUtil.saveFile(logoFile, (String)null);
+            req.setLogoId((String)map.get("batchNumber"));
+            req.setLogoUrl((String)map.get("url"));
+        }
         String hospitalInfo =
                 new CommonUtil().callInterfaceMethod(req, "user/userManage/v/updateHosInfo", RequestMethod.POST, request);
-        //错误编码
-        String code = CommonUtil.getJSONObject(hospitalInfo, CommonConstant.JSON_KEY_CODE).toString();
-        map.put("code", code);
-        return map;
+        JSONObject json = JSONObject.parseObject(hospitalInfo);
+        return json;
     }
     /**
      * 获取医院info--后台--医院详情

@@ -44,27 +44,6 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
     private INciicService iNciicService;
 
     /**
-     * 插入医院的logo
-     */
-    public BaseDataResp insertHosLogo(HospitalBasicReq req)
-            throws Exception{
-
-
-        return null;
-    }
-
-    /**
-     * 插入医院的组织机构证明
-     */
-    public BaseDataResp insertHosptitude(HospitalBasicReq req)
-            throws Exception{
-
-
-
-        return null;
-    }
-
-    /**
      * 修改医院的推荐状态
      */
     public BaseDataResp updateHosRecStatus(HospitalBasicReq req)
@@ -755,9 +734,11 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         tHospitalBasic.setCounty(insertReq.getCounty());
         tHospitalBasic.setAddr(insertReq.getAddr());
         tHospitalBasic.setLogoUrl(insertReq.getLogoUrl());
+        tHospitalBasic.setLogoId(insertReq.getLogoId());
         tHospitalBasic.setHospitalAbstract(insertReq.getHospitalAbstract());
         tHospitalBasic.setDescription(insertReq.getDescription());
         tHospitalBasic.setOrganizationAptitudeUrl(insertReq.getOrganizationAptitudeUrl());
+        tHospitalBasic.setOrganizationAptitudeId(insertReq.getOrganizationAptitudeId());
         tHospitalBasic.setHospitalUrl(insertReq.getHospitalUrl());
         tHospitalBasic.setLinkName(insertReq.getLinkName());
         tHospitalBasic.setMobilePhone(insertReq.getMobilePhone());
@@ -834,9 +815,11 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         tHospitalBasic.setCity(updateReq.getCity());
         tHospitalBasic.setCounty(updateReq.getCounty());
         tHospitalBasic.setAddr(updateReq.getAddr());
+        tHospitalBasic.setLogoId(updateReq.getLogoId());
         tHospitalBasic.setLogoUrl(updateReq.getLogoUrl());//？？？？？
         tHospitalBasic.setHospitalAbstract(updateReq.getHospitalAbstract());
         tHospitalBasic.setDescription(updateReq.getDescription());
+        tHospitalBasic.setOrganizationAptitudeId(updateReq.getOrganizationAptitudeId());
         tHospitalBasic.setOrganizationAptitudeUrl(updateReq.getOrganizationAptitudeUrl());
         tHospitalBasic.setHospitalUrl(updateReq.getHospitalUrl());
         tHospitalBasic.setLinkName(updateReq.getLinkName());

@@ -34,7 +34,7 @@
         <label class='fl'>＊医院资质证明</label>
         <img class='fl' id="show"></span>
         <p class='fl p-iut'>
-            <input type="file" name='' value='' onchange="c()" id="file" >
+            <input type="file" name="aptitudeFile" value='' onchange="c()" id="file" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>

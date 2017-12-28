@@ -33,7 +33,7 @@
         <label class='fl'>＊医院资质证明</label>
         <img class='fl' id="show" src="${updateHosUserInfo.organizationAptitudeUrl}"></span>
         <p class='fl p-iut'>
-            <input type="file" name='organizationAptitudeUrl' value='' onchange="c()" id="file" >
+            <input type="file" name='aptitudeFile' value='' onchange="c()" id="file" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -43,7 +43,7 @@
         <label class='fl'>＊医院封面图片</label>
         <img class='fl' id="show1" src="${updateHosUserInfo.logoUrl}"></span>
         <p class='fl p-iut'>
-            <input type="file" name='logoUrl' value='' onchange="cover()" id="file1" >
+            <input type="file" name='logoFile' value='' onchange="cover()" id="file1" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -101,9 +101,8 @@
         </p>
     </div>
     <div class='but-sibm'>
-        <a class="" onclick="updateUser()">提交</a>
+        <a class="" id="addHosUser" href="javascript:void(0);">提交</a>
         <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
-
     </div>
     <%--<div class="tl pl120 f16 pb20"><a href="javascript:void(0);" id="addAdvert" class="btn-blue2 btn white radius-6 pl20 pr20 ml20 mr20">发布</a>--%>
         <%--<a href="javascript:void(0)" onclick="closeInfo()" class="btn btn-gray radius-6 pl20 pr20 ml20 mr20">取消</a>--%>
@@ -117,6 +116,34 @@
     <li class='ldr' datr='${updateHosUserInfo.userId}'></li>
 </form>
 </div>
+
+
+<script type="text/javascript" src="<%=basePath%>js/easy/user/addHospitalInfo.js"></script>
+
+<script>
+    var userId = $('.ldr').attr('datr');
+//    alert(userId);
+    $(document).ready(function(){
+        $("#advertImage").uploadPreview({ Img: "showPic1" });//图片预览
+    });
+
+    DM.Page.ready({
+        "初始化":function(){
+            //ajax表单提交
+            var controller=new AdvertImageRecord();
+            DM.Util.ajaxForm({
+                formId:"mForm",        //表单id
+                url:"userManage/updateHospitalInfoAjax.do?userId="+userId,//后台处理地址
+                success:controller.returnPageBasic  // 提交后的回调函数
+            });
+        }
+    })
+
+    $("#backHome").click(function(){
+        myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
+    });
+
+</script>
 <script>
     function c () {
         var r= new FileReader();
@@ -137,43 +164,43 @@
         };
     }
 </script>
-<script type="text/javascript" language="javascript">
-    var userId = $('.ldr').attr('datr');
-//    alert(userId);
-    //增加校验模式
-    dmCheck.init("#mForm");
-    function updateUser(){
-        if(!dmCheck.check("#mForm")){
-            return false;
-        }
-        //提交数据
-        DM.ajax({
-            url:"userManage/updateHospitalInfoAjax.do?userId="+userId,
-            type:"post",
-            data:$('#mForm').serialize(),
-            success:function(data){
-                //显示提示信息
-                if("000000"==data.code){
-                    Dialog.show("修改成功","success");
-                    myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
-                } else if(data.code=='600007'){
-                    Dialog.show("保存失败，输入的文章內容过大","error");
-                } else{
-                    Dialog.show(data.description,"error");
-                }
-            },
-            error:function(){
-                Dialog.show("修改失败","error");
-            }});
-    }
+<%--<script type="text/javascript" language="javascript">--%>
+    <%--var userId = $('.ldr').attr('datr');--%>
+<%--//    alert(userId);--%>
+    <%--//增加校验模式--%>
+    <%--dmCheck.init("#mForm");--%>
+    <%--function updateUser(){--%>
+        <%--if(!dmCheck.check("#mForm")){--%>
+            <%--return false;--%>
+        <%--}--%>
+        <%--//提交数据--%>
+        <%--DM.ajax({--%>
+            <%--url:"userManage/updateHospitalInfoAjax.do?userId="+userId,--%>
+            <%--type:"post",--%>
+            <%--data:$('#mForm').serialize(),--%>
+            <%--success:function(data){--%>
+                <%--//显示提示信息--%>
+                <%--if("000000"==data.code){--%>
+                    <%--Dialog.show("修改成功","success");--%>
+                    <%--myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));--%>
+                <%--} else if(data.code=='600007'){--%>
+                    <%--Dialog.show("保存失败，输入的文章內容过大","error");--%>
+                <%--} else{--%>
+                    <%--Dialog.show(data.description,"error");--%>
+                <%--}--%>
+            <%--},--%>
+            <%--error:function(){--%>
+                <%--Dialog.show("修改失败","error");--%>
+            <%--}});--%>
+    <%--}--%>
 
-    $("#backHome").click(function(){
-        /*if(dmCheck.check("#projectForm")){
-        }*/
-        myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
+    <%--$("#backHome").click(function(){--%>
+        <%--/*if(dmCheck.check("#projectForm")){--%>
+        <%--}*/--%>
+        <%--myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));--%>
 
-    });
-</script>
+    <%--});--%>
+<%--</script>--%>
 
 <script type="text/javascript">
     var editor1;
