@@ -59,6 +59,7 @@ public class HospitalUserManagerController extends BaseController {
     /**
      * 添加
      */
+    @SuppressWarnings("unchecked")
     @SystemConsoleLog(desc = "新增", modul = "用户管理")//这个地方在JS中可以找到
     @ResponseBody
     @RequestMapping("/addHospitalUserAjax.do")
@@ -101,6 +102,7 @@ public class HospitalUserManagerController extends BaseController {
     /**
      * 修改医院信息
      */
+    @SuppressWarnings("unchecked")
     @ResponseBody
     @RequestMapping("/updateHospitalInfoAjax.do")
     public Object updateHospitalInfo(@RequestParam(value = "logoFile",required = false) MultipartFile logoFile,
@@ -138,6 +140,8 @@ public class HospitalUserManagerController extends BaseController {
     /**
      * 获取医院info--后台--医院详情
      */
+    @SuppressWarnings("unchecked")
+    @ResponseBody
     @RequestMapping(value = "/updateHosUserInfo.do")
     public Object findHosUserInfo(HttpServletRequest request,
                                   HttpServletResponse response,HospitalBasicReq req){
@@ -152,6 +156,8 @@ public class HospitalUserManagerController extends BaseController {
     /**
      * 修改医院用户的推荐状态
      */
+    @SuppressWarnings("unchecked")
+    @ResponseBody
     @RequestMapping(value = "/updateHosRecStatus.do")
     public Object updateHosRecStatus(HttpServletRequest request,HttpServletResponse response,
                                 HospitalBasicReq req){
