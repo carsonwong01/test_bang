@@ -6,6 +6,7 @@ import com.dimeng.constants.CommonConstant;
 import com.dimeng.entity.ext.user.ConsoleUserInfo;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.framework.utils.StringUtil;
+import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
 import com.dimeng.utils.CommonUtil;
@@ -31,12 +32,30 @@ public class HospitalUserManagerController extends BaseController {
     /**
      * 添加医院用户页面
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping("/addHospitalUser.do")
     public Object addHospitalUser(HttpServletRequest request, HttpServletResponse response,
-                                  HospitalBasicReq req){
+                                  HospitalBasicReq req,String provinceId){
         ModelAndView mv = new ModelAndView("pages/easy/user/addHospitalInfo");
+        String data = new CommonUtil().callInterfaceMethod(req,
+                "user/userManage/v/findProvince",RequestMethod.POST,request);
+        mv.addObject("provinceList",JSONObject.parseObject(data).getJSONObject("data").get("list"));
         return mv;
     }
+
+    /**
+     * 根据省份获取城市
+     */
+    @SuppressWarnings("unchecked")
+    @ResponseBody
+    @RequestMapping("/findCity.do")
+    public Object findCity(HttpServletRequest request, HttpServletResponse response,
+                           FindProvinceAndCityReq req){
+        String city = new CommonUtil().callInterfaceMethod(req,
+                "user/userManage/v/findCity",RequestMethod.POST,request);
+        return CommonUtil.getJSONObject(city, null);
+    }
+
     /**
      * 添加
      */

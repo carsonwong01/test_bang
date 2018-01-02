@@ -18,8 +18,6 @@
             <%--<select class='setp'name=''>--%>
             <%--<option value=''>市</option>--%>
             <%--</select>--%>
-            <%--<select name="province" regionId="" class="select_style province"></select>--%>
-            <%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
             <%--<select class='setp'name=''>--%>
             <%--<option value=''>区/县</option>--%>
             <%--</select>--%>

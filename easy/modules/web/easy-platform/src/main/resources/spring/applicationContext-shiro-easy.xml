@@ -101,6 +101,8 @@
 				/user/userManage/v/insertHosUser = anon
 				/user/userManage/v/findHosUserInfo = anon
 				/user/userManage/v/updateHosRecStatus = anon
+				/user/userManage/v/findProvince = anon
+				/user/userManage/v/findCity = anon
 
 
 

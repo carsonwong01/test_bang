@@ -4,6 +4,7 @@ import com.dimeng.entity.ext.user.ThirdPartyUserResp;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.exception.ServicesException;
+import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
 import com.dimeng.model.user.*;
@@ -29,6 +30,16 @@ public interface UserInfoManageService
      * 修改插入的医院信息
      */
     public BaseDataResp updateHosInfo(InsertHospitalReq req)
+            throws Exception;
+    /**
+     * 插入医院信息前先获取省 --下拉选
+     */
+     public BaseDataResp provinceList(FindProvinceAndCityReq req)
+             throws Exception;
+    /**
+     * 根据省获取市
+     */
+    public BaseDataResp cityList(FindProvinceAndCityReq req)
             throws Exception;
     /**
      * 插入医院信息

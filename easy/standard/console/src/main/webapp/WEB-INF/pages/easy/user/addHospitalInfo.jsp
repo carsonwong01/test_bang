@@ -1,6 +1,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/easy/user/css/public.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath%>js/easy/user/css/entryinformation.css">
+<script type="text/javascript">
+    /*页面加载就开始执行*/
+//    alert($("#provinceId").val());
+    $(function(){
+        $("#provinceId").change(function(){
+            var pr=$(this).children('option:selected').val();
+//    alert("pr:::"+pr);
+            $('#list').html('');
+            var list=$("#list");
+            var str='';
+            $.ajax({
+                url:"<%=basePath %>userManage/findCity.do",
+                type:"post",
+                data:{province:pr},
+            async:false,
+                success:function(data){
+                var data=data.list;
+//    console.log(data);
+                $.each(data,function(i,n){
+                    str+="<option value="+n.city+">"+n.city+"</option>";
+                });
+               list.append(str);
+            }
+        })
+        });
+    })
+</script>
 <!--新增-->
 <div class='base'>
 <form method="post" id="mForm">
@@ -13,21 +40,20 @@
         <p>
             <label>＊医院级别</label><input name='hospitalGrade' value='' type="text" class='ibu'>
             <label>＊医院地址</label>
-            <%--<select class='setp'name=''>--%>
-            <%--<option value=''>省</option>--%>
-            <%--</select>--%>
-            <%--<select class='setp'name=''>--%>
-            <%--<option value=''>市</option>--%>
-            <%--</select>--%>
-            <%--<select name="province" regionId="" class="select_style province"></select>--%>
-            <%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
+            <select name="province" class="setp" id="provinceId">
+                <c:forEach items="${provinceList}" var="province">
+                    <option value="${province.province}" >${province.province}</option>
+                </c:forEach>
+            </select>
+            <select name="city" class="setp" id="list">
+
+            </select>
+            <input name='county' type="text" value='' placeholder="区/县" class='ibuu'>
+            <input name='addr' type="text" value='' placeholder="街道地址" class='upi'>
             <%--<select class='setp'name=''>--%>
             <%--<option value=''>区/县</option>--%>
             <%--</select>--%>
-            <input name='province' type="text" value='' placeholder="省" class='ibuu'>
-            <input name='city' type="text" value='' placeholder="市" class='ibuu'>
-            <input name='county' type="text" value='' placeholder="区/县" class='ibuu'>
-            <input name='addr' type="text" value='' placeholder="街道地址" class='upi'>
+
         </p>
     </div>
     <div class='impt'>
@@ -106,9 +132,6 @@
         <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
         <%--onclick="addUser()"  id="addHosUser" href="javascript:void(0);" --%>
     </div>
-    <%--<div class="tl pl120 f16 pb20"><a href="javascript:void(0);" id="addAdvert" class="btn-blue2 btn white radius-6 pl20 pr20 ml20 mr20">发布</a>--%>
-    <%--<a href="javascript:void(0)" onclick="closeInfo()" class="btn btn-gray radius-6 pl20 pr20 ml20 mr20">取消</a>--%>
-    <%--</div>--%>
 
     <%--<div class="pr mh30 pl120"><span class="display-ib"><em class="red pr5">*</em>标题</span>--%>
     <%--<div class="pr">--%>
@@ -135,9 +158,7 @@
     <%--</div>--%>
 </form>
 </div>
-
 <script type="text/javascript" src="<%=basePath%>js/easy/user/addHospitalInfo.js"></script>
-
 <script>
     $(document).ready(function(){
         $("#advertImage").uploadPreview({ Img: "showPic1" });//图片预览

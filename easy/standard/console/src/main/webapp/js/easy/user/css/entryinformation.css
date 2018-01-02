@@ -5,7 +5,7 @@ body{
 	margin: 0 auto;
 	width: 1066px;
 	min-height: 500px;
-	border: 1px solid rgba(174, 174, 174, 1);
+	border: 1px solid #b9b9b9;
 	font-family: 'ArialMT', 'Arial';
 }
 .utop{
@@ -16,9 +16,9 @@ body{
 	font-size: 14px;
 	padding-left: 20px;
 	font-family: 'PingFangSC-Regular', 'PingFang SC';
-    font-weight: 400;
-    box-sizing: border-box;
-    color: #333333;
+	font-weight: 400;
+	box-sizing: border-box;
+	color: #333333;
 }
 .inpt{
 	padding-left: 20px;
@@ -41,13 +41,13 @@ body{
 	width: 100px;
 	height: 30px;
 	line-height: 30px;
-	margin-right: 0;
+	margin-right: 10px;
 }
 .select_style {
 	min-width: 110px;
 	height: 33px;
 	line-height: 30px;
-	border: 1px solid #ddd;
+	border: 1px solid #b9b9b9;
 	margin-right: 10px;
 	padding-left: 5px;
 	display: inline-block;
@@ -59,16 +59,16 @@ body{
 }
 .setp{
 	-webkit-appearance: menulist-button;
-	border-color: rgb(153, 153, 153);
+	border-color: #b9b9b9;
 	width: 75px;
-	height: 29px;
+	height: 32px;
 	font-family: 'ArialMT', 'Arial';
 	font-weight: 400;
 	font-style: normal;
 	font-size: 13px;
 	text-decoration: none;
 	color: #000000;
-	margin-right: 15px;
+	margin-right: 10px;
 }
 .impt{
 	padding-left: 20px;
@@ -82,7 +82,7 @@ body{
 	display: inline-block;
 	width: 195px;
 	height: 175px;
-	border: 1px solid rgba(174, 174, 174, 1);
+	border: 1px solid #b9b9b9;
 	margin-right: 15px;
 }
 .p-iut{
@@ -105,7 +105,7 @@ body{
 	line-height: 24px;
 	text-align: center;
 	border-radius: 5px;
-	border: 1px solid rgba(174, 174, 174, 1);
+	border: 1px solid #b9b9b9;
 	cursor: pointer;
 }
 .txt-po{
@@ -119,7 +119,7 @@ body{
 	opacity: 0;
 }
 .yes-ou,.hosjj,.hostms{
-	
+
 	color: #333333;
 	font-size: 14px;
 	padding:15px 0;
@@ -189,13 +189,13 @@ body{
 }
 
 /*.but-sibm>a{*/
-	/*display: inline-block;*/
-	/*width: 116px;*/
-	/*height: 33px;*/
-	/*line-height: 33px;*/
-	/*background: rgba(201, 201, 201, 1);*/
-	/*border-radius: 5px;*/
-	/*color: #ffffff;*/
+/*display: inline-block;*/
+/*width: 116px;*/
+/*height: 33px;*/
+/*line-height: 33px;*/
+/*background: rgba(201, 201, 201, 1);*/
+/*border-radius: 5px;*/
+/*color: #ffffff;*/
 /*}*/
 
 .clla>p>.ibu{

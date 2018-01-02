@@ -3,6 +3,7 @@ package com.dimeng.modules.user.services.impl;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.ext.expand.FindAllHospitalResp;
+import com.dimeng.entity.ext.expand.FindProvinceAndCityResp;
 import com.dimeng.entity.ext.user.*;
 import com.dimeng.entity.table.hospital.THospitalBasic;
 import com.dimeng.entity.table.user.*;
@@ -19,6 +20,7 @@ import com.dimeng.framework.mybatis.utils.page.PageResult;
 import com.dimeng.framework.service.impl.BaseServiceImpl;
 import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.framework.utils.StringUtil;
+import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
 import com.dimeng.model.user.*;
@@ -42,6 +44,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
 {
     @Autowired
     private INciicService iNciicService;
+
 
     /**
      * 修改医院的推荐状态
@@ -80,6 +83,48 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
+    /**
+     * 插入医院信息前先获取省--下拉选
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp provinceList(FindProvinceAndCityReq req)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FindProvinceAndCityReq> event = new QueryEvent<FindProvinceAndCityReq>();
+
+        event.setObj(req);
+        event.setStatement("findProvince");
+        List<FindProvinceAndCityResp> findProvince = baseDao.findAllIsPageByCustom(event);
+        data.put(CommonConstant.JSON_KEY_LIST, findProvince);
+
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+    /**
+     * 根据省获取市
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp cityList(FindProvinceAndCityReq req)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FindProvinceAndCityReq> event = new QueryEvent<FindProvinceAndCityReq>();
+
+        event.setObj(req);
+        event.setStatement("findCity");
+        List<FindProvinceAndCityResp> findCity = baseDao.findAllIsPageByCustom(event);
+        data.put(CommonConstant.JSON_KEY_LIST, findCity);
+
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
 
 
     @SuppressWarnings("unchecked")

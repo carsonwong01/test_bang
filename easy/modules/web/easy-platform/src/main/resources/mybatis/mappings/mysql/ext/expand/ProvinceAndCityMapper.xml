@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dimeng.framework.mybatis.dao">
+
+    <!--查找省-->
+    <select id="findProvince" parameterType="com.dimeng.model.expand.FindProvinceAndCityReq"
+            resultType="com.dimeng.entity.ext.expand.FindProvinceAndCityResp">
+      SELECT DISTINCT province province, province_id provinceId
+      FROM t_system_region_info
+    </select>
+    <!--查找市-->
+    <select id="findCity" parameterType="com.dimeng.model.expand.FindProvinceAndCityReq"
+            resultType="com.dimeng.entity.ext.expand.FindProvinceAndCityResp">
+    SELECT DISTINCT city city, province_id provinceId,province province
+    from t_system_region_info
+        WHERE 1 = 1
+        AND t_system_region_info.level = '1'
+        AND t_system_region_info.province = #{province,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

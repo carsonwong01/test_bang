@@ -35,7 +35,6 @@ public class FrontHospitalDetailsController extends BaseController
     public Object hospitalDetails(HttpServletRequest request,
                                   HttpServletResponse response,HospitalBasicReq req){
         ModelAndView mv = new ModelAndView("easy/hospital/hospitalDetails.page");
-//        Map<String, Object> map = new HashMap<String, Object>();
         String data = new CommonUtil().callInterfaceMethod(req,
                 "hospital/v/hospitalDetails",RequestMethod.POST,request);
         JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
@@ -74,8 +73,6 @@ public class FrontHospitalDetailsController extends BaseController
     @RequestMapping(value = "/hospitalProjectListAjax.do")
     public Object findHosProjectList(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> map = new HashMap<String, Object>();
-        //查找众筹中的项目，注释后是查找所有项目
-        //req.setProjectStatus(ProjectStatusEnum.ZCZ.getDataBaseVal());
         String data =
                 new CommonUtil().callInterfaceMethod(req, "hospital/v/findHospitalProject", RequestMethod.POST, request);
         map.put("hospitalProjectList",CommonUtil.getJSONObject(data, null));
@@ -106,17 +103,6 @@ public class FrontHospitalDetailsController extends BaseController
         map.put("hosProjectSum",CommonUtil.getJSONObject(data, null));
         return map;
     }
-
-    /**
-     * Test
-     */
-    @RequestMapping(value = "/test.do")
-    public Object test(HttpServletRequest request,
-                                  HttpServletResponse response,HospitalBasicReq req){
-        ModelAndView mv = new ModelAndView("easy/hospital/perInformation.page");
-        return mv;
-    }
-
 
 }
 

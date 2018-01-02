@@ -11,9 +11,9 @@ import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.utils.FrameworkConfigurer;
 import com.dimeng.model.bus.FindProListByUserIdReq;
+import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
-import com.dimeng.model.home.FrontRegisterReq;
 import com.dimeng.model.home.ThirdTypeReq;
 import com.dimeng.model.message.InsertSystemVerifyCodeReq;
 import com.dimeng.model.thirdParty.loginHelp.QqLoginHelper;
@@ -33,10 +33,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -105,7 +102,37 @@ public class UserManageController extends BaseController
         return userManageService.updateHosRecStatus(req.getBody());
     }
 
+    /**
+     * 获取省
+     */
+    @RequestMapping(value="/{v}/findProvince", method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findProvince(HttpEntity<FindProvinceAndCityReq> httpEntity) throws Exception{
+        BaseDataResp resp = this.validator(httpEntity);
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        return userManageService.provinceList(httpEntity.getBody());
+    }
 
+    /**
+     * 获取市
+     */
+    @RequestMapping(value="/{v}/findCity", method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findCity(HttpEntity<FindProvinceAndCityReq> httpEntity) throws Exception{
+        BaseDataResp resp = this.validator(httpEntity);
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        return userManageService.cityList(httpEntity.getBody());
+    }
 
     /**
      * 医院info
