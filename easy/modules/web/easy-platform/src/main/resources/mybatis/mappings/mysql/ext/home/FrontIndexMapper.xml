@@ -35,7 +35,7 @@
 					FORMAT(IFNULL(sum(raised_amount), 0),0)
 			 FROM
 					t_project_info ) as raiseTotal,
-			(select count(1) from t_project_info where  project_status = '2' ) as projectCount,
+			(select count(1) from t_project_info where  project_status != '4' ) as projectCount,
 			(SELECT
 					COUNT(1)
 				FROM
@@ -82,20 +82,20 @@
 	<select id="findRecommendList" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp" 
 	parameterType="com.dimeng.model.home.FrontIndexReq" >
 	 SELECT
-			thb.hospital_name hospitalName,
-			p.project_id projectId,
-			tpv.foundation_name foundationName,
-			u.nick_name nickName,
-			TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft,
-			p.cover_image_url projectImg,
-		  	p.project_name projectName,
-		  	p.project_intro projectIntro,
-
-		  	(select IFNULL(count(1),0) from t_order_support where project_id = p.project_id and  `status` not in (1,2,9) and IFNULL(refund_type,0) IN(0,1,2)) supportCount,
-		  	floor(p.target_amount) targetAmount,
-		  	floor(p.raised_amount) raiseTotal,
-		  	p.project_type  projectType,
-  			IFNULL(LEFT(((p.raised_amount / p.target_amount)) ,4), 0.00 ) rate
+		thb.hospital_name hospitalName,
+		p.project_id projectId,
+		tpv.foundation_name foundationName,
+		u.nick_name nickName,
+		TIMESTAMPDIFF(DAY,DATE_FORMAT(NOW(),'%Y-%m-%d'),DATE_FORMAT(p.date_raised_end,'%Y-%m-%d')) timeLeft,
+		p.cover_image_url projectImg,
+		p.project_name projectName,
+		p.project_intro projectIntro,
+		p.project_label projectTag,
+		(select IFNULL(count(1),0) from t_order_support where project_id = p.project_id and  `status` not in (1,2,9) and IFNULL(refund_type,0) IN(0,1,2)) supportCount,
+		floor(p.target_amount) targetAmount,
+		floor(p.raised_amount) raiseTotal,
+		p.project_type  projectType,
+		IFNULL(LEFT(((p.raised_amount / p.target_amount)) ,4), 0.00 ) rate
 	FROM
 	t_site_home_project ho 
   	LEFT JOIN t_project_info p on ho.project_id = p.project_id

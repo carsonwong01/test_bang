@@ -132,6 +132,27 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
         event.setStatement("findRecommendList");
         List<FindRecommendListResp> list = baseDao.findAllIsPageByCustom(event);
 
+        //格式化标签为List
+        if (list != null && list.size() > 0)
+        {
+            List<String> projectTags = null;
+            for (FindRecommendListResp findRecommendListResp : list)
+            {
+                //格式化标签为数组List
+                projectTags = new ArrayList<String>();
+                String[] label = findRecommendListResp.getProjectTag().split(",");
+                for (String string : label)
+                {
+                    if (StringUtil.notEmpty(string))
+                    {
+                        projectTags.add(string);
+                    }
+                }
+                findRecommendListResp.setProjectTags(projectTags);
+                findRecommendListResp.setProjectTag(null);
+            }
+        }
+
         data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
 
         resp.setData(data);

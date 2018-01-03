@@ -11,7 +11,8 @@
 		<module>console</module>
 		<module>front</module>
 		<module>platform</module>
-	</modules>
+        <module>weixin</module>
+    </modules>
 		<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dimeng.framework.version>6.2.0</dimeng.framework.version>
