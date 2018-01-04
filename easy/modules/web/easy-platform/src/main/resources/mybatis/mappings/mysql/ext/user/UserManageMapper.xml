@@ -122,7 +122,6 @@
 		<if test="hospitalName != null and hospitalName != ''">
 			and thb.hospital_name LIKE CONCAT ('%',trim(#{hospitalName,jdbcType=VARCHAR}),'%')
 		</if>
-
 		<if test="hospitalType != null and hospitalType != ''">
 			and thb.hospital_type LIKE CONCAT ('%',trim(#{hospitalType,jdbcType=VARCHAR}),'%')
 		</if>
@@ -164,15 +163,6 @@
 
 		<if test="endTime != null and endTime != ''">
 			and DATE_FORMAT(u.date_register,'%Y%m%d') &lt;= DATE_FORMAT(#{endTime,jdbcType=VARCHAR},'%Y%m%d')
-		</if>
-		<if test="hospitalName != null and hospitalName != '' ">
-			and u.hospital_name = #{hospitalName,jdbcType=VARCHAR}
-		</if>
-		<if test="hospitalGrade != null and hospitalGrade != '' ">
-			and thb.hospital_grade = #{hospitalGrade,jdbcType=VARCHAR}
-		</if>
-		<if test="hospitalType != null and hospitalType != '' ">
-			and thb.hospital_type = #{hospitalType,jdbcType=VARCHAR}
 		</if>
 		<if test="linkName != null and linkName != '' ">
 			and thb.link_name = #{linkName,jdbcType=VARCHAR}
