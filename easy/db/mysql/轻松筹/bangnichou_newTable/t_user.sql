@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : bangni
-Source Server Version : 50717
-Source Host           : localhost:3306
+Source Server         : bangnichouOnline
+Source Server Version : 50719
+Source Host           : 122.114.91.233:3306
 Source Database       : bangnichou
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-12-01 10:31:58
+Date: 2018-01-04 13:41:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,16 +35,10 @@ CREATE TABLE `t_user` (
   `date_login` datetime DEFAULT NULL,
   `date_last_login` datetime DEFAULT NULL COMMENT '最后一次登录时间',
   `first_login` char(2) DEFAULT NULL COMMENT '1第一次\r\n            2不是第一次',
-  `last_login_ip` varchar(30) NOT NULL COMMENT '最后一次登录ip',
+  `last_login_ip` varchar(30) NOT NULL DEFAULT '0' COMMENT '最后一次登录ip',
   `pwd_error_count` int(2) DEFAULT NULL COMMENT '当日交易密码错误次数',
   `fail_login_count` int(2) DEFAULT NULL COMMENT '当日登录失败次数',
   `user_type` char(2) NOT NULL DEFAULT '2' COMMENT '1医院用户\n2个人用户',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户总表';
-
--- ----------------------------
--- Records of t_user
--- ----------------------------
-INSERT INTO `t_user` VALUES ('101711251707099505', '13693350621', '101711251707099505', '千佛山', null, null, '13693350621', null, '1', '4', '2017-11-25 17:07:09', '1', '2017-11-30 19:12:50', '2017-11-30 19:11:13', '2', '10.0.0.233', null, null, '1');
-INSERT INTO `t_user` VALUES ('101711271806007644', '18653181412', '101711271806007644', '大明湖', null, null, '18653181412', null, '1', '4', '2017-11-27 18:06:00', '1', '2017-11-30 00:05:00', '2017-11-30 00:02:43', '2', '192.168.31.12', null, null, '1');

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : bangni
-Source Server Version : 50717
-Source Host           : localhost:3306
+Source Server         : bangnichouOnline
+Source Server Version : 50719
+Source Host           : 122.114.91.233:3306
 Source Database       : bangnichou
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2017-12-04 17:13:26
+Date: 2018-01-04 13:41:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,6 @@ CREATE TABLE `t_project_info` (
   `project_name` varchar(60) NOT NULL COMMENT '项目名称',
   `project_type` char(2) NOT NULL COMMENT '1：大病救助\r\n            2：灾难救助\r\n            3：动物保护\r\n            4：扶贫助学\r\n            5：其他\r\n            6：回报项目\r\n            7：梦想项目',
   `project_creator_id` varchar(25) NOT NULL COMMENT '项目发起人ID',
-  `foundation_name` varchar(50) DEFAULT NULL COMMENT '基金会',
   `target_amount` decimal(20,2) DEFAULT NULL COMMENT '筹资金额',
   `raised_amount` decimal(20,2) NOT NULL DEFAULT '0.00' COMMENT '已筹款金额',
   `project_intro` varchar(300) NOT NULL COMMENT '项目简介',
@@ -40,7 +39,7 @@ CREATE TABLE `t_project_info` (
   `date_update` datetime DEFAULT NULL COMMENT '修改时间',
   `qr_code_addr` varchar(50) NOT NULL COMMENT '二维码地址',
   `date_success` datetime DEFAULT NULL COMMENT '项目成功时间',
-  `project_label` varchar(30) DEFAULT NULL COMMENT '标签',
+  `project_label` varchar(30) DEFAULT '' COMMENT '标签',
   `is_nedd_addr` char(2) DEFAULT NULL COMMENT '是否提供收货地址:1是2否',
   `date_project_failure` datetime DEFAULT NULL COMMENT '项目失败时间',
   `failure_reason` varchar(200) DEFAULT NULL COMMENT '项目失败原因',

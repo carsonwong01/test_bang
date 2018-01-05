@@ -73,7 +73,7 @@
                  <div class='dao-t' id='dao-t'>
                      <p><span id="progress">{{= data.rate*100}}%</span></p>
                  </div>
-                <ul class='ul-nus'>
+                <ul class='ul-num'>
                    <li>目标金额（元）</br> <span>{{= data.targetAmount}}</span></li>
                    <li>已筹金额（元）</br> <span>{{= data.raiseTotal}}</span></li>
                    <li>捐助人次（次）</br> <span>{{= data.supportCount}}</span></li>
