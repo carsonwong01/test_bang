@@ -11,7 +11,6 @@
 		<module>console</module>
 		<module>front</module>
 		<module>platform</module>
-        <module>weixin</module>
     </modules>
 		<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
