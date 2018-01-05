@@ -159,13 +159,15 @@
 
 
 /* 项目详情页支持者 */
-.p-detail-content .messagelist{position: relative;padding: 25px 0 30px 84px;border-top: 1px solid #d8d8d8}
+.p-detail-content .messagelist{position: relative;padding: 25px 0 30px 72px;border-top: 1px solid #d8d8d8}
 .p-detail-content .messagelist:first-child{border-top: 0}
-.p-detail-content .messagelist .m-headImg{position: absolute;left: 0;top: 26px;width: 65px;height: 65px}
+.p-detail-content .messagelist .m-headImg{position: absolute;left: 0;top: 26px;width: 50px;height: 50px}
+.m-headImg1 {border-radius:50%;overflow:hidden;position: absolute;left: 0;top: 26px;width: 50px;height: 50px}
 .p-detail-content .messagelist .userinfo{padding-top: 10px}
 .p-detail-content .messagelist .namebox{padding-bottom: 2px;font-size: 16px;position: relative;}
 .p-detail-content .messagelist .namebox .name{padding-right: 10px}
 .p-detail-content .messagelist .namebox .replaybtn{cursor: pointer;position: absolute;right: 0;top: 0;width: 22px;height: 22px;background: url('../images/p_detail_icon2.png.png') no-repeat -125px 0;transition:background-position .3s;}
+.replay{cursor: pointer;position: absolute;right: 0;top: 0;width: 160px;height: 22px;transition:background-position .3s;background:0;}
 .p-detail-content .messagelist .namebox .replaybtn:hover{background-position: -125px -22px}
 .p-detail-content .messagelist .message{padding: 10px 0 }
 .p-detail-content .messagelist .otherReplay{background-color: #f8f9fb}

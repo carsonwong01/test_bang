@@ -242,7 +242,7 @@
 
 /*主色-蓝色*/
 /*a:hover{color:#1ea8fb;}*/
-.highlight{color:#1ea8fb!important;}/*高亮文字*/
+.highlight{color:#f4635f!important;}/*高亮文字*/
 .btn-blue{ background:#1ea8fb; }/*主色按钮*/
 .borderMain{border:1px solid #1ea8fb}/* 主色边框 */
 .btn-w50-hollow{ border:1px solid #1ea8fb; color:#1ea8fb;}/* 空边框*/

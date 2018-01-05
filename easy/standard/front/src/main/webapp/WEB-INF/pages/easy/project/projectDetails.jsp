@@ -5,7 +5,7 @@
 </script>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 
-<div class='center'>
+<div class='center p-detail-content'>
 	<div class='cent-nav'>
 		<p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
 		<%--<h2 class="p-til">${projectDetails.title}</h2>--%>
@@ -79,7 +79,7 @@
 							<form id="commentForm" method="post">
 								<input name="projectId" type="hidden"
 									   value="${projectDetails.id}">
-								<div class="record" id="commentD"></div>
+								<div id="commentD"></div>
 								<!--项目动态分页-->
 								<div class="paging" id="commentPaging"></div>
 								<!--项目动态分页  --END-->
@@ -87,10 +87,10 @@
 						</div>
 						<!-- 支持者 end-->
 					</div>
-					<ul class='list'>
-						数据加载中，请稍后...
-					</ul>
-					<p class='jzgd-s'><a href="javascript:;"  onClick="moreload.loadMore();">加载更多>></a></p>
+					<%--<ul class='list'>--%>
+						<%--数据加载中，请稍后...--%>
+					<%--</ul>--%>
+					<%--<p class='jzgd-s'><a href="javascript:;"  onClick="moreload.loadMore();">加载更多>></a></p>--%>
 				</div>
 			</div>
 		</div>
@@ -331,14 +331,15 @@
 <script id="commentTemp" type="text/x-jquery-tmpl">
 {{each(i,data) pageResult.list}}
                             <div class="messagelist">
-									<img src="{{= data.imageUrl}}" alt="" class="m-headImg">
+									<img src="{{= data.imageUrl}}" alt="" class="m-headImg1">
 									<div class="userinfo">
 										<p class="namebox">
 											<span class="name Color333">{{= data.nickName}}</span>
-											<span class="money color999">支持了<b class="highlight">{{= data.supportAmount}}</b>元</span>
-											<a class="replaybtn" onclick="projectDetails.showReplyDiv('{{= data.orderId}}')"></a>
+											<span class="money color999">帮助了<b class="highlight">{{= data.supportAmount}}</b>元</span>
+											<%--<a class="replaybtn" onclick="projectDetails.showReplyDiv('{{= data.orderId}}')"></a>--%>
+											<a class="replay">{{= data.supportTime}}</a>
 										</p>
-										<p class="color999">{{= data.supportTime}}</p>
+										<%--<p class="color999">{{= data.supportTime}}</p>--%>
 									</div>
                                      {{if data.comments[0] == null}}
                                       <div class="otherReplay">
@@ -355,7 +356,7 @@
 									</div>
                                     {{/if}}
                                      {{if data.comments[0] != null && data.comments[0].supportAmount != null}}
-                                      <p class="message color333">{{= data.comments[0].content}}</p>
+                                      <%--<p class="message color333">{{= data.comments[0].content}}</p>--%>
                                       <div class="otherReplay">
 										<ul>
                                         {{each(i,d) data.comments}}
@@ -443,39 +444,39 @@
             }
         })
     })
-    var _content = []; //临时存储li循环内容
-    var moreload = {
-        _default:15, //默认显示图片个数
-        _loading:5,  //每次点击按钮后加载的个数
-        init:function(){
-            var lis = $(".record .hidden li");
-            $(".record ul.list").html("");
-            for(var n=0;n<moreload._default;n++){
-                lis.eq(n).appendTo(".record ul.list");
-            }
-            for(var i=moreload._default;i<lis.length;i++){
-                _content.push(lis.eq(i));
-            }
-            $(".record .hidden").html("");
-        },
-        loadMore:function(){
-            var mLis = $(".record ul.list li").length;
-            for(var i =0;i<moreload._loading;i++){
-                var target = _content.shift();
-                if(!target){
-                    $('.record .jzgd-s').html("<a href='javascript:;'>全部加载完毕...</a>");
-                    break;
-                }
-                $(".record ul.list").append(target);
-                /*$(".record ul.list li").eq(mLis+i).each(function(){
-                    $(this).attr('src',$(this).attr('realSrc'));
-                });*/
-            }
-        }
-    }
-    moreload.init();
+//    var _content = []; //临时存储li循环内容
+//    var moreload = {
+//        _default:15, //默认显示图片个数
+//        _loading:5,  //每次点击按钮后加载的个数
+//        init:function(){
+//            var lis = $(".record .hidden li");
+//            $(".record ul.list").html("");
+//            for(var n=0;n<moreload._default;n++){
+//                lis.eq(n).appendTo(".record ul.list");
+//            }
+//            for(var i=moreload._default;i<lis.length;i++){
+//                _content.push(lis.eq(i));
+//            }
+//            $(".record .hidden").html("");
+//        },
+//        loadMore:function(){
+//            var mLis = $(".record ul.list li").length;
+//            for(var i =0;i<moreload._loading;i++){
+//                var target = _content.shift();
+//                if(!target){
+//                    $('.record .jzgd-s').html("<a href='javascript:;'>全部加载完毕...</a>");
+//                    break;
+//                }
+//                $(".record ul.list").append(target);
+//                /*$(".record ul.list li").eq(mLis+i).each(function(){
+//                    $(this).attr('src',$(this).attr('realSrc'));
+//                });*/
+//            }
+//        }
+//    }
+//    moreload.init();
 </script>
-<link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />
+<%--<link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />--%>
 <script type="text/javascript"  src="<%=basePath %>easy/js/project/projectDetails.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
 <script language="javascript" src="<%=basePath %>js/common/lytebox.js"></script>
