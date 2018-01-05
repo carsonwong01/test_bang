@@ -9,23 +9,23 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.6.RELEASE</spring.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
-		<hibernate-validator.version>5.2.2.Final</hibernate-validator.version>	     
+		<hibernate-validator.version>5.2.2.Final</hibernate-validator.version>
 		<druid.version>1.0.18</druid.version>
 		<mybatis.version>3.4.0</mybatis.version>
 		<mybatis-spring.version>1.3.0</mybatis-spring.version>
 		<shiro.version>1.2.5</shiro.version>
-		<ehcache.version>2.10.0</ehcache.version>		
+		<ehcache.version>2.10.0</ehcache.version>
 		<log4j.version>1.2.17</log4j.version>
-        <httpclient.version>4.5.1</httpclient.version>
+		<httpclient.version>4.5.1</httpclient.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<commons-io.version>2.5</commons-io.version>
 		<commons-codec.version>1.10</commons-codec.version>
 		<commons-fileupload.version>1.3.2</commons-fileupload.version>
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
-        <fastjson.version>1.2.12</fastjson.version>
-        <aspectj.version>1.8.9</aspectj.version>
-        <batik-transcoder.version>1.7</batik-transcoder.version>
-        <javax.mail.version>1.5.4</javax.mail.version>
+		<fastjson.version>1.2.12</fastjson.version>
+		<aspectj.version>1.8.9</aspectj.version>
+		<batik-transcoder.version>1.7</batik-transcoder.version>
+		<javax.mail.version>1.5.4</javax.mail.version>
 		<xstream.version>1.4.3</xstream.version>
 		<guava.version>14.0.1</guava.version>
 		<poi.version>3.9</poi.version>
@@ -42,13 +42,13 @@
 		<javaee-api.version>7.0</javaee-api.version>
 		<module.version>6.0.0</module.version>
 	</properties>
-	<modules>	
+	<modules>
 		<module>easy</module>
-  </modules>
+	</modules>
 	<repositories>
 		<repository>
 			<id>DiMeng-Platform-snapshots</id>
-			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
+			<url>http://122.114.59.17:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>false</enabled>
@@ -63,7 +63,7 @@
 		</repository>
 		<repository>
 			<id>DiMeng-Platform-releases</id>
-			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
+			<url>http://122.114.59.17:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>true</enabled>
@@ -88,11 +88,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.2</version>
-        </dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
@@ -109,7 +109,7 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<configuration>
-					  <skip>true</skip>
+						<skip>true</skip>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -135,21 +135,21 @@
 		</pluginManagement>
 	</build>
 	<profiles>
-	    <!-- 产品众筹 -->
-        <profile>
-            <id>product</id>
-            <properties>
-                <package.environment>product</package.environment>
-            </properties>
-        </profile>
-         <!-- 股权众筹 -->
-        <profile>
-            <id>stock</id>
-            <properties>
-               <package.environment>stock</package.environment>
-            </properties>
-        </profile>
-    </profiles>
+		<!-- 产品众筹 -->
+		<profile>
+			<id>product</id>
+			<properties>
+				<package.environment>product</package.environment>
+			</properties>
+		</profile>
+		<!-- 股权众筹 -->
+		<profile>
+			<id>stock</id>
+			<properties>
+				<package.environment>stock</package.environment>
+			</properties>
+		</profile>
+	</profiles>
 	<name>DimengSystem</name>
 	<organization>
 		<url>http://www.dimeng.net</url>
@@ -165,12 +165,12 @@
 	<distributionManagement>
 		<repository>
 			<id>DiMeng-Platform-releases</id>
-			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
+			<url>http://122.114.59.17:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
 			<uniqueVersion>true</uniqueVersion>
 		</repository>
 		<snapshotRepository>
 			<id>DiMeng-Platform-snapshots</id>
-			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
+			<url>http://122.114.59.17:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 </project>
