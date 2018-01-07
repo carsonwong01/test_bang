@@ -607,9 +607,9 @@
         <if test="status != null and status != '' and status == 2">
             ,t.date_success = now()
         </if>
-        <if test="status != null and status != '' and status == 3">
-            ,t.date_project_failure = now(),t.failure_reason="项目期限到达，未达到筹资目标金额。"
-        </if>
+        <!--<if test="status != null and status != '' and status == 3">-->
+        <!--,t.date_success = now(),t.failure_reason="项目期限到达，未达到筹资目标金额。"-->
+        <!--</if>-->
         where t.project_id in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item.projectId,jdbcType=VARCHAR}

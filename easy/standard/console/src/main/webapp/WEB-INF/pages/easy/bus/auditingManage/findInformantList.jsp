@@ -40,7 +40,7 @@
 								class="border mr20 h32 mw100" name="projectStatus">
 								<option value="">全部</option>
 								<option value="1">众筹中</option>
-								<option value="2">众筹成功</option>
+								<option value="2">众筹结束</option>
 								<option value="3">众筹失败</option>
 								<option value="4">已删除</option>
 							</select>
@@ -147,7 +147,7 @@
 	     	 众筹中
 	      {{/if}}
 		   {{if data.projectStatus=="2"}}        
-	                         众筹成功
+	                         众筹结束
 	      {{/if}}
    		   {{if data.projectStatus=="3"}}       
 	       	众筹失败

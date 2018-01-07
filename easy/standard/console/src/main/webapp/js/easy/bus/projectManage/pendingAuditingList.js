@@ -143,7 +143,7 @@ DM.Page.ready({
 			DM.exportExcel({
 				"tableId" : "exportTable",
 				"formId" : "dataForm",
-				"fileName" : "众筹成功项目列表.xls",
+				"fileName" : "众筹结束项目列表.xls",
 				"url" : "bus/projectManage/pendingAuditingListExport.do"
 			});
 		});

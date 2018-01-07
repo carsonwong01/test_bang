@@ -1,43 +1,34 @@
 package com.dimeng.modules.jobs.services.impl;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;  
-
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
 import com.dimeng.entity.ext.bus.FindQscProjectListResp;
 import com.dimeng.entity.table.order.TOrderSupport;
-import com.dimeng.entity.table.project.TProjectDynamic; 
+import com.dimeng.entity.table.project.TProjectDynamic;
 import com.dimeng.entity.table.project.TProjectInfo;
 import com.dimeng.entity.table.site.TSiteHomeProject;
 import com.dimeng.entity.table.site.TSiteInfo;
 import com.dimeng.entity.table.user.TUserAccountRecord;
 import com.dimeng.entity.table.user.TUserCapitalAccount;
-import com.dimeng.enums.AccountTradeTypeEnum;
-import com.dimeng.enums.AccountTypeEnum;
-import com.dimeng.enums.CapitalDirectionEnum;
-import com.dimeng.enums.PayStatusEnum;
-import com.dimeng.enums.ProjectDynamicTypeEnum;
-import com.dimeng.enums.RefundTypeEnum;
-import com.dimeng.enums.SerialNumberTypeEnum;
-import com.dimeng.enums.TemplateTypeEnumEasy;
+import com.dimeng.enums.*;
 import com.dimeng.framework.constants.DigitalAndStringConstant;
 import com.dimeng.framework.exception.ServicesException;
 import com.dimeng.framework.mybatis.utils.IMapperConstant;
 import com.dimeng.framework.mybatis.utils.QueryEvent;
 import com.dimeng.framework.service.impl.BaseServiceImpl;
-import com.dimeng.framework.utils.DateUtil;  
+import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.modules.jobs.services.ProManageJobService;
 import com.dimeng.modules.message.services.IMessageService;
-import com.dimeng.util.SerialNumberUtil; 
+import com.dimeng.util.SerialNumberUtil;
 import com.dimeng.utils.UUIDGenerate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 项目众筹中转众筹成功或失败-状态修改定时任务
@@ -64,8 +55,10 @@ public class ProManageJobServiceImpl  extends BaseServiceImpl implements ProMana
             logs.info("####无筹资到期的项目####");
             return;
         }
+        //只要项目正常结束就算众筹成功
         List<FindQscProjectListResp> successList = new ArrayList<>();
-        List<FindQscProjectListResp> failList = new ArrayList<>();
+        //只有取消项目时才是项目失败，这里注释掉
+//        List<FindQscProjectListResp> failList = new ArrayList<>();
         for (FindQscProjectListResp req : list)
         {
         	//到期的把推荐项目列表给下了
@@ -75,12 +68,12 @@ public class ProManageJobServiceImpl  extends BaseServiceImpl implements ProMana
             	 baseDao.delete(homePro);
             }
         	 
-            BigDecimal b1 = new BigDecimal(req.getFacTarget());
-            BigDecimal b2 = new BigDecimal(req.getSupportAmt());
-            if(b2.compareTo(b1) < 0){
-                failList.add(req);
-                continue;
-            }
+//            BigDecimal b1 = new BigDecimal(req.getFacTarget());
+//            BigDecimal b2 = new BigDecimal(req.getSupportAmt());
+//            if(b2.compareTo(b1) < 0){
+//                failList.add(req);
+//                continue;
+//            }
             successList.add(req); 
         }
         if(successList.size() != 0){
@@ -90,13 +83,13 @@ public class ProManageJobServiceImpl  extends BaseServiceImpl implements ProMana
             baseDao.executeSQL(IMapperConstant.COMMON_UPDATE, "updateProStatus", map);
             commonProSuccess(successList);
         }
-        if(failList.size() != 0){
-            Map map = new HashMap();
-            map.put("list", failList);
-            map.put("status", 3);
-            baseDao.executeSQL(IMapperConstant.COMMON_UPDATE, "updateProStatus", map);
-            commonProFail(failList);
-        }
+//        if(failList.size() != 0){
+//            Map map = new HashMap();
+//            map.put("list", failList);
+//            map.put("status", 3);
+//            baseDao.executeSQL(IMapperConstant.COMMON_UPDATE, "updateProStatus", map);
+//            commonProFail(failList);
+//        }
         logs.info("####项目众筹中筹资到期状态修改定时任务结束###");
         
     }

@@ -52,7 +52,7 @@
 		                    <div class="mod_01"><span class="highlight2">{{= data.facTarget}}</span></div>
 		                    <div class="mod_02">
 										{{if data.projectStatus == '1'}}众筹中{{/if}}
-										{{if data.projectStatus == '2'}}<span class="highlight2">众筹成功</span>{{/if}}
+										{{if data.projectStatus == '2'}}<span class="highlight2">众筹结束</span>{{/if}}
 										{{if data.projectStatus == '3'}}<span class="red">众筹失败</span>{{/if}}
 										{{if data.projectStatus == '4'}}已删除{{/if}}</div>
 		                    <div class="mod_r">

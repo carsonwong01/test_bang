@@ -1,20 +1,20 @@
 package com.dimeng.modules.jobs.job;
-import javax.annotation.Resource;
-
+import com.dimeng.modules.jobs.services.OrdManageJobService;
+import com.dimeng.modules.jobs.services.ProManageJobService;
+import com.dimeng.utils.SpringBeanUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 
-import com.dimeng.modules.jobs.services.OrdManageJobService;
-import com.dimeng.modules.jobs.services.ProManageJobService;
-import com.dimeng.utils.SpringBeanUtil;
+import javax.annotation.Resource;
 
 /** 
  *  一、项目众筹中时间到期状态修改定时任务
  *       1).众筹到期筹集资金未达目标金额，项目状态修改为众筹失败，所有支持订单修改为待退款 
  *       2).众筹到期筹集资金达到目标金额，状态修改为众筹成功
+ *       以上1 和 2 均改为 众筹结束
  *  二、订单失效时间到期定时任务
  *  三、默认收货定时任务
  * @author  song

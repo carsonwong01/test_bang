@@ -82,7 +82,7 @@
 								<div class="til">
 									<a href="javascript:void(0)" onclick="userCenterController.goProjectDetails('{{= data.projectId}}')">{{= data.projectName}}</a><span class="state">
 										{{if data.projectStatus == '1'}}众筹中{{/if}}
-										{{if data.projectStatus == '2'}}众筹成功{{/if}}
+										{{if data.projectStatus == '2'}}众筹结束{{/if}}
 										{{if data.projectStatus == '3'}}众筹失败{{/if}}
 										{{if data.projectStatus == '4'}}已删除{{/if}}
 									</span>

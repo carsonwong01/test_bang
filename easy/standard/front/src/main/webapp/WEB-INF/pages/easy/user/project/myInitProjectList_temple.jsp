@@ -13,7 +13,7 @@
 		<li id="one0" onclick="myInitProjectListController.setTab('one',0,3)"
 			class="hover">全部</li>
 		<li id="one1" onclick="myInitProjectListController.setTab('one',1,3)">众筹中</li>
-		<li id="one2" onclick="myInitProjectListController.setTab('one',2,3)">众筹成功</li>
+		<li id="one2" onclick="myInitProjectListController.setTab('one',2,3)">众筹结束</li>
 		<li id="one3" onclick="myInitProjectListController.setTab('one',3,3)">众筹失败</li>
 		<p class="animate_p">
 			<span class="xmjt-arrow"></span>
@@ -65,7 +65,7 @@
 		                    </div>
 		                    <div class="mod_01">{{= data.facTarget}}</div>
 		                    <div class="mod_02">{{if data.projectStatus == '1'}}众筹中{{/if}}
-										{{if data.projectStatus == '2'}}<span class="highlight2">众筹成功</span>{{/if}}
+										{{if data.projectStatus == '2'}}<span class="highlight2">众筹结束</span>{{/if}}
 										{{if data.projectStatus == '3'}}<span class="red">众筹失败</span>{{/if}}
 										{{if data.projectStatus == '4'}}已删除{{/if}}</div>
 		                    <div class="mod_r">

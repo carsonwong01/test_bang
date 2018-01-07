@@ -4,7 +4,7 @@
 <div class="p20">
 <form id="dataForm">
   <div class="border">
-    <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i><span id="detailHtml">众筹成功</span></div>
+    <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i><span id="detailHtml">众筹结束</span></div>
     <div class="content-container pl40 pt30 pr40 pb20">
       <ul class="gray6 input-list-container clearfix">
         <li><div class="item-box"><span class="display-ib mr5">项目编号：</span>
@@ -28,7 +28,7 @@
              <option value="7">实现梦想</option>
           </select></div>
         </li>
-        <li><span class="display-ib mr5">众筹成功时间：</span> 
+        <li><span class="display-ib mr5">众筹结束时间：</span>
 	          <input class="text border pl5 w120 date" type=text name="successTimeStart" id="successTimeStart" onclick="WdatePicker({maxDate: '#F{$dp.$D(\'successTimeEnd\')}'})"  > 
 	         <span class="pl5 pr5">至</span>
 	         <input class="text border pl5 w120 mr20 date" type=text name="successTimeEnd" id="successTimeEnd" onclick="WdatePicker({minDate: '#F{$dp.$D(\'successTimeStart\')}'})">
@@ -59,7 +59,7 @@
           <th>已筹金额（元）</th>
           <th>支持人次</th>
           <th>实际筹资时间（天）</th>
-          <th>众筹成功时间</th>
+          <th>众筹结束时间</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -86,7 +86,7 @@
           <th exp-name="supportAmt">已筹金额（元）</th>
            <th exp-name="supportNumber">支持人次</th>
           <th exp-name="factInvestDays">实际筹资时间（天）</th>
-          <th exp-name="successTime">众筹成功时间</th>
+          <th exp-name="successTime">众筹结束时间</th>
         </tr>
       </thead>
     </table> 

@@ -18,7 +18,7 @@ public enum ProjectStatusEnum implements BaseEnum
 {
     
     ZCZ(1, "PROJECT_CROWDFUNDING", "众筹中"), //众筹中  
-    ZCCG(2, "PROJECT_CROWDFUNDING_SUCCESS", "众筹成功"), //众筹成功
+    ZCCG(2, "PROJECT_CROWDFUNDING_SUCCESS", "众筹结束"), //众筹成功
     ZCSB(3, "PROJECT_CROWDFUNDING_FAIL", "众筹失败"), //众筹失败
     YSC(4, "PROJECT_DELETED", "已删除"); //已删除
     

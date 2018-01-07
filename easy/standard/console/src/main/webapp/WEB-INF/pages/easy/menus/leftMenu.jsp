@@ -40,7 +40,7 @@
 				</shiro:hasPermission>
 				<shiro:hasPermission name="YWGL_XMGL_ZCCG_MU">
 					<li><a href="javascript:void(0);" class="click-link"
-						data-url="bus/projectManage/pendingAuditingList.do">众筹成功</a></li>
+						data-url="bus/projectManage/pendingAuditingList.do">众筹结束</a></li>
 				</shiro:hasPermission>
 				<shiro:hasPermission name="YWGL_XMGL_ZCSB_MU">
 					<li><a href="javascript:void(0);" class="click-link"

@@ -335,7 +335,7 @@
 									<div class="userinfo">
 										<p class="namebox">
 											<span class="name Color333">{{= data.nickName}}</span>
-											<span class="money color999">帮助了<b class="highlight">{{= data.supportAmount}}</b>元</span>
+											<span class="money color999">帮助了<b class="highlight1">{{= data.supportAmount}}</b>元</span>
 											<%--<a class="replaybtn" onclick="projectDetails.showReplyDiv('{{= data.orderId}}')"></a>--%>
 											<a class="replay">{{= data.supportTime}}</a>
 										</p>

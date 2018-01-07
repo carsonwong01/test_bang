@@ -46,11 +46,10 @@
 			tpv.receive_card_image_id, tpv.receive_card_image_url, tpv.recipient_card_image_id,
 			tpv.recipient_card_image_url, tpv.wedding_picture_id, tpv.wedding_picture_url,
 			DATE_FORMAT(tpv.date_create, '%Y-%m-%d %T') date_create, tpi.project_name, tpi.project_type,
-			CONCAT(tsri.province, tsri.city) hospital_region_name
+			CONCAT(thb.province, thb.city) hospital_region_name
 		FROM
 			t_project_validation tpv
 			LEFT JOIN t_project_info tpi ON tpv.project_id=tpi.project_id
-			LEFT JOIN t_system_region_info tsri ON tsri.region_id=tpv.hospital_region_id
 			LEFT JOIN t_hospital_basic thb ON thb.hospital_id = tpi.project_creator_id
 		WHERE 1=1
 		<if test="validationId != null and validationId != ''">

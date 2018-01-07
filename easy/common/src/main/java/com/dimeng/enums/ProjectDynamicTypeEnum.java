@@ -18,7 +18,7 @@ public enum ProjectDynamicTypeEnum
 {
     
     FBXXM("1", "发布新项目"), ZCXM("2", "支持项目"), GXDT("3", "更新动态"), TQJSXM("4", "提前结束项目"), SCXM("5", "删除项目"), XMXG("6",
-        "项目修改(有订单时修改公益项目)"), ZCCG("7", "众筹成功"), ZCSB("8", "众筹失败");
+        "项目修改(有订单时修改公益项目)"), ZCCG("7", "众筹结束"), ZCSB("8", "众筹失败");
     
     public String dataBaseVal;
     
