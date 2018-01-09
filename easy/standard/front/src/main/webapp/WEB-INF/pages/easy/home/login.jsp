@@ -147,7 +147,7 @@ List<SiteProtocolModelResp> list = (List<SiteProtocolModelResp>)SystemCache.getC
 		    state: "116ec67e09f728cfb78eb1577",
 		    style: "black",
 		    href: ""
-		  });   
+		  });
 </script>
 <script type="text/javascript" src="<%=basePath %>js/common/base64.js"></script>
 <script src="<%=basePath %>js/common/formValidate.js"></script>

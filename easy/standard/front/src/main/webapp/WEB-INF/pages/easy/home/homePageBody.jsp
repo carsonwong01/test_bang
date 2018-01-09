@@ -24,11 +24,11 @@
             、慈善机构等慈善资源，通过移动互联网O2O模式，打通慈善筹款与爱心救助的爱心之路 。</p>
         <ul class='liu-cfr'>
             <li><img src="<%=basePath%>easy/images/cn07.png">
-                <p>75道审核拨付流程</br>工作人员实地探访</p></li>
+                <p>快速、快捷<br>方便、透明</p></li>
             <li><img src="<%=basePath%>easy/images/cn09.png">
                 <p>全国26个省（市）</br>百家三甲医院</p></li>
             <li><img src="<%=basePath%>easy/images/cn06.png">
-                <p>《中国公益时报》发起</br>数十家公益基金会联合参与</p></li>
+                <p>媒体、公益机构</br>医务救助机构、爱心企业全面参与</p></li>
             <li><img src="<%=basePath%>easy/images/cn08.png">
                 <p>开放性数据平台</br>多家平台数据共享策略</p></li>
             <div class='clear'></div>
@@ -107,10 +107,9 @@
             <div class='fr wid-ad'>
 
                 <%--需要重构--%>
-
-                <p>全国26个省（市），百家三甲医院，《中国公益时报》发起
-                    </br>数十家公益基金会联合参与
-                    </br>让爱心传播无界限</p>
+                <p>百家医院、国家指定互联网筹款平台、行业媒体、公益机构
+                    </br>医务救助机构、爱心企业（个人）全面参与
+                </p>
                 <ul class='hospital-name'>
                     {{each(sta, obj) homeHosList}}
                     <li><a href="<%=basePath%>hospital/hospitalDetails.do?hospitalId={{= obj.hospitalId}}">{{=
