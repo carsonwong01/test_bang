@@ -235,7 +235,8 @@
 			      +'</div>';
 	    	   return  confirmTempl;
 	       }else if(options["type"] == 'alert'){//普通提示框
-	    	   commonTempl='<div class="dialog_popup_bg" id="common_popup_bg_id"></div>'
+	    	   commonTempl=
+				   '<div class="dialog_popup_bg" id="common_popup_bg_id"></div>'
 		           +'<div class="popup_con popup_common" id="common_popup_con_id">';
 		          if(options["showTitle"]){
 		        	  commonTempl+='<div class="hd clearfix">'
@@ -257,9 +258,12 @@
 			       }else{
 			    	   commonTempl+="<div class=\"text\">";
 			       }
-			      
-			       commonTempl+= options["msg"]
-	 			   +'</div>'
+					if(options["msg"] == 200004){
+						commonTempl+= "验证码无效或超时"
+					}else{
+                        commonTempl+= options["msg"]
+					}
+                   commonTempl+= '</div>'
 	 			   +'</div>'
 			       +'</div>'
 			       +'</div>'

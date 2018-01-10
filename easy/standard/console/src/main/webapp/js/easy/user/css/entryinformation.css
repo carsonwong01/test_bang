@@ -28,8 +28,18 @@ body{
 	font-size: 14px;
 	color: #333333;
 }
+.inpt>p>span{
+	padding: 15px 0;
+	font-size: 14px;
+	color: #333333;
+}
+.inpt>p>span>label{
+	padding-right: 15px;
+	font-size: 14px;
+}
 .inpt>p>label{
 	padding-right: 15px;
+	font-size: 14px;
 }
 .ibu{
 	width: 140px;

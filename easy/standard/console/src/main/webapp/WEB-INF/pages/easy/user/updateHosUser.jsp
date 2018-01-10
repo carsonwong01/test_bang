@@ -6,12 +6,16 @@
     <div class='utop'>医院基本信息</div>
     <div class='inpt'>
         <p>
-            <label>＊医院名称</label><input name='hospitalName' value='${updateHosUserInfo.hospitalName}' type="text" class='ibu'>
-            <label>＊医院类型</label><input name='hospitalType' value='${updateHosUserInfo.hospitalType}' type="text" class='ibu'>
+            <span class="pr">
+                <label><em class="red pr5">*</em>医院名称</label><input name='hospitalName' maxlength="25" validate='q' value='${updateHosUserInfo.hospitalName}' type="text" class='ibu'></span>
+            <span class="pr">
+                <label><em class="red pr5">*</em>医院类型</label><input name='hospitalType' maxlength="25" validate='q' value='${updateHosUserInfo.hospitalType}' type="text" class='ibu'></span>
         </p>
         <p>
-            <label>＊医院级别</label><input name='hospitalGrade' value='${updateHosUserInfo.hospitalGrade}' type="text" class='ibu'>
-            <label>＊医院地址</label>
+            <label><em class="red pr5">*</em>医院级别</label>
+            <span class="pr">
+                <input name='hospitalGrade' validate='q' maxlength="20" value='${updateHosUserInfo.hospitalGrade}' type="text" validate='q'  class='ibu'></span>
+            <label><em class="red pr5">*</em>医院地址</label>
             <%--<select class='setp'name=''>--%>
             <%--<option value=''>省</option>--%>
             <%--</select>--%>
@@ -21,38 +25,41 @@
             <%--<select class='setp'name=''>--%>
             <%--<option value=''>区/县</option>--%>
             <%--</select>--%>
-            <input name='province' type="text" value='${updateHosUserInfo.province}' placeholder="省" class='ibuu'>
-            <input name='city' type="text" value='${updateHosUserInfo.city}' placeholder="市" class='ibuu'>
-            <input name='county' type="text" value='${updateHosUserInfo.county}' placeholder="区/县" class='ibuu'>
-            <input name='addr' type="text" value='${updateHosUserInfo.addr}' placeholder="街道地址" class='upi'>
+            <span class="pr">
+            <input name='province' validate='q' maxlength="20" type="text" value='${updateHosUserInfo.province}' placeholder="省" class='ibuu'></span>
+            <span class="pr">
+            <input name='city' validate='q' maxlength="20" type="text" value='${updateHosUserInfo.city}' placeholder="市" class='ibuu'></span>
+            <span class="pr">
+            <input name='county' validate='q' maxlength="25" type="text" value='${updateHosUserInfo.county}' placeholder="区/县" class='ibuu'></span>
+            <input name='addr' maxlength="100" type="text" value='${updateHosUserInfo.addr}' placeholder="街道地址" class='upi'>
         </p>
     </div>
-    <div class='impt'>
-        <label class='fl'>＊医院资质证明</label>
+    <div class='impt pr'>
+        <label class='fl'><em class="red pr5">*</em>医院资质证明</label>
         <img class='fl' id="show" src="${updateHosUserInfo.organizationAptitudeUrl}"></span>
         <p class='fl p-iut'>
-            <input type="file" name='aptitudeFile' value='' onchange="c()" id="file" >
+            <input type="file" validate='q'  name='aptitudeFile' value='' onchange="c()" id="file" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
         <div class='clear'></div>
     </div >
-    <div class='impt'>
-        <label class='fl'>＊医院封面图片</label>
+    <div class='impt pr'>
+        <label class='fl'><em class="red pr5">*</em>医院封面图片</label>
         <img class='fl' id="show1" src="${updateHosUserInfo.logoUrl}"></span>
         <p class='fl p-iut'>
-            <input type="file" name='logoFile' value='' onchange="cover()" id="file1" >
+            <input type="file" validate='q'  name='logoFile' value='' onchange="cover()" id="file1" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
         <div class='clear'></div>
     </div >
-    <div class='hostms'>
-        <label>＊医院简介</label>
-        <input type="text" name='hospitalAbstract' value='${updateHosUserInfo.hospitalAbstract}'>
+    <div class='hostms pr'>
+        <label><em class="red pr5">*</em>医院简介</label>
+        <input type="text" validate='q' maxlength="500"  name='hospitalAbstract' value='${updateHosUserInfo.hospitalAbstract}'>
     </div>
-    <div class='hosjj'>
-        <label class='fl'>＊医院描述</label>
+    <div class='hosjj pr'>
+        <label class='fl'><em class="red pr5">*</em>医院描述</label>
         <textarea class='fl' name='description' value='' >${updateHosUserInfo.description}</textarea>
         <div class='clear'></div>
     </div>
@@ -66,20 +73,20 @@
             <%--</div>--%>
         <%--</div>--%>
     <%--</li>--%>
-    <div class='hostms'>
-        <label>＊医院网址</label>
-        <input type="text" name='hospitalUrl' value='${updateHosUserInfo.hospitalUrl}'>
+    <div class='hostms pr'>
+        <label><em class="red pr5">*</em>医院网址</label>
+        <input type="text" validate='q' maxlength="100"  name='hospitalUrl' value='${updateHosUserInfo.hospitalUrl}'>
     </div>
     <div class='yes-ou'>
         <p class='fl'>
-            <label>＊推荐</label>
+            <label><em class="red pr5">*</em>推荐</label>
             <select class='setp' name='recommendStatus'>
                 <option value='1'>是</option>
                 <option value='2'>否</option>
             </select>
         </p>
         <p class='fr'>
-            <label>＊发布</label>
+            <label><em class="red pr5">*</em>发布</label>
             <select class='setp' name='publishStatus'>
                 <option value='1'>是</option>
                 <option value='2'>否</option>
@@ -88,29 +95,24 @@
         <div class='clear'></div>
     </div>
     <div class='utop'>医院联系人信息</div>
-    <div class='clla'>
+    <div class='inpt'>
         <p>
-            <label>＊姓&nbsp;&nbsp;&nbsp;名</label><input name='linkName' type="text" value='${updateHosUserInfo.linkName}' class='ibu'>
-            <label>＊办公电话</label><input name='officeTel' type="text" value='${updateHosUserInfo.officeTel}' class='ibu'>
+            <span class="pr"></span>
+            <label><em class="red pr5">*</em>姓&nbsp;&nbsp;&nbsp;&nbsp;名</label><input name='linkName' maxlength="20" validate='q'  type="text" value='${updateHosUserInfo.linkName}' class='ibu'></span>
+            <span class="pr">
+            <label><em class="red pr5">*</em>办公电话</label><input name='officeTel' maxlength="30" validate='q'  type="text" value='${updateHosUserInfo.officeTel}' class='ibu'></span>
         </p>
         <p>
-            <label>＊手机号</label><input name='mobilePhone' type="text" class='ibu' value='${updateHosUserInfo.mobilePhone}'>
-            <label>＊电子邮箱</label><input name='hospitalMail' type="text" class='ibu' value='${updateHosUserInfo.hospitalMail}'>
+            <span class="pr">
+            <label><em class="red pr5">*</em>手机号</label><input name='mobilePhone' maxlength="11" validate='q'  type="text" class='ibu' value='${updateHosUserInfo.mobilePhone}'></span>
+            <span class="pr">
+            <label><em class="red pr5">*</em>电子邮箱</label><input name='hospitalMail' maxlength="50" validate='q'  type="text" class='ibu' value='${updateHosUserInfo.hospitalMail}'></span>
         </p>
     </div>
     <div class='but-sibm'>
         <a class="" id="addHosUser" href="javascript:void(0);">提交</a>
         <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
     </div>
-    <%--<div class="tl pl120 f16 pb20"><a href="javascript:void(0);" id="addAdvert" class="btn-blue2 btn white radius-6 pl20 pr20 ml20 mr20">发布</a>--%>
-        <%--<a href="javascript:void(0)" onclick="closeInfo()" class="btn btn-gray radius-6 pl20 pr20 ml20 mr20">取消</a>--%>
-    <%--</div>--%>
-
-<%--<div class="pr mh30 pl120"><span class="display-ib"><em class="red pr5">*</em>标题</span>--%>
-        <%--<div class="pr">--%>
-            <%--<input type="text" class="focus_text"  validate="q" name="title" id=""  maxlength="20">--%>
-        <%--</div>--%>
-    <%--</div>--%>
     <li class='ldr' datr='${updateHosUserInfo.userId}'></li>
 </form>
 </div>

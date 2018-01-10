@@ -34,55 +34,63 @@
     <div class='utop'>医院基本信息</div>
     <div class='inpt'>
         <p>
-            <label>＊医院名称</label><input name='hospitalName' value='' type="text" class='ibu'>
-            <label>＊医院类型</label><input name='hospitalType' value='' type="text" class='ibu'>
+            <span class="pr">
+            <label><em class="red pr5">*</em>医院名称</label><input name='hospitalName'  value='' type="text" class='pr ibu' validate='q' maxlength="25">
+            </span>
+            <span class="pr">
+                <label><em class="red pr5">*</em>医院类型</label><input name='hospitalType'  value='' type="text" class='pr ibu' validate='q' maxlength="25">
+            </span>
         </p>
         <p>
-            <label>＊医院级别</label><input name='hospitalGrade' value='' type="text" class='ibu'>
-            <label>＊医院地址</label>
+            <span class="pr">
+            <label><em class="red pr5">*</em>医院级别</label><input name='hospitalGrade' validate='q' value='' type="text" class='pr ibu' maxlength="20">
+            </span>
+            <span class="pr">
+            <label><em class="red pr5">*</em>医院地址</label>
             <select name="province" class="setp" id="provinceId">
+                <option value="" >请选择</option>
                 <c:forEach items="${provinceList}" var="province">
                     <option value="${province.province}" >${province.province}</option>
                 </c:forEach>
             </select>
-            <select name="city" class="setp" id="list">
+            <select name="city" class="setp" id="list" >
 
             </select>
-            <input name='county' type="text" value='' placeholder="区/县" class='ibuu'>
-            <input name='addr' type="text" value='' placeholder="街道地址" class='upi'>
+            <input name='county' maxlength="25" type="text" value='' placeholder="区/县" class='ibuu' validate='q'>
+            <input name='addr' maxlength="100" type="text" value='' placeholder="街道地址" class='upi'>
             <%--<select class='setp'name=''>--%>
             <%--<option value=''>区/县</option>--%>
             <%--</select>--%>
-
+            </span>
         </p>
     </div>
-    <div class='impt'>
-        <label class='fl'>＊医院资质证明</label>
+    <div class='impt pr'>
+        <label class='fl'><em class="red pr5">*</em>医院资质证明</label>
         <img class='fl' id="show"></span>
         <p class='fl p-iut'>
-            <input type="file" name="aptitudeFile" value='' onchange="c()" id="file" >
+            <input type="file" name="aptitudeFile" value='' onchange="c()" id="file"  validate='q' >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
         <div class='clear'></div>
     </div >
     <div class='impt'>
-        <label class='fl'>＊医院封面图片</label>
+        <label class='fl'><em class="red pr5">*</em>医院封面图片</label>
         <img class='fl' id="show1"></span>
-        <p class='fl p-iut'>
-            <input type="file" name="logoFile" value='' onchange="cover()" id="file1" >
+        <p class='fl p-iut pr' >
+            <input type="file" name="logoFile" value='' onchange="cover()" id="file1"  validate='q'>
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
         <div class='clear'></div>
     </div >
-    <div class='hostms'>
-        <label>＊医院简介</label>
-        <input type="text" name='hospitalAbstract' value=''>
+    <div class='hostms pr'>
+        <label><em class="red pr5">*</em>医院简介</label>
+            <input type="text" validate='q' name='hospitalAbstract' value='' maxlength="500">
     </div>
-    <div class='hosjj'>
-        <label class='fl'>＊医院描述</label>
-        <textarea class='fl' value='' name='description'></textarea>
+    <div class='hosjj pr'>
+        <label class='fl'><em class="red pr5">*</em>医院描述</label>
+        <textarea class='fl' value='' validate='q' name='description'></textarea>
         <div class='clear'></div>
     </div>
     <%--<li class="mb20">--%>
@@ -95,20 +103,20 @@
     <%--</div>--%>
     <%--</div>--%>
     <%--</li>--%>
-    <div class='hostms'>
-        <label>＊医院网址</label>
-        <input type="text" name='hospitalUrl' value=''>
+    <div class='hostms pr'>
+        <label><em class="red pr5">*</em>医院网址</label>
+        <input type="text" name='hospitalUrl' value='' maxlength="100" validate='q'>
     </div>
     <div class='yes-ou'>
         <p class='fl'>
-            <label>＊推荐</label>
+            <label><em class="red pr5">*</em>推荐</label>
             <select class='setp' name='recommendStatus'>
                 <option value='1'>是</option>
                 <option value='2'>否</option>
             </select>
         </p>
         <p class='fr'>
-            <label>＊发布</label>
+            <label><em class="red pr5">*</em>发布</label>
             <select class='setp' name='publishStatus'>
                 <option value='1'>是</option>
                 <option value='2'>否</option>
@@ -117,14 +125,22 @@
         <div class='clear'></div>
     </div>
     <div class='utop'>医院联系人信息</div>
-    <div class='clla'>
+    <div class='inpt'>
         <p>
-            <label>＊姓&nbsp;&nbsp;&nbsp;名</label><input name='linkName' type="text" value='' class='ibu'>
-            <label>＊办公电话</label><input name='officeTel' type="text" value='' class='ibu'>
+            <span class="pr">
+                <label><em class="red pr5">*</em>姓&nbsp;&nbsp;&nbsp;&nbsp;名</label><input name='linkName' type="text" value='' class='ibu' maxlength="20" validate='q'>
+            </span>
+            <span class="pr">
+                <label><em class="red pr5">*</em>办公电话</label><input name='officeTel' type="text" value='' class='ibu' maxlength="30" validate='q'>
+            </span>
         </p>
         <p>
-            <label>＊手机号</label><input name='mobilePhone' type="text" class='ibu' value=''>
-            <label>＊电子邮箱</label><input name='hospitalMail' type="text" class='ibu' value=''>
+            <span class="pr">
+                <label><em class="red pr5">*</em>手机号</label><input name='mobilePhone' type="text" class='ibu' value='' maxlength="11" validate='q'>
+            </span>
+            <span class="pr">
+                <label><em class="red pr5">*</em>电子邮箱</label><input name='hospitalMail' type="text" class='ibu' value='' maxlength="50" validate='q'>
+            </span>
         </p>
     </div>
     <div class='but-sibm'>
@@ -135,7 +151,7 @@
 
     <%--<div class="pr mh30 pl120"><span class="display-ib"><em class="red pr5">*</em>标题</span>--%>
     <%--<div class="pr">--%>
-    <%--<input type="text" class="focus_text"  validate="q" name="title" id=""  maxlength="20">--%>
+    <%--<input type="text" class=""  validate="q" name="title" id=""  maxlength="20">--%>
     <%--</div>--%>
     <%--</div>--%>
 

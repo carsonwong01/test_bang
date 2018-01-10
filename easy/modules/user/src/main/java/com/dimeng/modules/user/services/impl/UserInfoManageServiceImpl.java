@@ -766,79 +766,88 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
     @Override
     public BaseDataResp insertHospitalInfo(InsertHospitalReq insertReq)
             throws Exception{
+        QueryEvent event = new QueryEvent();
+        event.setStatement("findHosUserUnique");
+        event.setObj(insertReq);
+        List<TUser> list = baseDao.findAllIsPageByCustom(event);
         BaseDataResp resp = new BaseDataResp();
-        //1.1 、新增医院信息表t_hospital_basic
-        THospitalBasic tHospitalBasic =  new THospitalBasic();
-        tHospitalBasic.setUserId(UUIDGenerate.generateShortUuid());
-        tHospitalBasic.setHospitalId(tHospitalBasic.getUserId());
-        tHospitalBasic.setHospitalName(insertReq.getHospitalName());
-        tHospitalBasic.setHospitalGrade(insertReq.getHospitalGrade());
-        tHospitalBasic.setHospitalType(insertReq.getHospitalType());
-        tHospitalBasic.setProvince(insertReq.getProvince());
-        tHospitalBasic.setCity(insertReq.getCity());
-        tHospitalBasic.setCounty(insertReq.getCounty());
-        tHospitalBasic.setAddr(insertReq.getAddr());
-        tHospitalBasic.setLogoUrl(insertReq.getLogoUrl());
-        tHospitalBasic.setLogoId(insertReq.getLogoId());
-        tHospitalBasic.setHospitalAbstract(insertReq.getHospitalAbstract());
-        tHospitalBasic.setDescription(insertReq.getDescription());
-        tHospitalBasic.setOrganizationAptitudeUrl(insertReq.getOrganizationAptitudeUrl());
-        tHospitalBasic.setOrganizationAptitudeId(insertReq.getOrganizationAptitudeId());
-        tHospitalBasic.setHospitalUrl(insertReq.getHospitalUrl());
-        tHospitalBasic.setLinkName(insertReq.getLinkName());
-        tHospitalBasic.setMobilePhone(insertReq.getMobilePhone());
-        tHospitalBasic.setOfficeTel(insertReq.getOfficeTel());
-        tHospitalBasic.setHospitalMail(insertReq.getHospitalMail());
-        tHospitalBasic.setPublishStatus(insertReq.getPublishStatus());
-        tHospitalBasic.setRecommendStatus(insertReq.getRecommendStatus());
-//      baseDao.insert(tHospitalBasic);
-        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tHospitalBasic))
+        if (null != list && list.size() > 0)
         {
-            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
-        }
-        //2、新增用户总表
-        TUser tuser = new TUser();
-        tuser.setUserId(tHospitalBasic.getUserId());
-        tuser.setUserName(tHospitalBasic.getMobilePhone());
-        tuser.setHospitalName(tHospitalBasic.getHospitalName());
-        tuser.setHospitalId(tuser.getUserId());
-        tuser.setUserType("1");
-        tuser.setSource("1");
-        tuser.setSourceType(CommonConstant.FOUR);
-        tuser.setMobile(tHospitalBasic.getMobilePhone());
-        tuser.setDateLastLogin(DateUtil.getNow());
-//      baseDao.insert(tuser);
-        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tuser))
-        {
-            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
-        }
-        //3、新增用户基本信息表 -登录授权方式，如果不是sj则说明是第三方授权登录的
-        TQUserBasic userBase = new TQUserBasic();
-        userBase.setUserId(tuser.getUserId());
-        userBase.setNickName(tHospitalBasic.getHospitalName());
-        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userBase))
-        {
-            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
-        }
+            resp.setCode("000001");
+        }else{
+            //1.1 、新增医院信息表t_hospital_basic
+            THospitalBasic tHospitalBasic =  new THospitalBasic();
+            tHospitalBasic.setUserId(UUIDGenerate.generateShortUuid());
+            tHospitalBasic.setHospitalId(tHospitalBasic.getUserId());
+            tHospitalBasic.setHospitalName(insertReq.getHospitalName());
+            tHospitalBasic.setHospitalGrade(insertReq.getHospitalGrade());
+            tHospitalBasic.setHospitalType(insertReq.getHospitalType());
+            tHospitalBasic.setProvince(insertReq.getProvince());
+            tHospitalBasic.setCity(insertReq.getCity());
+            tHospitalBasic.setCounty(insertReq.getCounty());
+            tHospitalBasic.setAddr(insertReq.getAddr());
+            tHospitalBasic.setLogoUrl(insertReq.getLogoUrl());
+            tHospitalBasic.setLogoId(insertReq.getLogoId());
+            tHospitalBasic.setHospitalAbstract(insertReq.getHospitalAbstract());
+            tHospitalBasic.setDescription(insertReq.getDescription());
+            tHospitalBasic.setOrganizationAptitudeUrl(insertReq.getOrganizationAptitudeUrl());
+            tHospitalBasic.setOrganizationAptitudeId(insertReq.getOrganizationAptitudeId());
+            tHospitalBasic.setHospitalUrl(insertReq.getHospitalUrl());
+            tHospitalBasic.setLinkName(insertReq.getLinkName());
+            tHospitalBasic.setMobilePhone(insertReq.getMobilePhone());
+            tHospitalBasic.setOfficeTel(insertReq.getOfficeTel());
+            tHospitalBasic.setHospitalMail(insertReq.getHospitalMail());
+            tHospitalBasic.setPublishStatus(insertReq.getPublishStatus());
+            tHospitalBasic.setRecommendStatus(insertReq.getRecommendStatus());
+    //      baseDao.insert(tHospitalBasic);
+            if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tHospitalBasic))
+            {
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
+            //2、新增用户总表
+            TUser tuser = new TUser();
+            tuser.setUserId(tHospitalBasic.getUserId());
+            tuser.setUserName(tHospitalBasic.getMobilePhone());
+            tuser.setHospitalName(tHospitalBasic.getHospitalName());
+            tuser.setHospitalId(tuser.getUserId());
+            tuser.setUserType("1");
+            tuser.setSource("1");
+            tuser.setSourceType(CommonConstant.FOUR);
+            tuser.setMobile(tHospitalBasic.getMobilePhone());
+            tuser.setDateLastLogin(DateUtil.getNow());
+    //      baseDao.insert(tuser);
+            if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tuser))
+            {
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
+            //3、新增用户基本信息表 -登录授权方式，如果不是sj则说明是第三方授权登录的
+            TQUserBasic userBase = new TQUserBasic();
+            userBase.setUserId(tuser.getUserId());
+            userBase.setNickName(tHospitalBasic.getHospitalName());
+            if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userBase))
+            {
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
 
-        //4、新增用户资金信息表
-        TUserCapitalAccount acc = new TUserCapitalAccount();
-        acc.setUserId(tuser.getUserId());
-        acc.setDateUpdate(DateUtil.getNow());
-        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(acc))
-        {
-            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            //4、新增用户资金信息表
+            TUserCapitalAccount acc = new TUserCapitalAccount();
+            acc.setUserId(tuser.getUserId());
+            acc.setDateUpdate(DateUtil.getNow());
+            if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(acc))
+            {
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
+            //5、新增用户免打扰设置信息
+            TUserNotify userNotify = new TUserNotify();
+            userNotify.setUserId(tuser.getUserId());
+            if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userNotify))
+            {
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         }
-        //5、新增用户免打扰设置信息
-        TUserNotify userNotify = new TUserNotify();
-        userNotify.setUserId(tuser.getUserId());
-        if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(userNotify))
-        {
-            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
-        }
-
-        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
+
     }
 
     /**

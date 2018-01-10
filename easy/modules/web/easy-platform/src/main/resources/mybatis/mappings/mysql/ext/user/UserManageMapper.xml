@@ -384,7 +384,14 @@
 		select user_id,user_name  from t_user
 		where  user_name = #{phoneNumber,jdbcType=VARCHAR} 
 	</select>
-	
+
+
+	<select id="findHosUserUnique" resultType="com.dimeng.model.expand.InsertHospitalReq"
+			parameterType="com.dimeng.model.expand.InsertHospitalReq">
+		select user_id userId, hospital_id hospitalId
+		from t_user
+		where  user_name = #{mobilePhone,jdbcType=VARCHAR}
+	</select>
 	
 	<resultMap id="findUserHomeInfoRestMap" type="com.dimeng.entity.ext.user.FrontUserAccHomeResp">
 		<result column="user_id" property="userId" jdbcType="VARCHAR" />

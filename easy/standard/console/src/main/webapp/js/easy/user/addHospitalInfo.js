@@ -100,7 +100,8 @@ var AdvertImageRecord=DM.Controller.sub({
                 }
             });
         }else{
-            Dialog.show("保存失败","error");
+            Dialog.show("保存失败，该手机号已注册！","error");
+            myfn.AjaxFn("userManage/addHospitalUser.do",$(".viewFramework-content"));
         }
     },
     //校验是否上传了图片
