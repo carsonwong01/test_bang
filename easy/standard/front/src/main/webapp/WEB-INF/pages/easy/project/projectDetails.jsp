@@ -110,7 +110,7 @@
 				</div>
 			</div>
 			<div class='xim-qi'>
-				<p><i></i> <span>认证基金会</span></p>
+				<p><i></i> <span>专项管理基金会</span></p>
 				<div class='xim-id'>
 					<img src="<%=basePath%>easy/images/cn19.png" class='fl'>
 					<p class='fl'>

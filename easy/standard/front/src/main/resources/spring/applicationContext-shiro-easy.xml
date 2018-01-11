@@ -55,6 +55,8 @@
 				/easy/js/** = anon
 				/project/** = anon
 				/hospital/** = anon
+				/foundation/** = anon
+
 				<!-- 第三方回调地址 -->
 				/thirdCallback/callback.do = anon
 

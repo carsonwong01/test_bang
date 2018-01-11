@@ -103,6 +103,8 @@
 				/user/userManage/v/updateHosRecStatus = anon
 				/user/userManage/v/findProvince = anon
 				/user/userManage/v/findCity = anon
+				/foundation/v/foundationList = anon
+				/foundation/v/foundationDetails = anon
 
 
 
