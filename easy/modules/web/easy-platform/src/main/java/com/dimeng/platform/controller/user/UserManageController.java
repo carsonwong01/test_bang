@@ -4,6 +4,7 @@ import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.ext.user.FrontUserInfo;
 import com.dimeng.entity.ext.user.ThirdPartyUserResp;
+import com.dimeng.entity.table.foundation.DeleteFoundationReq;
 import com.dimeng.enums.ThirdTypeEnum;
 import com.dimeng.enums.variable.EasySystemVariable;
 import com.dimeng.framework.controller.BaseController;
@@ -238,6 +239,22 @@ public class UserManageController extends BaseController
     }
 
     /**
+     * 删除基金会信息
+     */
+    @RequestMapping(value = {"/{v}/deleteFoundation"},method = {RequestMethod.DELETE},
+            produces = {"application/json", "application/xml"} )
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public Object deleteFoundation(DeleteFoundationReq deleteReq)throws Exception{
+        BaseDataResp resp = this.validator(deleteReq);
+        if ("000000".equals(resp.getCode())) {
+            resp = this.userManageService.deleteFoundation(deleteReq);
+        }
+        return resp;
+    }
+
+
+    /**
      * 修改基金会信息
      */
     @RequestMapping(value = "/{v}/updateFoundation", method = RequestMethod.POST, produces = {"application/json",
@@ -250,7 +267,7 @@ public class UserManageController extends BaseController
     }
 
     /**
-     * 插入基金会
+     * 插入基金会信息
      */
     @RequestMapping(value="/{v}/insertFoundation", method = RequestMethod.POST,
             produces = {"application/json","application/xml"})

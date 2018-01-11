@@ -127,6 +127,51 @@ var PerInformationControler=DM.constructor.sub({
 
             }
         });
+    },
+
+
+    //删除弹窗
+    delFoundation:function(val, title,wenzi){
+        var _self=this;
+        Dialog.confirm("确认删除该内容吗？删除后将不可恢复！",{
+            title:wenzi+"确认",
+            sureName:"确定",
+            cancelName:"取消",
+            showCancel:true,
+            picClass:"tip", //需要时设置,该属性用来显示提示信息成功或失败的图标（success，error,tip）
+            callBack:function(){
+                _self.delAjax(val, title,wenzi);
+                //回调函数
+            }
+        });
+    },
+
+    //删除Ajax跳转
+    delAjax:function(val, title,wenzi){
+        var _self=this;
+        //var data= {"status":userStatus,"userId":userId};
+        DM.ajax({
+            url:"userManage/delFoundationInfo.do",
+            data:{foundationId:val},
+            success:function(data){
+                _self.getPerInformationList();
+                if(data.code=="000000"){
+                    Dialog.confirm(wenzi+"成功！",{
+                        title:"提示消息",
+                        sureName:"确定",
+                        showCancel:false,                //是否显示confirm弹框的取消按钮
+                        picClass:"success", //需要时设置,该属性用来显示提示信息成功或失败的图标（success，error,tip）
+                        callBack:function(){
+                            //回调函数
+                            _self.getPerInformationList();
+                        }
+                    });
+                }
+            },
+            error:function(data){
+
+            }
+        });
     }
 });
 

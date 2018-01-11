@@ -1,14 +1,17 @@
 package com.dimeng.modules.user.services.impl;
 
+import com.dimeng.abilitys.annotation.SystemOperationLog;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.ext.expand.FindAllHospitalResp;
 import com.dimeng.entity.ext.expand.FindFoundationResp;
 import com.dimeng.entity.ext.expand.FindProvinceAndCityResp;
 import com.dimeng.entity.ext.user.*;
+import com.dimeng.entity.table.foundation.DeleteFoundationReq;
 import com.dimeng.entity.table.foundation.FoundationInfo;
 import com.dimeng.entity.table.hospital.THospitalBasic;
 import com.dimeng.entity.table.user.*;
+import com.dimeng.enums.BusinessOperationTypeEnum;
 import com.dimeng.enums.IdCardStatusEnum;
 import com.dimeng.enums.ThirdTypeEnum;
 import com.dimeng.enums.variable.SystemVariable;
@@ -21,6 +24,7 @@ import com.dimeng.framework.mybatis.utils.page.PageContext;
 import com.dimeng.framework.mybatis.utils.page.PageResult;
 import com.dimeng.framework.service.impl.BaseServiceImpl;
 import com.dimeng.framework.utils.DateUtil;
+import com.dimeng.framework.utils.DimengBeanUtil;
 import com.dimeng.framework.utils.StringUtil;
 import com.dimeng.model.expand.FindFoundationReq;
 import com.dimeng.model.expand.FindProvinceAndCityReq;
@@ -968,6 +972,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             //1、插入到foundation_info表汇总
             FoundationInfo foundation = new FoundationInfo();
 
+            Date now = new Date();
             foundation.setFoundationId(UUIDGenerate.generateShortUuid());
             foundation.setFoundationName(insertReq.getFoundationName());
             foundation.setFoundationUrl(insertReq.getFoundationUrl());
@@ -982,7 +987,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             foundation.setMail(insertReq.getMail());
             foundation.setLogoUrl(insertReq.getLogoUrl());
             foundation.setLogoId(insertReq.getLogoId());
-            foundation.setCreateTime(insertReq.getCreateTime());
+            foundation.setCreateTime(now);
             foundation.setDescription(insertReq.getDescription());
             foundation.setRemainProperty(insertReq.getRemainProperty());
             foundation.setBankInfo(insertReq.getBankInfo());
@@ -1008,7 +1013,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         BaseDataResp resp = new BaseDataResp();
         //1、插入到foundation_info表汇总
         FoundationInfo foundation = new FoundationInfo();
-
+        Date now = new Date();
         foundation.setFoundationId(updateReq.getFoundationId());
         foundation.setFoundationName(updateReq.getFoundationName());
         foundation.setFoundationUrl(updateReq.getFoundationUrl());
@@ -1023,7 +1028,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         foundation.setMail(updateReq.getMail());
         foundation.setLogoUrl(updateReq.getLogoUrl());
         foundation.setLogoId(updateReq.getLogoId());
-        foundation.setCreateTime(updateReq.getCreateTime());
+        foundation.setCreateTime(now);
         foundation.setDescription(updateReq.getDescription());
         foundation.setRemainProperty(updateReq.getRemainProperty());
         foundation.setBankInfo(updateReq.getBankInfo());
@@ -1041,6 +1046,23 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         return resp;
     }
 
+    /**
+     * 删除基金会信息--console
+     */
+    @SystemOperationLog(
+            businessOperationTypeEnum = BusinessOperationTypeEnum.CUSTMGRDELETE
+    )
+    public BaseDataResp deleteFoundation(DeleteFoundationReq req)
+            throws Exception{
+        if (1 != this.baseDao.delete(DimengBeanUtil.copyProperties(FoundationInfo.class, req))) {
+            this.logs.error("###删除数据错误###");
+            throw new ServicesException("100002");
+        } else {
+            BaseDataResp resp = new BaseDataResp();
+            resp.setCode("000000");
+            return resp;
+        }
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.dimeng.modules.user.services;
 
 import com.dimeng.entity.ext.user.ThirdPartyUserResp;
+import com.dimeng.entity.table.foundation.DeleteFoundationReq;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.exception.ServicesException;
@@ -17,6 +18,12 @@ import com.dimeng.model.user.*;
  */
 public interface UserInfoManageService
 {
+    /**
+     * 删除基金会信息
+     */
+    public BaseDataResp deleteFoundation(DeleteFoundationReq req)
+            throws Exception;
+
     /**
      * 修改提交基金会信息
      */

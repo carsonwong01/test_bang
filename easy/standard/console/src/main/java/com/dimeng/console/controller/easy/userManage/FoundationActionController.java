@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dimeng.abilitys.annotation.SystemConsoleLog;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.entity.ext.user.ConsoleUserInfo;
+import com.dimeng.entity.table.foundation.DeleteFoundationReq;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.framework.utils.StringUtil;
 import com.dimeng.model.expand.FindFoundationReq;
@@ -98,6 +99,24 @@ public class FoundationActionController extends BaseController{
         JSONObject json = JSONObject.parseObject(foundationInfo);
         return json;
     }
+
+    /**
+     * 删除基金会
+     */
+    @SystemConsoleLog(
+            desc = "删除基金会",modul = "用户管理")
+    @SuppressWarnings("unchecked")
+    @ResponseBody
+    @RequestMapping(value = "/delFoundationInfo.do")
+    public Object delFoundation(HttpServletRequest request, HttpServletResponse response,
+                                DeleteFoundationReq req){
+        response.setContentType("text/html;charset=utf-8");
+        response.setHeader("Cache-Control", "no-cache");
+        String data = (new CommonUtil()).callInterfaceMethod(req, "user/userManage/v/deleteFoundation", RequestMethod.DELETE, request);
+        JSONObject json = JSONObject.parseObject(data);
+        return json;
+    }
+
 
     /**
      * 插入基金会信息

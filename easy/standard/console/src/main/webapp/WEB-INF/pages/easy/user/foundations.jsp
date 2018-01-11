@@ -81,14 +81,68 @@
     <a data-url="userManage/updateFoundationInfo.do?foundationId={{= data.foundationId}}" class="link-blue mr20 click-link" >编辑</a>
 </shiro:hasPermission>
 
-<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">
-    <a data-url="userManage/deleteFoundation.do?foundationId={{= data.foundationId}}" class="link-blue mr20 click-link" >删除</a>
+<%--<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">--%>
+    <%--<a href="javascript:void(0);" onclick="controler.articleGuideDel('{{= data.foundationId}}','{{= data.foundationName}}')" class="link-blue mr20 click-link" >删除</a>--%>
+<%--</shiro:hasPermission>--%>
+
+<shiro:hasPermission name="YHGL_YHXX_GRXX_SD">
+    <a href="javascript:void(0);" class="link-blue mr20" onclick="controler.delFoundation('{{= data.foundationId}}','{{= data.foundationName}}','删除');">删除</a>
 </shiro:hasPermission>
 
 				</td>
 	        </tr>
 	{{/each}}
 </script>
+
+<%--<script type="text/javascript">--%>
+    <%--var ArticleGuideController=DM.Controller.sub({--%>
+        <%--articleGuideDel:function(val, title){--%>
+        <%--var _self=this;--%>
+            <%--Dialog.confirm({--%>
+                <%--title:"删除确认",--%>
+                <%--msg:"确认删除该内容吗？删除后将不可恢复！",--%>
+                <%--picClass:"tip",--%>
+                <%--showCancel:true,--%>
+                <%--showClose:true,--%>
+                <%--sureName:"确认",--%>
+                <%--callBack:function(){--%>
+                    <%--_self.toDel(val);//删除--%>
+                <%--}--%>
+            <%--});--%>
+        <%--},--%>
+        <%--//删除--%>
+        <%--toDel:function(val){--%>
+            <%--var _self=this;--%>
+            <%--DM.ajax({--%>
+                <%--url:"userManage/delFoundationInfo.do",--%>
+                <%--data:{id:val},--%>
+                <%--success:function(data){--%>
+                    <%--if("000000" == data.code){--%>
+                        <%--articleGuideController.loadRecord();--%>
+                    <%--}--%>
+                <%--},--%>
+                <%--error:function(){--%>
+
+                <%--}--%>
+            <%--});--%>
+        <%--},--%>
+    <%--});--%>
+    <%--var articleGuideController=new ArticleGuideController();--%>
+    <%--DM.Page.ready({--%>
+        <%--"加载数据":function(){--%>
+            <%--articleGuideController.loadRecord();--%>
+
+            <%--//绑定查询事件--%>
+            <%--$("#searchAdvert").bind("click",function(){--%>
+                <%--articleGuideController.loadRecord();--%>
+            <%--});--%>
+        <%--}--%>
+
+    <%--});--%>
+
+<%--</script>--%>
+
+
 
 
 
