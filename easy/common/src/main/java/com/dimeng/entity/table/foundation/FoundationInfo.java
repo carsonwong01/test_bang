@@ -1,9 +1,9 @@
-package com.dimeng.entity.ext.expand;
+package com.dimeng.entity.table.foundation;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class FindFoundationResp  implements Serializable {
+public class FoundationInfo implements Serializable {
     //基金会ID
     private String foundationId;
     //基金会名称
@@ -221,5 +221,4 @@ public class FindFoundationResp  implements Serializable {
     public void setLinkName(String linkName) {
         this.linkName = linkName;
     }
-    public FindFoundationResp(){}
 }

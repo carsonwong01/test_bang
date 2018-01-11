@@ -3,8 +3,10 @@ package com.dimeng.modules.user.services.impl;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.entity.ext.expand.FindAllHospitalResp;
+import com.dimeng.entity.ext.expand.FindFoundationResp;
 import com.dimeng.entity.ext.expand.FindProvinceAndCityResp;
 import com.dimeng.entity.ext.user.*;
+import com.dimeng.entity.table.foundation.FoundationInfo;
 import com.dimeng.entity.table.hospital.THospitalBasic;
 import com.dimeng.entity.table.user.*;
 import com.dimeng.enums.IdCardStatusEnum;
@@ -20,6 +22,7 @@ import com.dimeng.framework.mybatis.utils.page.PageResult;
 import com.dimeng.framework.service.impl.BaseServiceImpl;
 import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.framework.utils.StringUtil;
+import com.dimeng.model.expand.FindFoundationReq;
 import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
@@ -45,10 +48,52 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
     @Autowired
     private INciicService iNciicService;
 
+    /**
+     * 修改基金会前先查询基金会信息
+     */
+    public BaseDataResp findFoundationInfo(FindFoundationReq req)
+            throws Exception{
+
+
+        return null;
+    }
+
+    /**
+     * 查询基金会详细信息
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findFoundationDetails(NotPageFoundationIdReq req)
+            throws Exception{
+        Map<String, Object> map = new HashMap<String, Object>();
+        BaseDataResp resp = new BaseDataResp();
+        QueryEvent event = new QueryEvent();
+        event.setStatement("findFoundationDetails");
+        event.setObj(req);
+        FindFoundationResp result = (FindFoundationResp)baseDao.findOneByCustom(event);
+        if (result == null)
+        {
+            resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
+            return resp;
+        }
+        //如果需要将基金会的支付账户信息加密显示，则可以参考以下代码
+//        if (StringUtils.isNoneBlank(result.getIdCard()))
+//        {
+//            result.setIdCard(Base64Decoder.decode(result.getIdCard()));
+//        }
+        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, result);
+        resp.setData(map);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+
+    }
+
 
     /**
      * 修改医院的推荐状态
      */
+    @SuppressWarnings("unchecked")
+    @Override
     public BaseDataResp updateHosRecStatus(HospitalBasicReq req)
             throws Exception{
         BaseDataResp resp = new BaseDataResp();
@@ -904,5 +949,98 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
+
+    /**
+     * 插入基金会信息
+     */
+    @SuppressWarnings("unchecked")
+    public BaseDataResp insertFoundationInfo(FindFoundationReq insertReq)
+            throws Exception{
+        QueryEvent event = new QueryEvent();
+        event.setStatement("findFoundationUnique");
+        event.setObj(insertReq);
+        List<FoundationInfo> list = baseDao.findAllIsPageByCustom(event);
+        BaseDataResp resp = new BaseDataResp();
+        if (null != list && list.size() > 0)
+        {
+            resp.setCode("000001");
+        }else{
+            //1、插入到foundation_info表汇总
+            FoundationInfo foundation = new FoundationInfo();
+
+            foundation.setFoundationId(UUIDGenerate.generateShortUuid());
+            foundation.setFoundationName(insertReq.getFoundationName());
+            foundation.setFoundationUrl(insertReq.getFoundationUrl());
+            foundation.setRegistrationInstitution(insertReq.getRegistrationInstitution());
+            foundation.setSocialCreditCode(insertReq.getSocialCreditCode());
+            foundation.setCertificateUrl(insertReq.getCertificateUrl());
+            foundation.setCertificateId(insertReq.getCertificateId());
+            foundation.setDonationsQualificationUrl(insertReq.getDonationsQualificationUrl());
+            foundation.setDonationUrlId(insertReq.getDonationUrlId());
+            foundation.setAddress(insertReq.getAddress());
+            foundation.setOfficeTel(insertReq.getOfficeTel());
+            foundation.setMail(insertReq.getMail());
+            foundation.setLogoUrl(insertReq.getLogoUrl());
+            foundation.setLogoId(insertReq.getLogoId());
+            foundation.setCreateTime(insertReq.getCreateTime());
+            foundation.setDescription(insertReq.getDescription());
+            foundation.setRemainProperty(insertReq.getRemainProperty());
+            foundation.setBankInfo(insertReq.getBankInfo());
+            foundation.setInvoiceType(insertReq.getInvoiceType());
+            foundation.setAccountInfo(insertReq.getAccountInfo());
+            foundation.setLinkMobile(insertReq.getLinkMobile());
+            foundation.setLinkName(insertReq.getLinkName());
+            //baseDao.insert(foundation);
+            if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(foundation))
+            {
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        }
+        return resp;
+    }
+    /**
+     * 修改提交基金会信息
+     */
+    @SuppressWarnings("unchecked")
+    public BaseDataResp updateFoundationInfo(FindFoundationReq updateReq)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        //1、插入到foundation_info表汇总
+        FoundationInfo foundation = new FoundationInfo();
+
+        foundation.setFoundationId(updateReq.getFoundationId());
+        foundation.setFoundationName(updateReq.getFoundationName());
+        foundation.setFoundationUrl(updateReq.getFoundationUrl());
+        foundation.setRegistrationInstitution(updateReq.getRegistrationInstitution());
+        foundation.setSocialCreditCode(updateReq.getSocialCreditCode());
+        foundation.setCertificateUrl(updateReq.getCertificateUrl());
+        foundation.setCertificateId(updateReq.getCertificateId());
+        foundation.setDonationsQualificationUrl(updateReq.getDonationsQualificationUrl());
+        foundation.setDonationUrlId(updateReq.getDonationUrlId());
+        foundation.setAddress(updateReq.getAddress());
+        foundation.setOfficeTel(updateReq.getOfficeTel());
+        foundation.setMail(updateReq.getMail());
+        foundation.setLogoUrl(updateReq.getLogoUrl());
+        foundation.setLogoId(updateReq.getLogoId());
+        foundation.setCreateTime(updateReq.getCreateTime());
+        foundation.setDescription(updateReq.getDescription());
+        foundation.setRemainProperty(updateReq.getRemainProperty());
+        foundation.setBankInfo(updateReq.getBankInfo());
+        foundation.setInvoiceType(updateReq.getInvoiceType());
+        foundation.setAccountInfo(updateReq.getAccountInfo());
+        foundation.setLinkMobile(updateReq.getLinkMobile());
+        foundation.setLinkName(updateReq.getLinkName());
+//        baseDao.update(user);
+        if (baseDao.update(foundation) != 1)
+        {
+            logs.info("数据更新出错");
+            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+        }
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+
 
 }

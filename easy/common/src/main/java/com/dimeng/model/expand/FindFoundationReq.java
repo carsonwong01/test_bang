@@ -43,6 +43,33 @@ public class FindFoundationReq extends FindExportExcelParamsReq{
     //联系人
     private String linkName;
 
+    private String logoId;
+    private String donationUrlId;
+    private String certificateId;
+
+    public String getLogoId() {
+        return logoId;
+    }
+
+    public void setLogoId(String logoId) {
+        this.logoId = logoId;
+    }
+
+    public String getDonationUrlId() {
+        return donationUrlId;
+    }
+
+    public void setDonationUrlId(String donationUrlId) {
+        this.donationUrlId = donationUrlId;
+    }
+
+    public String getCertificateId() {
+        return certificateId;
+    }
+
+    public void setCertificateId(String certificateId) {
+        this.certificateId = certificateId;
+    }
 
     public String getFoundationId() {
         return foundationId;

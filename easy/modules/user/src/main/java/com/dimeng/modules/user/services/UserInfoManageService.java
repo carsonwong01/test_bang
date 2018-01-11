@@ -4,6 +4,7 @@ import com.dimeng.entity.ext.user.ThirdPartyUserResp;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.exception.ServicesException;
+import com.dimeng.model.expand.FindFoundationReq;
 import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
@@ -16,6 +17,30 @@ import com.dimeng.model.user.*;
  */
 public interface UserInfoManageService
 {
+    /**
+     * 修改提交基金会信息
+     */
+    public BaseDataResp updateFoundationInfo(FindFoundationReq req)
+            throws Exception;
+
+    /**
+     * 修改基金会前先查询基金会信息
+     */
+    public BaseDataResp findFoundationInfo(FindFoundationReq req)
+            throws Exception;
+
+    /**
+     * 插入基金会信息
+     */
+    public BaseDataResp insertFoundationInfo(FindFoundationReq req)
+            throws Exception;
+
+    /**
+     * 查询基金会详细信息
+     */
+    public BaseDataResp findFoundationDetails(NotPageFoundationIdReq req)
+            throws Exception;
+
     /**
      * 修改医院的推荐状态
      */

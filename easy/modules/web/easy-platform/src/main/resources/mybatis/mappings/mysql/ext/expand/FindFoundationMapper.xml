@@ -9,6 +9,7 @@
           registration_institution registrationInstitution
         FROM foundation_info
 
+        where 1 = 1
         <if test="foundationName != null and foundationName != ''">
             and foundation_info.foundation_name LIKE CONCAT
             ('%',trim(#{foundationName,jdbcType=VARCHAR}),'%')
@@ -32,6 +33,12 @@
             <otherwise>and foundation_info.foundation_id=''</otherwise>
         </choose>
     </select>
-
+    <!--查询基金会是否唯一-->
+    <select id="findFoundationUnique" resultType="com.dimeng.entity.ext.expand.FindFoundationResp"
+            parameterType="com.dimeng.model.expand.FindFoundationReq">
+        SELECT foundation_id foundationId,foundation_name foundationName
+        FROM foundation_info
+        WHERE foundation_name = #{foundationName,jdbcType=VARCHAR}
+    </select>
 
 </mapper>

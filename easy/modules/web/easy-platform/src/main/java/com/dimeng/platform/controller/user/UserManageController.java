@@ -11,6 +11,7 @@ import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.framework.domain.BaseReq;
 import com.dimeng.framework.utils.FrameworkConfigurer;
 import com.dimeng.model.bus.FindProListByUserIdReq;
+import com.dimeng.model.expand.FindFoundationReq;
 import com.dimeng.model.expand.FindProvinceAndCityReq;
 import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.expand.InsertHospitalReq;
@@ -28,6 +29,7 @@ import com.dimeng.modules.user.services.UserInfoManageService;
 import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.LoginCache;
 import com.dimeng.utils.SystemCache;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -234,6 +236,51 @@ public class UserManageController extends BaseController
         resp = userManageService.findUserInfo(req.getBody());
         return resp;
     }
+
+    /**
+     * 修改基金会信息
+     */
+    @RequestMapping(value = "/{v}/updateFoundation", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object updateFoundation(HttpEntity<FindFoundationReq> req)
+            throws Exception{
+        return userManageService.updateFoundationInfo(req.getBody());
+    }
+
+    /**
+     * 插入基金会
+     */
+    @RequestMapping(value="/{v}/insertFoundation", method = RequestMethod.POST,
+            produces = {"application/json","application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object insertFoundation(HttpEntity<FindFoundationReq> httpEntity, HttpServletRequest request)
+            throws Exception{
+        return userManageService.insertFoundationInfo(httpEntity.getBody());
+    }
+
+    /**
+     * 后台用户管理-基金会详情信息查看
+     */
+    @RequestMapping(value = "/{v}/findFoundationInfo", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findFoundationInfo(HttpEntity<NotPageFoundationIdReq> req)
+            throws Exception
+    {
+        BaseDataResp resp = this.validator(req.getBody());
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        resp = userManageService.findFoundationDetails(req.getBody());
+        return resp;
+    }
+
+
     
     /**
      * 后台用户管理-用户详情-发起的项目列表
