@@ -31,9 +31,9 @@ public interface UserInfoManageService
             throws Exception;
 
     /**
-     * 修改基金会前先查询基金会信息
+     * 查询基金会详细信息--包括项目等
      */
-    public BaseDataResp findFoundationInfo(FindFoundationReq req)
+    public BaseDataResp findFoundationInfo(NotPageFoundationIdReq req)
             throws Exception;
 
     /**
@@ -43,9 +43,9 @@ public interface UserInfoManageService
             throws Exception;
 
     /**
-     * 查询基金会详细信息
+     * 修改基金会前先查询基金会字段信息--仅字段
      */
-    public BaseDataResp findFoundationDetails(NotPageFoundationIdReq req)
+    public BaseDataResp findFoundationDetails(FindFoundationReq req)
             throws Exception;
 
     /**

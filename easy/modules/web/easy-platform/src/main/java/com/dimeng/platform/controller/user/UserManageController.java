@@ -279,13 +279,32 @@ public class UserManageController extends BaseController
     }
 
     /**
-     * 后台用户管理-基金会详情信息查看
+     * 后台用户管理-基金会详情信息查看--包括项目和其它信息
      */
     @RequestMapping(value = "/{v}/findFoundationInfo", method = RequestMethod.POST, produces = {"application/json",
             "application/xml"})
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public Object findFoundationInfo(HttpEntity<NotPageFoundationIdReq> req)
+            throws Exception
+    {
+        BaseDataResp resp = this.validator(req.getBody());
+        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            return resp;
+        }
+        resp = userManageService.findFoundationInfo(req.getBody());
+        return resp;
+    }
+
+    /**
+     * 后台用户管理-基金会详情信息查看--仅字段--参数 FindFoundationReq
+     */
+    @RequestMapping(value = "/{v}/findFoundationDetails", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public Object findFoundationDetails(HttpEntity<FindFoundationReq> req)
             throws Exception
     {
         BaseDataResp resp = this.validator(req.getBody());
