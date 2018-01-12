@@ -28,8 +28,7 @@
     <result column="recipient_card_image_url" property="recipientCardImageUrl" jdbcType="VARCHAR" />
     <result column="wedding_picture_id" property="weddingPictureId" jdbcType="VARCHAR" />
     <result column="wedding_picture_url" property="weddingPictureUrl" jdbcType="VARCHAR" />
-    <result column="organization_aptitude_id" property="organizationAptitudeId" jdbcType="VARCHAR" />
-    <result column="organization_aptitude_url" property="organizationAptitudeUrl" jdbcType="VARCHAR" />
+    <result column="project_record" property="projectRecord" jdbcType="VARCHAR" />
     <result column="foundation_name" property="foundationName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="TProjectValidation_Column_List" >
@@ -37,8 +36,8 @@
     receive_phone, disease, hospital_region_id, hospital_name, recipient_real_name, recipient, 
     recipient_id_card, organization_name, organization_phone, date_create, date_update, 
     audit_status, receive_card_image_id, receive_card_image_url, recipient_card_image_id, 
-    recipient_card_image_url, wedding_picture_id, wedding_picture_url, organization_aptitude_id, 
-    organization_aptitude_url,date_aduit,aduit_user_id
+    recipient_card_image_url, wedding_picture_id, wedding_picture_url, project_record,
+    date_aduit,aduit_user_id
   </sql>
   <select id="findByIdTProjectValidation" resultMap="TProjectValidationResultMap" parameterType="java.lang.String" >
     select 
@@ -125,11 +124,8 @@
       <if test="weddingPictureUrl != null" >
         wedding_picture_url,
       </if>
-      <if test="organizationAptitudeId != null" >
-        organization_aptitude_id,
-      </if>
-      <if test="organizationAptitudeUrl != null" >
-        organization_aptitude_url,
+      <if test="projectRecord != null" >
+        project_record,
       </if>
       <if test="dateAduit != null" >
         date_aduit,
@@ -214,11 +210,8 @@
       <if test="weddingPictureUrl != null" >
         #{weddingPictureUrl,jdbcType=VARCHAR},
       </if>
-      <if test="organizationAptitudeId != null" >
-        #{organizationAptitudeId,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationAptitudeUrl != null" >
-        #{organizationAptitudeUrl,jdbcType=VARCHAR},
+      <if test="projectRecord != null" >
+        #{projectRecord,jdbcType=VARCHAR},
       </if>
        <if test="dateAduit != null" >
         #{dateAduit,jdbcType=VARCHAR},
@@ -303,17 +296,17 @@
       <if test="weddingPictureUrl != null" >
         wedding_picture_url = #{weddingPictureUrl,jdbcType=VARCHAR},
       </if>
-      <if test="organizationAptitudeId != null" >
-        organization_aptitude_id = #{organizationAptitudeId,jdbcType=VARCHAR},
-      </if>
-      <if test="organizationAptitudeUrl != null" >
-        organization_aptitude_url = #{organizationAptitudeUrl,jdbcType=VARCHAR},
+      <if test="projectRecord != null" >
+        project_record = #{projectRecord,jdbcType=VARCHAR},
       </if>
       <if test="dateAduit != null" >
         date_aduit= #{dateAduit,jdbcType=VARCHAR},
       </if>
       <if test="aduitUserId != null" >
         aduit_user_id= #{aduitUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="foundationName != null" >
+        foundation_name = #{foundationName,jdbcType=VARCHAR},
       </if>
     </set>
     where validation_id = #{validationId,jdbcType=VARCHAR}

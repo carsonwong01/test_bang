@@ -158,6 +158,16 @@ public class ProjectValidationReq extends BaseReq
      */
     private String foundationName;
 
+    private String projectRecord;
+
+    public String getProjectRecord() {
+        return projectRecord;
+    }
+
+    public void setProjectRecord(String projectRecord) {
+        this.projectRecord = projectRecord;
+    }
+
     public String getFoundationName() {
         return foundationName;
     }

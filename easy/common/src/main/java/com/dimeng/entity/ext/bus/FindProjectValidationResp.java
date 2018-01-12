@@ -183,6 +183,18 @@ public class FindProjectValidationResp implements Serializable
      *  详细地址
      */
     private String addr;
+    /**
+     * 公开募捐活动在民政部备案号
+     */
+    private String projectRecord;
+
+    public String getProjectRecord() {
+        return projectRecord;
+    }
+
+    public void setProjectRecord(String projectRecord) {
+        this.projectRecord = projectRecord;
+    }
 
     public String getOfficeTel() {
         return officeTel;

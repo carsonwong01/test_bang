@@ -71,7 +71,7 @@ var AdvertImageRecord=DM.Controller.sub({
     loadRecord:function(){
         //查询数据
         // myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
-        DM.ajax({"formId":"form","serialize":true,"url":"userManage/listFoundation.do","success":this.pageCallBack});
+        DM.ajax({"formId":"form","serialize":true,"url":"userManage/hospitalUserList.do","success":this.pageCallBack});
     },
     /*
      * 分页回调
@@ -96,34 +96,34 @@ var AdvertImageRecord=DM.Controller.sub({
                 picClass:"success",
                 titile:"提示信息",
                 callBack:function(){
-                    myfn.AjaxFn("userManage/listFoundation.do",$(".viewFramework-content"));
+                    myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));
                 }
             });
         }else{
-            Dialog.show("保存失败，该基金会已存在！","error");
-            myfn.AjaxFn("userManage/addFoundationInfo.do",$(".viewFramework-content"));
+            Dialog.show("保存失败，该手机号已存在！","error");
+            myfn.AjaxFn("userManage/updateHosUserInfo.do",$(".viewFramework-content"));
         }
     },
     //校验是否上传了质证明图片
-    checkAptitudeIsNull:function(){
-        var file=$("#file").val();
-        if(file==''){
-            Dialog.show("请上传资质证明图片","tip");
-            return false;
-        }else{
-            return true;
-        }
-    },
+    // checkAptitudeIsNull:function(){
+    //     var file=$("#file").val();
+    //     if(file==''){
+    //         Dialog.show("请上传资质证明图片","tip");
+    //         return false;
+    //     }else{
+    //         return true;
+    //     }
+    // },
     //校验是否上传了医院封面图片
-    checkLogoIsNull:function(){
-        var file1=$("#file1").val();
-        if(file1==''){
-            Dialog.show("请上传医院封面图片","tip");
-            return false;
-        }else{
-            return true;
-        }
-    },
+    // checkLogoIsNull:function(){
+    //     var file1=$("#file1").val();
+    //     if(file1==''){
+    //         Dialog.show("请上传医院封面图片","tip");
+    //         return false;
+    //     }else{
+    //         return true;
+    //     }
+    // },
     // 上传附件
     uploadFile:function(idStr) {
         var _this=this;
@@ -177,30 +177,30 @@ var AdvertImageRecord=DM.Controller.sub({
     }
 });
 
-var flagSubmit = false;
+// var flagSubmit = false;
 var controller=new AdvertImageRecord();
 //页面加载时调用
 DM.Page.ready({
     "表单提交":function(){
         //基本信息点击保存type 1:保存 2::下一步 4：预览
-        $("#addHosUser").click(function(){
-            if(flagSubmit){
-                return;
-            }
-            if(dmCheck.check("#mForm") && controller.checkAptitudeIsNull()){
-                alert("checkAptitudeIsNull()");
-                flagSubmit = true;
+        $("#updateHosUser").click(function(){
                 $("#mForm").submit();
-            }
-            if(dmCheck.check("#mForm") && controller.checkLogoIsNull()){
-                alert("checkLogoIsNull()");
-                flagSubmit = true;
-                $("#mForm").submit();
-            }
+            // if(flagSubmit){
+            //     return;
+            // }
+            // if(dmCheck.check("#mForm") && controller.checkAptitudeIsNull()
+            //     && controller.checkLogoIsNull()){
+            //     flagSubmit = true;
+            //     $("#mForm").submit();
+            // }
         });
         //上传文件类型校验
-        $("#advertImage").change(function(){
-            controller.uploadFile("advertImage");
+        $("#file").change(function(){
+            controller.uploadFile("file");
+        });
+        //上传文件类型校验
+        $("#file1").change(function(){
+            controller.uploadFile("file1");
         });
     }
 });

@@ -38,7 +38,7 @@
         <label class='fl'><em class="red pr5">*</em>医院资质证明</label>
         <img class='fl' id="show" src="${updateHosUserInfo.organizationAptitudeUrl}"></span>
         <p class='fl p-iut'>
-            <input type="file" validate='q'  name='aptitudeFile' value='' onchange="c()" id="file" >
+            <input type="file"  name='aptitudeFile' value='' onchange="c()" id="file" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -48,7 +48,7 @@
         <label class='fl'><em class="red pr5">*</em>医院封面图片</label>
         <img class='fl' id="show1" src="${updateHosUserInfo.logoUrl}"></span>
         <p class='fl p-iut'>
-            <input type="file" validate='q'  name='logoFile' value='' onchange="cover()" id="file1" >
+            <input type="file" name='logoFile' value='' onchange="cover()" id="file1" >
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -104,13 +104,14 @@
         </p>
         <p>
             <span class="pr">
-            <label><em class="red pr5">*</em>手机号</label><input name='mobilePhone' maxlength="11" validate='q'  type="text" class='ibu' value='${updateHosUserInfo.mobilePhone}'></span>
+            <label><em class="red pr5">*</em>手机号</label><input name='mobilePhone' maxlength="11" validate="q|m"  warning="手机号码格式不正确" type="text" class='ibu' value='${updateHosUserInfo.mobilePhone}'></span>
             <span class="pr">
             <label><em class="red pr5">*</em>电子邮箱</label><input name='hospitalMail' maxlength="50" validate='q'  type="text" class='ibu' value='${updateHosUserInfo.hospitalMail}'></span>
         </p>
     </div>
     <div class='but-sibm'>
-        <a class="" id="addHosUser" href="javascript:void(0);">提交</a>
+        <a class="" id="updateHosUser" href="javascript:void(0);">提交</a>
+        <%--<a onclick="" href="javascript:void(0);">提交</a>--%>
         <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
     </div>
     <li class='ldr' datr='${updateHosUserInfo.userId}'></li>
@@ -118,7 +119,7 @@
 </div>
 
 
-<script type="text/javascript" src="<%=basePath%>js/easy/user/addHospitalInfo.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/easy/user/updateHospitalInfo.js"></script>
 
 <script>
     var userId = $('.ldr').attr('datr');
@@ -164,43 +165,6 @@
         };
     }
 </script>
-<%--<script type="text/javascript" language="javascript">--%>
-    <%--var userId = $('.ldr').attr('datr');--%>
-<%--//    alert(userId);--%>
-    <%--//增加校验模式--%>
-    <%--dmCheck.init("#mForm");--%>
-    <%--function updateUser(){--%>
-        <%--if(!dmCheck.check("#mForm")){--%>
-            <%--return false;--%>
-        <%--}--%>
-        <%--//提交数据--%>
-        <%--DM.ajax({--%>
-            <%--url:"userManage/updateHospitalInfoAjax.do?userId="+userId,--%>
-            <%--type:"post",--%>
-            <%--data:$('#mForm').serialize(),--%>
-            <%--success:function(data){--%>
-                <%--//显示提示信息--%>
-                <%--if("000000"==data.code){--%>
-                    <%--Dialog.show("修改成功","success");--%>
-                    <%--myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));--%>
-                <%--} else if(data.code=='600007'){--%>
-                    <%--Dialog.show("保存失败，输入的文章內容过大","error");--%>
-                <%--} else{--%>
-                    <%--Dialog.show(data.description,"error");--%>
-                <%--}--%>
-            <%--},--%>
-            <%--error:function(){--%>
-                <%--Dialog.show("修改失败","error");--%>
-            <%--}});--%>
-    <%--}--%>
-
-    <%--$("#backHome").click(function(){--%>
-        <%--/*if(dmCheck.check("#projectForm")){--%>
-        <%--}*/--%>
-        <%--myfn.AjaxFn("userManage/hospitalUserList.do",$(".viewFramework-content"));--%>
-
-    <%--});--%>
-<%--</script>--%>
 
 <script type="text/javascript">
     var editor1;
@@ -239,3 +203,5 @@
     });
     initFocusText();
 </script>
+
+

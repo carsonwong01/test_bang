@@ -68,7 +68,7 @@
         <label class='fl'><em class="red pr5">*</em>医院资质证明</label>
         <img class='fl' id="show"></span>
         <p class='fl p-iut'>
-            <input type="file" name="aptitudeFile" value='' onchange="c()" id="file"  validate='q' >
+            <input type="file" name="aptitudeFile" value='' onchange="c()" id="file">
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -78,7 +78,7 @@
         <label class='fl'><em class="red pr5">*</em>医院封面图片</label>
         <img class='fl' id="show1"></span>
         <p class='fl p-iut pr' >
-            <input type="file" name="logoFile" value='' onchange="cover()" id="file1"  validate='q'>
+            <input type="file" name="logoFile" value='' onchange="cover()" id="file1">
             <span class='p-iusp'>选择图片</span></br></br>
             <span class='txt-po'>建议图片尺寸为：640*360</span>
         </p>
@@ -136,7 +136,7 @@
         </p>
         <p>
             <span class="pr">
-                <label><em class="red pr5">*</em>手机号</label><input name='mobilePhone' type="text" class='ibu' value='' maxlength="11" validate='q'>
+                <label><em class="red pr5">*</em>手机号</label><input name='mobilePhone' validate="q|m"  warning="手机号码格式不正确" type="text" class='ibu' value='' maxlength="11">
             </span>
             <span class="pr">
                 <label><em class="red pr5">*</em>电子邮箱</label><input name='hospitalMail' type="text" class='ibu' value='' maxlength="50" validate='q'>

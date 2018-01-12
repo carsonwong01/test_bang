@@ -60,6 +60,10 @@ public class FindUserListReq extends FindExportExcelParamsReq
      * 结束时间
      */
     private String endTime;
+    /**
+     * 邮箱
+     */
+    private String email;
     private String hospitalName;
     private String mobilePhone;
     private String province;
@@ -74,6 +78,14 @@ public class FindUserListReq extends FindExportExcelParamsReq
     private String area;
     private String publishStatus;
     private String recommendStatus;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPublishStatus() {
         return publishStatus;

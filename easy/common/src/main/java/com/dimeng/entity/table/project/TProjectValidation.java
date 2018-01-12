@@ -55,12 +55,22 @@ public class TProjectValidation
     private String weddingPictureId;
     
     private String weddingPictureUrl;
+
+    private String projectRecord;
     
-    private String organizationAptitudeId;
-    
-    private String organizationAptitudeUrl;
+//    private String organizationAptitudeId;
+//
+//    private String organizationAptitudeUrl;
 
     private String foundationName;
+
+    public String getProjectRecord() {
+        return projectRecord;
+    }
+
+    public void setProjectRecord(String projectRecord) {
+        this.projectRecord = projectRecord;
+    }
 
     public String getFoundationName() {
         return foundationName;
@@ -330,23 +340,23 @@ public class TProjectValidation
         this.weddingPictureUrl = weddingPictureUrl == null ? null : weddingPictureUrl.trim();
     }
     
-    public String getOrganizationAptitudeId()
-    {
-        return organizationAptitudeId;
-    }
+//    public String getOrganizationAptitudeId()
+//    {
+//        return organizationAptitudeId;
+//    }
     
-    public void setOrganizationAptitudeId(String organizationAptitudeId)
-    {
-        this.organizationAptitudeId = organizationAptitudeId == null ? null : organizationAptitudeId.trim();
-    }
+//    public void setOrganizationAptitudeId(String organizationAptitudeId)
+//    {
+//        this.organizationAptitudeId = organizationAptitudeId == null ? null : organizationAptitudeId.trim();
+//    }
     
-    public String getOrganizationAptitudeUrl()
-    {
-        return organizationAptitudeUrl;
-    }
-    
-    public void setOrganizationAptitudeUrl(String organizationAptitudeUrl)
-    {
-        this.organizationAptitudeUrl = organizationAptitudeUrl == null ? null : organizationAptitudeUrl.trim();
-    }
+//    public String getOrganizationAptitudeUrl()
+//    {
+//        return organizationAptitudeUrl;
+//    }
+//
+//    public void setOrganizationAptitudeUrl(String organizationAptitudeUrl)
+//    {
+//        this.organizationAptitudeUrl = organizationAptitudeUrl == null ? null : organizationAptitudeUrl.trim();
+//    }
 }

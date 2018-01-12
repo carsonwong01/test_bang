@@ -338,9 +338,12 @@
     <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="user_type" property="userType" jdbcType="CHAR" />
-    <result column="hospital_name" property="realName" jdbcType="VARCHAR" />
+    <result column="hospital_name" property="hospitalName" jdbcType="VARCHAR" />
     <result column="province" property="provinceId" jdbcType="VARCHAR" />
     <result column="city" property="cityId" jdbcType="VARCHAR" />
+    <result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+    <result column="link_name" property="linkName" jdbcType="VARCHAR" />
+    <result column="hospital_mail" property="hospitalMail" jdbcType="VARCHAR" />
   </resultMap>
 
 	<!-- 根据手机号查询用户信息 登录用-->
@@ -353,6 +356,8 @@
 			tu.first_login,
 			tu.user_type,
 			tu.hospital_name,
+			tu.email,
+			thb.link_name linkName,
 			(select province from t_hospital_basic WHERE hospital_id=tu.user_id) province,
   			(select city from t_hospital_basic where hospital_id = tu.user_id ) city,
 			date_format(
@@ -369,6 +374,7 @@
 			tub.image_url 
 		from t_user tu
 		    left join t_q_user_basic tub on  tu.user_id = tub.user_id
+		    left join t_hospital_basic thb on thb.hospital_id = tu.user_id
 		where tu.user_name = #{userName,jdbcType=VARCHAR}
 	</select> 
 	

@@ -17,6 +17,7 @@
 		<result column="recipient_card_image_url" property="recipientCardImageUrl" />
 		<result column="organization_name" property="organizationName" />
 		<result column="organization_phone" property="organizationPhone" />
+		<result column="project_record" property="projectRecord" />
 		<result column="organization_aptitude_id" property="organizationAptitudeId" />
 		<result column="organization_aptitude_url" property="organizationAptitudeUrl" />
 		<result column="disease" property="disease" />
@@ -44,7 +45,7 @@
 			tpv.receive_phone, tpv.disease, tpv.hospital_region_id,  tpv.recipient_real_name,
 			tpv.recipient recipient_id_card,  tpv.audit_status,tpv.audit_status,
 			tpv.receive_card_image_id, tpv.receive_card_image_url, tpv.recipient_card_image_id,
-			tpv.recipient_card_image_url, tpv.wedding_picture_id, tpv.wedding_picture_url,
+			tpv.recipient_card_image_url, tpv.wedding_picture_id, tpv.wedding_picture_url,tpv.project_record,
 			DATE_FORMAT(tpv.date_create, '%Y-%m-%d %T') date_create, tpi.project_name, tpi.project_type,
 			CONCAT(thb.province, thb.city) hospital_region_name
 		FROM

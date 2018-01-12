@@ -497,7 +497,7 @@
 .focus_text{padding:5px; line-height:30px; height: 30px; }
 .text_style{border:1px solid #ddd; height:18px; line-height:18px; margin-right:10px; vertical-align:middle; width:88px;}
 .text_small_style{ border:1px solid #ddd; height:18px; line-height:18px; margin-right:10px; vertical-align:middle; width:100px; padding:5px;}
-.select_style{min-width:112px; height:30px; line-height:30px; border:1px solid #ddd; margin-right:10px; padding-left:5px; display:inline-block; padding:2px 2px 3px 5px\9;}
+.select_style{min-width:112px; height:48px; line-height:48px; border:1px solid #ddd; margin-right:10px; padding-left:5px; display:inline-block; padding:2px 2px 3px 5px\9;}
 .text_style_date{background:url("../images/user_icon.png") no-repeat 0 -326px; padding-left:35px; width:80px; }
 
 

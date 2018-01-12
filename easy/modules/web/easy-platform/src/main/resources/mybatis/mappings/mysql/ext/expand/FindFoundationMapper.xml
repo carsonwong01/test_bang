@@ -7,8 +7,9 @@
                     parameterType="com.dimeng.model.expand.FindFoundationReq">
         SELECT foundation_id foundationId, foundation_name foundationName,
           registration_institution registrationInstitution,link_name linkName,
-          link_mobile linkMobile,office_tel officeTel,mail mail,create_time createTime,
-          logo_url logoUrl,description description
+          link_mobile linkMobile,office_tel officeTel,mail mail,
+          logo_url logoUrl,description description,
+          date_format(foundation_info.create_time,'%Y-%m-%d %H:%i:%s') createTime
         FROM foundation_info
         where 1 = 1
         <if test="foundationName != null and foundationName != ''">
@@ -24,9 +25,10 @@
         foundation_id foundationId,foundation_name foundationName, registration_institution institution,
         foundation_url foundationUrl, social_credit_code socialCreditCode, certificate_url certificateUrl,
         donations_qualification_url donationsQualificationUrl, address address, office_tel officeTel,
-        mail mail, logo_url logoUrl, create_time createTime, description description, remain_property remainProperty,
+        mail mail, logo_url logoUrl, description description, remain_property remainProperty,
         bank_info bankInfo, invoice_type invoiceType, account_info accountInfo, link_name linkName,
-        link_mobile linkMobile
+        link_mobile linkMobile,
+        date_format(foundation_info.create_time,'%Y-%m-%d %H:%i:%s') createTime
       FROM foundation_info
         where 1=1
         <choose>

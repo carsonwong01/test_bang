@@ -104,16 +104,25 @@ var AdvertImageRecord=DM.Controller.sub({
             myfn.AjaxFn("userManage/addHospitalUser.do",$(".viewFramework-content"));
         }
     },
-    //校验是否上传了图片
-    checkFileIsNull:function(){
-        var advertImage=$("#advertImage").val();
-        if(advertImage==''){
-            Dialog.show("请上传图片","tip");
+    //校验是否上传了质证明图片
+    checkAptitudeIsNull:function(){
+        var file=$("#file").val();
+        if(file==''){
+            Dialog.show("请上传资质证明图片","tip");
             return false;
         }else{
             return true;
         }
-
+    },
+    //校验是否上传了医院封面图片
+    checkLogoIsNull:function(){
+        var file1=$("#file1").val();
+        if(file1==''){
+            Dialog.show("请上传医院封面图片","tip");
+            return false;
+        }else{
+            return true;
+        }
     },
     // 上传附件
     uploadFile:function(idStr) {
@@ -178,15 +187,19 @@ DM.Page.ready({
             if(flagSubmit){
                 return;
             }
-            if(dmCheck.check("#mForm") && controller.checkFileIsNull()){
+            if(dmCheck.check("#mForm") && controller.checkAptitudeIsNull()
+                && controller.checkLogoIsNull()){
                 flagSubmit = true;
                 $("#mForm").submit();
-
             }
         });
         //上传文件类型校验
-        $("#advertImage").change(function(){
-            controller.uploadFile("advertImage");
+        $("#file").change(function(){
+            controller.uploadFile("file");
+        });
+        //上传文件类型校验
+        $("#file1").change(function(){
+            controller.uploadFile("file1");
         });
     }
 });

@@ -193,7 +193,7 @@
 							<dl>
 								<dt><span class="red">*</span>医院名称</dt>
 								<dd>
-									<input type="text" id="hospitalName" name="hospitalName" validate="q|leng" leng="1,25" maxlength="25" class="input_txt wid92"  value="${currUser.realName}">
+									<input type="text" id="hospitalName" name="hospitalName" validate="q|leng" leng="1,25" maxlength="25" class="input_txt wid92"  value="${currUser.hospitalName}">
 									<p class="prompt" id="hospitalNameMsg"></p>
 								</dd>
 							</dl>
@@ -212,7 +212,7 @@
 							<dl>
 								<dt><span class="red">*</span>医疗诊断证明</dt>
 								<dd>
-									<ul id="proveImgIds" class="addCover clearfix">
+									<ul id="proveImgIds" class=" clearfix">
 										<li class="fileListAfter">
 											<a id="proveImgIdsPicker" class="addCoverIcon">
 												<span>上传医疗诊断<br>结果照片<br>（最多6张）</span>
@@ -228,6 +228,33 @@
 									</ul>
 									<p class="prompt" id="proveImgIdsMsg"></p>
 									<p class="tips">请提供带有医院公章的诊断结果照片</p>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="sickwhiteBg">
+						<h3 class="til">项目负责人信息</h3>
+						<div class="formbox">
+							<dl>
+								<dt><span class="red">*</span>负责人姓名</dt>
+								<dd>
+									<input type="text" id="linkName" readonly="readonly" name="" value="${currUser.linkName}"  leng="1,15" maxlength="15" class="input_txt wid92">
+									<p class="prompt" id="linkNameMsg"></p>
+								</dd>
+							</dl>
+							<dl>
+								<dt><span class="red"></span>联系电话</dt>
+								<dd>
+									<input type="text" id="mobilePhone" readonly="readonly" name="" value="${currUser.mobile}"  leng="1,15" maxlength="15" class="input_txt wid92">
+									<p class="prompt" id="mobilePhoneMsg"></p>
+								</dd>
+							</dl>
+							<dl>
+								<dt><span class="red"></span>联系邮箱</dt>
+								<dd>
+									<input type="text" id="email" readonly="readonly" name="" value="${currUser.email}"  leng="1,15" maxlength="15" class="input_txt wid92">
+									<p class="prompt" id="hospitalMailMsg"></p>
 								</dd>
 							</dl>
 						</div>

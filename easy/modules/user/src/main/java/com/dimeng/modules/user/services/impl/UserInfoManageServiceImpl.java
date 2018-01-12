@@ -879,6 +879,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             tuser.setSource("1");
             tuser.setSourceType(CommonConstant.FOUR);
             tuser.setMobile(tHospitalBasic.getMobilePhone());
+            tuser.setEmail(tHospitalBasic.getHospitalMail());
             tuser.setDateLastLogin(DateUtil.getNow());
     //      baseDao.insert(tuser);
             if (DigitalAndStringConstant.DigitalConstant.DATABASE_OP_SUCCESS_INT != baseDao.insert(tuser))
@@ -925,8 +926,8 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         //1、修改医院基本信息表中的内容
         THospitalBasic tHospitalBasic = new THospitalBasic();
 
-        tHospitalBasic.setUserId(updateReq.getUserId());        //有没有必要？
-        tHospitalBasic.setHospitalId(updateReq.getUserId());    //有没有必要？
+        tHospitalBasic.setUserId(updateReq.getUserId());
+        tHospitalBasic.setHospitalId(updateReq.getUserId());
         tHospitalBasic.setHospitalName(updateReq.getHospitalName());
         tHospitalBasic.setHospitalGrade(updateReq.getHospitalGrade());
         tHospitalBasic.setHospitalType(updateReq.getHospitalType());
@@ -960,6 +961,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         user.setUserName(tHospitalBasic.getMobilePhone());
         user.setMobile(tHospitalBasic.getMobilePhone());
         user.setHospitalName(tHospitalBasic.getHospitalName());
+        user.setEmail(tHospitalBasic.getHospitalMail());
 //        baseDao.update(user);
         if (baseDao.update(user) != 1)
         {
