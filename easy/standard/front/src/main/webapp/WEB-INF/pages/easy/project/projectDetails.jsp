@@ -98,6 +98,14 @@
 			<div class='na-v'>
 				<b></b><a href="<%=basePath%>hospital/hospitalList.do">我要求助</a>
 			</div>
+
+
+			<div class='na-v'>
+				<input type="hidden" value="${projectDetails.id}">
+				<b></b><a href="<%=basePath%>project/toInformProject.do?projectId=${projectDetails.id}">我要举报</a>
+			</div>
+
+
 			<div class='xim-qi'>
 				<p><i></i> <span>项目发起人</span></p>
 				<div class="xim-id">

@@ -22,8 +22,11 @@ ul, ol { list-style: none; }
 #clear1{height: 26px}
 .fl{ float: left; }
 .fr{float: right;}
-
-
+.t-blue{color: #1ea8fb;}
+.fn-s-12{ font-size: 16px;}  	/*20px*/
+.report-file{
+	padding: 0px 10px 40px 70px;
+}
 
 header{
 	background: #ffffff;
