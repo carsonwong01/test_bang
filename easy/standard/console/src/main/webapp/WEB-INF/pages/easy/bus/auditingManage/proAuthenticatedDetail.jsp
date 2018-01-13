@@ -487,7 +487,45 @@
 							</div>
 						</li>
 					</c:if>
+					<c:if test="${validationDetail.auditStatus !='1' }">
+						<li class="mb20"><hr /></li>
+						<!-- 项目备案号信息 -->
+						<li class="mb20">
+							<div class="tabnav-container pl200 f16 bold">项目备案号信息</div>
+							<div class="tab-content-container p20">
+								<div class="tab-item">
+									<ul class="gray6 pt20">
+										<li class="mb20">
+											<div class="pr mh30 pl160">
+												<span class="display-ib w140 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>项目备案号：</span>
+													<input name='projectRecord' readonly="readonly" maxlength="25" type="text" value='${validationDetail.projectRecord }'  class='upi' style="width: 300px;height: 30px; border:none">
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</c:if>
 					<c:if test="${to=='sh' && validationDetail.auditStatus=='1' }">
+						<%--<li class="mb20"><hr /></li>--%>
+						<%--<!-- 项目备案号信息 -->--%>
+						<%--<li class="mb20">--%>
+							<%--<div class="tabnav-container pl200 f16 bold">项目备案号信息</div>--%>
+							<%--<div class="tab-content-container p20">--%>
+								<%--<div class="tab-item">--%>
+									<%--<ul class="gray6 pt20">--%>
+										<%--<li class="mb20">--%>
+											<%--<div class="pr mh30 pl160">--%>
+												<%--<span class="display-ib w140 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>项目备案号：</span>--%>
+												<%--<from class="pr">--%>
+													<%--<input name='projectRecord' maxlength="25" type="text" value='${validationDetail.projectRecord }' placeholder="募捐活动在民政部备案号" style="width: 300px;height: 30px;" validate='q' class='upi'>--%>
+												<%--</from>--%>
+											<%--</div>--%>
+										<%--</li>--%>
+									<%--</ul>--%>
+								<%--</div>--%>
+							<%--</div>--%>
+						<%--</li>--%>
 						<li class="mb20 tc">
 							<div id="sh" class="pr mh30 pl160">
 								<a href="javascript:void(0);"
@@ -569,11 +607,17 @@
 				<input type="hidden" id="id" name="id" value="{{= validationId}}"/>
 				<!-- 审核状态 -->
 				<input type="hidden" id="status" name="status" value=""/>
+
+				<div class="f16 fb gray3">项目备案号：</div>
+				<div class="pr tl" style="margin: 10px 0px 10px 30px">
+				   <input name="projectRecord" class="border" maxlength="25" value="" validate="q" id="projectRecord" placeholder="募捐活动在民政部备案号" style="width: 300px;height: 30px;"/>
+				</div>
+
 				<div class="f16 fb gray3"><em class="red pr5">*</em>审核意见：</div> 
 				<div class="pr tl" style="margin: 10px 0px 0px 30px">
 				   <textarea name="auditInfo" cols="53" rows="5" class="border p10" maxlength="200" validate="q" least="1|200" id="reasonText"></textarea>
 				</div>
-				<span class="lh30" style="margin-left: 30px">200字以内</span> 
+				<span class="lh30" style="margin-left: 30px">200字以内</span>
 				<p class="prompt" id="reasonTextMsg"></p>
 			</div> 
 		 </form>

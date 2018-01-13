@@ -1,39 +1,13 @@
 package com.dimeng.modules.bus.services.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
-import com.dimeng.entity.ext.bus.AuthenticatedRecordResp;
-import com.dimeng.entity.ext.bus.FindCommentDetailListResp;
-import com.dimeng.entity.ext.bus.FindDynamicsListResp;
-import com.dimeng.entity.ext.bus.FindInformantContentImgsResp;
-import com.dimeng.entity.ext.bus.FindInformantDetailListResp;
-import com.dimeng.entity.ext.bus.FindInformantListResp;
-import com.dimeng.entity.ext.bus.FindProjectAuditListResp;
-import com.dimeng.entity.ext.bus.FindProjectValidationResp;
-import com.dimeng.entity.ext.bus.ProjectAttachmentResp;
-import com.dimeng.entity.ext.bus.ProjectDynamicResp;
+import com.dimeng.entity.ext.bus.*;
 import com.dimeng.entity.table.bus.TQBusProjectComment;
-import com.dimeng.entity.table.project.TProjectAduitRecord;
-import com.dimeng.entity.table.project.TProjectDynamic;
-import com.dimeng.entity.table.project.TProjectInfo;
-import com.dimeng.entity.table.project.TProjectReport;
-import com.dimeng.entity.table.project.TProjectValidation;
+import com.dimeng.entity.table.project.*;
 import com.dimeng.entity.table.site.TSiteInfo;
-import com.dimeng.enums.AuditStatusEnum;
-import com.dimeng.enums.ProjectAttachmentTypeEnum;
-import com.dimeng.enums.ProjectStatusEnum;
-import com.dimeng.enums.ProjectTypeEnum;
-import com.dimeng.enums.TemplateTypeEnumEasy;
+import com.dimeng.enums.*;
 import com.dimeng.framework.constants.DigitalAndStringConstant;
 import com.dimeng.framework.constants.DigitalAndStringConstant.DigitalConstant;
 import com.dimeng.framework.domain.BaseDataResp;
@@ -43,17 +17,7 @@ import com.dimeng.framework.mybatis.utils.page.PageContext;
 import com.dimeng.framework.mybatis.utils.page.PageResult;
 import com.dimeng.framework.utils.DateUtil;
 import com.dimeng.framework.utils.StringUtil;
-import com.dimeng.model.bus.CommonVerificateAuditReq;
-import com.dimeng.model.bus.DeleteCommentReq;
-import com.dimeng.model.bus.DeleteDynamicsReq;
-import com.dimeng.model.bus.FindAuthenRecordReq;
-import com.dimeng.model.bus.FindCommentListReq;
-import com.dimeng.model.bus.FindDynamicsListReq;
-import com.dimeng.model.bus.FindInformantDetailListReq;
-import com.dimeng.model.bus.FindInformantListReq;
-import com.dimeng.model.bus.FindProjectAuditListReq;
-import com.dimeng.model.bus.FindProjectValidationReq;
-import com.dimeng.model.bus.ProjectAttachmentReq;
+import com.dimeng.model.bus.*;
 import com.dimeng.model.common.IdPageReq;
 import com.dimeng.model.common.IdReq;
 import com.dimeng.modules.bus.services.IAuditingManageService;
@@ -61,6 +25,13 @@ import com.dimeng.modules.bus.services.impl.base.UserCapitalCommonService;
 import com.dimeng.modules.message.services.IMessageService;
 import com.dimeng.utils.ExportUtil;
 import com.dimeng.utils.UUIDGenerate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 审核管理业务
@@ -501,6 +472,7 @@ public class AuditingManageServiceImpl extends UserCapitalCommonService implemen
         tProjectValidation.setAduitUserId(req.getUserId());
         
         tProjectValidation.setDateAduit(DateUtil.getNow());
+        tProjectValidation.setProjectRecord(req.getProjectRecord());
         if (DigitalConstant.DATABASE_OP_SUCCESS_INT > baseDao.update(tProjectValidation))
         {
             throw new ServicesException(IDiMengResultCode.ProjectManage.ERROR_BUSAUDIT_INFO);
@@ -517,6 +489,7 @@ public class AuditingManageServiceImpl extends UserCapitalCommonService implemen
         {
             throw new ServicesException(IDiMengResultCode.ProjectManage.ERROR_BUSAUDIT_INFO);
         }
+
         //从缓存中获得站点信息
         TSiteInfo siteInfo = (TSiteInfo)systemCache.get(SystemConstant.CacheKey.SITE_INFO).getObjectValue();
         //查询项目信息

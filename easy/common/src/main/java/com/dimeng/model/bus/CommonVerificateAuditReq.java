@@ -40,7 +40,21 @@ public class CommonVerificateAuditReq extends BaseReq
      */
     @NotBlank
     private String status;
-    
+
+    /**
+     * 募捐活动在民政部备案号
+     */
+    @NotBlank
+    private String ProjectRecord;
+
+    public String getProjectRecord() {
+        return ProjectRecord;
+    }
+
+    public void setProjectRecord(String projectRecord) {
+        ProjectRecord = projectRecord;
+    }
+
     public String getId()
     {
         return id;
