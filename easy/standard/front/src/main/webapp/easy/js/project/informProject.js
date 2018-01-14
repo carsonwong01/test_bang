@@ -9,7 +9,7 @@ DM.Page.ready({
 		//初始化input实时显示填写字数
 		projectStartController.initCalculate($("input[name=projectName],input[name=projectIntro]"));
 		//初始化富文本控件
-		var content = projectStartController.initKindEditor("content","请填写您举报该项目的原因与理由","projectDetailsTip");
+		var content = projectStartController.initKindEditor("content","请填写您举报该项目的原因与理 由","projectDetailsTip");
 		if (cacheData.projectDetails && cacheData.projectDetails[0] != '') {
 		  projectDetails.html(cacheData.projectDetails ? cacheData.projectDetails[0] : "");
 		}
@@ -19,7 +19,7 @@ DM.Page.ready({
 				inputPrefix: "imgIds",//input的name前缀,必须
 				uploadUrl: "user/project/uploadAttachment.do",//上传文件url
 				deleteUrl: "user/project/deleteAttachment.do",//删除文件url
-				formData:{"fileType":"1"},//上传附带参数
+				formData:{"fileType":"7"},//上传附带参数
 				fileNumLimit: 6,
 				pick: "#filePicker",
 				accept: {//上传文件类型

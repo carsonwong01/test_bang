@@ -176,7 +176,7 @@ var ProjectStartController = DM.Controller.sub({
                     };
                     obj.imageId=file.imageId;
                     obj.imageUrl=file.imageUrl;
-                    if (file.isDefault == '1') {
+                    if (file.isDefault == '7') {
                         defaultFileId = obj.id;
                     }
                     mineStatu = true;
