@@ -1,7 +1,6 @@
 package com.dimeng.front.controller.easy.project;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dimeng.entity.ext.user.FrontUserInfo;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.model.bus.InformReq;
 import com.dimeng.utils.CommonUtil;
@@ -36,7 +35,6 @@ public class ProjectInformController extends BaseController {
     public Object insertProjectInform(HttpServletRequest request, HttpServletResponse response,InformReq req){
         response.setContentType("text/html;charset=utf-8");
         response.setHeader("Cache-Control", "no-cache");
-//        FrontUserInfo frontUser = new FrontUserInfo();
         String data =
                 new CommonUtil().callInterfaceMethod(req, "project/operate/v/inform",
                         RequestMethod.POST, request);

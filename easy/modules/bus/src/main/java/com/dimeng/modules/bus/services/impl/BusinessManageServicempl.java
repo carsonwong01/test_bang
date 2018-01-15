@@ -1,13 +1,5 @@
 package com.dimeng.modules.bus.services.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Service;
-
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
@@ -18,13 +10,7 @@ import com.dimeng.entity.table.project.TProjectDynamic;
 import com.dimeng.entity.table.project.TProjectInfo;
 import com.dimeng.entity.table.project.TProjectReport;
 import com.dimeng.entity.table.site.TSiteInfo;
-import com.dimeng.enums.PayStatusEnum;
-import com.dimeng.enums.ProjectDynamicTypeEnum;
-import com.dimeng.enums.ProjectShieldStatusEnum;
-import com.dimeng.enums.ProjectStatusEnum;
-import com.dimeng.enums.RefundTypeEnum;
-import com.dimeng.enums.SerialNumberTypeEnum;
-import com.dimeng.enums.TemplateTypeEnumEasy;
+import com.dimeng.enums.*;
 import com.dimeng.framework.constants.DigitalAndStringConstant;
 import com.dimeng.framework.constants.DigitalAndStringConstant.DigitalConstant;
 import com.dimeng.framework.domain.BaseDataResp;
@@ -43,6 +29,12 @@ import com.dimeng.modules.message.services.IMessageService;
 import com.dimeng.util.SerialNumberUtil;
 import com.dimeng.utils.LoginCache;
 import com.dimeng.utils.UUIDGenerate;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 项目业务操作类
@@ -264,7 +256,6 @@ public class BusinessManageServicempl extends BaseServiceImpl implements IBusine
     /**
      * 查询项目Id查询项目信息
      * <功能详细描述>
-     * @param req
      * @return
      * @throws Exception
      */
@@ -312,40 +303,49 @@ public class BusinessManageServicempl extends BaseServiceImpl implements IBusine
     public BaseDataResp commonInform(InformReq req)
         throws ServicesException
     {
-        TProjectReport projectReport = new TProjectReport();
-        projectReport.setReportId(UUIDGenerate.generateShortUuid());
-        projectReport.setProjectId(req.getProjectId());
-        projectReport.setDateReport(DateUtil.getNow());
-        projectReport.setReportName(req.getName());
-        projectReport.setReportPhone(req.getPhone());
-        projectReport.setReportReason(req.getContent());
-        projectReport.setReportUserId(req.getUserId());
-        if (DigitalConstant.DATABASE_OP_SUCCESS_INT > baseDao.insert(projectReport))
+        QueryEvent event = new QueryEvent();
+        event.setStatement("findProjectId");
+        event.setObj(req);
+        List<TProjectInfo> list = baseDao.findAllIsPageByCustom(event);
+        BaseDataResp resp = new BaseDataResp();
+        if (null == list || list.size() == 0)
         {
-            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
-        }
-        //更新附件
-        String[] imgIds = req.getImgIds();
-        if (imgIds != null && imgIds.length > 0)
-        {
-            TProjectAttachment projectAttachment = null;
-            for (String id : imgIds)
+            resp.setCode("000001");
+        }else{
+            TProjectReport projectReport = new TProjectReport();
+            projectReport.setReportId(UUIDGenerate.generateShortUuid());
+            projectReport.setProjectId(req.getProjectId());
+            projectReport.setDateReport(DateUtil.getNow());
+            projectReport.setReportName(req.getName());
+            projectReport.setReportPhone(req.getPhone());
+            projectReport.setReportReason(req.getContent());
+            projectReport.setReportUserId(req.getUserId());
+            if (DigitalConstant.DATABASE_OP_SUCCESS_INT > baseDao.insert(projectReport))
             {
-                if (StringUtil.notEmpty(id))
+                throw new ServicesException(IDiMengResultCode.DataManage.ERROR_INSERT);
+            }
+            //更新附件
+            String[] imgIds = req.getImgIds();
+            if (imgIds != null && imgIds.length > 0)
+            {
+                TProjectAttachment projectAttachment = null;
+                for (String id : imgIds)
                 {
-                    projectAttachment = new TProjectAttachment();
-                    projectAttachment.setFileId(id);
-                    projectAttachment.setAssociatedId(projectReport.getReportId());
-                    if (DigitalConstant.DATABASE_OP_SUCCESS_INT > baseDao.update(projectAttachment))
+                    if (StringUtil.notEmpty(id))
                     {
-                        throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+                        projectAttachment = new TProjectAttachment();
+                        projectAttachment.setFileId(id);
+                        projectAttachment.setAssociatedId(projectReport.getReportId());
+                        if (DigitalConstant.DATABASE_OP_SUCCESS_INT > baseDao.update(projectAttachment))
+                        {
+                            throw new ServicesException(IDiMengResultCode.DataManage.ERROR_UPDATE);
+                        }
+                        projectAttachment = null;
                     }
-                    projectAttachment = null;
                 }
             }
+            resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         }
-        BaseDataResp resp = new BaseDataResp();
-        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }
     

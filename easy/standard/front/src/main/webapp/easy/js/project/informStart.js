@@ -69,20 +69,20 @@ var ProjectStartController = DM.Controller.sub({
                 }
                 $("#errContent").html("&nbsp;");
             },
-            afterChange : function() {
-                $("textarea[name="+inputName+"]").trigger('change.formcache');
-                //限制字数
-                var limitNum = 200;  //设定限制字数
-                var count = this.count('text');
-                if (this.html() == defaultContent) {
-                    count = 0;
-                }
-                var $tip = $('#'+tipName);
-                if($tip){
-                    $tip.attr("count", count);
-                    $tip.html(count + "/" + limitNum); //输入显示
-                }
-            },
+            // afterChange : function() {
+            //     $("textarea[name="+inputName+"]").trigger('change.formcache');
+            //     //限制字数
+            //     var limitNum = 200;  //设定限制字数
+            //     var count = this.count('text');
+            //     if (this.html() == defaultContent) {
+            //         count = 0;
+            //     }
+            //     var $tip = $('#'+tipName);
+            //     if($tip){
+            //         $tip.attr("count", count);
+            //         $tip.html(count + "/" + limitNum); //输入显示
+            //     }
+            // },
             afterUpload:function(){
                 if (this.html() == defaultContent) {
                     this.html("");
@@ -188,10 +188,14 @@ var ProjectStartController = DM.Controller.sub({
         // 当有文件添加进来的时候
         uploader.on('fileQueued', function(file) {
             var self = this;
-            var content = option.isMulti ? '<p class="bg"></p><a>设为封面</a>' : '<p></p><a></a>';
+            var content = option.isMulti ? '<p class=""></p><a></a>' : '<p></p><a></a>';
             if (option.isMulti && file.id == defaultFileId) {
-                content = '<p class="bg"></p><a class="defaultImage">封面图片</a>';
+                content = '<p class=""></p><a class="defaultImage"></a>';
             }
+            // var content = option.isMulti ? '<p class="bg"></p><a>设为封面</a>' : '<p></p><a></a>';
+            // if (option.isMulti && file.id == defaultFileId) {
+            //     content = '<p class="bg"></p><a class="defaultImage">封面图片</a>';
+            // }
             var $li = $('<li id="' + file.id + '" class="file-item thumbnail"><img>' + '<div class="cont">'+content+'</div>');
             var $img = $li.find('img');
             $li.insertBefore($list);
@@ -238,7 +242,7 @@ var ProjectStartController = DM.Controller.sub({
                     if (option.isMulti) {
                         if($("#"+option.containerId+" .defaultImage") && $("#"+option.containerId+" .defaultImage").length == 0){
                             var $input = $($("#"+option.containerId+" input[name=" + option.inputPrefix + "]").get(0));
-                            $input.parent().find(".cont a").addClass("defaultImage").html("封面图片");
+                            $input.parent().find(".cont a").addClass("defaultImage").html("");
                             $("#coverImageId").val($input.data("batchNumber"));
                             $("#coverImageUrl").val($input.data("url"));
                             $("#coverImageId,#coverImageUrl").trigger('change.formcache');
@@ -253,8 +257,8 @@ var ProjectStartController = DM.Controller.sub({
                 if(option.isMulti){
                     //绑定click选中默认图片
                     $li.find("div.cont") && $li.find("div.cont").click(function(){
-                        $("a.defaultImage").removeClass("defaultImage").html("设为封面");
-                        $(this).find("a").addClass("defaultImage").html("封面图片");
+                        $("a.defaultImage").removeClass("defaultImage").html("");
+                        $(this).find("a").addClass("defaultImage").html("");
                         var $input = $(this).next("input[name=" + option.inputPrefix + "]");
                         $("#coverImageId").val($input.data("batchNumber"));
                         $("#coverImageUrl").val($input.data("url"));
@@ -294,7 +298,9 @@ var ProjectStartController = DM.Controller.sub({
         });
         // 文件上传成功，给item添加成功class, 用样式标记上传成功。
         uploader.on('uploadSuccess', function(file , result) {
-            if(!result || result.code != '000000'){
+            var userId = $('.ldr').attr('datr');
+            if(userId == "" || userId == null || !result || result.code != '000000'){
+                Dialog.show("用户未登录，请先登录！","error");
                 var $li = $('#'+option.containerId+' #'+file.id),
                     $error = $li.find('div.error');
                 // 避免重复创建
@@ -444,15 +450,15 @@ var ProjectStartController = DM.Controller.sub({
      */
     defaultImg:function($element,containerId, inputName){
         if($("#"+containerId+" .defaultImage")){
-            $($("#"+containerId+" input[name="+inputName+"]").get(0)).parent().find(".cont a").addClass("defaultImage").html("封面图片");
+            $($("#"+containerId+" input[name="+inputName+"]").get(0)).parent().find(".cont a").addClass("defaultImage").html("");
             var $input = $($("#"+containerId+" input[name="+inputName+"]").get(0));
             $("#coverImageId").val($input.data("batchNumber"));
             $("#coverImageUrl").val($input.data("url"));
             $("#coverImageId,#coverImageUrl").trigger('change.formcache');
         }
         $element && $element.click(function(){
-            $("a.defaultImage").removeClass("defaultImage").html("设为封面");
-            $(this).find("a").addClass("defaultImage").html("封面图片");
+            $("a.defaultImage").removeClass("defaultImage").html("");
+            $(this).find("a").addClass("defaultImage").html("");
             var $input = $(this).next("input[name="+inputName+"]");
             $("#coverImageId").val($input.data("batchNumber"));
             $("#coverImageUrl").val($input.data("url"));
@@ -467,7 +473,7 @@ var ProjectStartController = DM.Controller.sub({
             var defaultCount = $("#"+option.containerId).find("a.defaultImage") ? $("#"+option.containerId).find("a.defaultImage").length : 0;
             var liCount = $("#"+option.containerId).find("li:not(.fileListAfter)") ? $("#"+option.containerId).find("li:not(.fileListAfter)").length : 0;
             if(defaultCount == 0){
-                $($("#"+option.containerId+" div.cont a").get(0)).addClass("defaultImage").html("封面图片");
+                $($("#"+option.containerId+" div.cont a").get(0)).addClass("defaultImage").html("");
                 var $input = $($("#"+option.containerId+" input[name=" + option.inputPrefix + "]").get(0));
                 $("#coverImageId").val($input.data("batchNumber"));
                 $("#coverImageUrl").val($input.data("url"));
@@ -508,64 +514,66 @@ var ProjectStartController = DM.Controller.sub({
         $element.formcache("removeCaches");
     },
     /**
-     * 发起项目
+     * 发起项目举报
      */
     initProject:function(){
         var _this = this;
         if(dmCheck.check("#projectForm")){
-            var projectType = $("#projectType").val();
-            if ($("#projectDetailsTip").attr('count') <= 0) {
-                $("#projectDetailsMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
-                $("body",$('.ke-container iframe.ke-edit-iframe').contents()).focus();
-                $("html,body").animate({scrollTop: $('.ke-container').offset().top}, 100);
-                return;
-            }else if ($("#projectDetailsTip").attr('count') > 200) {
-                $("#projectDetailsMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("内容不能超过200字符").show();
-                $("body",$('.ke-container iframe.ke-edit-iframe').contents()).focus();
-                $("html,body").animate({scrollTop: $('.ke-container').offset().top}, 100);
-                return;
-            }else{
-                $("#projectDetailsMsg").hide();
-            }
             if(dmCheck.checkOne($("#coverImageId"))){
                 $("#coverImageIdMsg").hide();
             }else{
                 $("html,body").animate({scrollTop: $('#projectImageUl').offset().top}, 100);
                 return;
             }
-            var url = basePath+"project/addInformProject.do";
+
+            var url = location.search;
+            alert(url);
+            var projectId=url.substring(11);
+            // alert(projectId);
+            var url = basePath+"project/addInformProject.do?projectId="+projectId;
             //发布项目按钮取消click事件防止重复提交
             $("#informProjectBtn").unbind("click");
-            DM.ajax({
-                type:"POST",
-                url:url,
-                data:$("#projectForm").serialize(),
-                async : false,
-                success:function(data){
-                    if(data.code == '000000'){
-                        Dialog.show({
-                            msg:"举报成功",
-                            showClose:true,
-                            showCancel:false,
-                            picClass:"success",
-                            titile:"提示信息",
-                            callBack:function(){
-                                history.back();
-                            }
+                DM.ajax({
+                    type:"POST",
+                    url:url,
+                    projectId:projectId,
+                    data:$("#projectForm").serialize(),
+                    async : false,
+                    success:function(data){
+                        if(data.code == '000000'){
+                            Dialog.show({
+                                msg:"举报成功",
+                                showClose:true,
+                                showCancel:false,
+                                picClass:"success",
+                                titile:"提示信息",
+                                callBack:function(){
+                                    history.back();
+                                }
+                            });
+                        }else{
+                            Dialog.show({
+                                msg:"举报失败，请重试!",
+                                picClass:"error",
+                                titile:"提示信息",
+                                callBack:function(){
+                                    history.back();
+                                }
+                            });
+
+
+                            // Dialog.show("举报失败，请重试！","error");
+                            // history.back();
+                        }
+                    },
+                    error:function(data){
+                        Dialog.show("系统异常,请联系系统管理员！","error");
+                        //发布项目按钮绑定click事件
+                        $("#informProjectBtn").click(function(){
+                            _this.initProject();
                         });
-                    }else{
-                        Dialog.show("举报失败！","error");
-                        history.back();
                     }
-                },
-                error:function(data){
-                    Dialog.show("系统异常,请联系系统管理员！","error");
-                    //发布项目按钮绑定click事件
-                    $("#informProjectBtn").click(function(){
-                        _this.initProject();
-                    });
-                }
-            });
+                });
         }
     }
 });

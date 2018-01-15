@@ -338,6 +338,14 @@
         WHERE tpr.project_id = #{id,jdbcType=VARCHAR}
     </select>
 
+    <!--前台-查询项目是否存在-->
+    <select id="findProjectId" parameterType="com.dimeng.entity.table.project.TProjectInfo"
+                            resultType="com.dimeng.entity.table.project.TProjectInfo">
+        SELECT project_id projectId
+        FROM t_project_info
+        WHERE project_id =#{projectId,jdbcType=VARCHAR}
+    </select>
+
     <!-- 前台查询项目动态 -->
     <select id="getProjectDynamicList" resultMap="ProjectDynamicRespResultMap"
             parameterType="com.dimeng.model.bus.DynamicListReq">

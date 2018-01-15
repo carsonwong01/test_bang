@@ -9,10 +9,10 @@ DM.Page.ready({
 		//初始化input实时显示填写字数
 		projectStartController.initCalculate($("input[name=projectName],input[name=projectIntro]"));
 		//初始化富文本控件
-		var content = projectStartController.initKindEditor("content","请填写您举报该项目的原因与理 由","projectDetailsTip");
-		if (cacheData.projectDetails && cacheData.projectDetails[0] != '') {
-		  projectDetails.html(cacheData.projectDetails ? cacheData.projectDetails[0] : "");
-		}
+		// var content = projectStartController.initKindEditor("content","请填写您举报该项目的原因与理由，200字以内","projectDetailsTip");
+		// if (cacheData.projectDetails && cacheData.projectDetails[0] != '') {
+		//   projectDetails.html(cacheData.projectDetails ? cacheData.projectDetails[0] : "");
+		// }
 		//初始化上传控件
 		var option = {
 				containerId: "projectImageUl",//容器ID,必须

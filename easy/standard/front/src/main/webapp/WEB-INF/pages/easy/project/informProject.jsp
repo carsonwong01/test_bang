@@ -2,9 +2,8 @@
 	<div class="layout">
 		<h2>项目举报</h2>
 		<form id="projectForm" action="" >
-			<input type="hidden" id="projectType" name="projectType" value="${projectType}">
 			<div class="formpage">
-				<input type="hidden" name="projectId" value="101801031722256419">
+				<li class='ldr' datr='${currUser.userId}'></li>
 				<dl>
 					<dt><em class="red pr5">*</em>举报人姓名</dt><%-- validate="q|leng" leng="1,20"  validate="zh" --%>
 					<dd>
@@ -20,8 +19,9 @@
 				<dl>
 					<dt><em class="red pr5">*</em>举报详情</dt>
 					<dd>
-						<textarea id="content" name="content" class="wid92" cols="30" rows="7"  maxlength="200"></textarea>
-						<p id="projectDetailsTip" class="red display-table"></p>&nbsp;&nbsp;<p class="prompt display-table" id="projectDetailsMsg"></p>
+						<%--<textarea id="content" name="content" class="wid92" cols="30" rows="7"  maxlength="200" onkeydown="if(this.value.length>=200) {event.returnValue=false}"--%>
+						<textarea id="content" name="content" class="wid92" cols="30" rows="7"  onpropertychange="checkLength(this,200);" oninput="checkLength(this,200);"
+								  placeholder="请填写您举报该项目的原因与理由，200字以内"></textarea>
 						<p style="padding: 20px 0 20px 0">项目举报相关图片</p>
 						<ul id="projectImageUl" class="addCover clearfix">
 							<li class="fileListAfter">
@@ -35,24 +35,6 @@
 						<input type="hidden" id="coverImageUrl" name="coverImageUrl">
 					</dd>
 				</dl>
-				<%--<dl>--%>
-					<%--<dt><em class="red pr5">*</em>项目举报相关图片</dt>--%>
-					<%--<dd>--%>
-						<%--<textarea class="ub w100 radius fn-s-14 control-input" name="content" maxlength="200" validator="notEmpty;" title="举报原因" placeholder="请填写您举报该项目的原因与理由"></textarea>--%>
-						<%--<textarea id="projectDetails" name="projectDetails" class="wid92" cols="30" rows="7" placeholder="请填写您举报该项目的原因与理由" maxlength="200"></textarea>--%>
-						<%--<p id="projectDetailsTip" class="red display-table"></p>&nbsp;&nbsp;<p class="prompt display-table" id="projectDetailsMsg"></p>--%>
-						<%--<ul id="projectImageUl" class="addCover clearfix">--%>
-							<%--<li class="fileListAfter">--%>
-								<%--<a id="filePicker" class="addCoverIcon">--%>
-									<%--<span>上传图片<br>（最多6张）</span>--%>
-								<%--</a>--%>
-							<%--</li>--%>
-						<%--</ul>--%>
-						<%--<p class="prompt" id="coverImageIdMsg"></p>--%>
-						<%--<input type="hidden" id="coverImageId" validate="q" info="q:请至少上传一张图片" name="coverImageId">--%>
-						<%--<input type="hidden" id="coverImageUrl" name="coverImageUrl">--%>
-					<%--</dd>--%>
-				<%--</dl>--%>
 				<!--附件-->
 				<dl class="report-file">
 					<span class="t-9 fn-s-12 ">附：</span>
@@ -85,7 +67,13 @@
 		</div>
 	</div>
 </div>
-
+<script>
+    function checkLength(obj,maxlength){
+        if(obj.value.length > maxlength){
+            obj.value = obj.value.substring(0,maxlength);
+        }
+    }
+</script>
 <!-- 富文本编辑器的css和js文件begin -->
 <%--<link rel="stylesheet" href="<%=basePath%>js/kindeditor-4.1.10/themes/default/default.css" />--%>
 <%--<link rel="stylesheet" href="<%=basePath%>js/kindeditor-4.1.10/plugins/code/prettify.css" />--%>
@@ -102,7 +90,6 @@
 <script language="javascript" src="<%=basePath %>easy/js/project/informStart.js"></script>
 <!-- 公共：form表单缓存、附件上传、富文本 -->
 <script language="javascript" src="<%=basePath %>easy/js/project/informProject.js"></script>
-
 
 
 
