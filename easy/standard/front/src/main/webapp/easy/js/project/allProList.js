@@ -1,7 +1,7 @@
 /**
  * 前台-项目列表
  */
-var hospitalList = DM.Controller.sub({
+var AllProList = DM.Controller.sub({
     init : function() {
     },
     /*
@@ -43,11 +43,11 @@ var hospitalList = DM.Controller.sub({
 });
 
 //实例化控制器
-var hospitalList = new hospitalList();
+var AllProList = new AllProList();
 // 页面加载时调用
 DM.Page.ready({
     "监控" : function() {
-        hospitalList.loadRecord();
+        AllProList.loadRecord();
     }
 });
 

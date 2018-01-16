@@ -42,7 +42,7 @@
                 <%--<input type="text" placeholder="搜医院"><button></button>--%>
                <input type="text" id="ldr" name="projectName" value="" placeholder="搜项目"/>
                     <%--<li><div class="item-box"><a class="btn btn-blue radius-6 mr5 pl1 pr15" onclick="hospitalList.loadRecord();"><i class="icon-i w30 h30 va-middle search-icon "></i>搜索</a></div></li>--%>
-                <button onclick="hospitalList.loadRecord();"></button>
+                <button onclick="AllProList.loadRecord();"></button>
             </div>
             <div class='clear'></div>
         </div>
@@ -60,7 +60,7 @@
 </div>
 <script language="JavaScript">
     function GaiBian(){
-        hospitalList.loadRecord();
+        AllProList.loadRecord();
     }
 </script>
 
