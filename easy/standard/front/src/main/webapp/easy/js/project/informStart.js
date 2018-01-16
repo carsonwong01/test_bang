@@ -527,7 +527,7 @@ var ProjectStartController = DM.Controller.sub({
             }
 
             var url = location.search;
-            alert(url);
+            // alert(url);
             var projectId=url.substring(11);
             // alert(projectId);
             var url = basePath+"project/addInformProject.do?projectId="+projectId;
@@ -540,17 +540,19 @@ var ProjectStartController = DM.Controller.sub({
                     data:$("#projectForm").serialize(),
                     async : false,
                     success:function(data){
+                        // $('.layout').css('display','none');
                         if(data.code == '000000'){
-                            Dialog.show({
-                                msg:"举报成功",
-                                showClose:true,
-                                showCancel:false,
-                                picClass:"success",
-                                titile:"提示信息",
-                                callBack:function(){
-                                    history.back();
-                                }
-                            });
+                            $('.modtso').css('display','block');
+                            // Dialog.show({
+                            //     msg:"举报成功",
+                            //     showClose:true,
+                            //     showCancel:false,
+                            //     picClass:"success",
+                            //     titile:"提示信息",
+                            //     callBack:function(){
+                            //         history.back();
+                            //     }
+                            // });
                         }else{
                             Dialog.show({
                                 msg:"举报失败，请重试!",

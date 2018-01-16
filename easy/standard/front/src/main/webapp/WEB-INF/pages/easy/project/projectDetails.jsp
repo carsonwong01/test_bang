@@ -1,8 +1,17 @@
+<%@ page import="com.dimeng.constants.SystemConstant" %>
+<%@ page import="com.dimeng.entity.ext.site.SiteAttentionResp" %>
+<%@ page import="com.dimeng.entity.table.site.TSiteInfo" %>
+<%@ page import="com.dimeng.utils.SystemCache" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project-details.css">
+<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/front.css">--%>
+<%
+	TSiteInfo siteInfo=(TSiteInfo) SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO);
+%>
 <script type="text/javascript">
     var currUserId = "${currUser.userId}";//当前登录人ID
 </script>
+<li class='ldr' datr='${currUser.userId}'></li>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 
 <div class='center p-detail-content'>
@@ -88,7 +97,7 @@
 						<!-- 支持者 end-->
 					</div>
 					<%--<ul class='list'>--%>
-						<%--数据加载中，请稍后...--%>
+					<%--数据加载中，请稍后...--%>
 					<%--</ul>--%>
 					<%--<p class='jzgd-s'><a href="javascript:;"  onClick="moreload.loadMore();">加载更多>></a></p>--%>
 				</div>
@@ -98,17 +107,15 @@
 			<div class='na-v'>
 				<b></b><a href="<%=basePath%>hospital/hospitalList.do">我要求助</a>
 			</div>
-
-
-			<div class='na-v'>
+			<!-- 增加 -->
+			<div class='nes-opo' id='tswy'>
 				<input type="hidden" value="${projectDetails.id}">
-				<b></b><a href="<%=basePath%>project/toInformProject.do?projectId=${projectDetails.id}">我要举报</a>
+				<b></b>我要投诉
 			</div>
-
-
+			<!-- 增加 -->
 			<div class='xim-qi'>
 				<p><i></i> <span>项目发起人</span></p>
-				<div class="xim-id">
+				<div class='xim-id'>
 					<img src="${projectDetails.initiatorImgUrl}" class='fl'>
 					<p class='fl'>
 						<a>${projectDetails.initiatorNickName}</a></br>
@@ -116,19 +123,48 @@
 					</p>
 					<div class='clear'></div>
 				</div>
+				<!-- 增加 -->
+				<div class='jiyg'>
+					<p>项目负责人：${projectDetails.linkName}</p>
+					<p>联系电话：${projectDetails.officeTel}</p>
+					<p>电子邮箱：${projectDetails.hospitalMail}</p>
+				</div>
+				<!-- 增加 -->
 			</div>
+
 			<div class='xim-qi'>
 				<p><i></i> <span>专项管理基金会</span></p>
 				<div class='xim-id'>
-					<img src="<%=basePath%>easy/images/cn19.png" class='fl'>
+					<img src="${projectDetails.logoUrl}" class='fl'>
 					<p class='fl'>
-						<a href=''>${projectDetails.foundationName}</a></br>
+						<a>${projectDetails.foundationName}</a></br>
 						<span>捐助的所有款项由该基金会管理拨及付</span>
 					</p>
 					<div class='clear'></div>
-
+				</div>
+				<!-- 增加 -->
+				<div class='jiyg'>
+					<p>开户名称：${projectDetails.foundationName}</p>
+					<p>开户银行：${projectDetails.bankInfo}</p>
+					<p>开户帐号：${projectDetails.accountInfo}</p>
+					<p>统一社会信用代码：${projectDetails.socialCreditCode}</p>
+				</div>
+				<!-- 增加 -->
+			</div>
+			<!-- 增加 -->
+			<div class='xim-qi'>
+				<p><i></i> <span>活动执行机构</span></p>
+				<div class='xim-id'>
+					<img src="<%=siteInfo.getFrontLogoId()%>" class='fl'>
+					<p class='fl'>
+						<a><%=siteInfo.getCompanyName()%></a></br>
+						<span>联系电话：<%=siteInfo.getServicePhone()%></span>
+					</p>
+					<div class='clear'></div>
 				</div>
 			</div>
+			<!-- 增加 -->
+
 			<div class="p-detail-content">
 				<!-- 项目详情右侧信息 -->
 				<div class="rightbox">
@@ -202,6 +238,13 @@
 								<h4 class="til">认证资料<i class="btn-blue"></i><br><em class="bord"></em></h4>
 								<div class="">
 									<ul>
+										<!-- 增加 -->
+										<li>
+											<span class='fl'>患者姓名</span><span class='fr'>${projectDetails.recRealName}</span>
+
+										</li>
+										<!-- 增加 -->
+
 										<c:choose>
 											<c:when test="${projectDetails.validationType == null}">
 												<li>
@@ -242,7 +285,7 @@
 													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
 												</li>
 												<li>
-													<span class="fl">与受助人关系证明</span>
+													<span class="fl">受助人（患者）信息</span>
 													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
 												</li>
 												<li>
@@ -296,29 +339,133 @@
 				<p><i></i> <span>常见问题</span></p>
 				<ul class='cjwt-s' id="helpCenterId">
 				</ul>
-
 				<input type="hidden" id="typeFooter" value="4" />
 				<script id="helpCenterTemplate" type="text/x-jquery-tmpl">
-	{{each(i,data) list}}
-		<li><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><i></i>{{= data.title}}</a></li>
-	{{/each}}
-</script>
+                    {{each(i,data) list}}
+                        <li><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><i></i>{{= data.title}}</a></li>
+                    {{/each}}
+                </script>
 				<!--常见问题--内容-->
-				<script language="javascript"
-						src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>
+				<script language="javascript" src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>
 			</div>
 		</div>
 		<div class='clear'></div>
 	</div>
 </div>
-
-
-
+<!-- 增加 -->
+<!-- 弹出框 -->
+<div class='layoutt'>
+		<div class='tou-poh'>
+			<h2>举报 <b id='xx'></b></h2>
+			<form id='projectForm'>
+				<div class='formpage'>
+					<p class='po-yu'>
+						<label>举报人姓名</label>
+						<input type="text" id="name" name="name" class="input_txtt" validate="q|leng" leng="1,20" maxlength="20" placeholder="请填写举报人真实姓名">
+					</p>
+					<p class='po-yu'>
+						<label>举报人姓名</label>
+						<input type="text" id="phone" name="phone" maxlength="11" class="input_txtt" validate="q|leng" leng="1,11" placeholder="请填写举报人联系电话">
+					</p>
+					<div class='txic-rea'>
+						<textarea id="content" name="content" class="" cols="30" rows="7" onpropertychange="checkLength(this,200);" oninput="checkLength(this,200);" placeholder="请填写您举报该项目的原因与理由"></textarea>
+					</div>
+					<div class="sicknessPage sicknessboxoo">
+						<li class='ldr' datr='${currUser.userId}'></li>
+						<%--<textarea id="content" name="content" class="wid92" cols="30" rows="7"  onpropertychange="checkLength(this,200);" oninput="checkLength(this,200);"--%>
+						<%--placeholder="请填写您举报该项目的原因与理由，200字以内"></textarea>--%>
+						<p style="padding: 20px 0 20px 0;font-size: 14px;">项目举报相关图片</p>
+						<ul id="projectImageUl" class="addCover clearfix">
+							<li class="fileListAfter">
+								<a id="filePicker" class="addCoverIcon">
+									<span>上传<br>图片</span>
+									<%--<span>上传图片<br>（最多6张）</span>--%>
+								</a>
+							</li>
+						</ul>
+						<p class="prompt" id="coverImageIdMsg"></p>
+						<input type="hidden" id="coverImageId" validate="q" info="q:请至少上传一张图片" name="coverImageId">
+						<input type="hidden" id="coverImageUrl" name="coverImageUrl">
+					</div>
+					<div class='texi-ad'> <span>附： </span>
+						<a class="explain highlight"><span class="deg">《中华人民共和国民法通则》</span></a>
+						<a class="explain highlight"><span class="deg">《中华人民共和国刑法》</span></a>
+						<%--<a href="javascript:void(0);" id='koh' class='deg'>《中华人民共和国民法通则》</a> <a href="javascript:void(0);" class='deg'>《中华人民共和国刑法》</a>--%>
+					</div>
+					<div class='mtr10'>
+						<a id="informProjectBtn" class="btn-bldue">确认举报</a>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- 弹窗 -->
+		<div id="raiseExplain" class="dialogBox" style="display: none;">
+			<div class="popup_bg"></div>
+			<div class="dialog">
+				<div class="title"><a href="#" class="out"></a>详细内容：</div>
+				<div class="content">
+					<div class="dia_auto width-full">
+						<div class="tip_information">
+							<div class="tips">
+								<span class="f20 gray3">${textInstruct}</span>
+							</div>
+						</div>
+					</div>
+					<div class="tc mt20"><a id="closeBtn" href="javascript:void(0);" class="btn-public btn-w50h25 btn-blue">知道了</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<script>
+    function checkLength(obj,maxlength){
+        if(obj.value.length > maxlength){
+            obj.value = obj.value.substring(0,maxlength);
+        }
+    }
+</script>
+<!-- 二级弹出框 -->
+<!-- 举报成功弹出框 -->
+<div class='modtso'>
+	<div class='txhe'>
+		<h2> 举报<b id='xkkk'></b></h2>
+		<div class='jubao'>
+			<img src="<%=basePath %>easy/images/rtgtc.png" class='fl'>
+			<p class='fl'>举报资料已上传！</br><span>平台会在5个工作日内对您进行反馈</span></p>
+			<div class='clear'></div>
+		</div>
+		<div class='bua'>
+			<a href="javascript:void(0);" id='xkk'>确认</a>
+		</div>
+	</div>
+</div>
+<!-- 增加 -->
 <link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />
 <script type="text/javascript"  src="<%=basePath %>easy/js/project/projectDetails.js"></script>
 <script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
 <script language="javascript" src="<%=basePath %>js/common/lytebox.js"></script>
 <script type="text/javascript"  src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
+
+<script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/kindeditor.js"></script><%-- 需要-控制编辑起样式--%>
+<script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/plugins/code/prettify.js"></script><%--控制上传图片--%>
+<!-- 富文本编辑器的css和js文件end -->
+<!-- 公共：form表单缓存、附件上传、富文本 -->
+<script language="javascript" src="<%=basePath %>easy/js/home/formcache.js"></script>
+<script language="javascript" src="<%=basePath %>easy/js/home/webuploader.js"></script>
+<script language="javascript" src="<%=basePath %>easy/js/project/informStart.js"></script>
+<!-- 公共：form表单缓存、附件上传、富文本 -->
+<script language="javascript" src="<%=basePath %>easy/js/project/informProject.js"></script>
+
+<script>
+    function checkLength(obj,maxlength){
+        if(obj.value.length > maxlength){
+            obj.value = obj.value.substring(0,maxlength);
+        }
+    }
+</script>
 
 <script id="dynamicTemp" type="text/x-jquery-tmpl">
 {{each(i,data) pageResult.list}}
@@ -435,9 +582,24 @@
     {{/each}}
 </script>
 <script type="text/javascript" src="<%=basePath %>easy/js/project/projectList.js"></script>
-
-<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
+    // 增加
+    $(function(){
+        $('#tswy').click(function(){
+            $('.layoutt').css('display','block')
+        })
+        $('#xxxo,#okx').click(function(){
+            $('.modto').css('display','none')
+        })
+        $('#xx').click(function(){
+            $('.layoutt').css('display','none')
+        })
+        $('#xkkk,#xkk').click(function(){
+            $('.modtso').css('display','none')
+        })
+    })
+    // 增加
+
     $(function(){
         var withs=$('.jqrt>p>span').html();
         $('.jqrt>p').css('width',withs)
@@ -452,43 +614,7 @@
             }
         })
     })
-//    var _content = []; //临时存储li循环内容
-//    var moreload = {
-//        _default:15, //默认显示图片个数
-//        _loading:5,  //每次点击按钮后加载的个数
-//        init:function(){
-//            var lis = $(".record .hidden li");
-//            $(".record ul.list").html("");
-//            for(var n=0;n<moreload._default;n++){
-//                lis.eq(n).appendTo(".record ul.list");
-//            }
-//            for(var i=moreload._default;i<lis.length;i++){
-//                _content.push(lis.eq(i));
-//            }
-//            $(".record .hidden").html("");
-//        },
-//        loadMore:function(){
-//            var mLis = $(".record ul.list li").length;
-//            for(var i =0;i<moreload._loading;i++){
-//                var target = _content.shift();
-//                if(!target){
-//                    $('.record .jzgd-s').html("<a href='javascript:;'>全部加载完毕...</a>");
-//                    break;
-//                }
-//                $(".record ul.list").append(target);
-//                /*$(".record ul.list li").eq(mLis+i).each(function(){
-//                    $(this).attr('src',$(this).attr('realSrc'));
-//                });*/
-//            }
-//        }
-//    }
-//    moreload.init();
 </script>
-<%--<link rel="stylesheet" href="<%=basePath%>css/lytebox.css" />--%>
-<script type="text/javascript"  src="<%=basePath %>easy/js/project/projectDetails.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
-<script language="javascript" src="<%=basePath %>js/common/lytebox.js"></script>
-<script type="text/javascript"  src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
 <script type="text/javascript" >
     var supportAmt = ${projectDetails.supportAmt};
     var facTarget = ${projectDetails.facTarget};

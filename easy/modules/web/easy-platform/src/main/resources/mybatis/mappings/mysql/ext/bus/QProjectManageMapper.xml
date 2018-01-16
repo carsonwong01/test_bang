@@ -64,6 +64,15 @@
         <result column="cover_image_id" property="coverImageId"/>
         <result column="shield_status" property="shieldStatus"/>
         <result column="foundation_name" property="foundationName"/>
+
+        <result column="logo_url" property="logoUrl"/>
+        <result column="bank_info" property="bankInfo"/>
+        <result column="account_info" property="accountInfo"/>
+        <result column="social_credit_code" property="socialCreditCode"/>
+        <result column="office_tel" property="officeTel"/>
+        <result column="link_name" property="linkName"/>
+        <result column="hospital_mail" property="hospitalMail"/>
+        <result column="recipient_real_name" property="recRealName"/>
     </resultMap>
 
     <!-- 项目内容 -->
@@ -244,7 +253,11 @@
     <select id="projectDetails" resultMap="ProjectDetailsRespResultMap"
             parameterType="com.dimeng.model.bus.ProjectDetailsReq">
         select
-        tpi.project_id,tpi.project_name,tpv.foundation_name,   tqub.nick_name,t.user_name,tqub.image_url,tpi.cover_image_url,tpi.shield_status,
+        tpv.foundation_name, fi.logo_url, fi.bank_info,fi.account_info,
+        fi.social_credit_code, thb.office_tel,thb.link_name,thb.hospital_mail,
+        tpv.recipient_real_name,
+
+        tpi.project_id,tpi.project_name,tqub.nick_name,t.user_name,tqub.image_url,tpi.cover_image_url,tpi.shield_status,
         (select count(*) from t_order_support where project_id=tpi.project_id
         and status NOT IN(1,2) AND IFNULL(refund_type,0) IN(0,1,2)) as support_times,tpi.cover_image_id,
         datediff(tpi.date_raised_end,NOW()) remaining_day,tpi.financing_days,tpi.is_nedd_addr,
@@ -265,9 +278,9 @@
         t_user t on
         tqub.user_id
         = t.user_id
-        LEFT JOIN t_project_validation tpv
-        on
-        tpi.project_id=tpv.project_id
+        LEFT JOIN t_project_validation tpv   on   tpi.project_id=tpv.project_id
+        LEFT JOIN foundation_info fi ON fi.foundation_name = tpv.foundation_name
+        LEFT JOIN t_hospital_basic thb ON thb.user_id = tqub.user_id
         where 1=1
         <choose>
             <when test="projectId != null and projectId != ''">and tpi.project_id=#{projectId,jdbcType=VARCHAR}</when>

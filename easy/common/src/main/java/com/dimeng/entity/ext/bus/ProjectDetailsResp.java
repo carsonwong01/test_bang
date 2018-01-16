@@ -179,6 +179,79 @@ public class ProjectDetailsResp extends BaseResp
      */
     private String foundationName;
 
+    private String logoUrl;
+    private String bankInfo;
+    private String accountInfo;
+    private String socialCreditCode;
+    private String officeTel;
+    private String linkName;
+    private String hospitalMail;
+    private String recRealName;
+
+    public String getRecRealName() {
+        return recRealName;
+    }
+
+    public void setRecRealName(String recRealName) {
+        this.recRealName = recRealName;
+    }
+
+    public String getOfficeTel() {
+        return officeTel;
+    }
+
+    public void setOfficeTel(String officeTel) {
+        this.officeTel = officeTel;
+    }
+
+    public String getLinkName() {
+        return linkName;
+    }
+
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+
+    public String getHospitalMail() {
+        return hospitalMail;
+    }
+
+    public void setHospitalMail(String hospitalMail) {
+        this.hospitalMail = hospitalMail;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
+    }
+
+    public String getBankInfo() {
+        return bankInfo;
+    }
+
+    public void setBankInfo(String bankInfo) {
+        this.bankInfo = bankInfo;
+    }
+
+    public String getAccountInfo() {
+        return accountInfo;
+    }
+
+    public void setAccountInfo(String accountInfo) {
+        this.accountInfo = accountInfo;
+    }
+
+    public String getSocialCreditCode() {
+        return socialCreditCode;
+    }
+
+    public void setSocialCreditCode(String socialCreditCode) {
+        this.socialCreditCode = socialCreditCode;
+    }
+
     public String getFoundationName() {
         return foundationName;
     }

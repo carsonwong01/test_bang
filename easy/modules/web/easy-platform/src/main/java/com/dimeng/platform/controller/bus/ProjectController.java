@@ -47,7 +47,7 @@ public class ProjectController extends BaseController
     
     @Autowired
     IProjectService projectService;
-    
+
     /**
      * 项目管理-查询项目列表
      * <功能详细描述>
