@@ -1,8 +1,11 @@
 package com.dimeng.front.controller.easy.project;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dimeng.enums.ProjectStatusEnum;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.model.bus.FindProjectListReq;
+import com.dimeng.model.expand.ProjectLabelReq;
+import com.dimeng.model.home.FrontIndexReq;
 import com.dimeng.utils.CommonUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -74,20 +77,22 @@ public class PendingProjectListController extends BaseController
      */
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/allProList.do")
-    public Object allProList(HttpServletRequest request, HttpServletResponse response)
+    public Object allProList(HttpServletRequest request, HttpServletResponse response, ProjectLabelReq req,FrontIndexReq frontReq)
     {
         ModelAndView mv = new ModelAndView("easy/project/allProjectList.page");
+        String data = new CommonUtil().callInterfaceMethod(req,
+                "home/frontInfo/v/findProLabel",RequestMethod.POST,request);
+        mv.addObject("proLabelList", JSONObject.parseObject(data).getJSONObject("data").get("list"));
         return mv;
     }
 
     @ResponseBody
     @RequestMapping(value = "/allProListAjax.do")
-    public Object allProList(FindProjectListReq req, HttpServletRequest request, HttpServletResponse response)
+    public Object allProList(FrontIndexReq req, HttpServletRequest request, HttpServletResponse response)
     {
         Map<String, Object> map = new HashMap<String, Object>();
         req.setOpSource("1");
         req.setMaxResults(12);
-        req.setProjectStatus(ProjectStatusEnum.ZCZ.getDataBaseVal());
         String data =
                 new CommonUtil().callInterfaceMethod(req, "home/frontInfo/v/frontAllProList", RequestMethod.POST, request);
         map.put("frontAllProList",CommonUtil.getJSONObject(data, null));

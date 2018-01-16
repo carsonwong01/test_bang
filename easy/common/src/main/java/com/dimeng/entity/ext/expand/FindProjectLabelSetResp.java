@@ -43,7 +43,17 @@ public class FindProjectLabelSetResp implements Serializable
      * 更新时间
      */
     private String updateTime;
-    
+
+    private String labelId;
+
+    public String getLabelId() {
+        return labelId;
+    }
+
+    public void setLabelId(String labelId) {
+        this.labelId = labelId;
+    }
+
     /**
      * @return 返回 proType
      */

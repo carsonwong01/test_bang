@@ -24,13 +24,13 @@
             、慈善机构等慈善资源，通过移动互联网O2O模式，打通慈善筹款与爱心救助的爱心之路 。</p>
         <ul class='liu-cfr'>
             <li><img src="<%=basePath%>easy/images/cn07.png">
-                <p>快速、快捷<br>方便、透明</p></li>
+                <p>多家全国性公益机构<br>百家行业媒体群</p></li>
             <li><img src="<%=basePath%>easy/images/cn09.png">
-                <p>全国26个省（市）</br>百家三甲医院</p></li>
+                <p>全国医务救助组织</br>百家省级三甲医院</p></li>
             <li><img src="<%=basePath%>easy/images/cn06.png">
-                <p>媒体、公益机构</br>医务救助机构、爱心企业全面参与</p></li>
+                <p>多家国家指定互联网筹款平台</br>真实的患者数据</p></li>
             <li><img src="<%=basePath%>easy/images/cn08.png">
-                <p>开放性数据平台</br>多家平台数据共享策略</p></li>
+                <p>多个全国性用户数据接口</br>开放性的数据平台</p></li>
             <div class='clear'></div>
         </ul>
     </div>

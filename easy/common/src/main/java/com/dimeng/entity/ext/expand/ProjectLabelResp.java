@@ -1,40 +1,22 @@
-/*
- * 文 件 名:  ProjectLabelReq.java
- * 版    权:  深圳市迪蒙网络科技有限公司
- * 描    述:  <描述>
- * 修 改 人:  huangjinbing
- * 修改时间:  2016年9月28日
- */
-package com.dimeng.model.expand;
+package com.dimeng.entity.ext.expand;
 
-import com.dimeng.framework.domain.BaseReq;
+import java.io.Serializable;
 
-/**
- * 项目标签参数
- * <功能详细描述>
- * 
- * @author  huangjinbing
- * @version  [版本号, 2016年9月28日]
- */
-public class ProjectLabelReq extends BaseReq
-{
-    
-    /**
-     * 注释内容
-     */
-    private static final long serialVersionUID = 8966476056558550397L;
-    
+public class ProjectLabelResp implements Serializable {
+
     private String labelTypeId;
-    
+
     private String labelName;
-    
+
     private String projectType;
-    
+
     private String createId;
-    
+
     private String dateCreate;
 
     private String labelId;
+
+    public ProjectLabelResp(){}
 
     public String getLabelId() {
         return labelId;
@@ -50,7 +32,7 @@ public class ProjectLabelReq extends BaseReq
     {
         return labelTypeId;
     }
-    
+
     /**
      * @param 对labelTypeId进行赋值
      */
@@ -58,7 +40,7 @@ public class ProjectLabelReq extends BaseReq
     {
         this.labelTypeId = labelTypeId;
     }
-    
+
     /**
      * @return 返回 labelName
      */
@@ -66,7 +48,7 @@ public class ProjectLabelReq extends BaseReq
     {
         return labelName;
     }
-    
+
     /**
      * @param 对labelName进行赋值
      */
@@ -74,7 +56,7 @@ public class ProjectLabelReq extends BaseReq
     {
         this.labelName = labelName;
     }
-    
+
     /**
      * @return 返回 projectType
      */
@@ -82,7 +64,7 @@ public class ProjectLabelReq extends BaseReq
     {
         return projectType;
     }
-    
+
     /**
      * @param 对projectType进行赋值
      */
@@ -90,7 +72,7 @@ public class ProjectLabelReq extends BaseReq
     {
         this.projectType = projectType;
     }
-    
+
     /**
      * @return 返回 createId
      */
@@ -98,7 +80,7 @@ public class ProjectLabelReq extends BaseReq
     {
         return createId;
     }
-    
+
     /**
      * @param 对createId进行赋值
      */
@@ -106,7 +88,7 @@ public class ProjectLabelReq extends BaseReq
     {
         this.createId = createId;
     }
-    
+
     /**
      * @return 返回 dateCreate
      */
@@ -114,7 +96,7 @@ public class ProjectLabelReq extends BaseReq
     {
         return dateCreate;
     }
-    
+
     /**
      * @param 对dateCreate进行赋值
      */
@@ -122,5 +104,5 @@ public class ProjectLabelReq extends BaseReq
     {
         this.dateCreate = dateCreate;
     }
-    
+
 }

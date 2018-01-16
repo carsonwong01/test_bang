@@ -21,7 +21,7 @@
 	box-sizing: border-box;
 	padding: 0 25px;
 	font-size: 14px;
-	padding-top: 24px;
+	padding-top: 15px;
 }
 .top-ioo .corej{
 	color: #00aaf6;
@@ -47,6 +47,7 @@
 .okls-b{
 	position: relative;
 	margin-right: 30px;
+	margin-top: 10px;
 }
 .okls-b>span{
 	padding-right: 10px;
@@ -61,9 +62,9 @@
     background: url(../images/limgvv.png)no-repeat center;
 }
 .input-lpj>input{
-	    width: 348px;
+	width: 348px;
     height: 42px;
-    line-height: 32px;
+    line-height: 42px;
     padding-left: 9px;
     border: 1px solid #c3ecff;
     border-radius: 5px;

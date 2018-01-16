@@ -148,20 +148,28 @@ public class FrontIndexReq extends FindExportExcelParamsReq
 
     private String projectId;
     private String projectName;
+    private String projectStatus;
+    private String projectLabel;
     private String targetAmount;
     private String raisedAmount;
     private String dateRaisedEnd;
     private String dateCreate;
-    private String projectStatus;
     private String coverImageUrl;
     private String recipientRealName;
     private String supportTimes;
-
 
     private String allTargetAmount;
     private String allRaisedAmount;
     private String allSupprotTimes;
     private String rate;
+
+    public String getProjectLabel() {
+        return projectLabel;
+    }
+
+    public void setProjectLabel(String projectLabel) {
+        this.projectLabel = projectLabel;
+    }
 
     public String getRate() {
         return rate;

@@ -45,6 +45,16 @@
 				AND  IFNULL(sup.refund_type,0) IN(0,1,2)
 			) as memberCount 
 	</select>
+
+	<!--查找病种-->
+	<select id="findProLabel" resultType="com.dimeng.entity.ext.expand.ProjectLabelResp"
+			parameterType="com.dimeng.model.expand.ProjectLabelReq">
+		SELECT label_type_id labelTypeId, label_name labelName,label_id labelId
+		FROM t_project_label_type
+		WHERE project_type = '1'
+	</select>
+
+
 	<!--查找已认证的-所有项目-->
 	<select id="findAllProList" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp"
 			parameterType="com.dimeng.model.home.FrontIndexReq">
@@ -59,6 +69,7 @@
 		tpi.project_name projectName,
 		floor(tpi.target_amount) targetAmount,
 		tpi.project_type,
+		tpi.project_label projectLabel,
 		floor(tpi.raised_amount) raiseTotal,
 		datediff(tpi.date_raised_end, now()) remainingDay,
 		tpv.foundation_name foundationName,
@@ -70,8 +81,21 @@
 		FROM  t_project_validation tpv
 		LEFT JOIN t_project_info tpi ON tpv.project_id = tpi.project_id
 		LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
+		WHERE 1 = 1
+		AND  tpi.project_status IN ('1','2')  AND tpv.audit_status = '3'
+		<if test="projectName != null and projectName != ''">
+			and tpi.project_name LIKE CONCAT
+			('%',trim(#{projectName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="projectLabel != null and projectLabel != ''">
+			and tpi.project_label LIKE CONCAT
+			('%',trim(#{projectLabel,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="projectStatus != null and projectStatus != ''">
+			and tpi.project_status LIKE CONCAT
+			('%',trim(#{projectStatus,jdbcType=VARCHAR}),'%')
+		</if>
 
-		WHERE tpi.project_status = '1' AND tpi.project_status = '2' AND tpv.audit_status = '3'
 		ORDER BY tpi.date_update DESC
 	</select>
 

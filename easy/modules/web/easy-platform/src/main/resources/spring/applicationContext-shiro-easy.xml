@@ -96,6 +96,9 @@
 				/home/frontInfo/v/findSiteInvestment = anon
 				/home/frontInfo/v/findHomeHosList = anon
 				/home/frontInfo/v/findPartnerList = anon
+				/home/frontInfo/v/findProLabel = anon
+
+
 				/user/userManage/v/findInitiateProList = anon
 				/hospital/v/linkMethod = anon
 				/user/userManage/v/updateHosInfo = anon

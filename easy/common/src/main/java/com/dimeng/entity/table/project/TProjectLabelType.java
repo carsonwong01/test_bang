@@ -13,6 +13,16 @@ public class TProjectLabelType {
 
     private Date dateCreate;
 
+    private String labelId;
+
+    public String getLabelId() {
+        return labelId;
+    }
+
+    public void setLabelId(String labelId) {
+        this.labelId = labelId;
+    }
+
     public String getLabelTypeId() {
         return labelTypeId;
     }

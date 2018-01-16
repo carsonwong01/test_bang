@@ -1,25 +1,29 @@
 /**
  * 前台-项目列表
  */
-var allProList = DM.Controller.sub({
+var hospitalList = DM.Controller.sub({
     init : function() {
     },
     /*
      * 项目列表
      */
     loadRecord : function() {
+        var projectName = $('#ldr').attr('value');
+        var projectLabel = $('#projectLabel').attr('value');
+        var projectStatus = $('#projectStatus').attr('value');
         // 查询数据
         DM.ajax({
             "formId" : "allProListForm",
             "serialize" : true,
             "url" : "project/allProListAjax.do",
-            "success" : this.pendingPageCallBack
+            "data":{projectName:projectName,projectLabel:projectLabel,projectStatus:projectStatus},
+            "success" : this.pageCallBack
         });
     },
     /*
      * 分页回调
      */
-    pendingPageCallBack : function(data) {
+    pageCallBack : function(data) {
         // 清空表格数据
         $("#allProListD").empty();
         // 填充数据
@@ -39,11 +43,11 @@ var allProList = DM.Controller.sub({
 });
 
 //实例化控制器
-var allProList = new allProList();
+var hospitalList = new hospitalList();
 // 页面加载时调用
 DM.Page.ready({
     "监控" : function() {
-        allProList.loadRecord();
+        hospitalList.loadRecord();
     }
 });
 

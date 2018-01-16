@@ -1,7 +1,9 @@
 package com.dimeng.modules.home.services;
 
+import com.dimeng.entity.table.project.TProjectLabelType;
 import com.dimeng.framework.domain.BaseDataResp;
 import com.dimeng.model.expand.HospitalBasicReq;
+import com.dimeng.model.expand.ProjectLabelReq;
 import com.dimeng.model.home.FrontIndexReq;
 import com.dimeng.model.home.FrontLoginCheckReq;
 import com.dimeng.model.home.FrontRegisterReq;
@@ -13,7 +15,11 @@ import com.dimeng.model.home.FrontRegisterReq;
  */
 public interface FrontIndexService
 {
-
+    /**
+     * 查询病种标签
+     */
+    public BaseDataResp findProLabel(ProjectLabelReq req)
+            throws Exception;
     /**
      * 查询数据库中的未删除的所有项目
      */

@@ -100,6 +100,25 @@ public class FindProjectListReq extends FindExportExcelParamsReq
      */
     private String foundationName;
 
+    private String projectName;
+    private String projectLabel;
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getProjectLabel() {
+        return projectLabel;
+    }
+
+    public void setProjectLabel(String projectLabel) {
+        this.projectLabel = projectLabel;
+    }
+
     public String getFoundationName() {
         return foundationName;
     }

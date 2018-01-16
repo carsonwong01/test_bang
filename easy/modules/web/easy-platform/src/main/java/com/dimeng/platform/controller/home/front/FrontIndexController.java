@@ -5,6 +5,7 @@ import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.enums.ThirdTypeEnum;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.framework.domain.BaseDataResp;
+import com.dimeng.model.expand.ProjectLabelReq;
 import com.dimeng.model.home.FrontIndexReq;
 import com.dimeng.model.home.FrontLoginCheckReq;
 import com.dimeng.model.home.FrontRegisterReq;
@@ -49,6 +50,18 @@ public class FrontIndexController extends BaseController
     
     @Resource
     private IMessageService msgService;
+
+    /**
+     * 查询病种类型v/frontAllProList
+     */
+    @RequestMapping(value = "/{v}/findProLabel", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value=HttpStatus.OK)
+    public Object findProLabel(HttpEntity<ProjectLabelReq> httpEntity, HttpServletRequest request)
+            throws Exception{
+        return frontIndexService.findProLabel(httpEntity.getBody());
+    }
 
 
     /**
