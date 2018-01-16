@@ -45,6 +45,35 @@
 				AND  IFNULL(sup.refund_type,0) IN(0,1,2)
 			) as memberCount 
 	</select>
+	<!--查找已认证的-所有项目-->
+	<select id="findAllProList" resultType="com.dimeng.entity.ext.home.front.FindRecommendListResp"
+			parameterType="com.dimeng.model.home.FrontIndexReq">
+		SELECT
+		thb.hospital_id hospitalId, thb.hospital_name hospitalName,
+		(
+		SELECT COUNT(tos.order_id) FROM t_order_support tos
+		WHERE tos.`status` not in ('1','2') AND IFNULL(tos.refund_type,0) in ('0','1','2') AND tos.project_id = tpi.project_id
+		) supportCount,
+		tpi.cover_image_url projectImg,
+		tpi.project_id projectId,
+		tpi.project_name projectName,
+		floor(tpi.target_amount) targetAmount,
+		tpi.project_type,
+		floor(tpi.raised_amount) raiseTotal,
+		datediff(tpi.date_raised_end, now()) remainingDay,
+		tpv.foundation_name foundationName,
+		tpi.project_status projectStatus,
+		tpi.cover_image_url coverImageUrl,
+		tpi.date_create dateCreate,
+		IFNULL(LEFT(((tpi.raised_amount / tpi.target_amount)) ,4), 0.00 ) rate,
+		(SELECT tpv.recipient_real_name from t_project_validation tpv WHERE tpv.project_id = tpi.project_id) recipientRealName
+		FROM  t_project_validation tpv
+		LEFT JOIN t_project_info tpi ON tpv.project_id = tpi.project_id
+		LEFT JOIN t_hospital_basic thb ON tpi.project_creator_id = thb.hospital_id
+
+		WHERE tpi.project_status = '1' AND tpi.project_status = '2' AND tpv.audit_status = '3'
+		ORDER BY tpi.date_update DESC
+	</select>
 
 
 

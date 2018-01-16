@@ -12,6 +12,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
+import com.dimeng.entity.table.foundation.FoundationInfo;
+import com.dimeng.model.expand.HospitalBasicReq;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -305,11 +308,19 @@ public class LaunchProjectController extends BaseController
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/projectValidationStart.do")
     public Object projectValidationStart(String projectId, String projectType, String validationType,
-        HttpServletRequest request, HttpServletResponse response)
+                                         HttpServletRequest request, HttpServletResponse response, FoundationInfo req)
     {
         validationType = ProjectValidationTypeEnum.ZZYZ.getDataBaseVal();
         //所有项目（组织验证/企业验证）
         ModelAndView mv = new ModelAndView("easy/user/project/projectValid/validation_group.page");
+        //获取基金会下拉选列表
+        String data = new CommonUtil().callInterfaceMethod(req,
+                "project/operate/v/selectFoundation",RequestMethod.POST,request);
+        mv.addObject("foundations", JSONObject.parseObject(data).getJSONObject("data").get("list"));
+
+
+
+
         /*
         //大病救助
         if (ProjectValidationTypeEnum.BRYZ.getDataBaseVal().equals(validationType))

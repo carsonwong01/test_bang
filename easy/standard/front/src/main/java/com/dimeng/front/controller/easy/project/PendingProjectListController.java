@@ -53,7 +53,7 @@ public class PendingProjectListController extends BaseController
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "frontPendingProjectAjax.do")
+    @RequestMapping(value = "/frontPendingProjectAjax.do")
     public Object pendingList(FindProjectListReq req, HttpServletRequest request, HttpServletResponse response)
     {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -66,5 +66,34 @@ public class PendingProjectListController extends BaseController
         map.put("req", req);
         return map;
     }
+
+
+
+    /**
+     * front--未删除的-已认证的所有项目
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/allProList.do")
+    public Object allProList(HttpServletRequest request, HttpServletResponse response)
+    {
+        ModelAndView mv = new ModelAndView("easy/project/allProjectList.page");
+        return mv;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/allProListAjax.do")
+    public Object allProList(FindProjectListReq req, HttpServletRequest request, HttpServletResponse response)
+    {
+        Map<String, Object> map = new HashMap<String, Object>();
+        req.setOpSource("1");
+        req.setMaxResults(12);
+        req.setProjectStatus(ProjectStatusEnum.ZCZ.getDataBaseVal());
+        String data =
+                new CommonUtil().callInterfaceMethod(req, "home/frontInfo/v/frontAllProList", RequestMethod.POST, request);
+        map.put("frontAllProList",CommonUtil.getJSONObject(data, null));
+        map.put("req", req);
+        return map;
+    }
+
 }
 

@@ -2,14 +2,14 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project.css">
 
-        <div class='fl fl-cen'>
-            <div class='im-ttx' id="pendingProListD" >
+<div class='fl fl-cen'>
+    <div class='im-ttx' id="pendingProListD" >
 
-            </div>
-            <%--<div class='clear'></div>--%>
-        </div>
-        <div class='clear'></div>
-        <div class="paging" id="paging"></div>
+    </div>
+    <%--<div class='clear'></div>--%>
+</div>
+<div class='clear'></div>
+<div class="paging" id="paging"></div>
 
 <script id="pendingProjectListTemp" type="text/x-jquery-tmpl">
     {{each(i,data) pageResult.list}}

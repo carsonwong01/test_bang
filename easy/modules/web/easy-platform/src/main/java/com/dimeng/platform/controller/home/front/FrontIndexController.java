@@ -50,6 +50,23 @@ public class FrontIndexController extends BaseController
     @Resource
     private IMessageService msgService;
 
+
+    /**
+     * 查询数据库中的未删除的所有项目
+     */
+    @RequestMapping(value = "/{v}/frontAllProList", method = RequestMethod.POST, produces = {"application/json",
+            "application/xml"})
+    @ResponseBody
+    @ResponseStatus(value=HttpStatus.OK)
+    public Object findAllProList(HttpEntity<FrontIndexReq> httpEntity, HttpServletRequest request)
+            throws Exception{
+        return frontIndexService.findAllProList(httpEntity.getBody());
+    }
+
+
+    /**
+     * front-查询众筹中的所有项目
+     */
     @RequestMapping(value = "/{v}/frontAllProject", method = RequestMethod.POST, produces = {"application/json",
             "application/xml"})
     @ResponseBody

@@ -121,12 +121,16 @@
 							<dt><span class="red">*</span>基金会名称</dt>
 							<dd>
 								<select id="foundationName" name="foundationName" regionId="" class="select_style foundation">
-									<%--<option value="0">请选择</option>--%>
-									<option value="中国华侨基金会">中国华侨基金会</option>
-									<option value="中华少年儿童慈善救助基金会">中华少年儿童慈善救助基金会</option>
-									<option value="中国少年儿童基金会">中国少年儿童基金会</option>
-									<option value="中华社会救助基金会">中华社会救助基金会 </option>
-									<option value="中国人口福利基金会">中国人口福利基金会</option>
+									<option value="" >请选择</option>
+									<c:forEach items="${foundations}" var="foundations">
+										<option value="${foundations.foundationName}" >${foundations.foundationName}</option>
+									</c:forEach>
+								<%--<option value="0">请选择</option>--%>
+									<%--<option value="中国华侨基金会">中国华侨基金会</option>--%>
+									<%--<option value="中华少年儿童慈善救助基金会">中华少年儿童慈善救助基金会</option>--%>
+									<%--<option value="中国少年儿童基金会">中国少年儿童基金会</option>--%>
+									<%--<option value="中华社会救助基金会">中华社会救助基金会 </option>--%>
+									<%--<option value="中国人口福利基金会">中国人口福利基金会</option>--%>
 								</select>
 								<%--<input type="text" id="foundationName" name="foundationName" validate="q|leng" leng="1,30" maxlength="30" class="input_txt wid92"  placeholder="请填写基金会名称">--%>
 								<p class="prompt" id="foundationNameMsg"></p>
@@ -212,7 +216,8 @@
 							<dl>
 								<dt><span class="red">*</span>医疗诊断证明</dt>
 								<dd>
-									<ul id="proveImgIds" class=" clearfix">
+									<div class="addImgBox">
+									<ul id="proveImgIds" class="addCover clearfix">
 										<li class="fileListAfter">
 											<a id="proveImgIdsPicker" class="addCoverIcon">
 												<span>上传医疗诊断<br>结果照片<br>（最多6张）</span>
@@ -226,6 +231,7 @@
 											</div>
 										</li>									
 									</ul>
+									</div>
 									<p class="prompt" id="proveImgIdsMsg"></p>
 									<p class="tips">请提供带有医院公章的诊断结果照片</p>
 								</dd>

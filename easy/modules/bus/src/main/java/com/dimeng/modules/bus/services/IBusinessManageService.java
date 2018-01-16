@@ -6,6 +6,7 @@ import com.dimeng.model.bus.ChangeProjectStatusReq;
 import com.dimeng.model.bus.GetProjectReasonReq;
 import com.dimeng.model.bus.InformReq;
 import com.dimeng.model.bus.UpdateProjectShieldStatusReq;
+import com.dimeng.model.expand.FindFoundationReq;
 
 /**
  * 项目业务操作
@@ -56,5 +57,10 @@ public interface IBusinessManageService
      */
     public BaseDataResp commonUpdateProjectShieldStatus(UpdateProjectShieldStatusReq req)
         throws ServicesException;
-    
+
+    /**
+     * 项目验证查找基金会
+     */
+    public BaseDataResp selectFoundation(FindFoundationReq req)
+        throws ServicesException;
 }

@@ -11,6 +11,15 @@
   <sql id="TProjectLabelType_Column_List" >
     label_type_id, label_name, project_type, create_id, date_create
   </sql>
+  <!--项目详情页疾病病种下拉选-->
+  <select id="findProjectLabel" resultMap="TProjectLabelTypeResultMap" parameterType="java.lang.String">
+    select
+      label_name, project_type
+    from t_project_label_type
+  </select>
+
+
+
   <select id="findByIdTProjectLabelType" resultMap="TProjectLabelTypeResultMap" parameterType="java.lang.String" >
     select 
     <include refid="TProjectLabelType_Column_List" />

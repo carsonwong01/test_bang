@@ -4,6 +4,7 @@ import com.dimeng.constants.CommonConstant;
 import com.dimeng.constants.IDiMengResultCode;
 import com.dimeng.constants.SystemConstant;
 import com.dimeng.entity.ext.bus.GetProjectReasonResp;
+import com.dimeng.entity.ext.expand.FindFoundationResp;
 import com.dimeng.entity.table.order.TOrderSupport;
 import com.dimeng.entity.table.project.TProjectAttachment;
 import com.dimeng.entity.table.project.TProjectDynamic;
@@ -24,6 +25,7 @@ import com.dimeng.model.bus.GetProjectReasonReq;
 import com.dimeng.model.bus.InformReq;
 import com.dimeng.model.bus.UpdateProjectShieldStatusReq;
 import com.dimeng.model.common.IdReq;
+import com.dimeng.model.expand.FindFoundationReq;
 import com.dimeng.modules.bus.services.IBusinessManageService;
 import com.dimeng.modules.message.services.IMessageService;
 import com.dimeng.util.SerialNumberUtil;
@@ -387,6 +389,24 @@ public class BusinessManageServicempl extends BaseServiceImpl implements IBusine
             }
         }
         BaseDataResp resp = new BaseDataResp();
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+    /**
+     * 项目验证查找基金会
+     */
+    public BaseDataResp selectFoundation(FindFoundationReq req)throws ServicesException{
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FindFoundationReq> event = new QueryEvent<FindFoundationReq>();
+
+        event.setObj(req);
+        event.setStatement("selectFoundation");
+        List<FindFoundationResp> selectFoundation = baseDao.findAllIsPageByCustom(event);
+        data.put(CommonConstant.JSON_KEY_LIST, selectFoundation);
+
+        resp.setData(data);
         resp.setCode(IDiMengResultCode.Commons.SUCCESS);
         return resp;
     }

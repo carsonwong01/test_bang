@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dimeng.framework.mybatis.dao" >
 
+    <!--发起项目下拉选中的基金会-->
+    <select id="selectFoundation" resultType="com.dimeng.entity.ext.expand.FindFoundationResp"
+            parameterType="com.dimeng.model.expand.FindFoundationReq">
+        SELECT DISTINCT foundation_id foundationId, foundation_name foundationName
+        FROM foundation_info
+    </select>
+
+
     <!--基金会列表-->
     <select id="findFoundationList" resultType="com.dimeng.entity.ext.expand.FindFoundationResp"
                     parameterType="com.dimeng.model.expand.FindFoundationReq">

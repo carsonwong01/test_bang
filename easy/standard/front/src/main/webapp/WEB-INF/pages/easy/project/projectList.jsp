@@ -17,7 +17,7 @@
             </ul>
             <div class='clear'></div>
             <div class='top-io asy'>
-                <i></i><span>疾病救助</span>
+                <i></i><span>疾病救助</span><a href="<%=basePath%>project/allProList.do" class='fr'>更多&gt;&gt;</a>
                 <%--<a href="" class='fr'></a>--%>
                 <div class='clear'></div>
             </div>

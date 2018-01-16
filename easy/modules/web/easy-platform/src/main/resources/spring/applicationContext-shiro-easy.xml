@@ -92,6 +92,7 @@
 				/hospital/v/findHosProjectSum = anon
 				/frontHome/v/recomNewsList = anon
 				/home/frontInfo/v/frontAllProject = anon
+				/home/frontInfo/v/frontAllProList = anon
 				/home/frontInfo/v/findSiteInvestment = anon
 				/home/frontInfo/v/findHomeHosList = anon
 				/home/frontInfo/v/findPartnerList = anon
@@ -105,6 +106,7 @@
 				/user/userManage/v/findCity = anon
 				/foundation/v/foundationList = anon
 				/foundation/v/foundationDetails = anon
+				/project/operate/v/selectFoundation = anon
 
 
 

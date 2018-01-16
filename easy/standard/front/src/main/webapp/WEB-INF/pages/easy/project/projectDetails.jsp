@@ -364,7 +364,7 @@
 									</div>
                                     {{/if}}
                                      {{if data.comments[0] != null && data.comments[0].supportAmount != null}}
-                                      <%--<p class="message color333">{{= data.comments[0].content}}</p>--%>
+                                      <p class="message color333">{{= data.comments[0].content}}</p>
                                       <div class="otherReplay">
 										<ul>
                                         {{each(i,d) data.comments}}

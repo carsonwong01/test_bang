@@ -1,5 +1,6 @@
 package com.dimeng.platform.controller.bus;
 
+import com.dimeng.model.expand.FindFoundationReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -173,4 +174,24 @@ public class ProjectOperateController extends BaseController
         }
         return resp;
     }
+
+    /**
+     * 项目验证时查找基金会
+     */
+    @RequestMapping(value = "/{v}/selectFoundation", method = RequestMethod.POST, produces = {
+            "application/json", "application/xml"})
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public Object selectFoundation(HttpEntity<FindFoundationReq> httpEntity)
+            throws Exception
+    {
+        BaseDataResp resp = this.validator(httpEntity);
+        if (IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
+        {
+            resp = businessManageService.selectFoundation(httpEntity.getBody());
+        }
+        return resp;
+    }
+
+
 }

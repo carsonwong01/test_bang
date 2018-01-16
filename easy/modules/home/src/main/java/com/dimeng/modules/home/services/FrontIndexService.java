@@ -13,8 +13,15 @@ import com.dimeng.model.home.FrontRegisterReq;
  */
 public interface FrontIndexService
 {
+
     /**
-     * front-查询所有项目
+     * 查询数据库中的未删除的所有项目
+     */
+    public BaseDataResp findAllProList(FrontIndexReq req)
+            throws Exception;
+
+    /**
+     * front-查询众筹中的所有项目
      * @param req
      * @return
      * @throws Exception

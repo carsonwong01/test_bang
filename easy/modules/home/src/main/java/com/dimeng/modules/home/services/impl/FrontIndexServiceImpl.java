@@ -60,6 +60,40 @@ public class FrontIndexServiceImpl extends BaseServiceImpl implements FrontIndex
 
     private BaseDataResp resp = new BaseDataResp();
 
+    /**
+     * 查询数据库中的未删除的所有项目
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public BaseDataResp findAllProList(FrontIndexReq req)
+            throws Exception{
+        BaseDataResp resp = new BaseDataResp();
+        Map<String, Object> data = new HashMap<String, Object>();
+        QueryEvent<FrontIndexReq> event = new QueryEvent<FrontIndexReq>();
+        //分页属性
+        PageContext page = PageContext.getContext();
+        page.setCurrentPage(req.getReqPageNum());
+        page.setPageSize(12);
+        //分页开关，一定要设置成true，才会分页
+        page.setPagination(!StringUtil.isEmpty(req.getExportPath()) ? false : true);
+        event.setObj(req);
+        event.setStatement("findAllProList");
+        List<FindRecommendListResp> list = baseDao.findAllIsPageByCustom(event);
+
+        data.put(CommonConstant.JSON_KEY_PAGERESULT, new PageResult(page, list));
+
+        resp.setData(data);
+        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
+        return resp;
+    }
+
+
+
+
+    /**
+     * front-查询众筹中的所有项目
+     */
+    @SuppressWarnings("unchecked")
     @Override
     public BaseDataResp findAllProject(FrontIndexReq req) throws Exception {
         BaseDataResp resp = new BaseDataResp();

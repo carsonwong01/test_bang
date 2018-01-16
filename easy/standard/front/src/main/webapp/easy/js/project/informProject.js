@@ -4,7 +4,7 @@ DM.Page.ready({
 	"初始化" : function() {
         //初始化form表单缓存
         var cacheData = projectStartController.initFormCache($("#projectForm"), "diseaseRelief");
-        
+
 		projectStartController.readyProject();
 		//初始化input实时显示填写字数
 		projectStartController.initCalculate($("input[name=projectName],input[name=projectIntro]"));
