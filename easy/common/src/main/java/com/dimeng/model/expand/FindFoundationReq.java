@@ -1,7 +1,5 @@
 package com.dimeng.model.expand;
 
-import java.util.Date;
-
 public class FindFoundationReq extends FindExportExcelParamsReq{
 
     //基金会ID
@@ -27,7 +25,7 @@ public class FindFoundationReq extends FindExportExcelParamsReq{
     //logo
     private String logoUrl;
     //录入时间
-    private Date CreateTime;
+    private String createTime;
     //基金会描述
     private String description;
     //剩余资产处理方案
@@ -44,7 +42,7 @@ public class FindFoundationReq extends FindExportExcelParamsReq{
     private String linkName;
 
     private String logoId;
-    private String donationUrlId;
+    private String donationsUrlId;
     private String certificateId;
 
     public String getLogoId() {
@@ -55,12 +53,12 @@ public class FindFoundationReq extends FindExportExcelParamsReq{
         this.logoId = logoId;
     }
 
-    public String getDonationUrlId() {
-        return donationUrlId;
+    public String getDonationsUrlId() {
+        return donationsUrlId;
     }
 
-    public void setDonationUrlId(String donationUrlId) {
-        this.donationUrlId = donationUrlId;
+    public void setDonationsUrlId(String donationsUrlId) {
+        this.donationsUrlId = donationsUrlId;
     }
 
     public String getCertificateId() {
@@ -159,12 +157,12 @@ public class FindFoundationReq extends FindExportExcelParamsReq{
         this.logoUrl = logoUrl;
     }
 
-    public Date getCreateTime() {
-        return CreateTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
-        CreateTime = createTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getDescription() {

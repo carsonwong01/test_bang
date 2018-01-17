@@ -1,7 +1,6 @@
 package com.dimeng.entity.ext.expand;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class FindFoundationResp  implements Serializable {
     //基金会ID
@@ -27,7 +26,7 @@ public class FindFoundationResp  implements Serializable {
     //logo
     private String logoUrl;
     //录入时间
-    private Date CreateTime;
+    private String createTime;
     //基金会描述
     private String description;
     //剩余资产处理方案
@@ -45,6 +44,14 @@ public class FindFoundationResp  implements Serializable {
     private String logoId;
     private String donationUrlId;
     private String certificateId;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
 
     public String getLogoId() {
         return logoId;
@@ -156,14 +163,6 @@ public class FindFoundationResp  implements Serializable {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
-    }
-
-    public Date getCreateTime() {
-        return CreateTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        CreateTime = createTime;
     }
 
     public String getDescription() {

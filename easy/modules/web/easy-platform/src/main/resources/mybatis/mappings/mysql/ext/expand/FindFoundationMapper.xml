@@ -17,7 +17,7 @@
           registration_institution registrationInstitution,link_name linkName,
           link_mobile linkMobile,office_tel officeTel,mail mail,
           logo_url logoUrl,description description,
-          date_format(foundation_info.create_time,'%Y-%m-%d %H:%i:%s') createTime
+          DATE_FORMAT(foundation_info.create_time,'%Y-%m-%d %T') createTime
         FROM foundation_info
         where 1 = 1
         <if test="foundationName != null and foundationName != ''">
@@ -35,8 +35,8 @@
         donations_qualification_url donationsQualificationUrl, address address, office_tel officeTel,
         mail mail, logo_url logoUrl, description description, remain_property remainProperty,
         bank_info bankInfo, invoice_type invoiceType, account_info accountInfo, link_name linkName,
-        link_mobile linkMobile,
-        date_format(foundation_info.create_time,'%Y-%m-%d %H:%i:%s') createTime
+        link_mobile linkMobile,registration_institution registrationInstitution,
+        DATE_FORMAT(foundation_info.create_time,'%Y-%m-%d %T') createTime
       FROM foundation_info
         where 1=1
         <choose>

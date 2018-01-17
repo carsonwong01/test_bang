@@ -104,21 +104,32 @@ var AdvertImageRecord=DM.Controller.sub({
             myfn.AjaxFn("userManage/addFoundationInfo.do",$(".viewFramework-content"));
         }
     },
-    //校验是否上传了质证明图片
-    checkAptitudeIsNull:function(){
-        var file=$("#file").val();
-        if(file==''){
-            Dialog.show("请上传资质证明图片","tip");
+    //校验是否上传了基金会logo
+    checkLogoIsNull:function(){
+        var file1=$("#file1").val();
+        if(file1==''){
+            Dialog.show("请上传基金会logo","tip");
             return false;
         }else{
             return true;
         }
     },
-    //校验是否上传了医院封面图片
-    checkLogoIsNull:function(){
-        var file1=$("#file1").val();
-        if(file1==''){
-            Dialog.show("请上传医院封面图片","tip");
+    //校验是否上传了登记证书扫描件
+    checkCertificateIsNull:function(){
+        var file=$("#file").val();
+        if(file==''){
+            Dialog.show("请上传登记证书扫描件","tip");
+            return false;
+        }else{
+            return true;
+        }
+    },
+
+    //校验是否上传了公开募捐资格证书
+    checkDonationIsNull:function(){
+        var file2=$("#file2").val();
+        if(file2==''){
+            Dialog.show("请上传公开募捐资格证书扫描件","tip");
             return false;
         }else{
             return true;
@@ -183,17 +194,12 @@ var controller=new AdvertImageRecord();
 DM.Page.ready({
     "表单提交":function(){
         //基本信息点击保存type 1:保存 2::下一步 4：预览
-        $("#addHosUser").click(function(){
+        $("#addFoundation").click(function(){
             if(flagSubmit){
                 return;
             }
-            if(dmCheck.check("#mForm") && controller.checkAptitudeIsNull()){
-                alert("checkAptitudeIsNull()");
-                flagSubmit = true;
-                $("#mForm").submit();
-            }
-            if(dmCheck.check("#mForm") && controller.checkLogoIsNull()){
-                alert("checkLogoIsNull()");
+            if(dmCheck.check("#mForm") && controller.checkCertificateIsNull()
+                && controller.checkDonationIsNull() && controller.checkLogoIsNull()){
                 flagSubmit = true;
                 $("#mForm").submit();
             }

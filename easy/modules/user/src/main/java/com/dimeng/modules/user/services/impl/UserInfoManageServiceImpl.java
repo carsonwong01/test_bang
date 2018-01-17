@@ -39,6 +39,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -990,7 +991,10 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             //1、插入到foundation_info表汇总
             FoundationInfo foundation = new FoundationInfo();
 
-            Date now = new Date();
+//            Date now = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String now = dateFormat.format(new Date());
+
             foundation.setFoundationId(UUIDGenerate.generateShortUuid());
             foundation.setFoundationName(insertReq.getFoundationName());
             foundation.setFoundationUrl(insertReq.getFoundationUrl());
@@ -999,7 +1003,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             foundation.setCertificateUrl(insertReq.getCertificateUrl());
             foundation.setCertificateId(insertReq.getCertificateId());
             foundation.setDonationsQualificationUrl(insertReq.getDonationsQualificationUrl());
-            foundation.setDonationUrlId(insertReq.getDonationUrlId());
+            foundation.setDonationsUrlId(insertReq.getDonationsUrlId());
             foundation.setAddress(insertReq.getAddress());
             foundation.setOfficeTel(insertReq.getOfficeTel());
             foundation.setMail(insertReq.getMail());
@@ -1031,7 +1035,8 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         BaseDataResp resp = new BaseDataResp();
         //1、插入到foundation_info表汇总
         FoundationInfo foundation = new FoundationInfo();
-        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String now = dateFormat.format(new Date());
         foundation.setFoundationId(updateReq.getFoundationId());
         foundation.setFoundationName(updateReq.getFoundationName());
         foundation.setFoundationUrl(updateReq.getFoundationUrl());
@@ -1040,7 +1045,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         foundation.setCertificateUrl(updateReq.getCertificateUrl());
         foundation.setCertificateId(updateReq.getCertificateId());
         foundation.setDonationsQualificationUrl(updateReq.getDonationsQualificationUrl());
-        foundation.setDonationUrlId(updateReq.getDonationUrlId());
+        foundation.setDonationsUrlId(updateReq.getDonationsUrlId());
         foundation.setAddress(updateReq.getAddress());
         foundation.setOfficeTel(updateReq.getOfficeTel());
         foundation.setMail(updateReq.getMail());

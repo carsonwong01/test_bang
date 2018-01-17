@@ -1,7 +1,6 @@
 package com.dimeng.entity.table.foundation;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class FoundationInfo implements Serializable {
     //基金会ID
@@ -27,7 +26,7 @@ public class FoundationInfo implements Serializable {
     //logo
     private String logoUrl;
     //录入时间
-    private Date CreateTime;
+    private String CreateTime;
     //基金会描述
     private String description;
     //剩余资产处理方案
@@ -43,7 +42,7 @@ public class FoundationInfo implements Serializable {
     //联系人
     private String linkName;
     private String logoId;
-    private String donationUrlId;
+    private String donationsUrlId;
     private String certificateId;
 
     public String getLogoId() {
@@ -54,12 +53,12 @@ public class FoundationInfo implements Serializable {
         this.logoId = logoId;
     }
 
-    public String getDonationUrlId() {
-        return donationUrlId;
+    public String getDonationsUrlId() {
+        return donationsUrlId;
     }
 
-    public void setDonationUrlId(String donationUrlId) {
-        this.donationUrlId = donationUrlId;
+    public void setDonationsUrlId(String donationsUrlId) {
+        this.donationsUrlId = donationsUrlId;
     }
 
     public String getCertificateId() {
@@ -158,11 +157,11 @@ public class FoundationInfo implements Serializable {
         this.logoUrl = logoUrl;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return CreateTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         CreateTime = createTime;
     }
 

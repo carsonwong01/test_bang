@@ -705,16 +705,14 @@
 	border-radius: 5px;
 }
 /*增加*/
-.sicknessboxoo .formbox .addCoverIcon{display: block;width: 139px;height: 70px;background: url('../images/sicknessRescue_Icon.png') no-repeat;cursor: pointer;text-align: center;padding-top: 83px}
-
 .sicknessboxoo {
 	padding: 0 0 40px;
 	background-color: #fff;
 }
-.test{
-	background: url('../images/rtgtc.png') no-repeat;
-}
-
+/*.sicknessPageoo .addCoverIconoo{display: block;width: 139px;height: 70px;background: url('../images/sicknessRescue_Icon.png') no-repeat;cursor: pointer;text-align: center;padding-top: 83px}*/
+/*.sicknessPageoo .addCoverIconoo span{font-size: 16px;color: #acacac;line-height: 24px;}*/
+/*.sicknessboxoo  .addCoverIconoo{display: block;width: 139px;height: 70px;background: url('../images/sicknessRescue_Icon.png') no-repeat;cursor: pointer;text-align: center;padding-top: 83px}*/
+/*.sicknessboxoo  .addCoverIconoo span{font-size: 16px;color: #acacac;line-height: 24px;}*/
 
 
 

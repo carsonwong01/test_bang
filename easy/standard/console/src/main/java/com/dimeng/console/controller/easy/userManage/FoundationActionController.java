@@ -84,14 +84,14 @@ public class FoundationActionController extends BaseController{
             req.setCertificateUrl((String)map.get("url"));
         }
         if (donationsFile != null && !donationsFile.isEmpty()) {
-            if (!StringUtil.isEmpty(req.getDonationUrlId())) {
+            if (!StringUtil.isEmpty(req.getDonationsUrlId())) {
                 new FilesHandleUtil();
-                FilesHandleUtil.deleteFile(req.getDonationUrlId());
+                FilesHandleUtil.deleteFile(req.getDonationsUrlId());
             }
 
             new FilesHandleUtil();
             Map<String, String> map = FilesHandleUtil.saveFile(donationsFile, (String)null);
-            req.setDonationUrlId((String)map.get("batchNumber"));
+            req.setDonationsUrlId((String)map.get("batchNumber"));
             req.setDonationsQualificationUrl((String)map.get("url"));
         }
         String foundationInfo =
@@ -167,14 +167,14 @@ public class FoundationActionController extends BaseController{
             req.setUserId(user.getUserId());
         }
         if (donationsFile != null && !donationsFile.isEmpty()) {
-            if (!StringUtil.isEmpty(req.getDonationUrlId())) {
+            if (!StringUtil.isEmpty(req.getDonationsUrlId())) {
                 new FilesHandleUtil();
-                FilesHandleUtil.deleteFile(req.getDonationUrlId());
+                FilesHandleUtil.deleteFile(req.getDonationsUrlId());
             }
 
             new FilesHandleUtil();
             Map<String, String> map = FilesHandleUtil.saveFile(donationsFile, user.getUserId());
-            req.setDonationUrlId((String)map.get("batchNumber"));
+            req.setDonationsUrlId((String)map.get("batchNumber"));
             req.setDonationsQualificationUrl((String)map.get("url"));
             req.setUserId(user.getUserId());
         }

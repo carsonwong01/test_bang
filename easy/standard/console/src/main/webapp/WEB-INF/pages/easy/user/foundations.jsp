@@ -71,7 +71,7 @@
               <td>{{= data.officeTel}}</td>
 	          <td>{{= data.linkMobile}}</td>
 	          <td>{{= data.mail}}</td>
-	          <td>{{= data.createTime}}{{= data.city}}</td>
+	          <td>{{= data.createTime}}</td>
 	          <td class="tc">
 				<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">
     <a data-url="userManage/FoundationInfoDetail.do?foundationId={{= data.foundationId}}" class="link-blue mr20 click-link" >查看</a>
