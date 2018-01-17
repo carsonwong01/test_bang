@@ -117,7 +117,7 @@
     <%--</div>--%>
     <%--</li>--%>
     <div class='hostms pr'>
-        <label><em class="red pr5">*</em>基金会账户<br>开户行信息</label>
+        <label><em class="red pr5">*</em>开户行信息</label>
         <input type="text" name='bankInfo' value='' maxlength="50" validate='q'>
     </div>
     <div class='hostms pr'>

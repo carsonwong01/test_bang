@@ -217,15 +217,18 @@ public class FoundationActionController extends BaseController{
     @RequestMapping(value = "/foundationInfo.do", method = RequestMethod.GET)
     @ResponseBody
     public Object userInfoDetail(FindFoundationReq findFoundationReq, HttpServletRequest request,
-                                 HttpServletResponse response, String foundationId)
+                                 HttpServletResponse response)
     {
         ModelAndView  mv = new ModelAndView("pages/easy/user/foundationsDetails");
-        mv.addObject("foundationId", foundationId);
+        String data = new CommonUtil().callInterfaceMethod(findFoundationReq,
+                "foundation/v/foundationDetails",RequestMethod.POST,request);
+        JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
+        mv.addObject("foundationInfo",object);
         return mv;
     }
 
     /**
-     * 查看基金会详细内容
+     * 查看基金会详细内容--未用到
      * @return
      */
     @RequestMapping(value = "/findFoundationDetails.do")

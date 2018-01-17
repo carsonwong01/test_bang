@@ -3,7 +3,7 @@
 <!--新手指南新增-->
 <div class='base'>
 <form method="post" id="mForm">
-    <div class='utop'>医院基本信息</div>
+    <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>医院基本信息</div>
     <div class='inpt'>
         <p>
             <span class="pr">
@@ -94,7 +94,7 @@
         </p>
         <div class='clear'></div>
     </div>
-    <div class='utop'>医院联系人信息</div>
+    <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>医院联系人信息</div>
     <div class='inpt'>
         <p>
             <span class="pr"></span>

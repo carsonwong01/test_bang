@@ -74,7 +74,7 @@
 	          <td>{{= data.createTime}}</td>
 	          <td class="tc">
 				<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">
-    <a data-url="userManage/FoundationInfoDetail.do?foundationId={{= data.foundationId}}" class="link-blue mr20 click-link" >查看</a>
+    <a data-url="userManage/foundationInfo.do?foundationId={{= data.foundationId}}" class="link-blue mr20 click-link" >查看</a>
 </shiro:hasPermission>
 
 <shiro:hasPermission name="YHGL_YHXX_GRXX_CK">

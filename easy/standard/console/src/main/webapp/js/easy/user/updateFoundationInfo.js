@@ -136,13 +136,13 @@ DM.Page.ready({
             // }
         });
         //上传文件类型校验
-        $("#file").change(function(){
-            controller.uploadFile("file");
-        });
+        // $("#file").change(function(){
+        //     controller.uploadFile("file");
+        // });
         //上传文件类型校验
-        $("#file1").change(function(){
-            controller.uploadFile("file1");
-        });
+        // $("#file1").change(function(){
+        //     controller.uploadFile("file1");
+        // });
     }
 });
 

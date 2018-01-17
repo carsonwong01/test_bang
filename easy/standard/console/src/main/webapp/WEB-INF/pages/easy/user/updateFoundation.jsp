@@ -3,7 +3,7 @@
 <!--新手指南新增-->
 <div class='base'>
     <form method="post" id="mForm">
-        <div class='utop'>基金会基本信息</div>
+        <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>基金会基本信息</div>
         <div class='inpt'>
             <p>
             <span class="pr">
@@ -62,7 +62,7 @@
             <div class='clear'></div>
         </div>
         <div class='hostms pr'>
-            <label><em class="red pr5">*</em>基金会账户开户行信息</label>
+            <label><em class="red pr5">*</em>开户行信息</label>
             <input type="text" name='bankInfo' value='${updateFoundationInfo.bankInfo}' maxlength="50" validate='q'>
         </div>
         <div class='hostms pr'>
@@ -79,7 +79,7 @@
             </p>
             <div class='clear'></div>
         </div>
-        <div class='utop'>基金会联系人信息</div>
+        <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>基金会联系人信息</div>
         <div class='inpt'>
             <p>
             <span class="pr">
@@ -102,6 +102,7 @@
             <a class="" id="updateFoundation" href="javascript:void(0);">提交</a>
             <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
         </div>
+        <li class='ldr' datr='${updateFoundationInfo.foundationId}'></li>
     </form>
 </div>
 
@@ -110,7 +111,7 @@
 
 <script>
     var foundationId = $('.ldr').attr('datr');
-//    alert(userId);
+//    alert(foundationId);
     $(document).ready(function(){
         $("#advertImage").uploadPreview({ Img: "showPic1" });//图片预览
     });
