@@ -1,17 +1,19 @@
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/foundation.css">
 <div class='center'>
-    <div class='bender cent-nav'>
+    <div class='bender'>
         <div>
-            <li class='fu-logo'>
-                <img src="${foundationDetails.certificateUrl}">
+            <%--<div class="cent-top">--%>
+                <ul class="cent-top">
+                    <li class='fu-logo'>
+                        <img src="${foundationDetails.logoUrl}">
+                    </li>
+                    <li class="fu-name">
+                        <p>${foundationDetails.foundationName}</p>
+                    </li>
+                </ul>
 
-
-            </li>
-            <li class="fu-name">
-                <p>基金会名称</p>
-            </li>
+            <%--</div>--%>
         </div>
-
     </div>
     <div class='cent-nav'>
         <!-- 基金会信息 -->
