@@ -28,7 +28,7 @@
         <ul>
             <li>
                 <li><b>基金会描述：</b></li>
-                <li>${foundationInfo.description}</li>
+                <li>${foundationInfo.content}</li>
             </li>
         </ul>
     </div>

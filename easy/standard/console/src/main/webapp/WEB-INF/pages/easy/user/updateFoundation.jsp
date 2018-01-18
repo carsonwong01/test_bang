@@ -142,8 +142,8 @@
         r.readAsDataURL(f);
         r.onload=function (e) {
             document.getElementById('show').src=this.result;
-        };
-    }
+        }
+    };
     function cover () {
         var logo= new FileReader();
         f=document.getElementById('file1').files[0];
@@ -152,7 +152,16 @@
         logo.onload=function (e) {
             document.getElementById('show1').src=this.result;
         };
-    }
+    };
+    function donations () {
+        var donations= new FileReader();
+        f=document.getElementById('file2').files[0];
+
+        donations.readAsDataURL(f);
+        donations.onload=function (e) {
+            document.getElementById('show2').src=this.result;
+        }
+    };
 </script>
 <%--<script type="text/javascript" language="javascript">--%>
     <%--var userId = $('.ldr').attr('datr');--%>
