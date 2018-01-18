@@ -19,9 +19,10 @@
 
 <div class='txt-yo'>
     <div>
-        <p>“帮你筹”是全国性的公益众筹平台。平台致力于重大疾病防治网络建设，以提高贫困患儿及时接受治疗机率，缓解家庭困境，促进贫困地区儿童健康成长
-            ，切断贫困代际传递。平台由中国社会工作联合会、《公益时报》社和中海软银财富管理有限公司联合发起，与中国华侨公益基金会等基金会合作开始爱心筹款项目。平台将积极整合爱心企业、个人
-            、慈善机构等慈善资源，通过移动互联网O2O模式，打通慈善筹款与爱心救助的爱心之路 。</p>
+        <p>“帮你筹”平台致力于重大疾病救助信息发布及网络建设、整合社会爱心资源，缓解病患个人及家庭困境；帮你筹平台致力于重大疾病的
+            防治工作以及优质医疗资源的整合，提高贫困病患救治率。“帮你筹”平台将积极整合爱心企业（个人）、慈善机构、医疗机构等慈善
+            资源，通过移动互联网技术打通慈善筹款与医疗救助的爱心 通路。
+        </p>
         <ul class='liu-cfr'>
             <li><img src="<%=basePath%>easy/images/cn07.png">
                 <p>多家全国性公益机构<br>百家行业媒体群</p></li>
@@ -68,9 +69,15 @@
                 <img src="{{= objInfo.projectImg}}"
                      onclick="location.href='<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}'">
                 <div class='detailed'>
-                    <p class='ti-m' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-                        <a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">{{=
-                            objInfo.projectName}}</a></p>
+                    <p class='ti-m'>
+                        <a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">慈善募捐&nbsp;|&nbsp;{{=
+                            objInfo.projectName}}&nbsp;|&nbsp;帮你筹</a>
+                    </p>
+
+                    <%--<p class='ti-m' style="width:330px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">--%>
+                        <%--<a href="<%=basePath %>project/projectDetails.do?projectId={{= objInfo.projectId}}">慈善募捐&nbsp;|&nbsp;{{=--%>
+                            <%--objInfo.projectName}}&nbsp;|&nbsp;帮你筹</a></p>--%>
+                    <%--{{=objInfo.projectName}}</a></p>--%>
                     <p class='yi-b' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
                         <b></b><span>{{= objInfo.hospitalName}}</span><i></i> <span>{{= objInfo.foundationName}}</span>
                     </p>

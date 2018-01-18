@@ -114,11 +114,6 @@
 	height: 210px;
 }
 
-
-
-
-
-
 .detailed{
 	padding: 16px 19px;
 }
@@ -127,11 +122,20 @@
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 26px;
-
+	display: inline-block;
+	width: 100%;
+	display: -webkit-box;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	overflow: hidden;
+	position: relative;
+	height: 52px;
+	margin-bottom: 0px;
 }
 .ti-m>a:hover{
 	text-decoration: underline;
 }
+
 .yi-b{
 	margin-bottom: 28px;
 }

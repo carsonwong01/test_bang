@@ -27,13 +27,9 @@
             <li class=""><a href="<%=basePath%>home/index.do">首页</a></li>
             <li><a href="<%=basePath%>project/projectList.do">项目</a></li>
             <li><a href="<%=basePath%>hospital/hospitalList.do">医院</a></li>
+            <li><a href="<%=basePath%>foundation/foundationDetails.do?foundationId=100">基金会</a></li>
             <li><a href="<%=basePath%>home/aboutUs.do">关于我们</a></li>
             <li><a href="<%=basePath%>frontHome/newsInfos.do">新闻资讯</a></li>
-            <%--<c:if test="${currUser.userName!=null}">--%>
-            <%--<c:if test="${currUser.userType == 1}">--%>
-            <%--<li class='login'><a href="#" onclick="$('#projecttype_form').submit();" class="ind">发起项目</a></li>--%>
-            <%--</c:if>--%>
-            <%--</c:if>--%>
             <div class='clear'></div>
         </ul>
         <div class='fr loin'>
@@ -69,8 +65,10 @@
     } else if (hrefs.indexOf("/hospital/") > 0) {
         $("#HEADER_MENUS").find("li:eq(2)").addClass("actiog");
     } else if (hrefs.indexOf("/home/aboutUs") > 0) {
-        $("#HEADER_MENUS").find("li:eq(3)").addClass("actiog");
-    } else if (hrefs.indexOf("/frontHome/newsInfos") > 0) {
         $("#HEADER_MENUS").find("li:eq(4)").addClass("actiog");
+    } else if (hrefs.indexOf("/frontHome/") > 0) {
+        $("#HEADER_MENUS").find("li:eq(5)").addClass("actiog");
+    }else if (hrefs.indexOf("/foundation/") > 0) {
+        $("#HEADER_MENUS").find("li:eq(3)").addClass("actiog");
     }
 </script>

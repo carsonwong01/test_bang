@@ -38,7 +38,7 @@
             <label><em class="red pr5">*</em>基金会名称</label><input name='foundationName'  value='' type="text" class='pr ibu' validate='q' maxlength="50">
             </span>
             <span class="pr">
-                <label><em class="red pr5">*</em>统一社会信用代码</label><input name='socialCreditCode'  value='' type="text" class='pr ibu' validate='q' maxlength="18">
+                <label><em class="red pr5">*</em>社会信用代码</label><input name='socialCreditCode'  value='' type="text" class='pr ibu' validate='q' maxlength="18">
             </span>
         </p>
         <p>
@@ -88,7 +88,7 @@
         <div class='clear'></div>
     </div >
     <div class='impt'>
-        <label class='fl'><em class="red pr5">*</em>公开募捐资<br>&nbsp;&nbsp;格证书</label>
+        <label class='fl'><em class="red pr5">*</em>公开捐募资<br>&nbsp;&nbsp;格证书</label>
         <img class='fl' id="show2"></span>
         <p class='fl p-iut pr' >
             <input type="file" name="donationsFile" value='' onchange="donations()" id="file2"  validate='q'>
@@ -103,19 +103,9 @@
     </div>
     <div class='hosjj pr'>
         <label class='fl'><em class="red pr5">*</em>基金会介绍</label>
-        <textarea class='fl' value='' validate='q' name='description'></textarea>
+        <textarea name='content' id="content" cols="100" rows="4" style="width:670px;height:300px;visibility:hidden;" class="border h200 ww100" validate="q"></textarea>
         <div class='clear'></div>
     </div>
-    <%--<li class="mb20">--%>
-    <%--<div class="pr mh30 pl120"><span class="display-ib w100 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>内容</span>--%>
-    <%--<div class="pr tl clearfix">--%>
-    <%--<div class="ww60 fl">--%>
-    <%--<textarea cols="100" rows="4" style="width:700px;height:300px;visibility:hidden;" class="border h200 ww100" validate="q" name="content" id="content"></textarea>--%>
-    <%--</div>--%>
-    <%--<div class="fl ww40"><span class="pl10 pr10 display-ib"></span></div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</li>--%>
     <div class='hostms pr'>
         <label><em class="red pr5">*</em>开户行信息</label>
         <input type="text" name='bankInfo' value='' maxlength="50" validate='q'>
@@ -153,7 +143,7 @@
         </p>
         <p>
             <span class="pr">
-                <label><em class="red pr5">*</em>手机号</label><input name='linkMobile' type="text" class='ibu' value='' maxlength="11" validate='q'>
+                <label><em class="red pr5">*</em>手机号</label><input name='linkMobile' type="text" class='ibu' value='' maxlength="11" validate="q|m"  warning="手机号码格式不正确">
             </span>
             <span class="pr">
                 <label><em class="red pr5">*</em>电子邮箱</label><input name='mail' type="text" class='ibu' value='' maxlength="50" validate='q'>

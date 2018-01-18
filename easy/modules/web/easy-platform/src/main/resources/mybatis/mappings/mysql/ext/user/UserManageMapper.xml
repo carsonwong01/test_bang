@@ -56,7 +56,7 @@
 		<result column="hospital_type" property="hospitalType"/>
 		<result column="hospital_abstract" property="hospitalAbstract"/>
 		<result column="hospital_image_url" property="hospitalImageUrl"/>
-		<result column="description" property="description"/>
+		<result column="description" property="content"/>
 		<result column="link_name" property="linkName"/>
 		<result column="mobile_phone" property="mobilePhone"/>
 		<result column="hospital_mail" property="hospitalMail"/>
@@ -87,7 +87,7 @@
 		hospital_url hospitalUrl,    province province, addr addr,
 		city city,    county county,    logo_url logoUrl,
 		logo_id logoId,    description_image_url descriptionImageUrl,
-		description_image_id descriptionImageId,    description description,
+		description_image_id descriptionImageId,    description content,
 		found_time foundTime, publish_status publishStatus, recommend_status recommendStatus,
 		organization_aptitude_id organizationAptitudeId, organization_aptitude_url organizationAptitudeUrl
 

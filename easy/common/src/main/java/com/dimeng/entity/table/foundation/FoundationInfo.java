@@ -28,7 +28,7 @@ public class FoundationInfo implements Serializable {
     //录入时间
     private String CreateTime;
     //基金会描述
-    private String description;
+    private String content;
     //剩余资产处理方案
     private String remainProperty;
     //开户行信息
@@ -165,12 +165,12 @@ public class FoundationInfo implements Serializable {
         CreateTime = createTime;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getRemainProperty() {

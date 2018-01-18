@@ -65,6 +65,7 @@
 			</div>
 		</div>
 	</div>
+	<div class='foot-c'><p>个人求助、网络互助不属于慈善捐div实性由信息提供方负责</p></div>
 	<div class='foot-b'><%=siteInfo.getCompanyName()%>©<%=siteInfo.getCopyright()%>|备案号:<%=siteInfo.getRecordation()%></div>
 </footer>
 

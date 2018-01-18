@@ -45,7 +45,7 @@ header{
 	margin-top: 20px;
 }
 .head-n{
-	margin-left: 95px;
+	margin-left: 70px;
 	height: 80px;
 	box-sizing: border-box;
 }
@@ -54,7 +54,7 @@ header{
 	line-height: 80px;
 	height: 78px;
 	padding: 0 12px;
-	margin: 0 10px;
+	margin: 0 5px;
 }
 .head-n>li>a{
 	line-height: 80px;
@@ -134,6 +134,22 @@ footer{
 	margin: 0 auto;
 	height: 216px;
 }
+.foot-c{
+	width: 100%;
+	background: #33383f;
+}
+.foot-c>p{
+	color: #ffffff;
+	font-size: 12px;
+	width: 1070px;
+	margin: 0 auto;
+	line-height: 44px;
+	height: 44px;
+	text-align: center;
+	font-weight: lighter;
+	border-top: 1px solid #737373;
+}
+
 .foot-b{
 	color: #999999;
 	font-size: 14px;

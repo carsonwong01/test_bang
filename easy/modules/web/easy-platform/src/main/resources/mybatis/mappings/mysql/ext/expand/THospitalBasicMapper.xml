@@ -24,7 +24,7 @@
         <result column="logo_id" property="logoId" jdbcType="VARCHAR" />
         <result column="description_image_url" property="descriptionImageUrl" jdbcType="VARCHAR" />
         <result column="description_image_id" property="descriptionImageId" jdbcType="VARCHAR" />
-        <result column="description" property="description" jdbcType="LONGVARCHAR" />
+        <result column="description" property="content" jdbcType="LONGVARCHAR" />
         <result column="found_time" property="foundTime" jdbcType="VARCHAR" />
         <result column="organization_aptitude_url" property="organizationAptitudeUrl" jdbcType="VARCHAR" />
         <result column="organization_aptitude_id" property="organizationAptitudeId" jdbcType="VARCHAR" />
@@ -96,7 +96,7 @@
         hospital_url hospitalUrl,    province province, addr addr,
         city city,    county county,    logo_url logoUrl,
         logo_id logoId,    description_image_url descriptionImageUrl,
-        description_image_id descriptionImageId,    description description,
+        description_image_id descriptionImageId,    description content,
         found_time foundTime,
         IFNULL(t.allRaisedAmount,0) allRaisedAmount,  IFNULL(t.allSupprotTimes,0) allSupprotTimes,
         IFNULL(t.allTargetAmount,0) allTargetAmount,
@@ -192,7 +192,7 @@
         VALUES (#{userId,jdbcType=VARCHAR},#{hospitalId,jdbcType=VARCHAR},#{hospitalName,jdbcType=VARCHAR},
         #{hospitalNum,jdbcType=VARCHAR},#{hospitalGrade,jdbcType=VARCHAR},#{hospitalType,jdbcType=VARCHAR},
         #{foundTime,jdbcType=VARCHAR},#{hospitalAbstract,jdbcType=VARCHAR},#{hospitalImageUrl,jdbcType=VARCHAR},
-        #{hospitalImageId,jdbcType=VARCHAR},#{description,jdbcType=LONGVARCHAR},#{linkName,jdbcType=VARCHAR},
+        #{hospitalImageId,jdbcType=VARCHAR},#{content,jdbcType=LONGVARCHAR},#{linkName,jdbcType=VARCHAR},
         #{hospitalMail,jdbcType=VARCHAR},#{mobilePhone,jdbcType=VARCHAR},#{officeTel,jdbcType=VARCHAR},
         #{hospitalUrl,jdbcType=VARCHAR},#{province,jdbcType=VARCHAR},#{city,jdbcType=VARCHAR},#{county,jdbcType=VARCHAR},
         #{addr,jdbcType=VARCHAR},#{logoUrl,jdbcType=VARCHAR},#{logoId,jdbcType=VARCHAR},#{descriptionImageUrl,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
             <if test="hospitalImageId != null" >
                 hospital_image_id,
             </if>
-            <if test="description != null" >
+            <if test="content != null" >
                 description,
             </if>
             <if test="linkName != null" >
@@ -318,8 +318,8 @@
             <if test="hospitalImageId != null" >
                 #{hospitalImageId,jdbcType=VARCHAR},
             </if>
-            <if test="description != null" >
-                #{description,jdbcType=LONGVARCHAR},
+            <if test="content != null" >
+                #{content,jdbcType=LONGVARCHAR},
             </if>
             <if test="linkName != null" >
                 #{linkName,jdbcType=VARCHAR},
@@ -408,8 +408,8 @@
             <if test="hospitalImageId != null" >
                 hospital_image_id = #{hospitalImageId,jdbcType=VARCHAR},
             </if>
-            <if test="description != null" >
-                description = #{description,jdbcType=LONGVARCHAR},
+            <if test="content != null" >
+                description = #{content,jdbcType=LONGVARCHAR},
             </if>
             <if test="linkName != null" >
                 link_name = #{linkName,jdbcType=VARCHAR},
@@ -479,7 +479,7 @@
         hospital_abstract = #{hospitalAbstract,jdbcType=VARCHAR},
         hospital_image_url = #{hospitalImageUrl,jdbcType=VARCHAR},
         hospital_image_id = #{hospitalImageId,jdbcType=VARCHAR},
-        description = #{description,jdbcType=LONGVARCHAR},
+        description = #{content,jdbcType=LONGVARCHAR},
         link_name = #{linkName,jdbcType=VARCHAR},
         hospital_mail = #{hospitalMail,jdbcType=VARCHAR},
         mobile_phone = #{mobilePhone,jdbcType=VARCHAR},

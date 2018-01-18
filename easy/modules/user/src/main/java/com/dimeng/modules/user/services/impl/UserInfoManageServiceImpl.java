@@ -855,7 +855,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             tHospitalBasic.setLogoUrl(insertReq.getLogoUrl());
             tHospitalBasic.setLogoId(insertReq.getLogoId());
             tHospitalBasic.setHospitalAbstract(insertReq.getHospitalAbstract());
-            tHospitalBasic.setDescription(insertReq.getDescription());
+            tHospitalBasic.setContent(insertReq.getContent());
             tHospitalBasic.setOrganizationAptitudeUrl(insertReq.getOrganizationAptitudeUrl());
             tHospitalBasic.setOrganizationAptitudeId(insertReq.getOrganizationAptitudeId());
             tHospitalBasic.setHospitalUrl(insertReq.getHospitalUrl());
@@ -939,7 +939,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         tHospitalBasic.setLogoId(updateReq.getLogoId());
         tHospitalBasic.setLogoUrl(updateReq.getLogoUrl());//？？？？？
         tHospitalBasic.setHospitalAbstract(updateReq.getHospitalAbstract());
-        tHospitalBasic.setDescription(updateReq.getDescription());
+        tHospitalBasic.setContent(updateReq.getContent());
         tHospitalBasic.setOrganizationAptitudeId(updateReq.getOrganizationAptitudeId());
         tHospitalBasic.setOrganizationAptitudeUrl(updateReq.getOrganizationAptitudeUrl());
         tHospitalBasic.setHospitalUrl(updateReq.getHospitalUrl());
@@ -1010,7 +1010,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
             foundation.setLogoUrl(insertReq.getLogoUrl());
             foundation.setLogoId(insertReq.getLogoId());
             foundation.setCreateTime(now);
-            foundation.setDescription(insertReq.getDescription());
+            foundation.setContent(insertReq.getContent());
             foundation.setRemainProperty(insertReq.getRemainProperty());
             foundation.setBankInfo(insertReq.getBankInfo());
             foundation.setInvoiceType(insertReq.getInvoiceType());
@@ -1052,7 +1052,7 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
         foundation.setLogoUrl(updateReq.getLogoUrl());
         foundation.setLogoId(updateReq.getLogoId());
         foundation.setCreateTime(now);
-        foundation.setDescription(updateReq.getDescription());
+        foundation.setContent(updateReq.getContent());
         foundation.setRemainProperty(updateReq.getRemainProperty());
         foundation.setBankInfo(updateReq.getBankInfo());
         foundation.setInvoiceType(updateReq.getInvoiceType());

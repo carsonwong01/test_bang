@@ -10,7 +10,7 @@
             <label><em class="red pr5">*</em>基金会名称</label><input name='foundationName'  value='${updateFoundationInfo.foundationName}' type="text" class='pr ibu' validate='q' maxlength="50">
             </span>
                 <span class="pr">
-                <label><em class="red pr5">*</em>统一社会信用代码</label><input name='socialCreditCode'  value='${updateFoundationInfo.socialCreditCode}' type="text" class='pr ibu' validate='q' maxlength="18">
+                <label><em class="red pr5">*</em>社会信用代码</label><input name='socialCreditCode'  value='${updateFoundationInfo.socialCreditCode}' type="text" class='pr ibu' validate='q' maxlength="18">
             </span>
             </p>
             <p>
@@ -43,7 +43,7 @@
             <div class='clear'></div>
         </div >
         <div class='impt'>
-            <label class='fl'><em class="red pr5">*</em>公开募捐资<br>&nbsp;&nbsp;格证书</label>
+            <label class='fl'><em class="red pr5">*</em>公开捐募资<br>&nbsp;&nbsp;格证书</label>
             <img class='fl' id="show2" src="${updateFoundationInfo.donationsQualificationUrl}"></span>
             <p class='fl p-iut pr' >
                 <input type="file" name="donationsFile" value='' onchange="donations()" id="file2"  validate='q'>
@@ -58,7 +58,8 @@
         </div>
         <div class='hosjj pr'>
             <label class='fl'><em class="red pr5">*</em>基金会介绍</label>
-            <textarea class='fl' value='' validate='q' name='description'>${updateFoundationInfo.description}</textarea>
+            <textarea name='content' id="content" cols="100" rows="4" style="width:670px;height:300px;visibility:hidden;"
+                      class="border h200 ww100" validate="q">${updateFoundationInfo.content}</textarea>
             <div class='clear'></div>
         </div>
         <div class='hostms pr'>
@@ -91,7 +92,7 @@
             </p>
             <p>
             <span class="pr">
-                <label><em class="red pr5">*</em>手机号</label><input name='linkMobile' type="text" class='ibu' value='${updateFoundationInfo.linkMobile}' maxlength="11" validate='q'>
+                <label><em class="red pr5">*</em>手机号</label><input name='linkMobile' type="text" class='ibu' value='${updateFoundationInfo.linkMobile}' maxlength="11" validate="q|m"  warning="手机号码格式不正确">
             </span>
                 <span class="pr">
                 <label><em class="red pr5">*</em>电子邮箱</label><input name='mail' type="text" class='ibu' value='${updateFoundationInfo.mail}' maxlength="50" validate='q'>

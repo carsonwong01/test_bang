@@ -88,21 +88,15 @@
         <label><em class="red pr5">*</em>医院简介</label>
             <input type="text" validate='q' name='hospitalAbstract' value='' maxlength="500">
     </div>
+    <%--<div class='hosjj pr'>--%>
+        <%--<label class='fl'><em class="red pr5">*</em>医院描述</label>--%>
+        <%--<textarea class='fl' value='' validate='q' name='description'></textarea>--%>
+        <%--<div class='clear'></div>--%>
+    <%--</div>--%>
     <div class='hosjj pr'>
         <label class='fl'><em class="red pr5">*</em>医院描述</label>
-        <textarea class='fl' value='' validate='q' name='description'></textarea>
-        <div class='clear'></div>
+        <textarea name='content' id="content" cols="100" rows="4" style="width:670px;height:300px;visibility:hidden;" class="border h200 ww100" validate="q"></textarea>
     </div>
-    <%--<li class="mb20">--%>
-    <%--<div class="pr mh30 pl120"><span class="display-ib w100 lh30 tr mr5 pa left0 top0"><em class="red pr5">*</em>内容</span>--%>
-    <%--<div class="pr tl clearfix">--%>
-    <%--<div class="ww60 fl">--%>
-    <%--<textarea cols="100" rows="4" style="width:700px;height:300px;visibility:hidden;" class="border h200 ww100" validate="q" name="content" id="content"></textarea>--%>
-    <%--</div>--%>
-    <%--<div class="fl ww40"><span class="pl10 pr10 display-ib"></span></div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</li>--%>
     <div class='hostms pr'>
         <label><em class="red pr5">*</em>医院网址</label>
         <input type="text" name='hospitalUrl' value='' maxlength="100" validate='q'>
@@ -146,15 +140,7 @@
     <div class='but-sibm'>
         <a class="" id="addHosUser" href="javascript:void(0);">提交</a>
         <a onclick="javascript:void(0);" id="backHome"  class="btn-gray">取消</a>
-        <%--onclick="addUser()"  id="addHosUser" href="javascript:void(0);" --%>
     </div>
-
-    <%--<div class="pr mh30 pl120"><span class="display-ib"><em class="red pr5">*</em>标题</span>--%>
-    <%--<div class="pr">--%>
-    <%--<input type="text" class=""  validate="q" name="title" id=""  maxlength="20">--%>
-    <%--</div>--%>
-    <%--</div>--%>
-
     <%--<div class="fl">--%>
         <%--<!--标题-->--%>
             <%--<ul class="gray6 pt50">--%>

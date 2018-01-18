@@ -72,7 +72,7 @@
                         <div class='clear'></div>
                     </ul>
                     <h1>详细介绍</h1>
-                    <p>${hospitalDetails.description}</p>
+                    <p>${hospitalDetails.content}</p>
                 </div>
                 <div id='record' class='record'>
                     <table>
@@ -95,18 +95,7 @@
                         </tr>
                         </thead>
                         <tbody id='list'>
-                        <%--<tr>--%>
-                        <%--<td>2017-10-24</td>--%>
-                        <%--<td>吴亦凡</td>--%>
-                        <%--<td><p>请帮帮饱受病痛折磨的贫困折磨的贫困折磨的贫困</p></td>--%>
-                        <%--<td>--%>
-                        <%--<div class='dao-he'>--%>
-                        <%--<p><span>656565</span>元（<span class='baibi'>72%</span>）／ <span>546596</span>	元</p>--%>
-                        <%--<span><i></i></span>--%>
-                        <%--</div>--%>
-                        <%--</td>--%>
-                        <%--<td class='tdse'>筹款中</td>--%>
-                        <%--</tr>--%>
+
                         </tbody>
                     </table>
                 </div>
@@ -311,8 +300,11 @@
                         "<img src='"+ n.coverImageUrl+"'" +
                         "onclick=\"location.href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'\"  >" +
                         "<div class='detailed'>" +
-                        "<p class='ti-ou' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +
-                        "<a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'>" + n.projectName + "</a></p>" +
+                        "<p class='ti-m'>" +
+                            "<a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"}'>" +
+                            "慈善募捐&nbsp;|&nbsp;" + n.projectName + "&nbsp;|&nbsp;帮你筹</a></p>" +
+                        <%--"<p class='ti-ou' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +--%>
+                        <%--"<a href='<%=basePath %>project/projectDetails.do?projectId="+n.projectId+"'>" + n.projectName + "</a></p>" +--%>
                         "<p class='yi-b' style='width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis'>" +
                         "<b  class='bba'></b><span>" + n.hospitalName + "</span><u></u> <span>"+ (n.foundationName?n.foundationName:'') +"</span></p>" +
                         "<div class='dao-t'id='dao-t'>" +

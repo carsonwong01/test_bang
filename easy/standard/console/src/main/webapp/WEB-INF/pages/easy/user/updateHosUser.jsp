@@ -60,7 +60,8 @@
     </div>
     <div class='hosjj pr'>
         <label class='fl'><em class="red pr5">*</em>医院描述</label>
-        <textarea class='fl' name='description' value='' >${updateHosUserInfo.description}</textarea>
+        <textarea name='content' id="content" cols="100" rows="4" style="width:670px;height:300px;visibility:hidden;"
+                  class="border h200 ww100" validate="q">${updateHosUserInfo.content}</textarea>
         <div class='clear'></div>
     </div>
     <%--<li class="mb20">--%>

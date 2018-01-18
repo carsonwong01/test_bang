@@ -52,7 +52,7 @@
 .frt-xq{
 	position: relative;
 	width: 510px;
-	padding-top: 30px;
+	padding-top: 20px;
 }
 .frt-xq>b{
 	position: absolute;
@@ -61,8 +61,27 @@
 	display: inline-block;
 	width: 90px;
 	height: 92px;
-	background: url(../images/cn11.png)no-repeat center;
+	/*background: url(../images/cn11.png)no-repeat center;*/
 }
+.pop-add{
+	font-size: 16px;
+	font-family: "MicrosoftYaHei";
+	color: #333333;
+	font-weight: bold;
+}
+.pop-ss{
+	width: 400px;
+	height:32px;
+	line-height: 32px;
+	padding-left: 10px;
+	font-size: 12px;
+	font-family: "MicrosoftYaHei";
+	color: #333333;
+	background: #f7f7f7;
+	margin: 10px 0;
+}
+
+
 .pop-s{
 	font-size: 12px;
 	font-family: "MicrosoftYaHei";

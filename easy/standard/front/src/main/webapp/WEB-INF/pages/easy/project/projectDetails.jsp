@@ -24,7 +24,15 @@
 				<img src="${projectDetails.coverImgUrl}">
 			</div>
 			<div class='fr frt-xq'>
-				<a></a>
+				<c:if test="${projectDetails.projectStatus == 1}">
+					<b><img src="<%=basePath %>easy/images/cn11.png"></b>
+				</c:if>
+				<c:if test="${projectDetails.projectStatus == 2}">
+					<b><img src="<%=basePath %>easy/images/over.png"></b>
+				</c:if>
+				<p class='pop-add'>慈善募捐&nbsp;|&nbsp;${projectDetails.title}&nbsp;|&nbsp;帮你筹</p>
+				<p class='pop-ss'>项目备案号:${projectDetails.projectRecord}</p>
+
 				<p class='pop-s'>已筹金额<span></br>${projectDetails.supportAmt}</span><span>&nbsp;元</span></p>
 				<div class='daohxi'>
 					<div><span class='fr'>捐款 <span>${projectDetails.supportTimes}</span>次</span><div class='clear'></div></div>

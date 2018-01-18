@@ -187,6 +187,15 @@ public class ProjectDetailsResp extends BaseResp
     private String linkName;
     private String hospitalMail;
     private String recRealName;
+    private String projectRecord;
+
+    public String getProjectRecord() {
+        return projectRecord;
+    }
+
+    public void setProjectRecord(String projectRecord) {
+        this.projectRecord = projectRecord;
+    }
 
     public String getRecRealName() {
         return recRealName;

@@ -16,8 +16,11 @@
     <li>
         <img src="{{= data.projectImg}}" onclick="location.href='<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}'" />
         <div class='detailed'>
-            <p class='ti-ou' style="width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-                    <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
+            <p class='ti-ou'>
+                    <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">
+                        慈善募捐&nbsp;|&nbsp;{{= data.projectName}}&nbsp;|&nbsp;帮你筹</a></p>
+            <%--<p class='ti-ou' style="width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">--%>
+                    <%--<a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>--%>
             <p class='yi-b' style="width: 210px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
                 <b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
             <div class='dao-t' id='dao-t'>

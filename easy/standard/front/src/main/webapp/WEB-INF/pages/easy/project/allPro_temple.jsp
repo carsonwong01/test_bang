@@ -14,8 +14,9 @@
     <img src="{{= data.projectImg}}"
          onclick="location.href='<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}'">
     <div class='detailed'>
-        <p class='ti-m' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-            <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>
+        <p class='ti-m'>
+            <a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">
+                        慈善募捐&nbsp;|&nbsp;{{= data.projectName}}&nbsp;|&nbsp;帮你筹</a></p>
         <p class='yi-b' style="width:330px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
             <b></b><span>{{= data.hospitalName}}</span><i></i> <span>{{= data.foundationName}}</span>
         </p>

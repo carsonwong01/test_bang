@@ -16,7 +16,7 @@ public class InsertHospitalReq extends BaseReq {
     private String hospitalAbstract;
     private String hospitalImageUrl;
     private String hospitalImageId;
-    private String description;
+    private String content;
     private String linkName;
 
     @NotBlank
@@ -312,12 +312,12 @@ public class InsertHospitalReq extends BaseReq {
         this.hospitalImageId = hospitalImageId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getLinkName() {

@@ -39,6 +39,16 @@ var AllProList = DM.Controller.sub({
             "url" : basePath+"project/allProListAjax.do",
             "toPageCallBack" : arguments.callee
         });
+        //加载进度条
+        $(function(){
+            $('#dao-t>p>span').each(function(){
+                var withs=$(this).html();
+                $(this).parents('p').css('width',withs)
+                if(parseInt(withs)<10){
+                    $(this).css('left',0)
+                }
+            })
+        })
     },
 });
 
