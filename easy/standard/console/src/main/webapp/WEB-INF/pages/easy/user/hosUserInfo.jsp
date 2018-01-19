@@ -124,7 +124,7 @@
  			  <td>{{= data.registerTime}}</td>
 	          <td class="tc">
 				<shiro:hasPermission name="YHGL_YHXX_GRXX_CK">
-    <a data-url="userManage/userInfoDetail.do?userId={{= data.userId}}" class="link-blue mr20 click-link" >查看</a>
+    <a data-url="userManage/hosUserInfoDetail.do?userId={{= data.userId}}" class="link-blue mr20 click-link" >查看</a>
 </shiro:hasPermission>
 
 

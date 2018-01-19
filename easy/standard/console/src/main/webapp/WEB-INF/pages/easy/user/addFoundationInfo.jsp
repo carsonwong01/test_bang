@@ -31,7 +31,7 @@
 <!--新增-->
 <div class='base'>
 <form method="post" id="mForm">
-    <div class='utop'>基金会基本信息</div>
+    <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>基金会基本信息</div>
     <div class='inpt'>
         <p>
             <span class="pr">
@@ -122,16 +122,9 @@
                 <option value='2'>纸质发票</option>
             </select>
         </p>
-        <%--<p class='fr'>--%>
-            <%--<label><em class="red pr5">*</em>发布</label>--%>
-            <%--<select class='setp' name='publishStatus'>--%>
-                <%--<option value='1'>是</option>--%>
-                <%--<option value='2'>否</option>--%>
-            <%--</select>--%>
-        <%--</p>--%>
         <div class='clear'></div>
     </div>
-    <div class='utop'>基金会联系人信息</div>
+    <div class="title-container"><i class="icon-i w30 h30 va-middle title-left-icon"></i>基金会联系人信息</div>
     <div class='inpt'>
         <p>
             <span class="pr">

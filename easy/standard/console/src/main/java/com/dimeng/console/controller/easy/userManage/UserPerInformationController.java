@@ -1,11 +1,9 @@
 package com.dimeng.console.controller.easy.userManage;
 
-import com.alibaba.fastjson.JSONObject;
 import com.dimeng.abilitys.annotation.SystemConsoleLog;
 import com.dimeng.constants.CommonConstant;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.model.bus.FindProListByUserIdReq;
-import com.dimeng.model.expand.HospitalBasicReq;
 import com.dimeng.model.finance.FindPaymentListReq;
 import com.dimeng.model.user.FindUserListReq;
 import com.dimeng.model.user.NotPageUserIdReq;
@@ -69,21 +67,6 @@ public class UserPerInformationController extends BaseController
                         request);
         return CommonUtil.getJSONObject(perInformation, null);
     }
-
-    /**
-     * 前台 -医院详情
-     */
-    @RequestMapping(value = "/hospitalDetails.do")
-    public Object hospitalDetails(HttpServletRequest request,
-                                  HttpServletResponse response,HospitalBasicReq req){
-        ModelAndView mv = new ModelAndView("easy/hospital/hospitalDetails.page");
-        String data = new CommonUtil().callInterfaceMethod(req,
-                "hospital/v/hospitalDetails",RequestMethod.POST,request);
-        JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
-        mv.addObject("hospitalDetails",object);
-        return mv;
-    }
-
 
     /**
      * 跳转到用户中心个人信息列表页面
@@ -158,7 +141,21 @@ public class UserPerInformationController extends BaseController
         map.put("code", code);
         return map;
     }
-    
+    /**
+     * 跳往医院用户详情页面
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/hosUserInfoDetail.do", method = RequestMethod.GET)
+    @ResponseBody
+    public Object hosUserInfoDetail(FindUserListReq userReq, HttpServletRequest req, HttpServletResponse response,String userId)
+    {
+        ModelAndView  mv = new ModelAndView("pages/easy/user/hosUserDetails");
+        mv.addObject("id", userId);
+        return mv;
+    }
+
+
     /**
      * 跳往用户详情页面
      * @param response
