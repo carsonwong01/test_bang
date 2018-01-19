@@ -1,7 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="sicknessPage sicknessbox">
 	<div class="layout">
 		<h2>大病救助<a class="explain highlight"><i></i>筹款说明</a></h2>
 		<form id="projectForm" action="" >
+			<li class='ldr' datr='${currUser.userId}'></li>
+			<li class='ldrType' datr='${currUser.userType}'></li>
 			<input type="hidden" id="projectType" name="projectType" value="${projectType}">
 			<div class="formpage">
 				<dl>
@@ -89,6 +92,12 @@
 </div>
 <!-- 弹窗 end-->
 <form id="successForm" method="post">
+	<c:if test="${currUser.userType==1}">
+		<input type="hidden" name="validationType" value="4">
+	</c:if>
+	<c:if test="${currUser.userType==2}">
+		<input type="hidden" name="validationType" value="1">
+	</c:if>
 	<input type="hidden" name="projectType" value="${projectType}">
 	<input type="hidden" id="projectId" name="projectId">
 </form>

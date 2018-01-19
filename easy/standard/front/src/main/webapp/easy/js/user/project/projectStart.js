@@ -388,9 +388,12 @@ var ProjectStartController = DM.Controller.sub({
             }
             $percent.css('width', percentage * 100 + '%');
         });
+        var userId = $('.ldr').attr('datr');
+        // alert("userId"+userId);
         // 文件上传成功，给item添加成功class, 用样式标记上传成功。
         uploader.on('uploadSuccess', function(file , result) {
-            if(!result || result.code != '000000'){
+            if(!result || result.code != '000000' || userId == "" || userId == null){
+                Dialog.show("用户未登录，请先登录！","error");
                 var $li = $('#'+option.containerId+' #'+file.id),
                 $error = $li.find('div.error');
                 // 避免重复创建
@@ -704,6 +707,8 @@ var ProjectStartController = DM.Controller.sub({
     				
     				break;
 			}
+            var userType = $('.ldrType').attr('datr');
+			// alert(userType);
 			//发布项目按钮取消click事件防止重复提交
             $("#initProjectBtn").unbind("click");
 			DM.ajax({

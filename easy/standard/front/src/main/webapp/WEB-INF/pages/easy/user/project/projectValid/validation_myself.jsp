@@ -25,6 +25,7 @@
 	<div class="layout">
 		<h2 class="mb30">项目验证<span>（<c:if test="${projectType eq '1'}">本人</c:if><c:if test="${projectType ne '1'}">个人</c:if>验证）</span></h2>
 		<form id="validationForm">
+			<li class='ldr' datr='${currUser.userId}'></li>
 			<input type="hidden" id="projectType" value="${projectType}">
 			<input type="hidden" id="projectId" name="projectId" value="${projectId}">
 			<input type="hidden" name="validationType" value="${validationType}">
@@ -143,16 +144,16 @@
 								<p class="prompt" id="hospitalNameMsg"></p>
 							</dd>
 						</dl>
-						<dl>
-							<dt><span class="red">*</span>医院地址</dt>
-							<dd>
-								<span class="input-midle">
-									<select name="province" regionId="" class="select_style province"></select>
-									<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>
-								</span>
-								<p class="prompt" id="hospitalRegionIdMsg"></p>
-							</dd>
-						</dl>
+						<%--<dl>--%>
+							<%--<dt><span class="red">*</span>医院地址</dt>--%>
+							<%--<dd>--%>
+								<%--<span class="input-midle">--%>
+									<%--<select name="province" regionId="" class="select_style province"></select>--%>
+									<%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
+								<%--</span>--%>
+								<%--<p class="prompt" id="hospitalRegionIdMsg"></p>--%>
+							<%--</dd>--%>
+						<%--</dl>--%>
 						<dl>
 							<dt><span class="red">*</span>医疗诊断证明</dt>
 							<dd>

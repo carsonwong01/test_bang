@@ -141,7 +141,7 @@ var AdvertImageRecord=DM.Controller.sub({
         var fileType=[ "jpg", "png", "jpeg"];
         var _this=$("#"+idStr);
         if (!RegExp("\.(" + fileType.join("|") + ")$", "i").test(_this.val().toLowerCase())) {
-            Dialog.show("选择文件错误,文件类型必须是" + fileType.join("，") + "中的一种","error");
+            Dialog.show("文件类型必须是" + fileType.join("，") + "中的一种!","error");
             _this.val("");
             return false;
         }
@@ -205,8 +205,17 @@ DM.Page.ready({
             }
         });
         //上传文件类型校验
-        $("#advertImage").change(function(){
-            controller.uploadFile("advertImage");
+        //上传文件类型校验
+        $("#file").change(function(){
+            controller.uploadFile("file");
+        });
+        //上传文件类型校验
+        $("#file1").change(function(){
+            controller.uploadFile("file1");
+        });
+        //上传文件类型校验
+        $("#file2").change(function(){
+            controller.uploadFile("file2");
         });
     }
 });

@@ -21,8 +21,16 @@
                         慈善募捐&nbsp;|&nbsp;{{= data.projectName}}&nbsp;|&nbsp;帮你筹</a></p>
             <%--<p class='ti-ou' style="width: 220px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">--%>
                     <%--<a href="<%=basePath %>project/projectDetails.do?projectId={{= data.projectId}}">{{= data.projectName}}</a></p>--%>
+
+        <%--<c:if test="{{= data.validationType==4}}">--%>
             <p class='yi-b' style="width: 210px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-                <b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
+            <b  class='bba'></b><span>{{= data.hospitalName}}</span><u></u> <span>{{= data.foundationName}}</span></p>
+        <%--</c:if>--%>
+        <%--<c:if test="{{= data.validationType==1}}">--%>
+            <%--<p class='yi-b' style="width: 210px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis">--%>
+                <%--<b  class='bba'></b><span>1122{{= data.hospitalName}}</span><u></u> <span>3344{{= data.foundationName}}</span></p>--%>
+        <%--</c:if>--%>
+
             <div class='dao-t' id='dao-t'>
                 <p><span id="progress">{{= data.rate*100}}%</span></p>
             </div>

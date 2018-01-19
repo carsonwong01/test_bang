@@ -28,6 +28,7 @@
 			<c:if test="${projectType eq '6'}">企业验证</c:if>
 			）</span></h2>
 		<form id="validationForm">
+			<li class='ldr' datr='${currUser.userId}'></li>
 			<input type="hidden" id="projectType" value="${projectType}">
 			<input type="hidden" id="projectId" name="projectId" value="${projectId}">
 			<input type="hidden" name="validationType" value="${validationType}">
@@ -201,18 +202,18 @@
 									<p class="prompt" id="hospitalNameMsg"></p>
 								</dd>
 							</dl>
-							<%--<dl>--%>
-								<%--<dt><span class="red">*</span>医院地址</dt>--%>
-								<%--<dd>--%>
-									<%--&lt;%&ndash;<span class="input-midle">&ndash;%&gt;--%>
-									<%--<input type="text" id="province" name="province"  class="select_style province"  value="${currUser.provinceId}">--%>
-									<%--<input type="text" id="hospitalRegionId" name="hospitalRegionId" class="select_style city"  value="${currUser.cityId}">--%>
-										<%--&lt;%&ndash;<select name="province" regionId="" class="select_style province"></select>&ndash;%&gt;--%>
-										<%--&lt;%&ndash;<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>&ndash;%&gt;--%>
-									<%--&lt;%&ndash;</span>&ndash;%&gt;--%>
-									<%--<p class="prompt" id="hospitalRegionIdMsg"></p>--%>
-								<%--</dd>--%>
-							<%--</dl>--%>
+							<dl>
+								<dt><span class="red">*</span>医院地址</dt>
+								<dd>
+									<%--<span class="input-midle">--%>
+									<input type="text" id="province" name="province"  class="select_style province"  value="${currUser.provinceId}">
+									<input type="text" id="hospitalRegionId" name="hospitalRegionId" class="select_style city"  value="${currUser.cityId}">
+										<%--<select name="province" regionId="" class="select_style province"></select>--%>
+										<%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
+									<%--</span>--%>
+									<p class="prompt" id="hospitalRegionIdMsg"></p>
+								</dd>
+							</dl>
 							<dl>
 								<dt><span class="red">*</span>医疗诊断证明</dt>
 								<dd>

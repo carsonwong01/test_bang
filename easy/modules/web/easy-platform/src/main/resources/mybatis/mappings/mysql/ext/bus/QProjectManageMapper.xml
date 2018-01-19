@@ -416,7 +416,7 @@
         FROM
         t_project_info tpi LEFT JOIN t_site_home_project hp on tpi.project_id = hp.project_id
         LEFT JOIN t_project_validation tpv ON tpv.project_id = tpi.project_id
-        where tpi.project_status = 1 and tpi.shield_status = 2
+        where tpi.project_status = 1 and tpi.shield_status = 2 and tpv.audit_status = 3
         <if test="projectNo != null and projectNo != ''">
             and tpi.project_no=#{projectNo,jdbcType=VARCHAR}
         </if>

@@ -285,7 +285,6 @@ public class LaunchProjectController extends BaseController
      * @param response
      * @return
      */
-/*
     @RequestMapping(value = "/projectValidChoose.do")
     public Object projectValidChoose(String projectId, String projectType,HttpServletRequest request,
     HttpServletResponse response)
@@ -295,7 +294,6 @@ public class LaunchProjectController extends BaseController
         mv.addObject("projectType", projectType);
         return mv;
     }
-*/
     /**
      * 跳转新增项目验证页面
      * <功能详细描述>
@@ -310,9 +308,15 @@ public class LaunchProjectController extends BaseController
     public Object projectValidationStart(String projectId, String projectType, String validationType,
                                          HttpServletRequest request, HttpServletResponse response, FoundationInfo req)
     {
-        validationType = ProjectValidationTypeEnum.ZZYZ.getDataBaseVal();
-        //所有项目（组织验证/企业验证）
-        ModelAndView mv = new ModelAndView("easy/user/project/projectValid/validation_group.page");
+        ModelAndView mv = new ModelAndView();
+        if(ProjectValidationTypeEnum.ZZYZ.getDataBaseVal().equals(validationType)){
+            //所有项目（组织验证/企业验证）
+            mv = new ModelAndView("easy/user/project/projectValid/validation_group.page");
+        }
+        else if(ProjectValidationTypeEnum.BRYZ.getDataBaseVal().equals(validationType)){
+            //所有项目（本人验证）
+            mv = new ModelAndView("easy/user/project/projectValid/validation_myself.page");
+        }
         //获取基金会下拉选列表
         String data = new CommonUtil().callInterfaceMethod(req,
                 "project/operate/v/selectFoundation",RequestMethod.POST,request);

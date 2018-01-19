@@ -41,10 +41,10 @@
             <!-- 登录前 end-->
             <!--已登录-->
             <c:if test="${currUser.userName!=null}">
-                <c:if test="${currUser.userType == 1}">
+                <%--<c:if test="${currUser.userType == 1}">--%>
                     <a href="<%=basePath%>/user/project/projectStart.do?projectType=1" class="inc">发起项目</a>
                     <%--<a href="#" onclick="$('#projecttype_form').submit();" class="inc">发起项目</a>--%>
-                </c:if>
+                <%--</c:if>--%>
                 <%--<li><a href="#" onclick="$('#projecttype_form').submit();" class="btn-public btn-w80 btn-blue">发起项目</a></li>--%>
                 <a href="<%=basePath %>user/userCenter.do?to=wdzc" class='inc'>个人中心</a>
                 <a href="<%=basePath%>home/logout.do" class='ind'>安全退出</a>

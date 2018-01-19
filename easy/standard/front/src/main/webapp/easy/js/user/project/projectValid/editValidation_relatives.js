@@ -181,12 +181,12 @@ var ProjectValidController = DM.Controller.sub({
             return;
         }
         //医院省市验证
-        if($("#hospitalRegionId").val() == null || $("#hospitalRegionId").val() == ''){
-            $("#hospitalRegionIdMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
-            return;
-        }else{
-            $("#hospitalRegionIdMsg").hide();
-        }
+        // if($("#hospitalRegionId").val() == null || $("#hospitalRegionId").val() == ''){
+        //     $("#hospitalRegionIdMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
+        //     return;
+        // }else{
+        //     $("#hospitalRegionIdMsg").hide();
+        // }
         //医疗证明图片必填验证
         if ($("#proveImgIds li.upload-state-done") && $("#proveImgIds li.upload-state-done").length > 0) {
             $("#proveImgIdsMsg").hide();

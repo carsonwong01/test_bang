@@ -18,7 +18,7 @@ var ProjectValidController = DM.Controller.sub({
         if (cacheData.hospitalRegionId) {
             $("select[name=province]").attr("regionId",cacheData.hospitalRegionId);
         }
-		DM.Region.init();
+        DM.Region.init();
 		
 		//示例图片click事件
 		$(".defaultImage").click(function(){
@@ -123,12 +123,12 @@ var ProjectValidController = DM.Controller.sub({
         {
             case '1':
                 //医院省市验证
-                if($("#hospitalRegionId").val() == null || $("#hospitalRegionId").val() == ''){
-                    $("#hospitalRegionIdMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空").show();
-                    return;
-                }else{
-                    $("#hospitalRegionIdMsg").hide();
-                }
+                // if($("#hospitalRegionId").val() == null || $("#hospitalRegionId").val() == ''){
+                //     $("#hospitalRegionIdMsg").css({"min-height":"20px","line-height":"20px","color":"red","padding-bottom":"0px","color":"#f66"}).html("此项不能为空12311").show();
+                //     return;
+                // }else{
+                //     $("#hospitalRegionIdMsg").hide();
+                // }
                 //医疗证明图片必填验证
                 if ($("#proveImgIds li.upload-state-done") && $("#proveImgIds li.upload-state-done").length > 0) {
                     $("#proveImgIdsMsg").hide();
