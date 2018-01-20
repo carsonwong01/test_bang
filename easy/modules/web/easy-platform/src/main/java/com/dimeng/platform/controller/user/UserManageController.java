@@ -30,13 +30,15 @@ import com.dimeng.modules.user.services.UserInfoManageService;
 import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.LoginCache;
 import com.dimeng.utils.SystemCache;
-import com.sun.xml.internal.bind.v2.TODO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -278,24 +280,6 @@ public class UserManageController extends BaseController
         return userManageService.insertFoundationInfo(httpEntity.getBody());
     }
 
-    /**
-     * 后台用户管理-基金会详情信息查看--包括项目和其它信息
-     */
-    @RequestMapping(value = "/{v}/findFoundationInfo", method = RequestMethod.POST, produces = {"application/json",
-            "application/xml"})
-    @ResponseBody
-    @ResponseStatus(value = HttpStatus.OK)
-    public Object findFoundationInfo(HttpEntity<NotPageFoundationIdReq> req)
-            throws Exception
-    {
-        BaseDataResp resp = this.validator(req.getBody());
-        if (!IDiMengResultCode.Commons.SUCCESS.equals(resp.getCode()))
-        {
-            return resp;
-        }
-        resp = userManageService.findFoundationInfo(req.getBody());
-        return resp;
-    }
 
     /**
      * 后台用户管理-基金会详情信息查看--仅字段--参数 FindFoundationReq

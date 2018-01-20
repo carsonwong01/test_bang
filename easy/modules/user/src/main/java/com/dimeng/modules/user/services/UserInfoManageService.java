@@ -30,11 +30,6 @@ public interface UserInfoManageService
     public BaseDataResp updateFoundationInfo(FindFoundationReq req)
             throws Exception;
 
-    /**
-     * 查询基金会详细信息--包括项目等
-     */
-    public BaseDataResp findFoundationInfo(NotPageFoundationIdReq req)
-            throws Exception;
 
     /**
      * 插入基金会信息

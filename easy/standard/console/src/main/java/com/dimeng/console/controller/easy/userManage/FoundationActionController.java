@@ -8,7 +8,6 @@ import com.dimeng.entity.table.foundation.DeleteFoundationReq;
 import com.dimeng.framework.controller.BaseController;
 import com.dimeng.framework.utils.StringUtil;
 import com.dimeng.model.expand.FindFoundationReq;
-import com.dimeng.model.user.NotPageFoundationIdReq;
 import com.dimeng.utils.CommonUtil;
 import com.dimeng.utils.FilesHandleUtil;
 import com.dimeng.utils.LoginCache;
@@ -225,22 +224,6 @@ public class FoundationActionController extends BaseController{
         JSONObject object = (JSONObject)CommonUtil.getJSONObject(data, CommonConstant.JSON_KEY_SINGLE_RESULT);
         mv.addObject("foundationInfo",object);
         return mv;
-    }
-
-    /**
-     * 查看基金会详细内容--未用到
-     * @return
-     */
-    @RequestMapping(value = "/findFoundationDetails.do")
-    @ResponseBody
-    public Object findFoundationDetails(NotPageFoundationIdReq req, HttpServletRequest request,
-                                        HttpServletResponse response){
-        //基金会信息
-        String foundationDetails =
-                new CommonUtil().callInterfaceMethod(req,
-                        "foundation/v/findFoundationInfo",
-                        RequestMethod.POST,request);
-        return CommonUtil.getJSONObject(foundationDetails, null);
     }
 }
 

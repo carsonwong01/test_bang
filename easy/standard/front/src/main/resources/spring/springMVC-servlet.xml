@@ -85,14 +85,20 @@
         <mvc:interceptor>  
             <mvc:mapping path="/**"/> 
             <!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->  
-           <bean class="com.dimeng.front.interceptor.FrontApplicationContext"/>  
-        </mvc:interceptor>  
+           <bean class="com.dimeng.front.interceptor.FrontApplicationContext"/>
+        </mvc:interceptor>
         <!-- add wsh 防重复提交拦截器 -->
           <!-- 配置Token拦截器，防止用户重复提交数据 -->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.dimeng.front.interceptor.TokenInterceptor"/>
         </mvc:interceptor>
+        <!--如果是移动端访问，拦截并转到微信页面-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.dimeng.front.controller.easy.common.CheckPcOrMobile"/>
+        </mvc:interceptor>
+
         <!-- <mvc:interceptor>  
             <mvc:mapping path="/**"/> 
             定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的  

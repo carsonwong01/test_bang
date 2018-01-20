@@ -54,33 +54,6 @@ public class UserInfoManageServiceImpl extends BaseServiceImpl implements UserIn
     private INciicService iNciicService;
 
     /**
-     * 查询基金会详细信息--包括项目和其它信息
-     */
-    public BaseDataResp findFoundationInfo(NotPageFoundationIdReq req)
-            throws Exception{
-        Map<String, Object> map = new HashMap<String, Object>();
-        BaseDataResp resp = new BaseDataResp();
-        QueryEvent event = new QueryEvent();
-        event.setStatement("000");
-        event.setObj(req);
-        FindFoundationResp result = (FindFoundationResp)baseDao.findOneByCustom(event);
-        if (result == null)
-        {
-            resp.setCode(IDiMengResultCode.Commons.ERROR_PARAMETER);
-            return resp;
-        }
-        //如果需要将基金会的支付账户信息加密显示，则可以参考以下代码
-//        if (StringUtils.isNoneBlank(result.getIdCard()))
-//        {
-//            result.setIdCard(Base64Decoder.decode(result.getIdCard()));
-//        }
-        map.put(CommonConstant.JSON_KEY_SINGLE_RESULT, result);
-        resp.setData(map);
-        resp.setCode(IDiMengResultCode.Commons.SUCCESS);
-        return resp;
-    }
-
-    /**
      * 修改基金会前先查询基金会信息
      */
     @SuppressWarnings("unchecked")
