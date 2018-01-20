@@ -254,6 +254,9 @@
     <select id="projectDetails" resultMap="ProjectDetailsRespResultMap"
             parameterType="com.dimeng.model.bus.ProjectDetailsReq">
         select
+        (SELECT text_context from t_site_text_instructions where text_id='7') civilLaw,
+        (SELECT text_context from t_site_text_instructions where text_id='8') penalLaw,
+
         tpv.foundation_name, fi.logo_url, fi.bank_info,fi.account_info,
         fi.social_credit_code, thb.office_tel,thb.link_name,thb.hospital_mail,
         tpv.recipient_real_name,tpv.project_record,

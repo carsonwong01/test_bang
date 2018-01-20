@@ -5,12 +5,19 @@ var ProjectStartController = DM.Controller.sub({
     },
     readyProject:function(){
         var _this = this;
-        //附件说明
-        $("a.explain").click(function(){
+        //民法通则
+        $("a.civilLaw").click(function(){
             $("#raiseExplain").show();
         });
         $("#raiseExplain #closeBtn,#raiseExplain a.out").click(function(){
             $("#raiseExplain").hide();
+        });
+        //刑法
+        $("a.explain").click(function(){
+            $("#raise").show();
+        });
+        $("#raise #close,#raise a.out").click(function(){
+            $("#raise").hide();
         });
 
         //发布项目按钮click事件

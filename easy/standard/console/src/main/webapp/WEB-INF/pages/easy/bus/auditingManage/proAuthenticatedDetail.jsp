@@ -303,12 +303,23 @@
 												<div class="tl h30 lh30">${validationDetail.disease }</div>
 											</div>
 										</li>
-										<li class="mb20">
-											<div class="pr mh30 pl160">
-												<span class="display-ib w140 lh30 tr mr5 pa left0 top0">医院所在省市：</span>
-												<div class="tl h30 lh30">${validationDetail.province }${validationDetail.city }</div>
-											</div>
-										</li>
+
+										<c:if test="${validationDetail.validationType =='4' }">
+											<li class="mb20">
+												<div class="pr mh30 pl160">
+													<span class="display-ib w140 lh30 tr mr5 pa left0 top0">医院所在省市：</span>
+													<div class="tl h30 lh30">${validationDetail.province }${validationDetail.city }</div>
+												</div>
+											</li>
+										</c:if>
+										<c:if test="${validationDetail.validationType =='1' }">
+											<li class="mb20">
+												<div class="pr mh30 pl160">
+													<span class="display-ib w140 lh30 tr mr5 pa left0 top0">医院所在省市：</span>
+													<div class="tl h30 lh30">${validationDetail.hospitalRegionName}</div>
+												</div>
+											</li>
+										</c:if>
 										<li class="mb20">
 											<div class="pr mh30 pl160">
 												<span class="display-ib w140 lh30 tr mr5 pa left0 top0">医院名称：</span>

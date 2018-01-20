@@ -188,6 +188,24 @@ public class ProjectDetailsResp extends BaseResp
     private String hospitalMail;
     private String recRealName;
     private String projectRecord;
+    private String civilLaw;
+    private String penalLaw;
+
+    public String getCivilLaw() {
+        return civilLaw;
+    }
+
+    public void setCivilLaw(String civilLaw) {
+        this.civilLaw = civilLaw;
+    }
+
+    public String getPenalLaw() {
+        return penalLaw;
+    }
+
+    public void setPenalLaw(String penalLaw) {
+        this.penalLaw = penalLaw;
+    }
 
     public String getProjectRecord() {
         return projectRecord;

@@ -188,6 +188,16 @@ public class FindProjectValidationResp implements Serializable
      */
     private String projectRecord;
 
+    private String userType;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
     public String getProjectRecord() {
         return projectRecord;
     }

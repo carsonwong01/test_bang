@@ -396,7 +396,7 @@
 						<input type="hidden" id="coverImageUrl" name="coverImageUrl">
 					</div>
 					<div class='texi-ad'> <span>附： </span>
-						<a class="explain highlight"><span class="deg">《中华人民共和国民法通则》</span></a>
+						<a class="civilLaw highlight"><span class="deg">《中华人民共和国民法通则》</span></a>
 						<a class="explain highlight"><span class="deg">《中华人民共和国刑法》</span></a>
 						<%--<a href="javascript:void(0);" id='koh' class='deg'>《中华人民共和国民法通则》</a> <a href="javascript:void(0);" class='deg'>《中华人民共和国刑法》</a>--%>
 					</div>
@@ -415,11 +415,29 @@
 					<div class="dia_auto width-full">
 						<div class="tip_information">
 							<div class="tips">
-								<span class="f20 gray3">${textInstruct}</span>
+								<span class="f20 gray3">${projectDetails.civilLaw}</span>
 							</div>
 						</div>
 					</div>
 					<div class="tc mt20"><a id="closeBtn" href="javascript:void(0);" class="btn-public btn-w50h25 btn-blue">知道了</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 弹窗 -->
+		<div id="raise" class="dialogBox" style="display: none;">
+			<div class="popup_bg"></div>
+			<div class="dialog">
+				<div class="title"><a href="#" class="out"></a>详细内容：</div>
+				<div class="content">
+					<div class="dia_auto width-full">
+						<div class="tip_information">
+							<div class="tips">
+								<span class="f20 gray3">${projectDetails.penalLaw}</span>
+							</div>
+						</div>
+					</div>
+					<div class="tc mt20"><a id="close" href="javascript:void(0);" class="btn-public btn-w50h25 btn-blue">知道了</a>
 					</div>
 				</div>
 			</div>
