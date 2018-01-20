@@ -4,7 +4,8 @@
 <%@ page import="com.dimeng.utils.SystemCache" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/project-details.css">
-<%--<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/front.css">--%>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/front.css">
+<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
 <%
 	TSiteInfo siteInfo=(TSiteInfo) SystemCache.getCache(SystemConstant.CacheKey.SITE_INFO);
 %>
@@ -12,8 +13,6 @@
     var currUserId = "${currUser.userId}";//当前登录人ID
 </script>
 <li class='ldr' datr='${currUser.userId}'></li>
-<link rel="stylesheet" type="text/css" href="<%=basePath %>easy/css/public.css">
-
 <div class='center p-detail-content'>
 	<div class='cent-nav'>
 		<p	class='nav-po'><a href="<%=basePath%>home/index.do">首页&nbsp;>&nbsp;</a><a href="<%=basePath %>project/projectList.do">项目&nbsp;>&nbsp;</a><span>项目详情</span></p>
@@ -383,7 +382,7 @@
 						<%--<textarea id="content" name="content" class="wid92" cols="30" rows="7"  onpropertychange="checkLength(this,200);" oninput="checkLength(this,200);"--%>
 						<%--placeholder="请填写您举报该项目的原因与理由，200字以内"></textarea>--%>
 						<p style="padding: 20px 0 20px 0;font-size: 14px;">项目举报相关图片</p>
-						<ul id="projectImageUl" class="addCover clearfix">
+						<ul id="" class="addCover clearfix">
 							<li class="fileListAfter">
 								<a id="filePicker" class="addCoverIcon">
 									<span>上传<br>图片</span>
@@ -471,8 +470,8 @@
 <script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
 <script language="javascript" src="<%=basePath %>js/common/lytebox.js"></script>
 <script type="text/javascript"  src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
+<%--<script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>--%>
+<%--<script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>--%>
 
 <script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/kindeditor.js"></script><%-- 需要-控制编辑起样式--%>
 <script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/lang/zh_CN.js"></script>

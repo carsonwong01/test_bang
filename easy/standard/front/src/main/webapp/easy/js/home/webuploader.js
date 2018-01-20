@@ -1773,13 +1773,19 @@
                             button.outerHeight() : button.height(),
     
                     pos = button.offset();
-    
                 width && height && shimContainer.css({
                     bottom: 'auto',
                     right: 'auto',
-                    width: width + 'px',
-                    height: height + 'px'
+                    width: 129 + 'px',
+                    height: 151 + 'px'
                 }).offset( pos );
+                //以下是组件原来的代码
+                // width && height && shimContainer.css({
+                //     bottom: 'auto',
+                //     right: 'auto',
+                //     width: width + 'px',
+                //     height: height + 'px'
+                // }).offset( pos );
             },
     
             enable: function() {

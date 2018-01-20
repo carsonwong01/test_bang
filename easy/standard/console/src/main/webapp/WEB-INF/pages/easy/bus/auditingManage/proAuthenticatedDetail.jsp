@@ -619,7 +619,7 @@
 				<!-- 审核状态 -->
 				<input type="hidden" id="status" name="status" value=""/>
 
-				<div class="f16 fb gray3">项目备案号：</div>
+				<div class="f16 fb gray3"><em class="red pr5">*</em>项目备案号：</div>
 				<div class="pr tl" style="margin: 10px 0px 10px 30px">
 				   <input name="projectRecord" class="border" maxlength="25" value="" validate="q" id="projectRecord" placeholder="募捐活动在民政部备案号" style="width: 300px;height: 30px;"/>
 				</div>

@@ -388,12 +388,10 @@ var ProjectStartController = DM.Controller.sub({
             }
             $percent.css('width', percentage * 100 + '%');
         });
-        var userId = $('.ldr').attr('datr');
-        // alert("userId"+userId);
+        // var userId = $('.ldr').attr('datr');
         // 文件上传成功，给item添加成功class, 用样式标记上传成功。
         uploader.on('uploadSuccess', function(file , result) {
-            if(!result || result.code != '000000' || userId == "" || userId == null){
-                Dialog.show("用户未登录，请先登录！","error");
+            if(!result || result.code != '000000'){
                 var $li = $('#'+option.containerId+' #'+file.id),
                 $error = $li.find('div.error');
                 // 避免重复创建

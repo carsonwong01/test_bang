@@ -37,7 +37,7 @@
 						<p class="beg-timeBox">今日起至<span class="redCol"></span>结束</p>
 						<div class="setTimeBox borderMain">
 							<a class="l_btn"><i></i></a>
-							<input type="text" id="financingDays" name="financingDays" readonly="readonly" value="2">
+							<input type="text" id="financingDays" name="financingDays" readonly="readonly" value="30">
 							<a class="r_btn"><i></i></a>
 							<span class="unit dateBox highlight">天</span>
 						</div>
