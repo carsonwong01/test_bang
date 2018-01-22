@@ -43,9 +43,8 @@
 				/css/** = anon
 				/images/** = anon
 				/home/** = anon
-				/frontHome/** = anon 
-				
-				
+				/frontHome/** = anon
+
 				/captcha = anon
 				/common/**= anon
 				<!-- 轻松筹 -->

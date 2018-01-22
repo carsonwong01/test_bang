@@ -12,7 +12,7 @@
 		<%@include file="/WEB-INF/pages/easy/helpCenter/leftMain.jsp"%>
 		<form id="dataForm">
 			<input type="hidden" name="type" id="munuType" value="1" /> <input
-				type="hidden" id="typeFooter" value="${4}" /><%-- value="${type}"设置点击后默认出现的问题选项--%>
+				type="hidden" id="typeFooter" value="${1}" /><%-- value="${type}"设置点击后默认出现的问题选项--%>
 			<div class="rightBox fr">
 				<div class="cont"  id="helpCenterId">
 					

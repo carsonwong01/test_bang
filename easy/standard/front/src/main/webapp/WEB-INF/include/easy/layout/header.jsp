@@ -27,7 +27,7 @@
             <li class=""><a href="<%=basePath%>home/index.do">首页</a></li>
             <li><a href="<%=basePath%>project/projectList.do">项目</a></li>
             <li><a href="<%=basePath%>hospital/hospitalList.do">医院</a></li>
-            <li><a href="<%=basePath%>foundation/foundationDetails.do?foundationId=100">基金会</a></li>
+            <li><a href="<%=basePath%>foundation/foundationDetails.do?foundationId=100">公益机构</a></li>
             <li><a href="<%=basePath%>home/aboutUs.do">关于我们</a></li>
             <li><a href="<%=basePath%>frontHome/newsInfos.do">新闻资讯</a></li>
             <div class='clear'></div>
