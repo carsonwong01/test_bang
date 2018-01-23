@@ -144,16 +144,16 @@
 								<p class="prompt" id="hospitalNameMsg"></p>
 							</dd>
 						</dl>
-						<%--<dl>--%>
-							<%--<dt><span class="red">*</span>医院地址</dt>--%>
-							<%--<dd>--%>
-								<%--<span class="input-midle">--%>
-									<%--<select name="province" regionId="" class="select_style province"></select>--%>
-									<%--<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>--%>
-								<%--</span>--%>
-								<%--<p class="prompt" id="hospitalRegionIdMsg"></p>--%>
-							<%--</dd>--%>
-						<%--</dl>--%>
+						<dl>
+							<dt><span class="red">*</span>医院地址</dt>
+							<dd>
+								<span class="input-midle">
+									<select name="province" regionId="" class="select_style province"></select>
+									<select id="hospitalRegionId" name="hospitalRegionId" class="select_style city"></select>
+								</span>
+								<p class="prompt" id="hospitalRegionIdMsg"></p>
+							</dd>
+						</dl>
 						<dl>
 							<dt><span class="red">*</span>医疗诊断证明</dt>
 							<dd>

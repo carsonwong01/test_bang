@@ -30,7 +30,7 @@
 					<b><img src="<%=basePath %>easy/images/over.png"></b>
 				</c:if>
 				<p class='pop-add'>慈善募捐&nbsp;|&nbsp;${projectDetails.title}&nbsp;|&nbsp;帮你筹</p>
-				<p class='pop-ss'>项目备案号:${projectDetails.projectRecord}</p>
+				<p class='pop-ss'>项目备案号：${projectDetails.projectRecord}</p>
 
 				<p class='pop-s'>已筹金额<span></br>${projectDetails.supportAmt}</span><span>&nbsp;元</span></p>
 				<div class='daohxi'>
@@ -246,12 +246,7 @@
 								<div class="">
 									<ul>
 										<!-- 增加 -->
-										<li>
-											<span class='fl'>患者姓名</span><span class='fr'>${projectDetails.recRealName}</span>
-
-										</li>
 										<!-- 增加 -->
-
 										<c:choose>
 											<c:when test="${projectDetails.validationType == null}">
 												<li>
@@ -259,6 +254,9 @@
 												</li>
 											</c:when>
 											<c:when test="${projectDetails.type ==1 && projectDetails.validationType == 1 }">
+												<li>
+													<span class='fl'>患者姓名</span><span class='fr'>${projectDetails.receiveRealName}</span>
+												</li>
 												<li>
 													<span class="fl">收款人身份信息</span>
 													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
@@ -287,6 +285,9 @@
 												</li>
 											</c:when>
 											<c:when test="${projectDetails.type == 1 && projectDetails.validationType == 4 }">
+												<li>
+													<span class='fl'>患者姓名</span><span class='fr'>${projectDetails.recRealName}</span>
+												</li>
 												<li>
 													<span class="fl">组织机构信息</span>
 													<p class="fr">${projectDetails.validationStatus == 3 ? "<i class='status-yes'></i><span>已认证</span>" : "<i class='status-no'></i><span>未认证</span>" }</p>
@@ -342,19 +343,19 @@
 					<li>4.<span>款项拨付</span>善款拨付实施救助</li>
 				</ul>
 			</div>
-			<div class='xim-qi'>
-				<p><i></i> <span>常见问题</span></p>
-				<ul class='cjwt-s' id="helpCenterId">
-				</ul>
-				<input type="hidden" id="typeFooter" value="4" />
-				<script id="helpCenterTemplate" type="text/x-jquery-tmpl">
-                    {{each(i,data) list}}
-                        <li><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><i></i>{{= data.title}}</a></li>
-                    {{/each}}
-                </script>
-				<!--常见问题--内容-->
-				<script language="javascript" src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>
-			</div>
+			<%--<div class='xim-qi'>--%>
+				<%--<p><i></i> <span>常见问题</span></p>--%>
+				<%--<ul class='cjwt-s' id="helpCenterId">--%>
+				<%--</ul>--%>
+				<%--<input type="hidden" id="typeFooter" value="4" />--%>
+				<%--<script id="helpCenterTemplate" type="text/x-jquery-tmpl">--%>
+                    <%--{{each(i,data) list}}--%>
+                        <%--<li><a href="<%=basePath %>frontHome/helpCenter.do" target="_blank"><i></i>{{= data.title}}</a></li>--%>
+                    <%--{{/each}}--%>
+                <%--</script>--%>
+				<%--<!--常见问题--内容-->--%>
+				<%--<script language="javascript" src="<%=basePath%>easy/js/helpCenter/helpCenter.js"></script>--%>
+			<%--</div>--%>
 		</div>
 		<div class='clear'></div>
 	</div>
@@ -382,7 +383,7 @@
 						<%--<textarea id="content" name="content" class="wid92" cols="30" rows="7"  onpropertychange="checkLength(this,200);" oninput="checkLength(this,200);"--%>
 						<%--placeholder="请填写您举报该项目的原因与理由，200字以内"></textarea>--%>
 						<p style="padding: 20px 0 20px 0;font-size: 14px;">项目举报相关图片</p>
-						<ul id="" class="addCover clearfix">
+						<ul id="projectImageUl" class="addCover clearfix">
 							<li class="fileListAfter">
 								<a id="filePicker" class="addCoverIcon">
 									<span>上传<br>图片</span>
@@ -470,8 +471,8 @@
 <script type="text/javascript" src="<%=basePath %>js/common/formValidate.js"></script>
 <script language="javascript" src="<%=basePath %>js/common/lytebox.js"></script>
 <script type="text/javascript"  src="<%=basePath %>js/common/jquery.tmpl.min.js"></script>
-<%--<script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>--%>
-<%--<script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>--%>
+<script type="text/javascript" src="<%=basePath %>js/public/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="<%=basePath %>js/public/vue.js"></script>
 
 <script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/kindeditor.js"></script><%-- 需要-控制编辑起样式--%>
 <script charset="utf-8" src="<%=basePath%>js/kindeditor-4.1.10/lang/zh_CN.js"></script>

@@ -74,6 +74,7 @@
         <result column="hospital_mail" property="hospitalMail"/>
         <result column="recipient_real_name" property="recRealName"/>
         <result column="project_record" property="projectRecord"/>
+        <result column="receive_real_name" property="receiveRealName"/>
     </resultMap>
 
     <!-- 项目内容 -->
@@ -259,7 +260,7 @@
 
         tpv.foundation_name, fi.logo_url, fi.bank_info,fi.account_info,
         fi.social_credit_code, thb.office_tel,thb.link_name,thb.hospital_mail,
-        tpv.recipient_real_name,tpv.project_record,
+        tpv.recipient_real_name,tpv.project_record,tpv.receive_real_name,
 
         tpi.project_id,tpi.project_name,tqub.nick_name,t.user_name,tqub.image_url,tpi.cover_image_url,tpi.shield_status,
         (select count(*) from t_order_support where project_id=tpi.project_id

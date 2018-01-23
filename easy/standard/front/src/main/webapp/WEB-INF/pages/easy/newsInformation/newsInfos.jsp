@@ -51,12 +51,12 @@
 			</div>
 			<%--推荐资讯--%>
 			<%@include file="/WEB-INF/pages/easy/newsInformation/recommendNewsInfos.jsp" %>
-			<div class='xim-qi'>
-				<p><i></i><span>常见问题</span></p>
-				<ul  class='cjwt-s' id="helpCenterId">
-				</ul>
-				<%--<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>--%>
-			</div>
+			<%--<div class='xim-qi'>--%>
+				<%--<p><i></i><span>常见问题</span></p>--%>
+				<%--<ul  class='cjwt-s' id="helpCenterId">--%>
+				<%--</ul>--%>
+				<%--&lt;%&ndash;<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>&ndash;%&gt;--%>
+			<%--</div>--%>
 		</div>
 		<div class='clear'></div>
 	</div>

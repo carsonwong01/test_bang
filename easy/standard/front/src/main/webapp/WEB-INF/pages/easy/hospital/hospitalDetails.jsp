@@ -143,10 +143,10 @@
                     <li>4.<span>款项拨付</span>善款拨付实施救助</li>
                 </ul>
             </div>
-            <div class='problem'>
-                <p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
-                <%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp" %>
-            </div>
+            <%--<div class='problem'>--%>
+                <%--<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>--%>
+                <%--<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp" %>--%>
+            <%--</div>--%>
         </div>
         <div class='clear'></div>
     </div>

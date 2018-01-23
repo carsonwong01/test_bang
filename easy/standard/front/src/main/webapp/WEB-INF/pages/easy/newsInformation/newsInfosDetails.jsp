@@ -45,12 +45,12 @@
 			</div>
 			<%--推荐资讯--%>
 			<%@include file="/WEB-INF/pages/easy/newsInformation/recommendNewsInfos.jsp" %>
-			<div class='xim-qi'>
-				<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>
-				<li><i></i><span><ul class='ul-o'  id="helpCenterId">
-				</ul></span></li>
-				<%--<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>--%>
-			</div>
+			<%--<div class='xim-qi'>--%>
+				<%--<p><i></i> <a href="<%=basePath %>frontHome/helpCenter.do"><span>常见问题</span></a></p>--%>
+				<%--<li><i></i><span><ul class='ul-o'  id="helpCenterId">--%>
+				<%--</ul></span></li>--%>
+				<%--&lt;%&ndash;<%@include file="/WEB-INF/pages/easy/helpCenter/commonQuestion.jsp"%>&ndash;%&gt;--%>
+			<%--</div>--%>
 		</div>
 		<div class='clear'></div>
 	</div>

@@ -98,6 +98,7 @@ public class FrontHospitalDetailsController extends BaseController
     @RequestMapping(value = "/hospitalProjectSumAjax.do")
     public Object findHosProjectSum(HospitalBasicReq req, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> map = new HashMap<String, Object>();
+        req.setMaxResults(9);
         String data =
                 new CommonUtil().callInterfaceMethod(req, "hospital/v/findHosProjectSum", RequestMethod.POST, request);
         map.put("hosProjectSum",CommonUtil.getJSONObject(data, null));

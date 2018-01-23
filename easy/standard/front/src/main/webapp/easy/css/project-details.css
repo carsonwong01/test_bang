@@ -96,7 +96,7 @@
 }
 .daohxi{
 	padding-right: 96px;
-	padding-top: 30px;
+	padding-top: 0px;
 }
 .daohxi>div{
 	font-size: 12px;
@@ -145,7 +145,7 @@
 }
 .img-wm{
 	text-align: center;
-	margin-top: 26px;
+	margin-top: 6px;
 	padding-right: 50px;
 }
 .img-wm>img{

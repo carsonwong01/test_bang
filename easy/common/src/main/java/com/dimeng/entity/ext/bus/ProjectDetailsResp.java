@@ -190,6 +190,15 @@ public class ProjectDetailsResp extends BaseResp
     private String projectRecord;
     private String civilLaw;
     private String penalLaw;
+    private String receiveRealName;
+
+    public String getReceiveRealName() {
+        return receiveRealName;
+    }
+
+    public void setReceiveRealName(String receiveRealName) {
+        this.receiveRealName = receiveRealName;
+    }
 
     public String getCivilLaw() {
         return civilLaw;

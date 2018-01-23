@@ -35,11 +35,9 @@
 								class="icon-public user-xmgl-icon"></i>项目管理<em class="unfold"></em></span>
 							<ul class="child">
 								<li id="wzcd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/user/supportProjectList.do',$('#main_right'),0,'wzcd')">我支持的</a></li>
-								<c:if test="${currUser.userType == 1}">
+								<%--<c:if test="${currUser.userType == 1}">--%>
 									<li id="wfqd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/myInitProjectList.do',$('#main_right'),0,'wfqd')">我发起的</a></li>
-								</c:if>
-
-
+								<%--</c:if>--%>
 								<li id="wgzd" name="meun"><a href="javascript:void(0);" onclick="userCenterController.ajaxTempleGet('<%=basePath %>user/project/myCollectionList.do',$('#main_right'),0,'wgzd')">我关注的</a></li>
 							</ul></li>
 						<li class="group"><span class="item"><i
