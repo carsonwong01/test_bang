@@ -1,0 +1,426 @@
+<div class="bg-c-edf">
+	<div class="pro-info">
+		<!--封面图-->
+		<div class="pro-cover">
+		   <img src="<%=Config.url('imgAddress')+proDetList.coverImgUrl%>" />
+		   <div class="ub ub-ac ub-pc small-shadow">
+		   	 <%switch(proDetList.projectStatus){
+		       case "1":%>
+	       			<span class="fn-s-14 t-wh">众筹中</span>
+	       			<%break;
+     		   case "2":%>
+	       			<span class="fn-s-14 t-wh">众筹成功</span>
+	       			<%break;
+	       	   case "3":%>
+	       			<span class="fn-s-14 t-wh">众筹失败</span>
+	       			<%break;
+       		   case "4":%>
+	       		    <span class="fn-s-14 t-wh">已删除</span>
+	       			<%break;
+             }%>
+		   </div>
+		   
+	    </div>
+	    
+	    
+	    <!--头部信息-->
+	    <div class="pro-user bg-c-white">
+	    	<h2 class="pro-til"><%=proDetList.title%></h3>
+	    	<div class="ub ub-ac pro-item-info">
+	    		<div class="head-img mg-r-10">
+	    			<img src="<%=(proDetList.initiatorImgUrl.indexOf('http://')==-1?Config.url('imgAddress'):'')+proDetList.initiatorImgUrl%>" />
+	    		</div>
+	    		<div class="det-info ub-f1">
+	    			<p class="det-name">
+	    				<span class="user-name"><%=proDetList.initiatorNickName%></span>
+	    				<%if(parseInt(proDetList.remainingDay) > 0 && proDetList.projectStatus == "1"){%>   
+	    				    <span class="re-time t-yell">剩余<em><%=proDetList.remainingDay%></em>天</span>
+	    				<%}else if(parseInt(proDetList.remainingDay) == 0 && proDetList.projectStatus == "1"){%> 
+	    				    <span class="re-time t-red">即将结束</span>
+	    				<%}else{%>
+	    				    <span class="re-time t-red">已结束</span>
+	    				<%}%>
+	    				
+	    			</p>
+	    			<p class="det-time">
+	    				<span class="up-time"><em><%=proDetList.dateCreate%></em>发起</span>
+	    				<%if(proDetList.labels.length>0){%>
+	    				    <%for(var i = 0;i< proDetList.labels.length;i++){%>
+	    				       <span class="tag pd-l-5">#<em><%=proDetList.labels[i]%></em></span>
+	    				    <%}%>
+	    				<%}%>
+	    			</p>
+	    		</div>
+	    	</div>
+	    </div>
+	    
+	    <!--统计总数-->
+	    <div class="ub ub-pc ub-pj bc-white ub-ac pd-bt-10 b-top-bottom bg-c-white">
+		    <div class="ub-f1 hei-40 width3333">
+			    <div class="fn-s-15  line-h-25 tx-al-c t-3" ><span><%=DMJS.changeAmount(proDetList.facTarget)%>元</span></div>
+			    <div class="fn-s-12 tx-al-c">
+				    <div class=""><span>目标金额</span></div>
+			    </div>
+		    </div>
+		    <div class="ub-f1 hei-40 width3333">
+			    <div class="fn-s-15  line-h-25 tx-al-c t-3" ><span><%=DMJS.changeAmount(proDetList.supportAmt)%>元</span></div>
+			    <div class="fn-s-12 tx-al-c">
+				    <div class=""><span>已筹金额</span></div>
+			    </div>
+		    </div>
+		    <div class="ub-f1 hei-40 width3333">
+			    <div class="fn-s-15  line-h-25 tx-al-c t-3" ><span><%=proDetList.supportTimes%>次</span></div>
+			    <div class="fn-s-12 tx-al-c">
+				    <div class=""><span>支持人次</span></div>
+			    </div>
+		    </div>
+	    </div>
+	    
+	    <!--详情内容-->
+	    <div class="project-content-detail bg-c-white" id="proConDetView">
+	    	<div class="det-view-body">
+	    	    <p class="fn-s-13" id="proDetCon"></p>
+	        </div>
+	        <%if(proDetList.imgs.length > 0){%>
+		        <div class="project-content-img clearfix">
+		            <%for(var i=0;i < proDetList.imgs.length;i++){%>
+		        	    <a href="javascript:void(0);" class="LookImg"><img src="<%=Config.url('imgAddress')+proDetList.imgs[i].addr%>" /></a>
+		        	<%}%>
+		        </div>
+	        <%}%>
+	    </div>
+	    <div class="pro-con-control ub ub-ac ub-pc bg-c-white dets-control-action" id="proConControl">
+	    	<span class="t-blue fn-s-14 v-a pd-r-2 dets-con">展开</span>
+	    	<span class="icon-down dets-icon"></span>
+	    </div>
+	    
+	    
+	    <!--回报项目-->
+	    <%if(proDetList.type=="6"){%>  
+	    
+	     <!--回报项目--运费发货时间-->
+	    <div class="pro-delivery bg-c-white">
+	    	<p class="det-til">运费和发货时间</p>
+	    	<div class="delivery-time fn-s-14 bd-t">
+	    		<div class="ub">
+	    			<p class="t-9 ub width30">运费说明：</p>
+	    			<p class="t-6 ub width70"><%=proDetList.freight%></p>
+	    		</div>
+	    		<div class="ub">
+	    			<p class="t-9 ub width30">发货时间：</p>
+	    			<p class="t-6 ub width70"><%=proDetList.postTimeText%></p>
+	    		</div>
+	    	</div>
+	    </div>
+	    <!--产品回报-->
+	    <div class="pro-product-retrun bg-c-white pro-delivery"> 
+	    	<p class="det-til">产品回报</p>
+	    	<%if(proDetList.dreamTargets.length>0){%>
+	    	  <%for(var i = 0;i < proDetList.dreamTargets.length;i++){%>
+	    	      <div class="pr-retrun-item">
+		    		<div class="pr-return-info ub ub-ac">
+		    			<div class="re-img LookImg"><img src="<%=Config.url('imgAddress')+proDetList.dreamTargets[i].imgUrl%>" /></div>
+		    		    <div class="re-info ub-f1">
+		    		        <span class="t-blue fn-s-14">支持<%=proDetList.dreamTargets[i].amount%>元</span>
+		    		        <%if(parseInt(proDetList.dreamTargets[i].remainingNum) == 0){%>
+		    		          <span class="t-9 fn-s-13 fr">已售罄</span>
+		    		        <%}else if(parseInt(proDetList.dreamTargets[i].remainingNum) > 0){%> 
+		    			      <span class="t-9 fn-s-13 fr">支持<%=proDetList.dreamTargets[i].supportCount%>份/剩余<%=proDetList.dreamTargets[i].remainingNum%>份</span>
+		    		        <%}else if(parseInt(proDetList.dreamTargets[i].remainingNum) < 0){%>
+		    		         <span class="t-9 fn-s-13 fr">支持<%=proDetList.dreamTargets[i].supportCount%>份</span>
+		    		        <%}%>
+		    		    </div>
+		    		</div>
+	    		    <div class="ub t-6 fn-s-13 pd-t-10"><%=proDetList.dreamTargets[i].content%></div>
+	    	      </div>
+	    	  <%}%>
+	    	<%}%>
+	    	
+	    </div>
+	    
+	    <!--梦想项目-->
+	    <%}else if(proDetList.type=="7"){%>
+	    <!--梦想项目--梦想清单-->
+	    <div class="pro-delivery bg-c-white">
+	    	<p class="det-til">梦想清单</p>
+	    	<%if(proDetList.dreamTargets.length>0){%>
+	    	  <%for(var i = 0;i < proDetList.dreamTargets.length;i++){%>
+	    	      <div class="dream-time fn-s-14 bd-t">
+	    		      <p><span class="t-blue fn-wei"><%=proDetList.dreamTargets[i].amount%>元</span></p>
+	    		      <p><span class="t-6"><%=proDetList.dreamTargets[i].purposeText%></span></p>
+	    	      </div>
+	    	  <%}%>
+	    	<%}%>
+	    </div>
+	    <!--公益项目-->
+	    <%}else{%>
+	    <!--公益项目--已认证资料-->
+	    <div class="pro-delivery bg-c-white">
+	    
+	        <!--验证状态--> 
+	    	<div class="det-til bd-b ub ub-ac">
+		    	<%if(proDetList.validationType){%>
+		    	    <%if(proDetList.validationStatus == "3"){%>
+		    	       <p class="ub-f1"><span>已认证资料</span></p>
+		    	    <%}else{%>
+		    	       <p class="ub-f1"><span>未提交认证资料</span></p>
+		    		<%}%>
+		    	<%}else{%>
+		    	    <p class="ub-f1"><span>项目暂未认证</span></p>
+		    	<%}%>	
+	    		<p class="ub-f1 ub ub-pe"><span class="t-9 fn-s-12">提示：请确保您了解项目后再帮助</span></p>
+	    	</div>
+	    	
+	    	<!--validationStatus 1.审核待审核   2.审核部通过  3.审核通过-->   
+	    	<!--validationType 1.本人验证   2.亲属验证  3.夫妻验证 4.组织验证--> 
+	    	<!--type 1.大病救助 2.灾难救助 3.动物保护 4.扶贫助学 5.其他救助-->
+	    	    	
+	    	<!--验证类型存在-->
+	    	<%if(proDetList.validationType){%> 
+	    	
+		    	<%if(proDetList.type=="1"){%>  <!--1.大病救助--> 
+		    	
+		    	    <%if(proDetList.validationType == "1"){%> <!--1.本人验证-->
+		    	    
+					    <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">收款人信息</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+					    
+					    <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">医疗诊断证明</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>		    	
+		    	    
+		    	    
+		    	    <%}else if(proDetList.validationType == "2" || proDetList.validationType == "3"){%> <!--2.亲属验证-->  <!--3.夫妻验证 --> 	
+		    	    
+		    	        <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">收款人信息</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+					    
+					    <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">受助人（患者）信息</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+					    
+					    <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">收款人与受助人（患者）关系</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+					    
+					    <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">医疗诊断证明</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>		    
+		    	    
+		    	    <%}else if(proDetList.validationType == "4"){%>  <!--4.组织验证 -->  
+		    	        
+		    	        <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">组织机构信息</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>		 
+		    	        
+		    	        <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">受助人（患者）信息 </span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+					    
+					    <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">医疗诊断证明</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+					    
+		    	    <%}%>
+		    	
+		    	
+		    	<%}else if(proDetList.type=="2" || proDetList.type=="3" || proDetList.type=="4"||proDetList.type=="5"){%> <!--2.灾难救助--><!--3.动物保护--><!--4.扶贫助学--><!--5.其他救助-->
+		    	
+		    	    <%if(proDetList.validationType == "1"){%> <!--1.本人验证-->
+		    	    
+		    	        <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">本人信息</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+		    	    
+		    	    <%}else if(proDetList.validationType == "4"){%> <!--1.组织验证-->
+		    	    
+		    	        <div class="det-til bd-b ub ub-ac">
+							<p class="ub-f1"><span class="t-6">组织机构信息</span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							<%if(proDetList.validationStatus == "3"){%>
+								<i class="icon-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">已认证</span>
+							<%}else{%>
+							    <i class="icon-un-auth ub ub-ac mg-r-5"></i>
+								<span class="t-6 fn-s-14">未认证</span>
+							<%}%>
+							</p>
+					    </div>	
+		    	    
+		    	    <%}%>
+	    	    
+	    	    <%}%>
+
+	    	<%}%>
+
+	    	<div class="public-auth">
+	    		<p class="fn-s-12 t-6 pd-all-10-15">项目发起人已承诺，涉及本项目的文字、图片证明等相关信息完全真实、有效且不存在未经他人授权冒用他人名义进行求助的行为。本人收到的全部求助款项将直接用于被救助人的救助，不另行挪作他用。若发起人存在违反上述承诺的行为，愿自行承担全部法律责任。</p>
+	    	</div>
+	    </div>
+	    <%}%>
+
+	    
+	    <!--项目动态-->
+	    <div class="pro-trends pro-delivery bg-c-white">
+	    	<p class="det-til ub ub-ac">
+	    		<span class="v-a pd-r-5">项目动态</span>
+	    		<span class="trends-num"><%=proDetList.dynamicCount%>条</span>
+	    	</p>
+	    	
+    	    <%if(proDymList.length > 0){%>
+    	    <div class="pro-trends-con">
+    	    	<%for(var i=0;i< (proDymList.length < 2 ? proDymList.length : 2);i++){%>
+    	    		<div class="pro-trends-item b-all-shadow">
+	    			    <span class="icon-position"><%=i+1%></span>
+		    			<div class="trends-item-con">
+		    				<p class="fn-s-14 t-9"><%=proDymList[i].dateCreate%></p>
+		    				<p class="fn-s-14 t-9 pd-bt-610"><%=proDymList[i].content%></p>
+		    				<!--images-->
+		    				<%if(proDymList[i].imgsUrl.length > 0){%>
+		    				    <div class="project-content-img clearfix">
+						        	<%for(var j=0;j< proDymList[i].imgsUrl.length;j++){%>
+						        	    <a href="javascript:void(0);" class="LookImg"><img src="<%=Config.url('imgAddress')+proDymList[i].imgsUrl[j].addr%>" /></a>
+						        	<%}%>
+                                </div>
+		    				<%}%>
+		    			</div>
+		    		 </div>
+    	    	<%}%>
+    	    	<%if(proDymList.length > 2){%>
+	    	        <%for(var i=2;i< proDymList.length;i++){%>
+	    	            <div class="trends-item-more hide">
+		    	            <div class="pro-trends-item b-all-shadow">
+				    			<span class="icon-position"><%=i+1%></span>
+				    			<div class="trends-item-con">
+				    				<p class="fn-s-14 t-9"><%=proDymList[i].dateCreate%></p>
+				    				<p class="fn-s-14 t-9 pd-bt-610"><%=proDymList[i].content%></p>
+				    				<%if(proDymList[i].imgsUrl.length > 0){%>
+				    				    <div class="project-content-img clearfix">
+								        	<%for(var j=0;j< proDymList[i].imgsUrl.length;j++){%>
+								        	    <a href="javascript:void(0);" class="LookImg"><img src="<%=Config.url('imgAddress')+proDymList[i].imgsUrl[j].addr%>" /></a>
+								        	<%}%>
+		                                </div>
+				    				<%}%>
+				    			</div>
+				    		</div>
+	    	            </div>
+				    <%}%>
+    	        <%}%>
+    	        
+		    	<%if(proDymList.length > 2){%>	
+			    	<div class="trends-con-control ub ub-ac ub-pc bg-c-white trends-control-action">
+   	    				<span class="t-blue fn-s-14 v-a pd-r-2 trends-con">查看全部</span>
+	    	    		<span class="icon-down trends-icon"></span>
+	        		</div>
+        		<%}%>
+        	</div>
+    		<%}%> 
+    		
+	    </div>
+	    
+	     <div class="pro-support pro-trends pro-delivery bg-c-white">
+		   	<p class="det-til ub ub-ac">
+		   		<span class="v-a pd-r-5">TA的支持者</span>
+		   		<span class="trends-num"><%=proDetList.supportTimes%>人</span>
+		   	</p>	
+		</div>   	
+	    <div id="support-list"></div>
+	    
+	    
+	   
+	</div>
+</div>
+
+    

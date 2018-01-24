@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<web-app   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns="http://java.sun.com/xml/ns/javaee"   
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
+    id="WebApp_ID"   
+    version="3.0">  
+    <context-param>  
+        <param-name>contextConfigLocation</param-name>  
+        <!-- 应用上下文配置文件 -->  
+        <param-value>/WEB-INF/spring-servlet.xml</param-value>  
+    </context-param>  
+   <servlet>
+    <servlet-name>spring</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[<servlet-name>]-servlet.xml，如spring-servlet.xml-->
+    <load-on-startup>1</load-on-startup>
+   </servlet>
+   
+ <servlet-mapping>
+     <servlet-name>spring</servlet-name>
+     <url-pattern>/weixin/*</url-pattern>
+ </servlet-mapping>
+  
+  <filter>  
+    <filter-name>CharacterEncodingFilter</filter-name>  
+     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+     <init-param>  
+          <param-name>encoding</param-name>  
+          <param-value>utf-8</param-value>  
+     </init-param>  
+  </filter>  
+  <filter-mapping>  
+     <filter-name>CharacterEncodingFilter</filter-name>  
+     <url-pattern>/*</url-pattern>  
+ </filter-mapping>  
+ 
+ <!-- 指定Spring Bean的配置文件所在目录。默认配置在WEB-INF目录下 -->
+</web-app>  

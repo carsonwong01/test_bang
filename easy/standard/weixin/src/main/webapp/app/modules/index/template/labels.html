@@ -1,0 +1,14 @@
+<!--标签内容-->
+<ul class="my-label-list bg-c-white clearfix con-list" id="labelConList">
+    <%if(list.length > 0){%>
+       <%for(var i=0;i<list.length;i++){%>
+	   		<li class="my-label-item" 
+	   		id="currLabelItem"
+	   		labelTypeId="<%=list[i].labelTypeId%>" 
+	   		projectType="<%=list[i].projectType%>"
+	   		labelName="<%=list[i].labelName%>">
+   				<span class="my-label-item-con ub ub-ac ub-pc">#<%=list[i].labelName%></span>
+	   		</li>
+	   <%}%> 
+	<%}%>   
+</ul>

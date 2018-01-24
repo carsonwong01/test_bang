@@ -1,0 +1,49 @@
+<div class="fn-s-14">
+	<div class="cardMessage">
+		<%for(var i=0;i<bankList.length;i++){%>
+		<div class="hide myBank" cardId="<%=bankList[i].cardId%>">
+             <div class="ub ub-ac ub-f1 b-bottom pd-all-10 bc-white">
+             <div class="ub-f1 fn-s-15 fn-c"><img src="<%=Config.url('imgAddress')+'/easy/images/bank_card_'+bankList[i].bankCode+'.png'%>"/></div>
+				<div class="ub-f1 ub ub-pe"><span class="pd-r-10">尾号<%=(bankList[i].cardNumber).substring(bankList[i].cardNumber.length-4)%> 储蓄卡</span><span class="selectBank pd-b-10"></span></div>
+              </div>
+          </div>
+    	<%}%>
+	</div>
+	
+	<div class="mg-t-10 bc-white pd-all-10">
+		<div class="bd-b pd-b-10 fn-c-gray ub">
+			<div class="ub-f1">可用余额:<%=DMJS.userInfo.availableAmount%>元</div>
+			<div class="ub-f1 ub ub-pe fn-c-blue allProposed">全部提出</div>
+		</div>
+		<div class="bd-b">
+			<div class="ub pd-t-10">
+				<div class="ub-f1 fn-c-gray">提现金额</div>
+			</div>
+			<div class="ub ub-ac uinput pd-b-10">
+                <div class="width40 ub ub-pe">
+                    <div class=" pd-r-10 fn-c fn-s-30">￥</div>
+                </div>
+                <div class="ub-f1">
+                    <input id="amount"  name="amount" placeholder="最多提现<%=DMJS.userInfo.availableAmount%>元" type="text" title="提现金额"  validator="notEmpty;" style="font-size:1.5rem;">
+
+                </div>
+            </div>
+		</div>
+		<div class="ub pd-t-10 ub-ac">
+			<div class="ub-f1 fn-s-11 ub ub-ac">提现手续费：<span class="fn-c-red" id="txsxf">0.00</span>元<span class="helpImg ub ub-ac"></span></div>
+			<div class="ub-f1 fn-s-11 ub ub-pe">实际到帐金额：<span class="fn-c-red" id="paySum">0.00</span>元</div>
+		</div>
+	</div>
+	<div class="pd-all-10">
+		<p class="pd-bt-10">
+			温馨提示：
+		</p>
+		<p class="fn-s-12">
+			1.提现到账时间T+1，节假日除外。<br/>	
+			2.提现必须为绑定的银行储蓄卡，不支持存折，信用卡提现。
+		</p>
+	</div>
+	<div class="address-keep" id="toWidthdraw">
+    	<p class="btn-address-keep ub ub-ac ub-pc">申请提现</p>
+    </div>
+</div>

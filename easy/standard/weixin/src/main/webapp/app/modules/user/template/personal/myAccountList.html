@@ -1,0 +1,34 @@
+<%for(var i=0;i<list.length;i++){%>
+	<%if(yearMonth != list[i].yearMonth){ yearMonth = list[i].yearMonth;%> 
+		<div class="pd-all-10">
+			<span><%=list[i].yearMonth%></span>
+		</div>
+	<%}%>
+		<div class="bc-white bd-b">
+			<div class="ub pd-lr-10 pd-t-10">
+				<div class="ub-f1 fn-c width70"><span><%=list[i].projectName%></span>
+				<%switch(list[i].tradeType){ 
+         			case '1':%><span class="fn-c">(众筹成功)</span><%;break;
+         			case '2':%><span class="fn-c">(众筹成功)</span><%;break;
+         			case '3':%><span class="fn-c">(提现申请)</span><%;break;
+         			case '4':%><span class="fn-c">(提现失败)</span><%;break;
+         			}%>
+					
+				</div>
+				<div class="ub-f1 ub ub-pe fn-c">
+					<span><%=list[i].capitalDirection=='1'?'+':'-'%><%=list[i].tradeAmount%></span>
+				</div>
+				
+			</div>
+			<div class="ub pd-all-10">
+				<div class="ub-f1"><%=list[i].dateCreate%></div>
+				<div class="ub-f1 ub ub-pe">
+				<%switch(list[i].accountType){ 
+					case '1':%><span class="reward_color">可用金额</span><%;break;
+					case '2':%><span class="donate_color">冻结金额</span><%;break;
+				}%>
+				</div>
+			</div>
+		</div>
+		
+<%}%>

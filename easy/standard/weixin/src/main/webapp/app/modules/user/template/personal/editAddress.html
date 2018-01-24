@@ -1,0 +1,57 @@
+<!--编辑收获地址-->
+<div class="add-address-pg">
+	<div class="add-address-con">
+	    <div class="address-item ub ub-ac b-bottom">
+	    	<div class="ub ub-ac width30 til"><span>收件人</span></div>
+	    	<div class="ub ub-ac width62"><input id="name" name="name" class="input_non ub ub-ac" nextfocus="phone" title="收件人" placeholder="请输入收件人姓名" maxlength="10" value="<%=consigneeName%>" validator="notEmpty;length[2,10];reg[/^[\u4e00-\u9fa5]{2,}$/]"></div>
+	        <div class="ub ub-ac width8"></div>
+	    </div>
+	    <div class="address-item ub ub-ac b-bottom">
+	    	<div class="ub ub-ac width30 til"><span>手机号</span></div>
+	    	<div class="ub ub-ac width62"><input id="phone" name="phone" class="input_non ub ub-ac" nextfocus="address" type="tel"  title="手机号" placeholder="请输入手机号" maxlength="11" value="<%=consigneePhone%>" validator="notEmpty;reg[/^[1][3|4|5|7|8][0-9]{9}$/]"></div>
+	        <div class="ub ub-ac width8"></div>
+	    </div>
+	    <div class="address-item ub ub-ac b-bottom" action="action:toShen">
+	    	<div class="ub ub-ac width30 hei-20"><span>省份</span></div>
+	    	<div class="ub ub-ac width62 ub-pe hei-20"><p class="t-6" id="provinceS"><%=province%></span></div>
+	    	<div class="ub ub-ac width8 ub-pe hei-20"><i class="icon-right ub ub-ac"></i></div>
+	    </div>
+	    
+	    <div class="address-item ub ub-ac b-bottom" action="action:toCity">
+	    	<div class="ub ub-ac width30 hei-20"><span>城市</span></div>
+	    	<div class="ub ub-ac width62 ub-pe hei-20"><p class="t-6" id="cityS"><%=city%></span></div>
+	    	<div class="ub ub-ac width8 ub-pe hei-20"><i class="icon-right ub ub-ac"></i></div>
+	    </div>
+	    
+	    <div class="address-item ub ub-ac b-bottom" action="action:toCounty">
+	    	<div class="ub ub-ac width30 hei-20"><span>地区</span></div>
+	    	<div class="ub ub-ac width62 ub-pe hei-20"><p class="t-6" id="countyS"><%=county%></span></div>
+	    	<div class="ub ub-ac width8 ub-pe hei-20"><i class="icon-right ub ub-ac"></i></div>
+	    	<input type="hidden" id="region" name="regionId" value="<%=countyId%>" definemsg="请选择完整的省市区" validator="{notEmpty};">
+	    </div>
+	   <div class="address-item ub ub-ac">
+	    	<div class="ub ub-ac width30 til"><span>详细地址</span></div>
+	    	<div class="ub ub-ac width62"><input id="address" maxlength="60" name="address" class="input_non ub ub-ac" nextfocus="" title="详细地址" placeholder="请输入详细地址" value="<%=consigneeAddress%>" validator="notEmpty;"></div>
+	        <div class="ub ub-ac width8"></div>
+	   </div>
+    </div>
+    <!--设置为默认地址-->
+    <div class="ship-dets-switch ub ub-ac bg-c-white">
+    	<div class="ub-f1 hei-20 lhei-20"><span class="t-3 fn-s-14">设为默认地址</span></div>
+		<div class="mint-cell-value">
+			<div class="mint-switch">
+				<input type="checkbox" id="defaultAddress" class="mint-switch-input" <%=isDefault=='1'?"checked":''%>> 
+				<span class="mint-switch-core"></span> 
+				<div class="mint-switch-label"></div>
+			</div>
+		</div>
+	</div>
+    </div>
+    <div class="address-keep">
+    	<p class="btn-address-keep ub ub-ac ub-pc" id="updateAddressBtn">保存</p>
+    </div>
+    <div class="address-keep address-del">
+    	<p class="btn-address-keep ub ub-ac ub-pc" id="delAddressBtn">删除</p>
+    </div>
+</div>
+

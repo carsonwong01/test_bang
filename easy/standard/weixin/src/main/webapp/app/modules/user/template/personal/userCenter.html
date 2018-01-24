@@ -1,0 +1,98 @@
+<div>
+	<div class="user-head" action="user/personal/personSet">
+		<div class="head-info-con ub ub-pc ">
+			<div class="head-con">
+				<%if(headUrl){%>
+				<img src="<%=(headUrl.indexOf('http://')==-1?Config.url('imgAddress'):'')+headUrl%>">
+				<%}%>
+			</div>
+		</div>
+		<div class="head-name ub ub-pc"><span><%=nickName%></span></div>
+		<div class="user-info-con ub ub-pc ub-ac">
+			<span class="phone-num"><%=phoneNumber.substr(0,3)+'****'+phoneNumber.substr(7)%></span>
+			<span class="circle-bg ub ub-ac ub-pc"><i class="icon-authen <%=idcardStatus=='1'?'authen-active':'authen-unactive'%> ub ub-ac"></i></span>
+			<span class="circle-bg ub ub-ac ub-pc"><i class="icon-tran <%=tradePwdStatus=='1'?'tran-active':'tran-unactive'%> ub ub-ac"></i></span>
+			<span class="icon-head-right ub ub-ac"></span>
+		</div>
+	</div>
+	<div class="user-data ub ub-ac ub-pc">
+		<div class="user-data-pro ub-f1 b-right" action="user/personal/myLaunch">
+			<p class="user-data-num"><%=launchProNumber%></p>
+			<p class="user-data-til">发起的项目</p>
+		</div>
+		<div class="user-data-pro ub-f1 b-right" action="action:myOrder">
+			<p class="user-data-num"><%=supportProNumber%></p>
+			<p class="user-data-til">支持的项目</p>
+		</div>
+		<div class="user-data-pro ub-f1" action="user/personal/myAttention">
+			<p class="user-data-num"><%=focusProNumber%></p>
+			<p class="user-data-til">关注的项目</p>
+		</div>
+	</div>
+	<div class="user-con bg-c-white"> 
+		<div class="user-item ub ub-ac" action="user/personal/myAccount">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-money user-icon"></span>
+		        <span class="user-til">我的账户</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="user-money-num"><%=accountAmt%>元</span>
+				<span class="icon-right"></span>
+			</div>
+	    </div>
+	    <div class="user-item ub ub-ac"action="user/personal/transDetails">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-detail user-icon"></span>
+		        <span class="user-til">交易明细</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="icon-right"></span>
+			</div>
+	    </div>
+	    <div class="user-item ub ub-ac" action="user/payment/myBankList">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-bank user-icon"></span>
+		        <span class="user-til">银行卡</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="icon-right"></span>
+			</div>
+	    </div>
+	    <div class="user-item ub ub-ac" action="user/personal/help">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-help user-icon"></span>
+		        <span class="user-til">帮助中心</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="icon-right"></span>
+			</div>
+	    </div>
+	    <!--<div class="user-item ub ub-ac">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-disturn user-icon"></span>
+		        <span class="user-til">免打扰设置</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="icon-right"></span>
+			</div>
+	    </div>-->
+	    <div class="user-item ub ub-ac" action="user/personal/feedback">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-notes user-icon"></span>
+		        <span class="user-til">意见反馈</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="icon-right"></span>
+			</div>
+	    </div>
+	    <div class="user-item ub ub-ac" action="user/personal/aboutUs">
+			<div class="item-left ub-f1 ub-ac ub-pc">
+				<span class="icon-about user-icon"></span>
+		        <span class="user-til">关于帮你筹</span>
+			</div>
+			<div class="item-right ub-f1 ub ub-ae ub-pe">
+				<span class="icon-right"></span>
+			</div>
+	    </div>
+	</div>
+</div>

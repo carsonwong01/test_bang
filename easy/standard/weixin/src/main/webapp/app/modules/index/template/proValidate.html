@@ -1,0 +1,55 @@
+<div class="fn-s-1">
+	<div class="ub ub-ac mg-bt-10 bg-c-white line-h-20" action="index/index/projectDetails/<%=singleResult.id%>">
+		<div class="pd-all-10 tx-ac lblack fn-s-11E">
+			<img class="pro-img" src="<%=Config.url("imgAddress")+singleResult.coverImgUrl%>">
+			<span>&nbsp;&nbsp;<%=singleResult.title%></span>
+		</div>
+		<div class="ub ub-ac ub-pe ub-f1 pd-all-10">
+			<i class="dsb img-more"></i>
+		</div>
+	</div>
+	<div>
+		<div class="bg-c-white hei-20">
+			<div class="bd-rl3 width25 height100"></div>
+		</div>
+		<%for(var i=0;i<pageResult.length;i++){%>
+			<div class="ub bg-c-white">
+				<div class="bd-rl3 width25 pd-all-10">
+					<%=pageResult[i].dateFormat%>
+					<%if(pageResult[i].status){%>
+						<div class="circle <%=pageResult[i].status=='3'?'circle-bc-suc':'circle-bc-fail'%>"></div>
+					<%}else{%>
+						<div class="circle"></div>
+					<%}%>
+				</div>
+				<div class="ub-f1 mg-l-20 mg-r-10">
+					<%if(pageResult[i].status=="2"){%>
+						<div class="ub ub-ac valicontent radius5 fn-s-11E fn-c-red73">
+							<%=pageResult[i].title%>
+						</div>
+						<p class="line-h-20 mg-tb-5"><span class="t-3">驳回原因：</span><span><%=pageResult[i].opinion%></span></p>
+					<%}else if(pageResult[i].status=="3"){%>
+						<div class="ub ub-ac valicontent radius5 fn-s-11E t-green">
+							<%=pageResult[i].title%>
+						</div>
+					<%}else{%>
+						<div class="ub ub-ac valicontent radius5 fn-s-11E">
+							<%=pageResult[i].title%>
+						</div>
+					<%}%>
+				</div>
+			</div>
+		<%}%>
+		<div class="bg-c-white hei-20">
+			<div class="bd-rl3 width25 height100"></div>
+		</div>
+	</div>
+	<div class="ub ub-pc">
+		<div class="width90 address-keep-hollow">
+			<%if(singleResult.validationStatus=="2"){%>
+				<div class="btn-address-keep-hollow tx-ac mg-b-11 bg-c-blue" style="color: white;" action="aciton:toUpdateVali">修改验证资料</div>
+			<%}%>
+			<div class="btn-address-keep-hollow tx-ac mg-b-11" action="index/index/projectDetails/<%=singleResult.id%>">返回项目</div>
+		</div>
+	</div>
+</div>

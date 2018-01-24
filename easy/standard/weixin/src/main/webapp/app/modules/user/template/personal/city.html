@@ -1,0 +1,11 @@
+<p class='chooseAdd1 fn-s-13E' id='cShen'>选择市</p>
+<div class='lc-ff' id='cityNr'>
+    <div>
+		<%for(var i=0;i<cityList.length;i++){%>
+			<div class="ub chooseAdd-item Jcity" cityId='<%=cityList[i].regionId%>'>
+				<p class="lmg-r-32" ><%=cityList[i].city%></p>
+				<span class="larow"></span>
+			</div>
+		<%}%>
+    </div>
+</div>

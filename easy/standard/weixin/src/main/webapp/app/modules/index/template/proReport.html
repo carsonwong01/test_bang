@@ -1,0 +1,45 @@
+<!--项目举报-->
+<div class="pro-report-con">
+	<!--举报人姓名-->
+	<div class="feed-email ub ub-ac bd-b report-name bg-c-white">
+    	<div class="ub ub-ac width30 fn-s-14 hei-20 lhei-20"><span class="t-3">举报人姓名</span></div>
+    	<div class="ub ub-ac width70 fn-s-14">
+	    	<input id="name" maxlength="15" name="name" class="input_non t-9 ub ub-ac hei-20 fn-s-14 lhei-20" nextfocus="" title="举报人姓名" placeholder="请填写举报人真实姓名" validator="notEmpty;length[2,10];reg[/^[\u4e00-\u9fa5]{2,}$/]"> 	
+    	</div>
+    </div>
+    <!--联系电话-->
+    <div class="feed-email ub ub-ac report-name bg-c-white">
+    	<div class="ub ub-ac width30 fn-s-14 hei-20 lhei-20"><span class="t-3">联系电话</span></div>
+    	<div class="ub ub-ac width70 fn-s-14">
+	    	<input id="phone" maxlength="11" name="phone" class="input_non t-9 ub ub-ac hei-20 fn-s-14 lhei-20" nextfocus="" title="联系电话" placeholder="请填写举报人联系电话" validator="notEmpty;reg[/^[1][3|4|5|7|8][0-9]{9}$/]"> 	
+    	</div>
+    </div>
+	<div class="feed-text report-text bg-c-white">
+		<textarea class="ub w100 radius fn-s-14 control-input" name="content" maxlength="200" validator="notEmpty;" title="举报原因" placeholder="请填写您举报该项目的原因与理由"></textarea>
+	</div>
+	<!--上传相关资料-->
+	<div class="report-upload bg-c-white">
+		<p class="til t-6 fn-s-14">项目举报相关图片（最多可传6张）</p>
+		<div class="clearfix pd-bt-10">
+			<div id="uploadImg" class="upload-file radius5 bd-dashed mg-r-5 mg-t-10" style="float: left;">
+			<div class="add-img"></div>
+			<span class="dsb ub ub-pc tx-c t-ccc">上传项目举报</span>
+			<span class="dsb ub ub-pc tx-c t-ccc">相关图片</span>
+			<input class="upload-file Upload" multiple type="file" definemsg="请上传举报相关图片" validator="" style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+		</div>
+		</div>
+		
+	</div>
+    
+    <!--附件-->
+    <div class="report-file">
+    	<span class="t-9 fn-s-12">附：</span>
+    	<span class="t-blue fn-s-12" id="peopleLawOfChina">《中华人民共和国民法通则》</span>
+    	<span class="t-blue fn-s-12" id="criminalLawOfChina">《中华人民共和国刑法》</span>
+    </div>
+    
+    <!--确认举报-->
+	<div class="address-keep report-btn">
+    	<p class="btn-address-keep ub ub-ac ub-pc" id="reportBtn">确认举报</p>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="bc-white">
+		<%for(var i=0;i<list.length;i++){%>
+				<div class="pd-all-10 ub bd-b">
+					<div class="ub-f1 l-img-p">
+					     <div class="freeze_img" style="background-image: url(<%=Config.url('imgAddress')+list[i].proImg%>);"></div>
+				    </div>
+					<div class="ub-f1 hei-50">
+						<div class="ub pd-bt-5 ub-ac fn-c">
+						<div class="ub-f1 fn-wei"><%=list[i].proTitle%></div>
+						<div class="ub-f1 ub ub-pe">+<%=list[i].proFreezeMoney%></div>
+					</div>
+				<div class="ub pd-bt-5 ub-ac fn-s-12">
+					<div class="ub-f1"><%=list[i].proCreteTime%></div>
+					<div class="ub-f1 ub ub-pe">
+						<%if(list[i].projectType=='6'){%>
+							<span class="freeze-status" action="user/personal/supportOrderReturnPro/<%=list[i].proId%>/<%=list[i].projectType%>">去发货</span>
+						<%}%>
+						<%if(list[i].validStatus=='2'){%>
+							<span class="freeze-status" action="">去验证</span>
+						<%}%>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%}%>
+</div>

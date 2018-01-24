@@ -1,0 +1,23 @@
+<div class="fn-s-14">
+	<%if(DMJS.userInfo.mobile){%>
+	<div class="pd-all-10">请填写您手机<span><%=DMJS.userInfo.mobile%></span>收到的短信验证码</div>
+	<%}%>
+	<div class="bc-white "> 
+            <div class="ub ub-ac uinput bd-b">
+                <div class="pd-all-10">
+                    <div class="password_yzm lub-img8"></div>
+                </div>
+                <div class="ub-f1 bd-r-shadow">
+                    <input id="verityCode" value="" type="text" placeholder="请输入验证码" maxlength="6" validator="notEmpty;">
+                </div>
+                <div class="pd-all-10 tx-l fn-c-blue" style="border-left:1px solid #ccc;"id="yzm" action="action:getMobileCode">
+                	<span>获取验证码</span>
+                </div>
+                <div class="pd-all-10 tx-l fn-c-blue hide" id="yzm_info"  style="color: #D3D3D3;"><span id="yzm_count">60</span>秒重新发送</div>
+            </div>
+    </div>
+    
+     <div class="address-keep" action="action:verificationCode">
+    	<p class="btn-address-keep ub ub-ac ub-pc">下一步</p>
+    </div>
+</div>

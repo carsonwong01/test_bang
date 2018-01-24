@@ -1,0 +1,17 @@
+<div>
+	<ul class="mg-t-10 bg-c-white clearfix Select pd-lr-5">
+		<%for(var i=0;i<list.length;i++){%>
+			<li class="my-label-item">
+				<span class="my-label-item-con ub ub-ac ub-pc <%=list[i].selected?'sel-label':''%>"><%=list[i].labelName%></span>
+			</li>
+		<%}%>
+	</ul>
+	<div class="address-keep">
+		<div class="btn-address-keep tx-ac" action="action:confirmLab">
+			确定
+		</div>
+		<div class="mg-t-10 tx-ac">
+			<span>最多选择两个标签</span>
+		</div>
+	</div>
+</div>

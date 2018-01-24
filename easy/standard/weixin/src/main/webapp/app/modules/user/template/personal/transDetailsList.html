@@ -1,0 +1,48 @@
+<!--交易明细-->
+
+
+   <%for(var i=0;i< list.length;i++){%>
+   
+		<div class="trans-item">
+		   <%if(yearMonth != list[i].yearMonth){ yearMonth = list[i].yearMonth;%> 
+	 		<div class="trans-time-til">
+				<span class="t-6 fn-s-14"><%=list[i].yearMonth%></span>
+			</div>
+		  <%}%>
+		    <%if(list[i].tradeType == "1"||list[i].tradeType=="5"){%>
+			<div class="trans-det-item bd-b" action = "user/personal/transProDetails/<%=list[i].tradeType%>/<%=list[i].orderId%>">
+			<%}else if(list[i].tradeType == "2"||list[i].tradeType=="3"){%>
+			<div class="trans-det-item bd-b"  id="postDet" tradeAmount="<%=list[i].tradeAmount%>" tradeType="<%=list[i].tradeType%>" dateCreate="<%=list[i].dateCreate%>">
+			<%}%>
+				<div class="ub ub-ac pd-b-5 fn-s-14">
+				<%switch(list[i].tradeType){
+			       case "1":%>
+		       			<span class="ub-f1 ub ub-ac t-3">订单支付</span>
+		       			<%break;
+	     		   case "2":%>
+		       			<span class="ub-f1 ub ub-ac t-3">提现</span>
+		       			<%break;
+		       	   case "3":%>
+		       			<span class="ub-f1 ub ub-ac t-3">提现手续费</span>
+		       			<%break;
+	       		   case "4":%>
+		       			<span class="ub-f1 ub ub-ac t-3">调账</span>
+		       			<%break;
+	       		   case "5":%>
+		       		    <span class="ub-f1 ub ub-ac t-3">订单退款</span>
+		       			<%break;
+                }%>
+				<%if(list[i].capitalDirection == "1"){%>	
+					<span class="ub-f1 ub ub-ac ub-pe t-3">+<%=list[i].tradeAmount%></span>
+			    <%}else{%>
+			        <span class="ub-f1 ub ub-ac ub-pe t-green">-<%=list[i].tradeAmount%></span>
+			    <%}%> 		
+				</div>
+				<div class="ub ub-ac">
+					<span class="fn-s-12 t-9"><%=list[i].dateCreate%></span>
+				</div>
+			</div>
+		</div>
+	
+	<%}%>
+

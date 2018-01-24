@@ -1,0 +1,48 @@
+<%for(var i=0;i<list.length;i++){%>
+	<div class="l-item">
+         	<!--til-->
+         	<div class="l-item-til ub ub-ac">
+         		<p class="til ub ub-ac"><span class="t-3"><%=list[i].nickName%></span><sapn class="t-9">发起</sapn></p>
+         		<p class="ub-f1 ub ub-ac ub-pe fn-s-12 fn-c-gold">
+         			<i class="ub ub-ac icon-clock mg-r-3"></i>
+         			<span><%=list[i].timeLeft>=1?'剩余'+list[i].timeLeft+'天':'即将结束'%></span>
+         		</p>
+         	</div>
+         	<!--con-->
+         	<div class="l-item-con ub bd-b proList" projectId="<%=list[i].projectId%>">
+         		<div class="item-img"><img src="<%=Config.url('imgAddress')+list[i].projectImg%>"/></div>
+         		<div class="ub-f1">
+     				<p class="label-item-title"><%=list[i].projectName%></p>
+     				<p class="label-item-content"><%=list[i].projectIntro%></p>
+         			<div class="ub">
+         				<p class="ub ub-f1 ub-ac fn-s-12 t-3">
+         					<%for(var j=0;j<list[i].projectTags.length;j++){%>
+         					#<span class="labelList"><%=list[i].projectTags[j]%></span>&nbsp;
+         					<%}%>
+         				</p>
+         				<!--<p class="ub ub-f1 ub-ac ub-pe fn-s-12 t-9">进度<span class="t-3"><%=((list[i].rate)*100).toFixed(2)%></span>%</p>-->
+         			</div>
+         		</div>
+         	</div>
+         	<!--data-->
+         	<div class="l-data ub ub-ac pd-bt-10">
+         		<div class="ub-f1">
+ 					<p class="t-9 fn-s-12 ub ub-pc"><span class="fn-s-14 t-3 fn-wei"><%=list[i].targetAmount%></span>元</p>
+ 					<p class="t-9 fn-s-12 ub ub-pc">目标</p>
+ 				</div>
+ 				<div class="ub-f1">
+ 					<p class="t-9 fn-s-12 ub ub-pc"><span class="fn-s-14 t-3 fn-wei"><%=list[i].raiseTotal%></span>元</p>
+ 					<p class="t-9 fn-s-12 ub ub-pc">已筹</p>
+ 				</div>
+ 				<div class="ub-f1">
+ 					<p class="t-9 fn-s-12 ub ub-pc"><span class="fn-s-14 t-3 fn-wei"><%=list[i].supportCount%></span>次</p>
+ 					<p class="t-9 fn-s-12 ub ub-pc">支持</p>
+ 				</div>
+ 				<div class="ub-f1">
+ 					<p class="t-9 fn-s-12 ub ub-pc"><span class="fn-s-14 t-3 fn-wei"><%=((list[i].rate)*100).toFixed(2)%></span>%</p>
+ 					<p class="t-9 fn-s-12 ub ub-pc">进度</p>
+ 				</div>
+         	</div>
+         </div>
+	<%}%>
+	

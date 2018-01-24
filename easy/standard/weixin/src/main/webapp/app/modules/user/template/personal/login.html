@@ -1,0 +1,72 @@
+<div>
+	<div class="width100">
+		<%if(singleResult){%>
+			<div class="ub ub-ae ub-pc" style="height: 14rem;">
+				<img src="<%=singleResult.headImgUrl%>" class="login_user">
+			</div>
+		<%}else{%>
+			<div class="width100" style="height: 18rem;">
+				<div class="width100 hei-100 login_logo mg-t-30"></div>
+				<div class="ub ub-pc fn-s-15 fn-c">帮你筹</div>
+			</div>
+		<%}%>
+	</div>
+	<%if(singleResult){%>
+	<div class="line-h-25 mg-bt-10">
+		<span class="dsb lblack tx-c lin fn-s-14"><%=singleResult.nickName%></span>
+		<span class="dsb tx-c fn-s-11">太棒了！只需验证完成手机号即可完成注册了！</span>
+	</div>
+	<%}%>
+	<div class="mg-l-20 mg-r-20 fn-s-14">
+		<div class="ub ub-ac uinput b-bottom">
+			<div class="icon_login img-phone"></div>
+			<div class="ub-f1 lpd-all-10 fn-c-gray1" id="phone">
+				<input type="tel" name="phoneNumber" title="手机号" placeholder="请输入您的手机号" maxlength="11" validator="notEmpty;length[11];reg[/^[1][3|4|5|7|8][0-9]{9}$/]"/>
+			</div>
+		</div>
+		<div class="ub ub-ac uinput  b-bottom">
+			<div class="icon_login img-yzm"></div>
+			<div class="ub-f1 pd-l-10 pd-t-10 pd-b-10">
+				<input type="tel" name="loginYzm" title="验证码" placeholder="请输入您的验证码" validator="notEmpty;"  maxlength="6"/>
+			</div>
+			<div class="pd-bt-10 fn-c-blue" id="yzm" action="action:getMobileCode">
+				获取验证码
+			</div>
+			<div class="pd-bt-10 fn-c-blue hide" id="yzm_info"  style="color: #D3D3D3;"><span id="yzm_count">60</span>秒重新发送</div>
+		</div>
+		<div class="fn-s-11 mg-t-5 mg-l-30">
+			<span>注：新用户输入验证码即可登录</span>
+		</div>
+		<div class="ub ub-ac fn-s-11">
+			<input type="checkbox" class="uhide" title="请阅读注册协议" validator="checked;" id="autid" checked="true">
+			<div action="action:turnRememberRido" class="che-icon ub-img-s12 icon_login"></div>
+			<div class="check_act uhide"></div>
+			<div class="lpd-all-10">
+				<span action="action:turnRememberRido">我已阅读并同意</span>
+				<span action="action:agreement" class="fn-c-blue">
+					<span id="protocal"><%=protocolTitle%></span>
+				</span>
+			</div>
+		</div>
+		<div class="address-keep login" action="action:doLogin">
+			<div class="btn-address-keep tx-ac b-shadow">
+				登录
+			</div>
+		</div>
+	</div>
+	<div class="mg-l-20 mg-r-20">
+		<div class="tx-ac width100 fn-s-12 mg-t-20 threeLogin">
+			<span class="">
+				&nbsp;&nbsp;使用社交账户登录&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="ub mg-t-20">
+		<%if(DMJS.CommonTools.isWeiXin()){%>
+			<div class="ub-f1 icon_three img-weixin" action="action:empower['wx']"></div>
+		<%}%>
+			<div class="ub-f1 icon_three img-qq" action="action:empower['qq']"></div>
+			<div class="ub-f1 icon_three img-xinlang" action="action:empower['wb']"></div>
+		</div>
+		<div class="hei-50"></div>
+	</div>
+</div>

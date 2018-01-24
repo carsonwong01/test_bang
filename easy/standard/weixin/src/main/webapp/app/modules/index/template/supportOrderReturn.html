@@ -1,0 +1,92 @@
+<!--支持下单--回报-->
+<div class="sup-order-con">
+	<!--回报列表-->
+	<div class="sup-til"><span class="t-6 fn-s-14">请选择回报</span></div>
+	<div class="sup-drem-list bg-c-white">
+		<%for(var i=0;i<comment.length;i++){%>
+		<div class="drem-item bd-b ub ub-ac" returnid="<%=comment[i].id%>" action = "action:selectBack[<%=comment[i].remainingNum%>,<%=comment[i].amount%>]">
+			<div class="drem-item-choice ub ub-ac mg-r-10">
+				<i class="icon-s <%=i==selected?'icon-select':'icon-unselect'%> ub ub-ac"></i>
+			</div>
+			<div class="drem-item-con ub-f1">
+				<p class="ub ub-ac pd-b-5">
+					<span class="retrun-pro-pic mg-r-10" style="background: url(<%=Config.url("imgAddress")+comment[i].imgUrl%>);background-size: 3rem 3rem;"></span>
+					<span class="fn-s-14 t-blue fn-wei ub ub-ac">支持<%=comment[i].amount%>元</span>
+					<span class="fn-s-12 t-9 ub ub-f1 ub-ac ub-pe">
+					<%if(comment[i].remainingNum == 0){%>
+						已售罄
+					<%}else if(comment[i].remainingNum < 0){%>
+						支持<%=comment[i].supportCount%>份
+					<%}else{%>
+						支持<%=comment[i].supportCount%>份/剩余<%=comment[i].remainingNum%>份
+					<%}%>
+					</span>
+				</p>
+				<p><span class="fn-s-14 t-6"><%=comment[i].purposeText%></span></p>
+			</div>
+		</div>
+		<%}%>
+	</div>
+	<!--支持金额-->
+	<div class="ub ub-ac bg-c-white mg-bt-10 pd-lr-10">
+    	<div class="ub ub-ac width25 fn-s-14 hei-20 lhei-20"><span class="t-3">回报项目</span></div>
+    	<div class="ub ub-f1 ub-pe ub-ac">
+			<div id="lessen" class="lessen" action="action:count['lessen']"></div>
+			<div class="ub ub-ac ub-pc lwidth11 cenBor-tb hei-40 fn-s-125">
+				<span id="retrunNums" class="fn-s-18 lblack">1</span>
+				<input class="uhide" id="retrunNum" type="text" name="returnNumber" value="1">
+			</div>
+			<div id="add" class="add" action="action:count['add']"></div>
+		</div>
+    </div>
+    <!--微信支付和收货地址-->
+    <div class="order-wx ub ub-ac bd-b">
+    	<div class="ub-f1 ub ub-ac width10">
+    		<i class="icon-wx-pay v-a"></i>
+    	</div>
+    	<div class="ub-f1 ub ub-ac width90">
+    		<span class="t-3 fn-s-14 ub ub-ac">微信支付</span>
+    		<span class="ub ub-ac ub-pe ub-f1">
+    			<i class="icon-choice v-a"></i>
+    		</span>
+    	</div>
+    </div>
+    <%if(isNeddAddr=="1"){%>
+    <div class="ub ub-ac pro-or-de-place bg-c-white" action="action:selectAdd">
+		<div class="ub ub-ac width10"><i class="icon-get-place"></i></div>
+			<div id="address" class="ub-f1 width85">
+				<%if(address.length>=1){%>
+						<p class="or-user-info t-3 fn-s-14">
+						   <span class="pd-r-5"><%=address[0].userName%></span>
+						   <span class="pd-r-10">（<%=address[0].phoneNumber%>）</span>
+					    </p>
+					    <p class="or-place-info t-9 fn-s-12"><%=address[0].area+address[0].detaileAddress%></p>
+				<%}else{%>
+					    <p class="or-place-info t-9 fn-s-12">暂无收货地址</p>
+				<%}%>
+			</div>
+		<div class="ub ub-f1 ub-ac ub-pe width5"><i class="icon-right"></i></div>
+	</div>
+	<%}%>
+	<!--支持留言-->
+	<div class="feed-text bg-c-white mg-t-10">
+		<textarea name="message" class="ub w100 radius fn-s-14 control-input con-bd-no" title="项目支持" placeholder="给您支持的项目留个言吧！默认：支持"></textarea>
+	</div>
+	
+	<!--服务条款-->
+	<div class="uinput lpd-all-10 m-bg-c">
+		<div class="ub ub-ac fn-s-12">
+			<input type="checkbox" class="uhide" title="平台服务条款" validator="checked;" id="autid" checked="true">
+			<div  action="action:turnRememberRido" class="che-icon ub-img-s12 service-icon mg-r-5"></div>
+			<div class="check_act uhide"></div>
+			<div class="pd-bt-10">
+				<span  action="action:turnRememberRido">我已阅读并同意</span><span action="action:agreement" class="fn-c-blue"><span class="protocal">帮你筹平台服务条款</span></span>
+			</div>
+		</div>
+		<div class="service-tips pd-b-30">
+			<p class="t-9 fn-s-12">请您特别关注协议中的有关风险提示，一旦选择支持即表示您已确知并完全同意相关协议内容</p>
+		</div>
+	</div>
+    
+</div>
+

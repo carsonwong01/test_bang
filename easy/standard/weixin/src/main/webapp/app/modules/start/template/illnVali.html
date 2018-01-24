@@ -1,0 +1,303 @@
+<div class="fn-s-12">
+	<div>
+		<div class="ub ub-ac uinput b-bottom lpd-all-10">
+			<div class="line-h-15 lblack">
+				<%=type=="1-1-4"?"组织机构信息":"收款人信息"%>
+			</div>
+		</div>
+	</div>
+	<div class="bg-c-white">
+		<%if(type.indexOf("-4") == -1){%>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">真实姓名</div>
+				<div class="ub-f1">
+					<input type="text" name="receiveRealName" value="<%=singleResult.receiveRealName%>" validator="notEmpty;length[2,18];reg[/^[\u4e00-\u9fa5]{2,}$/]" title="真实姓名" placeholder="请填写收款人真实姓名" maxlength="15"/>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">身份证号</div>
+				<div class="ub-f1">
+					<input type="text" name="receiveIdCard" value="<%=singleResult.receiveIdCard%>" <%=singleResult.receiveIdCard?"":"validator=notEmpty;length[15,18];reg["+idVali+"];"%>  title="身份证号" placeholder="请填写收款人身份证号" maxlength="18"/>
+				</div>
+			</div>
+		<%}else{%>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">组织名称</div>
+				<div class="ub-f1">
+					<input type="text" name="organizationName" value="<%=singleResult.organizationName%>" validator="notEmpty;" title="组织名称" placeholder="请填写收款组织名称" maxlength="30"/>
+				</div>
+			</div>
+		<%}%>
+		<div class="ub ub-ac uinput b-bottom lpd-all-10">
+			<div class="width25 line-h-15 lblack">联系手机</div>
+			<div class="ub-f1">
+				<input type="tel" value="<%=type.indexOf('-4') == -1?singleResult.receivePhone:singleResult.organizationPhone%>" name="<%=type.indexOf('-4') == -1?'receivePhone':'organizationPhone'%>" validator="notEmpty;length[6,11];reg[/^[1][3|4|5|7|8][0-9]{9}$/]" title="联系手机" placeholder="请填写<%=type.indexOf('-4') == -1?'收款人联系手机':'组织联系手机'%>" maxlength="11"/>
+			</div>
+		</div>
+		<%if(type.indexOf("-4") == -1){%>
+			<div class="b-bottom lpd-all-10">
+				<span class="lblack">收款人手持身份证照片</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in receiveCardImageIds){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+receiveCardImageIds[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(receiveCardImageIds.length||0) < MCidCardFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传手持</span>
+							<span class="dsb ub ub-pc tx-c">身份证图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传收款人手持身份证照片" <%=parseInt(receiveCardImageIds.length||0) > 0?'':'validator="{notEmpty};"'%>  style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+					<div class='upload-file mg-t-10 mg-r-5' style='float: left;'>
+						<div order="1" class='LookImg setCover upload-file-img' style="background-image: url(<%=Config.url("imgAddress")+list[2].imageUrl%>);">
+							<div class='tx-ac fn-c-white'>示例图片</div>
+						</div>
+					</div>
+				</div>
+				<span class="fn-s-9">身份证上的所有信息必须清晰可见，必须能看清身份证号</span>
+			</div>
+		<%}else{%>
+			<div class="b-bottom lpd-all-10">
+				<span class="lblack">组织机构资质证明</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%if(singleResult.organizationAptitudeId){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+singleResult.organizationAptitudeUrl%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=!singleResult.organizationAptitudeId?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传资质</span>
+							<span class="dsb ub ub-pc tx-c">证明图片</span>
+							<input class="upload-file Upload" multiple type="file"  definemsg="请上传组织机构资质证明" <%=singleResult.organizationAptitudeId?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				
+				<span class="fn-s-9">请提供组织机构证明照片</span>
+			</div>
+		<%}%>
+	</div>
+	<%if(type!="1-1-1"){%>
+		<div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="line-h-15 lblack">受助人（患者）信息</div>
+			</div>
+		</div>
+		<div class="bg-c-white">
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">真实姓名</div>
+				<div class="ub-f1">
+					<input type="text" value="<%=singleResult.recipientRealName%>" name="recipientRealName" validator="notEmpty;length[2,18];reg[/^[\u4e00-\u9fa5]{2,}$/]" title="真实姓名" placeholder="请填写受助人真实姓名" maxlength="15"/>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">身份证号</div>
+				<div class="ub-f1">
+					<input type="text" value="<%=singleResult.recipient%>" name="recipient" <%=singleResult.recipient?"":"validator=notEmpty;length[15,18];reg["+idVali+"];"%> title="身份证号" placeholder="请填写受助人身份证号" maxlength="18"/>
+				</div>
+			</div>
+			<div class="b-bottom lpd-all-10">
+				<span class="lblack">受助人手持身份证照片</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in recipientCardImageIds){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+recipientCardImageIds[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(recipientCardImageIds.length||0) < BHidCardFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传手持</span>
+							<span class="dsb ub ub-pc tx-c">身份证图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传受助人手持身份证照片" <%=parseInt(recipientCardImageIds.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+					<div class='upload-file mg-t-10 mg-r-5' style='float: left;'>
+						<div order="2" class='LookImg setCover upload-file-img' style="background-image: url(<%=Config.url("imgAddress")+list[2].imageUrl%>);">
+							<div class='tx-ac fn-c-white'>示例图片</div>
+						</div>
+					</div>
+				</div>
+				<span class="dsb fn-s-9">1、身份证上的所有信息必须清晰可见，必须能看清身份证号；</span>
+				<span class="dsb fn-s-9">2、如受助人因病情原因不能拍照，由直系亲属手持本人身份证和受助人身份证同时拍照；</span>
+				<span class="dsb fn-s-9">3、如受助人为儿童，需提供出生证明。</span>
+			</div>
+		</div>
+		<%if(type=="1-1-2"||type=="1-1-3"){%>
+		<div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="line-h-15 lblack">收款人和受助人（患者）关系</div>
+			</div>
+		</div>
+		<%}%>
+		<%if(type=="1-1-2"){%>
+		<div class="bg-c-white">
+			<div class="b-bottom lpd-all-10">
+				<span class="lblack">户口本照片</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%if(accountBookImgIds.length > 0){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+accountBookImgIds[0].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(accountBookImgIds.length||0) < MCAccountFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传收款人</span>
+							<span class="dsb ub ub-pc tx-c">个人页</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传收款人户口本个人页照片" <%=parseInt(accountBookImgIds.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+					<div>
+						<%if(accountBookImgIds.length > 0){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+accountBookImgIds[1].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(accountBookImgIds.length||0) < BHAccountFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传受助人</span>
+							<span class="dsb ub ub-pc tx-c">个人页</span>
+							<input class="upload-file Upload" multiple type="file"  definemsg="请上传受助人户口本个人页照片" <%=parseInt(accountBookImgIds.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+					<div>
+						<%if(accountBookImgIds.length > 2){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+accountBookImgIds[2].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(accountBookImgIds.length||0) < 3?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">其他补充图片</span>
+							<input class="upload-file Upload" multiple type="file" style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				<span class="fn-s-9">请提供户口本收款人个人页和受助人（患者）个人页</span>
+			</div>
+		</div>
+		<%}else if(type=="1-1-3"){%>
+			<div class="bg-c-white">
+				<div class="b-bottom lpd-all-10">
+					<span class="lblack">结婚证照片</span>
+					<div class="ub pd-bt-10">
+						<div>
+							<%if(singleResult.weddingPictureId){%>
+							<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+singleResult.weddingPictureUrl%>);">
+								<div class="del-img" action="action:delIdCardImg">
+								</div>
+							</div>
+							<%}%>
+							<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=!singleResult.weddingPictureId?'':'uhide'%>" style="float: left;">
+								<div class="add-img"></div>
+								<span class="dsb ub ub-pc tx-c">上传结婚证</span>
+								<span class="dsb ub ub-pc tx-c">照片</span>
+								<input class="upload-file Upload" multiple type="file" definemsg="请上传结婚证照片" <%=singleResult.weddingPictureId?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+							</div>
+						</div>
+						<div class='upload-file mg-t-10 mg-r-5' style='float: left;'>
+							<div class='LookImg setCover upload-file-img' style="background-image: url(<%=Config.url("imgAddress")+list[4].imageUrl%>);">
+								<div class='tx-ac fn-c-white'>示例图片</div>
+							</div>
+						</div>
+					</div>
+					<span class="fn-s-9">请提供与受助人（患者）的结婚证照片</span>
+				</div>
+			</div>
+		<%}%>
+	<%}%>
+	
+	<div>
+		<div class="ub ub-ac uinput b-bottom lpd-all-10">
+			<div class="line-h-15 lblack">疾病诊断医院</div>
+		</div>
+	</div>
+	
+	<div class="bg-c-white">
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">所患疾病</div>
+				<div class="ub-f1">
+					<input type="text" value="<%=singleResult.disease%>" name="disease" validator="notEmpty;" title="所患疾病" placeholder="请填写所患疾病" maxlength="30"/>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="line-h-15 lblack">医院所在省市</div>
+				<div class="ub ub-pe ub-f1" action="action:toShen">
+					<span id="address" class="ub ub-ac pd-r-10"><%=singleResult.hospitalRegionName%></span>
+					<i class="dsb pd-bt-10 img-more"></i>
+					<input type="hidden" value="<%=singleResult.hospitalRegionId%>" name="hospitalRegionId" definemsg="请选择医院所在省市" validator="{notEmpty};">
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 line-h-15 lblack">医院名称</div>
+				<div class="ub-f1">
+					<input type="text" value="<%=singleResult.hospitalName%>" name="hospitalName" validator="notEmpty;" title="医院名称" placeholder="请填写真实的医院名称" maxlength="25"/>
+				</div>
+			</div>
+		<%if(type.indexOf("-1") != -1){%>
+			<div class="b-bottom lpd-all-10">
+				<span class="lblack">医疗诊断说明（可多张）</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in proveImgIds){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+proveImgIds[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg"></div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(proveImgIds.length||0) < MDFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传医疗诊断</span>
+							<span class="dsb ub ub-pc tx-c">结果图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传医疗诊断照片" <%=parseInt(proveImgIds.length||0) > 0 ?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+						<div class='upload-file mg-t-10 mg-r-5' style='float: left;'>
+							<div class='LookImg setCover upload-file-img' style="background-image: url(<%=Config.url("imgAddress")+list[3].imageUrl%>);">
+								<div class='tx-ac fn-c-white'>示例图片</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<span class="fn-s-9">请提供带有医院公章的诊断结果照片</span>
+			</div>
+		<%}else{%>
+			<div class="b-bottom lpd-all-10">
+				<span class="lblack">组织机构资质证明</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%if(singleResult.organizationAptitudeId){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url("imgAddress")+singleResult.organizationAptitudeUrl%>);">
+							<div class="del-img" action="action:delIdCardImg"></div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=!singleResult.organizationAptitudeId?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传资质</span>
+							<span class="dsb ub ub-pc tx-c">证明图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传组织机构资质证明照片" <%=singleResult.organizationAptitudeId?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				
+				<span class="fn-s-9">请提供组织机构证明照片</span>
+			</div>
+		<%}%>
+	</div>
+	<div class="address-keep" action="action:LoadData">
+		<div class="btn-address-keep tx-ac">
+			提交验证
+		</div>
+	</div>
+	<div class="hei-50"></div>
+</div>

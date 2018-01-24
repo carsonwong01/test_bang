@@ -1,0 +1,24 @@
+<div class="fn-s-14">
+	<div class="hei-130 bg-c-blue">
+		<div class="ub">
+			<div class="kefu mg-l-10 ub-f1"></div>
+			<div class="ub-f1 ub ub-ac">
+				<div class="phone ub ub-ac ub-f1"></div>
+				<div class="ub-f1 fn-c-white">
+				<div class="fn-s-13">24小时在线服务</div>
+				<div class="fn-s-18 mg-t-5"><a href="tel:<%=DMJS.userInfo.serviceNumber%>" class="fn-c-white"><%=DMJS.userInfo.serviceNumber%></a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--问题列表二级目录-->
+	<div class="mg-t-10 bc-white pd-bt-3" id="secondQuestion">
+		<%for(var i=0;i<list.length;i++){%>
+		<div class="ub pd-all-10 bd-b" dataId="<%=list[i].id%>">
+			<div class="ub-f1 fn-c"><%=list[i].title%></div>
+			<div class=" ub-f1 ub ub-pe ub-ac"><div class="img-more"></div></div>
+		</div>
+		<%}%>
+	</div>
+	
+</div>

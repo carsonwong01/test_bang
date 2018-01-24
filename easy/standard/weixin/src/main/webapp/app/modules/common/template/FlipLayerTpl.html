@@ -1,0 +1,35 @@
+<div class="list_d FLayer">
+   <ul>
+      <li class="h44">
+        <p class="tac f_c_orange f16">
+           <%=obj["title"]%>
+        </p>
+      </li>
+      <%for(var i=0;i<obj.data.length;i++){%>
+        <%if(obj.defualtkey == obj.data[i][obj.keyString]){%>
+           <li class="h44"
+           Index = <%=i%>
+           data=<%=obj.data[i][obj.keyString]%>>
+              <span style="background:red;">
+                 <%=obj.data[i][obj.valueString]%>
+              </span>
+           </li>
+        <%}else{%>
+           <li class="h44" 
+           Index = <%=i%>
+           data=<%=obj.data[i][obj.keyString]%>>
+              <span>
+                 <%=obj.data[i][obj.valueString]%>
+              </span>
+           </li>
+        <%}%>
+      <%}%>
+      <%if(obj.colse){%>
+        <li class="colseBnt">
+           <p class="tac f_c_orange f16">
+              取消
+           </p>
+        </li>
+      <%}%>
+   </ul>         
+</div>

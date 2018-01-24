@@ -1,0 +1,52 @@
+<%for(var i=0;i<list.length;i++){%>
+		<div class="launch-item-list attentionProject"  projectId="<%=list[i].projectId%>">
+         <div class="launch-item">
+         	<!--til-->
+         	<div class="launch-item-til ub ub-ac">
+         		<p class="til ub-f1 width70"><%=list[i].title%></p>
+         		<p class="ub-f1 ub ub-ac ub-pe width30">
+         			<%switch(list[i].projectStatus){ 
+         			case '1':%><span class="item-type type-zcz">众筹中</span><%;break;
+         			case '2':%><span class="item-type type-zccg">众筹成功</span><%;break;
+         			case '3':%><span class="item-type type-zcsb">众筹失败</span><%;break;
+         			case '4':%><span class="item-type type-zcsb">已删除</span><%;break;
+         			}%>
+         			<i class="icon-more ub ub-ac mg-l-10"></i>
+         		</p>
+         	</div>
+         	<!--con-->
+         	<div class="launch-item-con ub">
+         		<div class="item-img"><img src="<%=Config.url('imgAddress')+list[i].coverImgUrl%>" /></div>
+         		<div class="ub-f1">
+         			<div class="ub tx-c ub-ac b-bottom hei-52">
+         				<div class="ub-f1">
+         					<p class="t-9 fn-s-12 pd-b-5"><span class="fn-s-14 t-3 fn-wei"><%=list[i].facTarget%></span>元</p>
+         					<p class="t-9 fn-s-12">目标金额</p>
+         				</div>
+         				<div class="ub-f1">
+         					<p class="t-9 fn-s-12 pd-b-5"><span class="fn-s-14 t-3 fn-wei"><%=list[i].supportAmt%></span>元</p>
+         					<p class="t-9 fn-s-12">已筹金额</p>
+         				</div>
+         				<div class="ub-f1">
+         					<p class="t-9 fn-s-12 pd-b-5"><span class="fn-s-14 t-3 fn-wei"><%=list[i].supportTimes%></span>次</p>
+         					<p class="t-9 fn-s-12">支持人次</p>
+         				</div>
+         			</div>
+         			<div class="ub hei-24 pd-t-10">
+         				<p class="ub ub-f1 ub-ac hei-14 fn-s-12 fn-c-gold width75">
+         				<i class="ub ub-ac icon-clock mg-r-3"></i>
+         					<%if(parseInt(list[i].remainingDay) > 0 && list[i].projectStatus == "1"){%>   
+	    				           <span>剩余<em><%=list[i].remainingDay%></em>天</span>
+	    				        <%}else if(parseInt(list[i].remainingDay) == 0 && list[i].projectStatus == "1"){%> 
+	    				           <span>即将结束</span>
+	    				        <%}else{%>
+	    				           <span>已结束</span>
+	    				        <%}%>
+         				</p>
+         				<p class="ub ub-f1 ub-ac hei-14 ub-pe fn-s-12 fn-c-blue cancleAttention">取消关注</p>
+         			</div>
+         		</div>
+         	</div>
+         </div>
+    </div>
+	<%}%>

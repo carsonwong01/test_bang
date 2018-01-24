@@ -1,0 +1,43 @@
+<div>
+   <div class="pro-man-con pd-t-30 pd-lr-10">
+   	   <div class="supp-order width25 ufl mg-b-30" action="action:supportOrderAction">
+   	   	   <div class="supp-order-bg mar-auto"></div>
+   	   	   <div class="supp-order-til pd-t-8 tx-c"><span class="t-3 fn-s-14">支持订单</span></div>
+   	   </div>
+   	   
+   	   <%if(projectStatus == "1"){%> <!--众筹中-->
+   	   <div class="edit-pro width25 ufl mg-b-30" action="action:toUpdate">
+   	   	   <div class="edit-pro-bg mar-auto"></div>
+   	   	   <div class="edit-pro-til pd-t-8 tx-c"><span class="t-3 fn-s-14">编辑项目</span></div>
+   	   </div>
+   	   <%}%>
+   	   
+   	   <div class="up-trends width25 ufl mg-b-30" action="user/personal/updateDynamics/<%=projectId%>">
+   	   	   <div class="up-trends-bg mar-auto"></div>
+   	   	   <div class="up-trends-til pd-t-8 tx-c"><span class="t-3 fn-s-14">更新动态</span></div>
+   	   </div>
+   	   
+   	   <%if(projectStatus == "1" || projectStatus == "2"){%> <!--众筹中和众筹成功-->
+   	   <div class="pro-valid width25 ufl mg-b-30" action="action:toVali">
+   	   	   <div class="pro-valid-bg mar-auto"></div>
+   	   	   <div class="pro-valid-til pd-t-8 tx-c"><span class="t-3 fn-s-14">项目验证</span></div>
+   	   </div>
+   	   <%}%>
+   	   
+   	   <%if(projectStatus == "1"){%><!--众筹中-->
+   	   <div class="ahead-end width25 ufl mg-b-30" action="action:proAheadEndAction">
+   	   	   <div class="ahead-end-bg mar-auto"></div>
+   	   	   <div class="ahead-end-til pd-t-8 tx-c"><span class="t-3 fn-s-14">提前结束</span></div>
+   	   </div>
+   	   <div class="del-pro width25 ufl mg-b-30" action="action:proDeleteAction">
+   	   	   <div class="del-pro-bg mar-auto"></div>
+   	   	   <div class="del-pro-til pd-t-8 tx-c"><span class="t-3 fn-s-14">删除项目</span></div>
+   	   </div>
+   	   <%}%>
+   	   
+   	    <div class="use-help width25 ufl mg-b-30" action="user/personal/help">
+   	   	   <div class="use-help-bg mar-auto"></div>
+   	   	   <div class="use-help-til pd-t-8 tx-c"><span class="t-3 fn-s-14">使用帮助</span></div>
+   	   </div>
+   </div>
+</div>

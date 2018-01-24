@@ -1,0 +1,38 @@
+<div   id="bottom" >	
+			<ul class="ub pd-bt-10 tx-al-c fn-s-15 bd-b fn-c-hardgray">
+				<li class="width25 bd-r"><div action="index/index/index" class="fn-c-blue">首页</div></li>
+				<li class="width25 bd-r" ><div action="index/index/project">项目</div></li>
+				<li class="width25 bd-r"><div action="investor/investor/investor">投资人</div></li>
+				<li class="width25"><div action="user/personal/userInfo">我的</div></li>
+			</ul>
+			<div class="ub ub-ac ub-pc umar-at2 fn-s-14 c-e mg-t-3">
+	              <div class="ub ub-f1">
+	                       
+	                       <%if(DMJS.userInfo){%>
+	                        <div class="pd-all-10"  action="user/personal/userInfo">您好！<%=DMJS.userInfo.userName%></div>
+	                   <%}else{%>
+	                        <div class="pd-all-10" action="user/personal/login">登录</div><div class="pd-bt-10">|</div><div class="pd-all-10" action="user/personal/register">注册</div>
+	                   <%}%>
+	                 
+	              </div> 
+			</div>
+	        
+	         <div class="ub c-wh pd-bt-10">
+	             <div class="ub ub-f1 ub-ac ub-pc ub-ver uinn-pb1">
+	                <div class="ub fn-s-14 ">
+	                  <div class="ub-f1  pd-lr-15 t-9 bd-r" ><a  href="javascript:void(0);" class='t-9' style='text-decoration: inherit;'>客户端</a></div> 
+	                  <div class="ub-f1  pd-lr-15 t-3 bd-r"><a href="javascript:void(0)"  target="_blank" style="text-decoration: none;color:#333;">触屏版</a></div>
+	                  <div class="ub-f1 pd-lr-15  t-9 ">
+	                  	<a href="" id="pcUrl" target="_blank"  class='t-9' style="text-decoration: none;">电脑版</a>
+	                  </div>
+	                </div>
+	                <div class="umar-at ulev-app2 ub ub-ac" style="padding: 0.5rem 1rem;" >
+	                	<div class="bt-phone"></div><div class="mg-l-5  fn-s-13">客服热线：<a id="tel" class="" href="">12345678900</a></div>
+	                	
+	                </div>
+	                <div class="ub ub-ac ub-pc  umar-at ulev-app2">
+	                    <div id="ICP">XXXX@迪蒙2016版权所属</div>
+	                </div>
+                 </div> 
+	         </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="bc-white mg-t-10" id="trends">
+	<%for(var i=0;i<list.length;i++){%>
+	    <div class="ub bc-white lpd-bt-15 bd-b">
+			    	<div class="ub-ac ub-pc mg-r-10">
+						<div  class="head-img">
+							<%if(list[i].headPic){%>
+			    		       <img src="<%=(list[i].headPic.indexOf('http://')==-1?Config.url('imgAddress'):'')+list[i].headPic%>" />
+			    			  <%}%>
+						</div>
+					</div>
+			    	<div class="ub-f5 ub-ver width80">
+			    		<div class="fn-s-14">
+			    			<span class="pd-r-10"><%=list[i].nickName%></span>
+			    			<%switch(list[i].dynamicType){ 
+			         			case '1':%><span class="fn-c">发布新项目</span><%;break;
+			         			case '2':%><span class="fn-c">支持项目</span><%;break;
+			         			case '3':%><span class="fn-c">更新动态</span><%;break;
+			         			case '4':%><span class="fn-c">提前结束项目</span><%;break;
+			         			case '5':%><span class="fn-c">删除项目</span><%;break;
+			         			case '6':%><span class="fn-c">修改项目</span><%;break;
+			         			case '7':%><span class="fn-c">众筹成功</span><%;break;
+			         			case '8':%><span class="fn-c">众筹失败</span><%;break;
+			         		}%>
+			    		</div>
+			    		
+			    		<div class="pd-t-5 fn-s-12"><%=list[i].dateCreate%></div>
+			    		
+			    		<%if(list[i].dynamicType=='3'){%>
+			    		<div class="pd-t-10"><%=list[i].content%></div>
+				    		<%if(list[i].imgsUrl.length > 0){%>
+						        <div class="project-content-img clearfix pd-t-8">
+						            <%for(var j=0;j < list[i].imgsUrl.length;j++){%>
+						        	    <a href="javascript:void(0);" class="LookImg"><img src="<%=Config.url('imgAddress')+list[i].imgsUrl[j].addr%>" /></a>
+						        	<%}%>
+						        </div>
+					         <%}%>
+			    		<%}else if(list[i].dynamicType=='1'){%>
+			    			<div class="pd-t-10">目标金额：<span class="fn-c-blue"><%=list[i].targetAmount%></span>元</div>
+			    		<%}else if(list[i].dynamicType=='4'){%>
+			    			<div class="pd-t-10">提前结束原因：<span class="fn-c-blue"><%=list[i].content%></span></div>
+			    		<%}else if(list[i].dynamicType=='2'){%>
+			    			<div class="pd-t-10">
+				    			<div>支持金额：<span class="fn-c-blue"><%=list[i].supportAmount%></span>元</div>
+				    			<div>订单编号：<span><%=list[i].orderNo%></span></div>
+			    			</div>
+			    		<%}else if(list[i].dynamicType=='5'){%>
+			    			<div class="pd-t-10"><%=list[i].content%></div>
+			    		<%}else if(list[i].dynamicType=='6'){%>
+			    			<div class="pd-t-10"><%=list[i].content%></div>
+				    		<%if(list[i].imgsUrl.length > 0){%>
+						        <div class="project-content-img clearfix pd-b-8">
+						            <%for(var j=0;j < list[i].imgsUrl.length;j++){%>
+						        	    <a href="javascript:void(0);" class="LookImg"><img src="<%=Config.url('imgAddress')+list[i].imgsUrl[j].addr%>" /></a>
+						        	<%}%>
+						        </div>
+					         <%}%>
+			    		<%}else if(list[i].dynamicType=='7'){%>
+			    		<%}else if(list[i].dynamicType=='8'){%>
+			    			<div class="pd-t-10"><%=list[i].content%></div>
+			    		<%}%>
+			    		<div class="ub ub-ac bg-c-gray hei-46 mg-t-10" action="index/index/projectDetails/<%=list[i].projectId%>">
+			    			<div  class="proImg" style="background-image: url(<%=Config.url('imgAddress')+list[i].coverImgUrl%>);"></div>
+			    			<div class="ub ub-ac pd-l-10 fn-c-gray ub-f1"><%=list[i].projectName%></div>
+			    		</div>
+			    	</div>
+			</div>
+		<%}%>
+
+    </div>

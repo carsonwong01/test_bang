@@ -1,0 +1,77 @@
+<div class="support-item-con mg-t-10 bg-c-white">
+
+          <%if(list.length > 0){%>
+              
+              <%for(var i=0;i< list.length;i++){%>
+          	    	
+		    		<div class="support-item lpd-bt-15 bd-b">
+		    			<div class="ub ub-ac commentMessage">
+			    		    <div class="head-img">
+			    		     <%if(list[i].imageUrl){%>
+			    		       <img src="<%=(list[i].imageUrl.indexOf('http://')==-1?Config.url('imgAddress'):'')+list[i].imageUrl%>" />
+			    			  <%}%> 
+			    		    </div>
+			    		    <div class="ub-f1 support-item-info" orderId="<%=list[i].orderId%>">
+			    		    <a href="javascript:void(0)" class="message-action"><span class="icon-message"></span></a>
+			    			    <p class="support-name">
+			    			       <span class="name t-6 fn-s-14 nickName"><%=list[i].nickName%></span>
+			    			    </p>
+			    			    <p class="support-time t-9 fn-s-12">
+			    				   <span class="date"><%=list[i].supportTime%></span>
+			    			    </p>
+			    		    </div>
+		    	        </div>
+		    	        <!--评论内容-->
+		    			<div class="support-message-con">
+		    			
+		    			<%if(list[i].comments.length > 0){%>
+		    				
+				    	    <p class="first-comm"><%=list[i].comments[0].content%></p>
+				    	    
+				    	    <%if(list[i].comments.length > 1){%>
+				    	    
+				    	    <div class="support-comment-con">
+				    	    <%for(var j=1;j<list[i].comments.length;j++){%>
+				    	        
+				    	        <%if(j<3){%>
+					            	<div class="comment-con fn-s-12 t-6" commentId="<%=list[i].comments[j].id%>">
+					            		<div class="show">
+					            		    <%if(list[i].comments[j].replyNickName){%>
+					            		    <p class="comm-item"><span class="comm-blue commPerson" commPersonId="<%=list[i].comments[j].userId%>"><%=list[i].comments[j].nickName%></span>回复<span class="comm-blue commPerson" commPersonId="<%=list[i].comments[j].replyUserId%>"><%=list[i].comments[j].replyNickName%>：</span><span><%=list[i].comments[j].content%></span></p>
+					            			<%}else{%>
+					            				<p class="comm-item"><span class="comm-blue commPerson" commPersonId="<%=list[i].comments[j].userId%>"><%=list[i].comments[j].nickName%>：</span><span class="t-6"><%=list[i].comments[j].content%></span></p>
+					            			<%}%>
+					            		</div>
+					            	</div>
+				            	<%}else{%>
+				            	    <div class="comment-con fn-s-12 t-6" commentId="<%=list[i].comments[j].id%>">
+					            		<div class="hide comm-more">
+					            		    <%if(list[i].comments[j].replyNickName){%>
+					            		    <p class="comm-item"><span class="comm-blue commPerson" commPersonId="<%=list[i].comments[j].userId%>"><%=list[i].comments[j].nickName%></span>回复<span class="comm-blue commPerson" commPersonId="<%=list[i].comments[j].replyUserId%>"><%=list[i].comments[j].replyNickName%>：</span><span><%=list[i].comments[j].content%></span></p>
+					            			<%}else{%>
+					            				<p class="comm-item"><span class="comm-blue commPerson" commPersonId="<%=list[i].comments[j].userId%>"><%=list[i].comments[j].nickName%>：</span><span class="t-6"><%=list[i].comments[j].content%></span></p>
+					            			<%}%>
+					            		</div>
+					            	</div>
+					            	
+				            	<%}%>
+				            <%}%>
+				                  <%if(list[i].comments.length > 3){%>
+				                    <div class="comment-control-action ub ub-ac ub-pc comment-control">
+							    	    <span class="t-blue fn-s-14 v-a pd-r-2 control-con">展开</span>
+							    	    <span class="icon-down control-icon"></span>
+		                            </div>
+		                          <%}%>  
+			                </div>
+			                <%}%>
+			              <%}%>
+			           </div>   
+			            <div class="ub ub-ac bg-c-gray hei-46 mar-t-10 mg-l-42" action="index/index/projectDetails/<%=list[i].projectId%>">
+			    			<div  class="proImg" style="background-image: url(<%=Config.url('imgAddress')+list[i].coverImageUrl%>);"></div>
+			    			<div class="ub ub-ac pd-l-10 fn-c-gray ub-f1"><%=list[i].projectName%></div>
+			    		</div>           
+			        </div>
+            <%}%>
+        <%}%>    
+      
+	</div>	

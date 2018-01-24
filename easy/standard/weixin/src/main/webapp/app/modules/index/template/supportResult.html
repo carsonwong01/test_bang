@@ -1,0 +1,69 @@
+<div>
+	<div class="tx-ac hei-120">
+		<span class="dsb <%=type=='success'?'cre-success':'cre-fail'%>">
+			
+		</span>
+	</div>
+	<div class="line-h-20 tx-c">
+		<div class="ub ub-pc">
+			<span class="dsb width70 pd-bt-20 fn-s-17 lblack">
+				<%=type=="success"?"支持项目成功！":"很抱歉，支持项目失败！"%>
+			</span>
+		</div>
+		<%if(type!="success"){%>
+		<div class="ub ub-pc pd-b-30 fn-c-red73 fn-s-1 ">
+			<span class="dsb" style="max-width: 80%;">
+				  提示：我们将会为该订单进行全额退款，原路返回 您的微信账户中，预计1~5天内完成 
+			</span>
+		</div>
+		<%}%>
+		<div class="ub ub-pc fn-s-11E">
+			<div class="width60 tx-al-l">
+				<span class="dsb">项目名称：<%=orderData.projectName%></span>
+				<span class="dsb">订单编号：<%=orderData.orderNo%></span>
+				<%if(type!="success"){%>
+					<span class="dsb fn-c-gray">失败原因：<%=orderData.refundReason%> </span>
+				<%}%>
+			</div>
+		</div>
+	</div>
+	<div class="ub ub-pc">
+		<div class="width70 address-keep-hollow">
+			<%if(type!="success"){%>
+				<div class="btn-address-keep-hollow tx-ac mg-b-11" action="user/personal/orderDetails/<%=orderid%>">查看订单详情</div>
+			<%}%>
+			<div class="btn-address-keep-hollow tx-ac mg-b-11" action="index/index/projectDetails/<%=orderData.projectId%>">查看支持项目</div>
+			<%if(type=="success"){%>
+				<div class="btn-address-keep-hollow tx-ac" action="index/index/index">逛逛其他项目</div>
+			<%}%>
+		</div>
+	</div>
+	<%if(type=="success"){%>
+	<div>
+		<div class="tx-ac width100 fn-s-12 mg-t-20 threeLogin">
+			<span class="">
+				&nbsp;&nbsp;分享给好友&nbsp;&nbsp;
+			</span>
+		</div>
+		
+		
+		<div class="ub umar-a2-3">
+		    <%if(DMJS.CommonTools.isWeiXin()){%>
+			<div class="ub-f1 icon_three img-weixin h5-share-weixin"></div>
+			<%}%>
+			<div class="ub-f1 icon_three img-qq h5-share-qq"></div>
+			<div class="ub-f1 icon_three img-qqzone h5-share-qqzone"></div>
+			<div class="ub-f1 icon_three img-xinlang h5-share-weibo"></div>
+		</div>
+		 	
+		<div class="share-component social-share" id="shareComponent" data-mobile-sites="weibo,qq,qzone"></div> 
+		<div class="hei-50"></div>
+	</div>
+	<%}%>
+</div>
+<div class='bg hide wxBg' style='margin-top: 0px; height: 100%; display: none;'>
+	<div class='modal-dire'>
+          <div class='ub ub-pe mg-t-10 mg-r-20'><i class='icon-direction'></i></div>
+          <div class='ub ub-pc ub-ac fn-s-16 fn-c-white fn-wei pd-t-30'>点击“分享到朋友圈”</div>
+    </div>
+ </div>

@@ -1,0 +1,22 @@
+<%if(html=="退出"||html=="返回"){%>
+<div class="b_icon_back ub-img8 uwh-tBtn2"></div>
+<%}else if(html=="返回首页"){%>
+<div class="b_icon_back ub-img8 uwh-tBtn2"></div>
+<div class="mg-l-5">首页</div>
+<%}else if(html=="首页logo"){%>
+<div class="b_logo"><img class="hide" src="assets/images/common/logo2.png" alt='logo' /></div>
+<%}else if(html=="首页"){%>
+<div class="b_icon_index ub-img8 uwh-tBtn2 "></div>
+<%}else if(html=="我的"){%>
+<div class="b_image-0  ub-img8 uwh-tBtn2 "></div>
+<%}else if(html=="修改"){%>
+<div class="ub-img8 uwh-tBtn2 umw4 tx-r">修改</div>
+<%}else if(html=="收藏"){%>
+<div class="collect-ico ub-img8 " id="projectCollect">
+<%}else if(html=="添加银行卡"){%>
+<div class="b_icon_add ub-img8 uwh-tBtn2 umar-ar3" id="addCard">
+<%}else if(html=="反馈ICO"){%>
+<div class="b_image-1  ub-img8 uwh-tBtn1 "></div>
+<%}else{%>
+<%=html%>
+<%}%>

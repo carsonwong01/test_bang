@@ -1,0 +1,34 @@
+<!--我的收货地址-->
+<div class="place-bg">
+	<!--地址列表-->
+	<div class="place-con">
+	    <%if(list.length > 0){%>
+	       <%for(var i = 0;i < list.length;i++){%>
+	           <div class="place-item ub ub-ac b-bottom" action="user/personal/editAddress/<%=list[i].addressId%>">
+					<div class="ub ub-ac width100">
+						<div class="p-icon ub width10 ub-f1"><i class="icon-get-place"></i></div>
+						<div class="p-info width85 ub-f1">
+							<p class="p-user-info t-3 fn-s-14">
+							   <span><%=list[i].userName%></span>
+							   <span>（<%=list[i].phoneNumber%>）</span>
+							   <%if(list[i].isDefault == "1"){%>
+							       <span class="t-yell">默认</span>
+							   <%}%>
+						    </p>
+						    <p class="p-place-info t-6 fn-s-13"><%=list[i].area%><%=list[i].detaileAddress%></p>
+						</div>
+						<div class="ub ub-f1 ub-ac ub-pe width5"><i class="icon-right"></i></div>
+					</div>
+		       </div>
+	       <%}%>
+	    <%}%>
+		
+	</div>
+	<!--添加新地址-->
+	<%if(list.length < total){%>
+	<div class="ub ub-ac ub-pc bg-c-white pd-all-10-15" action="index/index/addHarvestAddress">
+		<i class="icon-add ub ub-ac mg-r-5"></i>
+		<span class="fn-s-14 t-6 ub ub-ac">添加地址</span>
+	</div>
+	<%}%>
+</div>

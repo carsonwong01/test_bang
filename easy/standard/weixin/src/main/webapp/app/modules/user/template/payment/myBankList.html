@@ -1,0 +1,29 @@
+
+<div class="pd-all-10">
+<div id="listContent" class="JSMoveHOrs">
+<%for(var i=0;i<list.length;i++){%>
+	<div class=" ub">
+		<div class=" radius5 mg-b-10 width100 bg-c-white">
+			<div class="ub pd-bt-20 pd-l-10 pd-r-10 ub-ac">
+				<div class=" ub-f1">
+					<img src="<%=Config.url('imgAddress')+'/easy/images/bank_card_'+list[i].bankCode+'.png'%>"/>
+				</div>
+				<div class="ub-f1 pd-l-10 width100">
+					<div class="ub fn-c">
+						<div class="ub-f1 ub ub-pe ub-ac fn-s-15"><%=list[i].cardNumber%></div>
+					</div>
+				</div>
+			</div>
+		  </div>
+	  	<div class="c-red radius5 mg-b-10 t-wh mg-l-10 fn-s-15 pd-all-10 tx-c DeleteCard ub ub-ac ub-pc" data-dele="<%=list[i].cardId%>" style="width:6rem;background-color:red;">删除</div>
+     </div>
+<%}%>
+</div>
+	
+	<div class="bc-white tx-c pd-bt-30 fn-s-15 radius5" id="addBank">
+		<span class="plusAccount"></span>
+		<span>添加银行</span>
+	</div>
+	
+</div>
+

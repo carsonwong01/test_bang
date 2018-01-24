@@ -1,0 +1,60 @@
+<div class="bg-c-white">
+	<div class="ub ub-ac uinput b-bottom lpd-all-10">
+		<div class="width25 fn-s-12 line-h-15 lblack">回报金额</div>
+		<div class="ub-f1">
+			<input type="tel" value="<%=data.supportAmount?data.supportAmount:data.amount%>" validator="notEmpty;" onpaste="return false" name="supportAmount" title="回报金额" placeholder="请填写回报金额" maxlength="6">
+		</div>
+		<span class="fn-s-12 line-h-15 lblack">元</span>
+	</div>
+	<div class="ub ub-ac uinput lpd-all-10">
+		<div class="width25 fn-s-12 line-h-15 lblack">回报份数</div>
+		<div class="ub-f1">
+			<input type="text" value="<%=data.upperCount%>" name="upperCount" maxlength="7" title="回报份数" placeholder="不填写为无限量">
+		</div>
+		<span class="fn-s-12 line-h-15 lblack">份</span>
+	</div>
+	<div class="ub uinput">
+		<div class="ub-f1 mg-lr-10 hei-150 border-all">
+			<textarea name="returnDescribe" class="fn-s-12" validator="notEmpty;" maxlength="500" title="回报具体内容" style="padding: 1rem;" placeholder="请填写回报具体内容" style="border: none;"><%=data.returnDescribe?data.returnDescribe:data.content%></textarea>
+		</div>
+	</div>
+	
+	<div class="lpd-all-10 fn-s-11">
+		
+		<div class="ub pd-bt-10">
+			<div>
+				<%if(returnId){%>
+				<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=data.returnImg.filesUrl[0]%>);">
+					<div class="del-img" action="action:delIdCardImg"></div>
+				</div>
+				<%}%>
+				<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=returnId?'uhide':''%>" style="float: left;">
+					<div class="add-img"></div>
+					<span class="dsb ub ub-pc">上传图片</span>
+					<span class="tx-ac">（仅限1张）</span>
+					<input class="upload-file Upload" multiple="" type="file" style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+				</div>
+			</div>
+		</div>
+		<div>
+			<span></span>
+		</div>
+	</div>
+	
+	<div class="lpd-all-10 m-bg-c">
+		<div class="address-keep" action="action:returnList">
+			<div class="btn-address-keep tx-ac">
+				保存
+			</div>
+		</div>
+	</div>
+	<%if(returnId){%>
+	<div class="lpd-all-10 m-bg-c">
+		<div class="address-keep address-del" action="action:delRetuan">
+			<div class="btn-address-del tx-ac">
+				删除
+			</div>
+		</div>
+	</div>
+	<%}%>
+</div>

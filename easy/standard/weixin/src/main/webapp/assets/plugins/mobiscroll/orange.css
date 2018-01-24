@@ -1,0 +1,143 @@
+/* iCheck plugin Square skin, orange
+----------------------------------- */
+.icheckbox_square-orange,.iradio_square-orange {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	width: 22px;
+	height: 22px;
+	background: url(orange.png) no-repeat;
+	border: none;
+	cursor: pointer;
+}
+
+.icheckbox_square-orange {
+	background-position: 0 0;
+}
+
+.icheckbox_square-orange.hover {
+	background-position: -24px 0;
+}
+
+.icheckbox_square-orange.checked {
+	background-position: -48px 0;
+}
+
+.icheckbox_square-orange.disabled {
+	background-position: -72px 0;
+	cursor: default;
+}
+
+.icheckbox_square-orange.checked.disabled {
+	background-position: -96px 0;
+}
+
+.iradio_square-orange {
+	background-position: -120px 0;
+}
+
+.iradio_square-orange.hover {
+	background-position: -144px 0;
+}
+
+.iradio_square-orange.checked {
+	background-position: -168px 0;
+}
+
+.iradio_square-orange.disabled {
+	background-position: -192px 0;
+	cursor: default;
+}
+
+.iradio_square-orange.checked.disabled {
+	background-position: -216px 0;
+}
+
+/* Retina support */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) , only screen and
+		(-moz-min-device-pixel-ratio: 1.5) , only screen and
+		(-o-min-device-pixel-ratio: 3/2) , only screen and
+	(min-device-pixel-ratio: 1.5) {
+	.icheckbox_square-orange,.iradio_square-orange {
+		background-image: url(orange.png);
+		-webkit-background-size: 240px 24px;
+		background-size: 240px 24px;
+	}
+}
+
+/* 弹出多选框样式 */
+.checkbox_accreditNotice {
+	display: black;
+	position: absolute;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.7);
+	background-clip: padding-box;
+	top: 0px;
+	z-index: 100;
+}
+
+.checkbox_innerContent {
+	width: 70%;
+	margin: 25% 15% 30% 15%;
+	border-radius: 4px;
+	background: #efeeec;
+	background-clip: padding-box;
+}
+
+.checkbox_innerContent li {
+	width: 70%;
+	list-style-type: none;
+	margin-left: 15%;
+	vertical-align: top;
+}
+
+.checkbox_dwbc {
+	width: 100%;
+	border-top: 1px solid #dbdbdb;
+	height: 38px;
+	float: none;
+}
+
+.checkbox_btn {
+	border-right: 1px solid #dbdbdb;
+	cursor: pointer;
+	line-height: 36px;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	width: 49.5%;
+	height: 38px;
+	float: left;
+	color: #F84B08;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.checkbox_innerContent li span {
+	display: block;
+	word-wrap: break-word;
+	vertical-align: top;
+	position: relative;
+	top: -26px;
+	left: 34px;
+	font-size: 14px;
+}
+
+.checkbox_right {
+	float: right;
+	border-right: 0px solid #FF6600;
+	width: 49.5%;
+}
+
+.checkbox_dwv {
+	height: 36px;
+	line-height: 36px;
+	padding: 0;
+	border-bottom: 1px solid #dbdbdb;
+	font-size: 14px;
+	text-align: center;
+}
+
+.checkbox_showIns {
+	margin-top: 20px;
+}

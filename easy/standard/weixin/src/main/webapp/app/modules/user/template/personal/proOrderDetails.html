@@ -1,0 +1,183 @@
+<!--支持项目-订单详情-->
+<div>
+	<div class="pro-order-detail-head user-head">
+		<div class="ub ub-pc ub-ac t-wh fn-s-14"><span class="fn-s-25"><%=amount%></span>元</div>
+		<div class="ub ub-pc ub-ac t-wh fn-s-12">支持金额</div>
+	</div>
+	<div class="pro-order-item ub ub-ac" action="index/index/projectDetails/<%=projectId%>">
+		<div class="order-img"><img src="<%=Config.url('imgAddress')+projectImgUrl%>" /></div>
+		<div class="order-con ub-f1">
+			<div class="til ub ub-ac">
+				<span class="t-3 fn-s-14 ub-f1 ub-ac"><%=projectTile%></span>
+				<span class="ub-f1 ub ub-ac ub-pe"><i class="icon-right"></i></span>
+			</div>
+		</div>
+	</div>
+	<div class="pro-order-detail-con">
+		<div class="or-de-type ub or-de-item">
+			<span class="til ub ub-f1 width35">订单状态</span>
+			<%switch(status){ 
+	            case '1':%><span class="con t-red ub ub-f1 width65">待支付</span><%;break;
+	            case '2':%><span class="con t-red ub ub-f1 width65">已取消</span><%;break;
+       			case '3':%><span class="con t-red ub ub-f1 width65">已支付</span><%;break;
+       			case '4':%><span class="con t-red ub ub-f1 width65">待发货</span><%;break;
+       		    case '5':%><span class="con t-red ub ub-f1 width65">待收货</span><%;break;
+       			case '6':%><span class="con t-red ub ub-f1 width65">已收货</span><%;break;
+       			case '7':%><span class="con t-red ub ub-f1 width65">待退款</span><%;break;
+       			case '8':%><span class="con t-red ub ub-f1 width65">已退款</span><%;break;
+       			case '9':%><span class="con t-red ub ub-f1 width65">支付失败</span><%;break;
+       			case '10':%><span class="con t-red ub ub-f1 width65">退款中</span><%;break;
+   			}%>
+		</div>
+		<div class="or-de-number ub or-de-item">
+			<span class="til ub ub-f1 width35">订单编号</span>
+			<span class="con t-9 ub ub-f1 width65"><%=orderNo%></span>
+		</div>
+		
+		<%if(status == "3"||status == "4"||status == "5"||status == "6"||status == "7"||status == "8"||status == "9"||status == "10"){%> 
+		<div class="or-de-time ub or-de-item">
+			<span class="til ub ub-f1 width35">交易时间</span>
+			<span class="con t-9 ub ub-f1 width65"><%=supportTime%></span>
+		</div>
+		<%}%>
+		
+		<div class="or-de-trans-mode ub or-de-item">
+			<span class="til ub ub-f1 width35">交易方式</span>
+			<%if(tradeType == "200"){%>
+			<span class="con t-9 ub ub-f1 width65">微信支付</span>
+			<%}%>
+		</div>
+		
+		<!--回报项目-->
+	    <%if(projectType == "6"){%>
+		<div class="or-de-pro-return ub or-de-item">
+			<span class="til ub ub-f1 width35">产品回报</span>
+			<span class="con t-3 ub ub-f1 width65">
+				<span class="t-red"><%=returnAmount%>元</span>&nbsp;X&nbsp;<span><%=returnNumber%>份</span>
+			</span>
+		</div>
+		
+		<div class="ub re-message">
+			<p class="t-9 fn-s-12 ub ub-ac"><%=purposeText%></span>
+		</div>
+		<%}%>
+		
+		<!--梦想项目-->
+		<%if(projectType == "7"){%>
+		    <div class="or-de-pro-return ub or-de-item">
+				<span class="til ub ub-f1 width35">梦想帮助</span>
+				<span class="con t-9 ub ub-f1 width65"><%=purposeText%></span>
+			</div>
+		<%}%>
+		
+		<div class="or-de-message ub or-de-item">
+			<span class="til ub ub-f1 width35">留言</span>
+			<span class="con t-9 ub ub-f1 width65"><%=message%></span>
+		</div>
+		
+		<!--待退款、已退款-->
+		<%if(status == "7"||status == "8"){%> 
+			<div class="or-de-trans-mode ub or-de-item">
+				<span class="til ub ub-f1 t-red width35">退款原因</span>
+				<span class="con t-red ub ub-f1 width65"><%=refundReason%></span>
+			</div>
+		<%}%>
+		<!--已退款-->
+		<%if(status == "8"){%> 
+			<div class="or-de-trans-mode ub or-de-item">
+				<span class="til ub ub-f1 t-red width35">退款时间</span>
+				<span class="con t-red ub ub-f1 width65"><%=refundTime%></span>
+			</div>
+		<%}%>
+		
+	</div>
+	
+	<!--地址信息-->
+	<%if(projectType == "6"&&isLogistics== "1"){%>
+	    
+	    <%if(status == "1"||status == "4"){%><!--待支付，待发货-->
+		<div class="ub ub-ac pro-or-de-place bd-b bg-c-white mg-t-10" action="action:selectAdd">
+			<div class="ub ub-ac width10"><i class="icon-get-place ub ub-ac"></i></div>
+			<div class="ub-f1 width85" id="address">
+				<p class="or-user-info t-3 fn-s-14">
+				   <span class="pd-r-5"><%=receiverName%></span>
+				   <span class="pd-r-10">（<%=receiverPhone%>）</span>
+			    </p>
+			    <p class="or-place-info t-9 fn-s-12"><%=receiverAddr%><%=receiverDetailAddr%></p>
+			</div>
+			<div class="ub ub-f1 ub-ac ub-pe width5"><i class="icon-right"></i></div>
+		</div>
+		<%}else{%>
+		<div class="ub ub-ac pro-or-de-place bd-b bg-c-white mg-t-10">
+			<div class="ub ub-ac width12"><i class="icon-get-place ub ub-ac"></i></div>
+			<div class="ub-f1 width88">
+				<p class="or-user-info t-3 fn-s-14">
+				   <span class="pd-r-5"><%=receiverName%></span>
+				   <span class="pd-r-10">（<%=receiverPhone%>）</span>
+			    </p>
+			    <p class="or-place-info t-9 fn-s-12"><%=receiverAddr%><%=receiverDetailAddr%></p>
+			</div>
+		</div>
+		<%}%>
+	<%}%>
+	
+	<!--回报项目-->
+    <%if(projectType == "6"){%>
+        <!--待收货、已收货-->
+        <%if(status == "5"||status == "6"){%>
+	        <!--快递信息-->
+		    <div class="ub ub-ac pro-or-de-place">
+				<div class="ub ub-ac width12"><i class="icon-courier ub ub-ac"></i></div>
+				<div class="ub-f1 width88">
+					<p class="or-courier-til t-3 fn-s-14">
+					   <span class="pd-r-5"><%=courierCompany%></span>
+				    </p>
+				    <p class="or-courier-num t-9 fn-s-12">
+				    	<span>快递单号：</span>
+				    	<span><%=courierNumber%></span>
+				    </p>
+				</div>
+			</div>
+		<%}%>
+	<%}%>
+	
+	<!--回报项目-->
+	<%if(projectType == "6"){%>
+	    <%if(status == "5"){%><!--待收货-->
+			<!--确认收货-->
+			<div class="address-keep address-get">
+		    	<div class="btn-address-keep ub ub-ac ub-pc" orderId="<%=orderId%>" id="confirmReceipt">确认收货</div>
+		    </div>
+	    <%}%>
+    <%}%>
+    
+    
+    <%if(status == "1"){%><!--待支付-->
+	    <!--微信支付-->
+	    <div class="order-wx ub ub-ac">
+	    	<div class="ub-f1 ub ub-ac width10">
+	    		<i class="icon-wx-pay v-a"></i>
+	    	</div>
+	    	<div class="ub-f1 ub ub-ac width90">
+	    		<span class="t-3 fn-s-14 ub ub-ac">微信支付</span>
+	    		<span class="ub ub-ac ub-pe ub-f1">
+	    			<i class="icon-choice v-a"></i>
+	    		</span>
+	    	</div>
+	    </div>
+	    <!--温馨提示-->
+	    <div class="fn-s-12 pd-all-10">
+	    	<p class="pd-b-5"><span class="t-6">温馨提示：</pan></p>
+	    	<p class="t-9">请在<span class="t-red" id="orderTime"></span>分钟内完成付款哦，否则您的订单将会自动取消。</p>
+	    </div>
+	    <!--立即支付-->
+		<div class="address-keep address-pay">
+	    	<div class="btn-address-keep ub ub-ac ub-pc" orderid="<%=orderId%>" action="action:payOrder">立即支付</div>
+	    </div>
+	    <!--取消支持-->
+		<div class="address-keep address-cancel-sup">
+	    	<p class="btn-address-keep ub ub-ac ub-pc" id="cancelOrder" orderId="<%=orderId%>">取消支持</p>
+	    </div>
+    <%}%>
+</div>    
+    

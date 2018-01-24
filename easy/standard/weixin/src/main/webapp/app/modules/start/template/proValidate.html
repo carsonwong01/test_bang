@@ -1,0 +1,86 @@
+<div>
+	<div class="lpd-all-10 fn-s-125 bg-c-white fn-c-blue">
+		<%=type=="1-1"?"收款人与受助人关系":"项目发起人"%>
+	</div>
+	<%if(type=="1-1"){%>
+		<div class="bg-c-white mg-t-10">
+			<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-1']">
+				<div class="width80 fn-s-12 line-h-20">
+					<div class="lblack fn-s-13">受助人（患者）本人</div>
+					<span>患者本人发起</span>
+				</div>
+				<div class="ub ub-pe ub-f1">
+					<i class="dsb img-more"></i>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-2']">
+				<div class="width80 fn-s-12 line-h-20">
+					<div class="lblack fn-s-13">父母/亲兄弟姐妹/子女</div>
+					<span>直系亲属，需提供户口证明</span>
+				</div>
+				<div class="ub ub-pe ub-f1">
+					<i class="dsb img-more"></i>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-3']">
+				<div class="width80 fn-s-12 line-h-20">
+					<div class="lblack fn-s-13">夫妻</div>
+					<span>夫妻关系，需提供结婚证明</span>
+				</div>
+				<div class="ub ub-pe ub-f1">
+					<i class="dsb img-more"></i>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-4']">
+				<div class="width80 fn-s-12 line-h-20">
+					<div class="lblack fn-s-13">组织机构</div>
+					<span>以组织机构名义发起</span>
+				</div>
+				<div class="ub ub-pe ub-f1">
+					<i class="dsb img-more"></i>
+				</div>
+			</div>
+		</div>
+	<%}else{%>
+		<div class="bg-c-white mg-t-10">
+			<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-1']">
+				<div class="width80 fn-s-12 line-h-20">
+					<div class="lblack fn-s-13">个人名义发起</div>
+					<span>需上传个人手持身份证照片</span>
+				</div>
+				<div class="ub ub-pe ub-f1">
+					<i class="dsb img-more"></i>
+				</div>
+			</div>
+			<%if(type=="2"){%>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-2']">
+				<div class="width80 fn-s-12 line-h-20">
+					<div class="lblack fn-s-13">个体工商/企业名义发起</div>
+					<span>需上传营业执照</span>
+				</div>
+				<div class="ub ub-pe ub-f1">
+					<i class="dsb img-more"></i>
+				</div>
+			</div>
+			<%}else{%>
+				<div class="ub ub-ac uinput b-bottom lpd-all-10" action="action:toVali['<%=type%>-2']">
+					<div class="width80 fn-s-12 line-h-20">
+						<div class="lblack fn-s-13">组织机构名义发起</div>
+						<span>需上传组织机构资格证明</span>
+					</div>
+					<div class="ub ub-pe ub-f1">
+						<i class="dsb img-more"></i>
+					</div>
+				</div>
+			<%}%>
+		</div>
+	<%}%>
+	<%if(!source){%>
+		<div class="address-keep" action="action:laterOn">
+			<div class="btn-address-keep tx-ac">
+				稍后验证
+			</div>
+		</div>
+	<%}%>
+		<div class="hei-50"></div>
+</div>

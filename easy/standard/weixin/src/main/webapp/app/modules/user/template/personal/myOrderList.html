@@ -1,0 +1,77 @@
+	<%for(var i=0;i<list.length;i++){%>
+			<div class="mar-t-10 bc-white order-item">
+				<div class=" b-bottom bc-white  pd-l-10 pd-r-10 pd-b-10" data-bidid=''>
+				
+				
+				
+				<div class="ub ub-ac pd-bt-10" action="user/personal/proOrderDetails/<%=list[i].orderId%>">
+					<div class="width50 ub-f2 tx-l fn-s-13 t-3 r-title">订单编号：<%=list[i].orderNo%></div>
+					<%switch(list[i].status){ 
+         			case '1':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">待支付</div><%;break;
+         			case '2':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">已取消</div><%;break;
+         			case '3':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">已支付</div><%;break;
+         			case '4':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">待发货</div><%;break;
+         			case '5':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">待收货</div><%;break;
+         			case '6':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">已收货</div><%;break;
+         			case '7':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">待退款</div><%;break;
+         			case '8':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">已退款</div><%;break;
+         			case '9':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">已失败</div><%;break;
+         			case '10':%><div class="tx-r fn-s-125 fn-c-blue mg-l-5 fn-c-gold pd-r-5">退款中</div><%;break;
+         			}%>
+					<div class="img-more"></div>
+				</div>
+			
+			<div action = "index/index/projectDetails/<%=list[i].projectId%>">
+				
+			<div class="ub bd-bt pd-bt-10 content">
+				<div class="l-img-p">
+					<div class="concern_img" >
+						<img src="<%=Config.url('imgAddress')+list[i].coverImage%>"/>
+					</div>
+				</div>
+				<div class="ub-f1 o-r-con">
+					<div class="ub ub-ac">
+						<div class="tx-l fn-s-14 t-3 order-pro-til ub-f1 width65"><span><%=list[i].projectName%></span></div>
+						<div class="ub ub-pe ub-f1 width35">
+						<%switch(list[i].projectStatus){ 
+		         			case '1':%><span class="order-status type-zcz">众筹中</span><%;break;
+		         			case '2':%><span class="order-status type-zccg">众筹成功</span><%;break;
+		         			case '3':%><span class="order-status type-zcsb">众筹失败</span><%;break;
+		         			case '4':%><span class="order-status type-zcsb">已删除</span><%;break;
+		         		}%>
+						
+						</div>
+					</div>
+					<div class="label-item-content"><%=list[i].projectIntro%></div>
+					<div class="ub ub-ac">
+						<div class="img-time mg-r-3 mg-t-1"></div>
+						
+						<%if(parseInt(list[i].remainingDay) > 0 && list[i].projectStatus == "1"){%>   
+	    				    <div class="re-time t-yell tx-r fn-s-12">剩余<em><%=list[i].remainingDay%></em>天</div>
+	    				<%}else if(parseInt(list[i].remainingDay) == 0 && list[i].projectStatus == "1"){%> 
+	    				    <div class="re-time t-yell tx-r fn-s-12">即将结束</div>
+	    				<%}else{%>
+	    				    <div class="re-time t-yell tx-r fn-s-12">已结束</div>
+	    				<%}%>
+					</div>
+				</div>
+			</div>
+			
+			</div>
+			
+				<div class="ub mg-t-10">
+			    	<div class="ub-f1">支持金额：<span class="fn-c-red"><%=list[i].supportAmount%>元</span> </div>
+			    	<%if(list[i].status==1){%>
+				    	<div class="ub-f1 ub ub-pe">
+						    	<span class="fn-c-blue pd-r-10" id="cancelOrder" orderId="<%=list[i].orderId%>">取消订单</span>
+						    	<span orderid="<%=list[i].orderId%>" class="fn-c-white bg-c-blue bd-radius pd-btn-zf fn-s-13" action="action:payOrder">立即支付</span>
+						</div>
+				    <%}else{%>
+					    <div class="ub-f1 ub ub-pe">
+					    		<span class="fn-c-blue" id="proOrderDets" orderId="<%=list[i].orderId%>" >订单详情</span>
+				    	</div>
+			    	<%}%>
+			    </div>
+		    </div>
+		</div>
+	<%}%>

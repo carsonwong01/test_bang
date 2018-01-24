@@ -1,0 +1,39 @@
+<!--新增收获地址-->
+<div class="add-address-pg">
+	<div class="add-address-con">
+	    <div class="address-item ub ub-ac b-bottom">
+	    	<div class="ub ub-ac width30 til"><span>收件人</span></div>
+	    	<div class="ub ub-ac width62"><input id="name" name="name" class="input_non ub ub-ac" nextfocus="phone" title="收件人"  value="" placeholder="请输入收件人姓名" maxlength="10" validator="notEmpty;length[2,10];reg[/^[\u4e00-\u9fa5]{2,}$/]"></div>
+	        <div class="ub ub-ac width8"></div>
+	    </div>
+	    <div class="address-item ub ub-ac b-bottom">
+	    	<div class="ub ub-ac width30 til"><span>手机号</span></div>
+	    	<div class="ub ub-ac width62"><input id="phone" name="phone" class="input_non ub ub-ac" nextfocus="province" type="tel" value="" title="手机号" placeholder="请输入手机号" maxlength="11" validator="notEmpty;reg[/^[1][3|4|5|7|8][0-9]{9}$/]"></div>
+	        <div class="ub ub-ac width8"></div>
+	    </div><div class="address-item ub ub-ac b-bottom" action="action:toShen">
+	    	<div class="ub ub-ac width30 hei-20"><span>省份</span></div>
+	    	<div class="ub ub-ac width62 ub-pe hei-20"><p class="t-6" id="provinceS">请选择</span></div>
+	    	<div class="ub ub-ac width8 ub-pe hei-20"><i class="icon-right ub ub-ac"></i></div>
+	    </div>
+	    <div class="address-item ub ub-ac b-bottom" action="action:toCity">
+	    	<div class="ub ub-ac width30 hei-20"><span>城市</span></div>
+	    	<div class="ub ub-ac width62 ub-pe hei-20"><p class="t-6" id="cityS">请选择</span></div>
+	    	<div class="ub ub-ac width8 ub-pe hei-20"><i class="icon-right ub ub-ac"></i></div>
+	    </div>
+	    <div class="address-item ub ub-ac b-bottom" action="action:toCounty">
+	    	<div class="ub ub-ac width30 hei-20"><span>地区</span></div>
+	    	<div class="ub ub-ac width62 ub-pe hei-20"><p class="t-6" id="countyS">请选择</span></div>
+	    	<div class="ub ub-ac width8 ub-pe hei-20"><i class="icon-right ub ub-ac"></i></div>
+	    	<input type="hidden" id="region" name="regionId" value="" definemsg="请选择完整的省市区" validator="{notEmpty};">
+	    </div>
+	   <div class="address-item ub ub-ac">
+	    	<div class="ub ub-ac width30 til"><span>详细地址</span></div>
+	    	<div class="ub ub-ac width62"><input id="address" maxlength="60" name="address" class="input_non ub ub-ac" nextfocus=""  value="" title="详细地址" placeholder="请输入详细地址" validator="notEmpty;"></div>
+	        <div class="ub ub-ac width8"></div>
+	   </div>
+    </div>
+    <div class="address-keep">
+    	<p class="btn-address-keep ub ub-ac ub-pc" id="addNewAddress">保存</p>
+    </div>
+</div>
+

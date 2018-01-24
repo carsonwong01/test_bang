@@ -1,0 +1,20 @@
+  	<div class="select_notice_box">
+   		<div class="btnlist_wrap">
+   			<p class="tac"><%=title%></p>
+			<ul class="btnlist">
+				<%for(var i = 0, len = data.length; i < len; i++) {%>
+					<%if(data[i]["gray"]==true){%>
+						<li class="grey_btn_wrap">
+							<input action='<%=data[i]["action"]%>' to='<%=data[i]["to"]%>' type="button" name="submit" value="<%=data[i]['txt']%>" class="btn_grey w100 m_t10" />
+						</li>
+					<%}else{%>
+						<li>
+							<input action='<%=data[i]["action"]%>' to='<%=data[i]["to"]%>' type="button" name="submit" value="<%=data[i]['txt']%>" class="btn_new_orange1 w100 m_t12"/>
+						</li>						
+				<%}}%>
+				<li>
+					<input to="cancel" type="button" name="submit" value="取消" class="btn_grey w100 m_tb20">					
+				</li>
+			</ul>
+		</div>    
+	</div>

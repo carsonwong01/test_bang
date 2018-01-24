@@ -1,0 +1,190 @@
+<div class="bg-c-white fn-s-12">
+	<div class="ub ub-ac lpd-all-10 fn-s-125 fn-c-gray m-bg-c <%=data.hasSuport?'uhide':''%>"">
+		<span>项目基本详情</span>
+		<div class="ub ub-ac ub-pe ub-f1 <%=proid?'uhide':''%>" action="action:explain">
+			<span class="dsb problem"> </span>
+			<span class="fn-c-blue">
+				筹款说明
+			</span>
+		</div>
+	</div>
+	<div class="ub ub-ac uinput b-bottom lpd-all-10 <%=data.hasSuport?'uhide':''%>">
+		<div class="width25 line-h-15 lblack">项目标题</div>
+		<div class="ub-f1">
+			<input type="text" name="projectName" title="项目标题" value="<%=data.singleResult.title%>" validator="notEmpty;" placeholder="请填写项目标题，20字以内" maxlength="20"/>
+		</div>
+	</div>
+	<%if(type!="3"){%>
+	<div class="ub ub-ac uinput b-bottom lpd-all-10">
+		<div class="width25  line-h-15 lblack">目标金额</div>
+		<div class="ub-f1">
+			<input type="tel" onpaste="return false" name="targetAmount" value="<%=data.singleResult.facTarget%>" title="目标金额" validator="notEmpty;" placeholder="请填写目标金额" maxlength="7"/>
+		</div>
+		<span class=" line-h-15 lblack">元</span>
+	</div>
+	<%}%>
+	<div class="ub uinput b-bottom lpd-all-10 <%=data.hasSuport?'uhide':''%>">
+		<div class="width25  line-h-22 lblack">
+			<span>项目简介</span>
+		</div>
+		<div class="ub-f1 hei-70">
+			<textarea name="projectIntro" class="ub w100  radius fn-s-12" validator="notEmpty;" maxlength="30" title="项目简要说明或用途" placeholder="请填写目项目简要说明和用途，30字以内" style="border: none;"><%=data.singleResult.projectIntro%></textarea>
+		</div>
+	</div>
+	<div class=" lpd-all-10 b-bottom  line-h-15">
+		<div class="ub ub-ac">
+			<div class="width25  lblack">筹资期限</div>
+			<div class="ub-f1 fn-c-gray">
+				<%=data.singleResult.dateCreate?DMJS.formatDate(new Date(data.singleResult.dateCreate),"yyyy-MM-dd"):'今日'%>起至<span id="date"><%=afterTomorrow%></span>结束
+			</div>
+		</div>
+		<div class="ub ub-pc hei-50 lpd-all-10">
+			<div id="lessen" class="lessen" action="action:count['lessen']"></div>
+			<div class="ub ub-ac ub-pc lwidth11 cenBor-tb hei-40 fn-s-125">
+				<span id="days" class="fn-s-18 lblack"><%=data.singleResult.timeLimit?data.singleResult.timeLimit:2%></span> 天
+				<input class="uhide" id="day" type="text" name="financingDays" value="<%=data.singleResult.timeLimit?data.singleResult.timeLimit:2%>"/>
+			</div>
+			<div id="add" class="add" action="action:count['add']"></div>
+		</div>
+		
+	</div>
+	<%if(type=="2"||type=="3"){%>
+	<div class="ub uinput b-bottom lpd-all-10 <%=data.hasSuport?'uhide':''%>">
+		<div class="ub-f1  line-h-22 lblack">
+			<span>支持者提供收货地址</span>
+		</div>
+		<div class="mint-cell-value">
+			<div class="mint-switch">
+				<%if(data.singleResult.isNeddAddr){%>
+				<input id="needAddress" name="isNeddAddr" type="checkbox" class="mint-switch-input" <%=data.singleResult.isNeddAddr=="1"?"checked":''%> >
+				<%}else{%> 
+				<input id="needAddress" name="isNeddAddr" type="checkbox" class="mint-switch-input" <%=type=='2'?"checked":''%> >
+				<%}%> 
+				<span class="mint-switch-core"></span> 
+				<div class="mint-switch-label"></div>
+			</div>
+		</div>
+	</div>
+	<%if(type=="2"){%>
+	<div id="address">
+		<div id="explain" class="ub ub-ac uinput b-bottom lpd-all-10">
+			<div class="width25  line-h-15 lblack">运费说明</div>
+			<div class="ub-f1">
+				<input type="text" name="freightDescribe" value="<%=data.singleResult.freight%>" validator="notEmpty" title="运费说明" placeholder="请填写运费详情" maxlength="20"/>
+			</div>
+		</div>
+		<div id="deliverytime" class="ub ub-ac uinput b-bottom lpd-all-10">
+			<div class="width25  line-h-15 lblack">发货时间</div>
+			<div class="ub-f1">
+				<input type="text" name="deliverDescribe" value="<%=data.singleResult.postTimeText%>" validator="notEmpty" title="发货时间" placeholder="请填写发货时间" maxlength="20"/>
+			</div>
+		</div>
+	</div>
+	<%}%>
+	<div class="ub ub-ac uinput b-bottom lpd-all-10">
+		<div class="width25  line-h-15 lblack">项目标签</div>
+		<div id="selLabel" class="ub ub-ac ub-pe ub-f1 lblack">
+			<input type="hidden" title="项目标签" name="projectLabel" value="<%=data.singleResult.labels%>" validator="notEmpty;">
+			<span class="pd-r-20"><%=data.singleResult.labels%></span>
+			<i class="dsb img-more"></i>
+		</div>
+	</div>
+	<%}%>
+	<div class="ub ub-ac uinput lpd-all-10 <%=data.hasSuport?'uhide':''%>">
+		<div class="ub-f1 hei-180 border-all lpd-all-10">
+			<textarea name="projectDetails" class="ub w100 fn-s-12" maxlength="5000" validator="notEmpty;" title="详细介绍" placeholder="<%=data.content%>" id="loanDescription" style="border: none;"><%=data.singleResult.content%></textarea>
+		</div>
+	</div>
+	<%if(proid&&type.indexOf("1-")!="-1"&&data.hasSuport){%>
+	<div id="deliverytime" class="ub ub-ac uinput b-bottom lpd-all-10">
+		<div class="width25  line-h-15 lblack">修改原因</div>
+		<div class="ub-f1">
+			<input type="text" name="modifyReason" validator="notEmpty" title="修改原因" placeholder="请填写资金修改原因" maxlength="80"/>
+		</div>
+	</div>
+	<%}%>
+	<div class="lpd-all-10 fn-s-11 <%=data.hasSuport?'uhide':''%>">
+		<%if(type!="2"&&type!="3"){%>
+		<span>项目内容和项目图片禁止透露任何
+			<span class="fn-c-blue">联系方式</span>和
+			<span class="fn-c-blue">银行卡</span>等收款信息，包括但不限于手机号码、座机号码、微信号、支付宝账号、银行卡号等。违反以上规定，项目验证和提现申请均不予通过。
+		</span>
+		<%}%>
+		<div class="ub pd-bt-10">
+			<div>
+				<%for(var i in data.fileFilter){%>
+				<div class='upload-file upload-file-img mg-t-10 mg-r-5' style='float: left;background-image: url(<%=Config.url("imgAddress")+data.fileFilter[i].addr%>);'>
+					<div class='del-img DelImg'></div>
+					<div class='setCover'>
+					<div class='tx-ac fn-c-white'><%=data.cover==(parseInt(i)+1)?"封面图片":"设为封面"%></div>
+					</div>
+				</div>
+				<%}%>
+				<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5" style="float: left;">
+					<div class="add-img"></div>
+					<span class="dsb ub ub-pc">上传图片</span>
+					<span class="tx-ac">（最多8张）</span>
+					<input class="upload-file Upload" multiple type="file" style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+				</div>
+			</div>
+		</div>
+		<div>
+			<span><%=data.imgDes%></span>
+		</div>
+	</div>
+	<%if(type=="2"||type=="3"){%>
+		<div id="addTarget" class="ub ub-ac lpd-all-10 fn-s-125 fn-c-gray m-bg-c">
+			<span><%=type=="2"?"回报设置":"梦想目标"%></span>
+		</div>
+		<div id="returnList" class="<%=data.hasSuport?'uhide':''%>">
+			<%for(var i in data.singleResult.dreamTargets){%>
+				<%if(type=="2"){%>
+				<div rId="<%=data.singleResult.dreamTargets[i].id%>" class="ub ub-ac uinput b-bottom lpd-all-10">
+					<div class="width90  line-h-20">
+						<div class="ub ub-ac fn-c-blue2">
+							<span class="dsb concern_img4" style="background-image: url(<%=Config.url('imgAddress')+data.singleResult.dreamTargets[i].imgUrl%>)"></span>
+							<span class="pd-l-10">支持<%=data.singleResult.dreamTargets[i].amount%>元</span>
+						</div>
+						<span class="dsb pd-t-10"><%=data.singleResult.dreamTargets[i].content%></span>
+					</div>
+					<div class="ub ub-pe ub-f1"><i class="dsb img-more"></i></div>
+				</div>
+				<%}else{%>
+				<div rId="<%=data.singleResult.dreamTargets[i].id%>" class="ub ub-ac uinput b-bottom lpd-all-10">
+					<div class="width80  line-h-20">
+						<div class="fn-c-blue2">目标<%=data.singleResult.dreamTargets[i].amount%>元</div>
+						<span><%=data.singleResult.dreamTargets[i].content%></span>
+					</div>
+					<div class="ub ub-pe ub-f1"><i class="dsb img-more"></i></div>
+				</div>
+				<%}%>
+			<%}%>
+		</div>
+		<div id="addSel" class="ub ub-pc b-bottom lpd-all-10" action="action:addTarget">
+			<i class="dsb returnAdd"></i>
+			<span class="tx-ac  line-h-15">
+				<%=type=="2"?"添加回报":"添加梦想目标"%>
+			</span>
+		</div>
+	<%}%>
+	<div class="uinput lpd-all-10 m-bg-c">
+		<div class="ub ub-ac fn-s-11 <%=data.hasSuport?'uhide':''%>" >
+			<input type="checkbox" class="uhide" title="请阅读并勾选发起协议" validator="checked;" checked='checked' id="autid">
+			<div action="action:turnRememberRido" class="che-icon ub-img-s12 icon_login"></div>
+			<div class="check_act uhide"></div>
+			<div class="lpd-all-10">
+				<span action="action:turnRememberRido">我已阅读并同意</span>
+				<span action="action:agreement" class="fn-c-blue">
+					<span class="protocal">帮你筹平台发起协议</span>
+				</span>
+			</div>
+		</div>
+		
+		<div class="address-keep" action="action:createPro">
+			<div class="btn-address-keep tx-ac">
+				<%=proid?"确认修改":"发布项目"%>
+			</div>
+		</div>
+	</div>
+	<div class="hei-50 m-bg-c"></div>
+</div>

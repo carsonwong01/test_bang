@@ -1,0 +1,72 @@
+<div class="fn-s-14">
+	<div id="infomation_title" class="ub fn-s-15 tx-al-c bc-white ">
+		<div class="pd-all-10 ub-f1 active-blue" data-item="item1">个人银行</div>
+		<div class="pd-all-10 ub-f1 " data-item="item2">对公银行</div>
+	</div>
+	<div class="pd-all-10 fn-s-11">绑卡须知：平台只支持储蓄卡提现，请勿绑定信用卡以免影响提现</div>
+	
+	<div class="bc-white" >
+		<div class="ub pd-all-10 bd-b" >
+			<div class="ub-f1 fn-c">开户银行</div>
+			<div class="ub-f1 ub ub-pe ub-ac">
+				<div class="ub-f1 pd-r-5">
+					<input class="input-df fn-s-14 tx-r pd-r-10" placeholder="请选择银行" id="selectBank" validator="notEmpty;" title="银行">
+				</div>
+				<div class="img-more"></div>
+				<select class="uhide" id="bank" name="bankId" ></select>
+			</div>
+		</div>
+		
+		<div id="personBank">
+			<div class="ub pd-all-10 bd-b">
+				<div class="ub-f1 fn-c">开户姓名</div>
+				<div class="ub-f1 ub ub-pe ub-ac pd-r-5">
+					<div class="pd-r-5 fn-c"><%=DMJS.userInfo.realName%></div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="companyBank" class="hide">
+			<div class="ub pd-all-10 bd-b " >
+				<div class="ub-f1 fn-c">开户单位</div>
+				<div class="ub-f1 ub ub-pe ub-ac pd-r-10">
+					<input id="name" value="" name="cardUserName" placeholder="请输入开户单位" type="text" title="开户单位"  validator="" class="tx-r">
+				</div>
+			</div>
+		</div>
+		
+		<div class="ub pd-all-10 bd-b">
+			<div class="ub-f1 fn-c">银行卡号</div>
+			<div class="ub-f1 ub ub-pe ub-ac pd-r-10">
+				<input id="bankNumber" value="" name="cardNumberEncrypt" placeholder="请输入银行卡号" type="text" title="银行卡号"  validator="notEmpty;" class="tx-r">
+			</div>
+		</div>
+		
+		<div class="ub pd-all-10 bd-b" action="action:toShen">
+			<div class="ub-f1 fn-c">银行所在省</div>
+			<div class="ub-f1 ub ub-pe ub-ac">
+				<div class="pd-r-5 fn-c" id="provinceS">请选择</div>
+				<div class="img-more"></div>
+			</div>
+		</div>
+		<div class="ub pd-all-10 bd-b" action="action:toCity">
+			<div class="ub-f1 fn-c">银行所在市</div>
+			<div class="ub-f1 ub ub-pe ub-ac">
+				<div class="pd-r-5 fn-c" id="cityS">请选择</div>
+				<div class="img-more"></div>
+			</div>
+			<input type="hidden" id="region" name="bankRegionId" value="" definemsg="请选择完整的省市" validator="{notEmpty};">
+		</div>
+		<div class="ub pd-all-10 bd-b">
+			<div class="ub-f1 fn-c">支行名称</div>
+			<div class="ub-f1 ub ub-pe ub-ac pd-r-10">
+				<input id="bankName" value="" name="branchBank" placeholder="请输入支行名称" type="text" title="支行名称"  validator="notEmpty;" class="tx-r">
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="address-keep" id="saveBank">
+    	<p class="btn-address-keep ub ub-ac ub-pc">保存</p>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="fn-s-14 ">
+	<div class="mg-t-20 bc-white"> 
+            <div class="ub ub-ac uinput bd-b">
+                <div>
+                    <div class="pd-all-10 fn-c">真实姓名</div>
+                </div>
+                <div class="ub-f1">
+                    <input name="realName" placeholder="请输入真实姓名" nextfocus="idCard"
+							title="真实姓名" id="realName"
+							validator="notEmpty;length[2,18];reg[/^[\u4e00-\u9fa5]{2,}$/]"
+							type="text" maxlength="18">
+
+                </div>
+            </div>
+    </div>
+    <div class="bc-white"> 
+            <div class="ub ub-ac uinput">
+                <div>
+                    <div class="pd-all-10 fn-c">身份证号</div>
+                </div>
+                <div class="ub-f1">
+					<input name="idNumber" placeholder="请输入身份证号" title="身份证号"
+							id="idNumber"
+							validator="notEmpty;length[15,18];reg[/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}(\d|x|X)$/];checkidcard;"
+							type="text" maxlength="18">
+                </div>
+            </div>
+    </div>
+    <div class="address-keep" id="submit">
+    	<p class="btn-address-keep ub ub-ac ub-pc">提交认证</p>
+    </div>
+</div>

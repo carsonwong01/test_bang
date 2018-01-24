@@ -1,0 +1,152 @@
+<div>
+	<div class="bg-c-white">
+		<%if(type.indexOf("-1") != -1 || type == '2-2'){%>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 fn-s-12 line-h-15 lblack"><%=type == '2-2'?'法人':'真实'%>姓名</div>
+				<div class="ub-f1">
+					<input type="text" name="receiveRealName" value="<%=singleResult.receiveRealName%>" validator="notEmpty;length[2,18];reg[/^[\u4e00-\u9fa5]{2,}$/]" title="<%=type == '2-2'?'法人':'真实'%>姓名" placeholder="请填写<%=type == '2-2'?'法人':'本人'%>真实姓名" maxlength="15"/>
+				</div>
+			</div>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 fn-s-12 line-h-15 lblack">身份证号</div>
+				<div class="ub-f1">
+					<input type="text" name="receiveIdCard" value="<%=singleResult.receiveIdCard%>" <%=singleResult.receiveIdCard?"":"validator=notEmpty;length[15,18];reg["+idVali+"];"%> title="身份证号" placeholder="请填写<%=type == '2-2'?'法人':'本人'%>身份证号" maxlength="18"/>
+				</div>
+			</div>
+		<%}else{%>
+			<div class="ub ub-ac uinput b-bottom lpd-all-10">
+				<div class="width25 fn-s-12 line-h-15 lblack">组织名称</div>
+				<div class="ub-f1">
+					<input type="text" name="organizationName" validator="notEmpty;" value="<%=singleResult.organizationName%>" title="组织名称" placeholder="请填写收款组织名称" maxlength="30"/>
+				</div>
+			</div>
+		<%}%>
+		<div class="ub ub-ac uinput b-bottom lpd-all-10">
+			<div class="width25 fn-s-12 line-h-15 lblack">联系手机</div>
+			<div class="ub-f1">
+				<%if(type.indexOf('-1') != -1){%>
+					<input type="text" value="<%=singleResult.receivePhone%>" validator="notEmpty;length[6,11];reg[/^[1][3|4|5|7|8][0-9]{9}$/]" name="receivePhone" title="联系手机" placeholder="请填写本人联系手机" maxlength="11"/>
+				<%}else{%>
+					<input type="text" value="<%=type=='2-2'?singleResult.receivePhone:singleResult.organizationPhone%>" name="<%=type=='2-2'?'receivePhone':'organizationPhone'%>" validator="notEmpty;length[6,11];reg[/^[1][3|4|5|7|8][0-9]{9}$/]" title="联系手机" placeholder="请填写<%=type == '2-2'?'法人':'组织'%>联系手机" maxlength="11"/>
+				<%}%>
+			</div>
+		</div>
+		<%if(type.indexOf("-1") != -1||type=="2-2"){%>
+			<div class="b-bottom lpd-all-10">
+				<span class="fn-s-12 lblack">手持身份证照片</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in receiveCardImageIds){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url('imgAddress')+receiveCardImageIds[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(receiveCardImageIds.length||0) < idCardFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传手持</span>
+							<span class="dsb ub ub-pc tx-c">身份证图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传手持身份证照片" <%=parseInt(receiveCardImageIds.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+					<div class='upload-file mg-t-10 mg-r-5' style='float: left;'>
+						<div class='LookImg setCover upload-file-img' style="background-image: url(<%=Config.url('imgAddress')+list[2].imageUrl%>);">
+							<div class='tx-ac fn-c-white'>示例图片</div>
+						</div>
+					</div>
+				</div>
+				
+				<span class="fn-s-11">身份证上的所有信息必须清晰可见，必须能看清身份证号</span>
+			</div>
+		<%}else{%>
+			<div class="b-bottom lpd-all-10">
+				<span class="fn-s-12 lblack">组织机构资质证明</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in MechanismFiles.files){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url('imgAddress')+MechanismFiles.files[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(MechanismFiles.files.length||0) < MechanismFiles.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传资质</span>
+							<span class="dsb ub ub-pc tx-c">证明图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传组织机构资质证明照片" <%=parseInt(MechanismFiles.files.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				
+				<span class="fn-s-11">请提供组织机构证明照片</span>
+			</div>
+		<%}%>
+		<%if(type.indexOf("2-") != 0&&type.indexOf("3-") != 0){%>
+			<div class="b-bottom lpd-all-10">
+				<span class="fn-s-12 lblack">资金用途证明照片（可多张）</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in useProveImgIds){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url('imgAddress')+useProveImgIds[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg"></div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(useProveImgIds.length||0) < ProProve.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传项目资金用途证明</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传资金用途证明照片" <%=parseInt(useProveImgIds.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				<span class="fn-s-11"><%=hint%></span>
+			</div>
+		<%}else if(type == "2-2"){%>
+			<div class="b-bottom lpd-all-10">
+				<span class="fn-s-12 lblack">营业执照照片</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%if(singleResult.organizationAptitudeId){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url('imgAddress')+singleResult.organizationAptitudeUrl%>);">
+							<div class="del-img" action="action:delIdCardImg">
+							</div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=!singleResult.organizationAptitudeId?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传营业</span>
+							<span class="dsb ub ub-pc tx-c">执照图片</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传营业执照照片" <%=singleResult.organizationAptitudeId?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				<span class="fn-s-11"><%=hint%></span>
+			</div>
+		<%}else if(type.indexOf("3-") != -1){%>
+			<div class="b-bottom lpd-all-10">
+				<span class="fn-s-12 lblack">项目相关证明材料（可多张）</span>
+				<div class="ub pd-bt-10">
+					<div>
+						<%for(var i in projectProveImgIds){%>
+						<div class="LookImg upload-file upload-file-img mg-t-10 mg-r-5" style="float: left;background-image: url(<%=Config.url('imgAddress')+projectProveImgIds[i].addr%>);">
+							<div class="del-img" action="action:delIdCardImg"></div>
+						</div>
+						<%}%>
+						<div id="uploadImg" class="upload-file radius5 bd-dashed mg-t-10 mg-r-5 <%=parseInt(projectProveImgIds.length||0) < ProProve.num?'':'uhide'%>" style="float: left;">
+							<div class="add-img"></div>
+							<span class="dsb ub ub-pc tx-c">上传项目</span>
+							<span class="dsb ub ub-pc tx-c">相关证明资料</span>
+							<input class="upload-file Upload" multiple type="file" definemsg="请上传项目相关证明材料照片" <%=parseInt(projectProveImgIds.length||0) > 0?'':'validator="{notEmpty};"'%> style="opacity: 0; position: absolute; top: 0px; left: 0px;" accept="image/jpeg,image/png,image/bmp">
+						</div>
+					</div>
+				</div>
+				<span class="fn-s-11"><%=hint%></span>
+			</div>
+		<%}%>
+	</div>
+	<div class="address-keep" action="action:LoadData">
+		<div class="btn-address-keep tx-ac">
+			提交验证
+		</div>
+	</div>
+	<div class="hei-50"></div>
+</div>

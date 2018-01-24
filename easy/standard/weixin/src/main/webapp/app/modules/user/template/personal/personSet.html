@@ -1,0 +1,45 @@
+<div class="fn-s-14">
+	<div class="mg-t-10 bc-white pd-bt-3">
+		<div class="ub pd-lr-10 bd-b" id="userImg">
+			<div class="ub-f1 ub fn-c ub-ac">头像</div>
+			<div class="ub ub-pe">
+				<div class="person_img" style="background-image: url(<%=(headUrl.indexOf('http://')==-1?Config.url('imgAddress'):'')+headUrl%>);">
+					
+				</div>
+			</div>
+		</div>
+		<div class="ub pd-all-10 bd-b" id="accountNick">
+			<div class="ub-f1 fn-c">账号昵称</div>
+			<div class=" ub-f1 ub ub-pe ub-ac"><div class="pd-r-5" id="nickName"><%=nickName%></div><div class="img-more"></div></div>
+		</div>
+		<div class="ub pd-all-10 bd-b">
+			<div class="ub-f1 fn-c">绑定手机</div>
+			<div class="ub-f1 ub ub-pe ub-ac"><div class="pd-r-5"><%=phoneNumber.substr(0,3)+'****'+phoneNumber.substr(7)%></div></div>
+		</div>
+		<div class="ub pd-all-10 bd-b" action="user/personal/bindAccount">
+			<div class="ub-f1 fn-c">绑定第三方账号</div>
+			<div class="ub-f1 ub ub-pe ub-ac"><div class="img-more"></div></div>
+		</div>
+		<div class="ub pd-all-10" action="user/personal/myAddress">
+			<div class="ub-f1 fn-c">收货地址</div>
+			<div class="ub-f1 ub ub-pe ub-ac"><div class="img-more"></div></div>
+		</div>
+	</div>
+	
+	<div class="mg-t-10 bc-white">
+		<div class="ub pd-all-10 bd-b" action="action:setCheckName">
+			<div class="ub-f1  fn-c">实名认证</div>
+			<div class="ub-f1 ub ub-pe ub-ac"><div class="img-more"></div></div>
+		</div>
+		<div id="transP" class="hide">
+			<div class="ub pd-all-10" action="user/password/passManager">
+				<div class="ub-f1 fn-c">提现密码</div>
+				<div class="ub-f1 ub ub-pe ub-ac"><div class="img-more"></div></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="address-keep" id="logout">
+    	<p class="btn-address-keep ub ub-ac ub-pc">退出登录</p>
+    </div>
+</div>

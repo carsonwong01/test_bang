@@ -1,0 +1,46 @@
+<div>
+	<div class="tx-ac hei-120">
+		<span class="dsb cre-success">
+			
+		</span>
+	</div>
+	<div class="line-h-20 tx-c">
+		<div class="ub ub-pc">
+			<span class="dsb width70 pd-bt-20 fn-s-16 lblack">恭喜，您的项目创建成功！ </span>
+		</div>
+		<div class="ub ub-pc">
+			<span class="dsb width55 fn-s-125">太棒了！赶快分享给好友为你 支持和传播吧~~ </span>
+		</div>
+	</div>
+	<div class="ub ub-pc">
+		<div class="width70 address-keep-hollow">
+			<div class="btn-address-keep-hollow tx-ac mg-b-11" action="index/index/projectDetails/<%=id%>">查看项目</div>
+			<div class="btn-address-keep-hollow tx-ac" action="action:proValiStatus">项目验证</div>
+		</div>
+	</div>
+	<div>
+		<div class="tx-ac width100 fn-s-12 mg-t-20 threeLogin">
+			<span class="">
+				&nbsp;&nbsp;分享给好友&nbsp;&nbsp;
+			</span>
+		</div>
+		<div class="ub umar-a2-3">
+		    <%if(DMJS.CommonTools.isWeiXin()){%>
+			<div class="ub-f1 icon_three img-weixin h5-share-weixin"></div>
+			<%}%>
+			<div class="ub-f1 icon_three img-qq h5-share-qq"></div>
+			<div class="ub-f1 icon_three img-qqzone h5-share-qqzone"></div>
+			<div class="ub-f1 icon_three img-xinlang h5-share-weibo"></div>
+		</div>
+		
+			
+		<div class="share-component social-share" id="shareComponent" data-mobile-sites="weibo,qq,qzone"></div>
+		<div class="hei-50"></div>
+	</div>
+</div>
+<div class='bg hide wxBg' style='margin-top: 0px; height: 100%; display: none;'>
+	<div class='modal-dire'>
+          <div class='ub ub-pe mg-t-10 mg-r-20'><i class='icon-direction'></i></div>
+          <div class='ub ub-pc ub-ac fn-s-16 fn-c-white fn-wei pd-t-30'>点击“分享到朋友圈”</div>
+    </div>
+ </div>

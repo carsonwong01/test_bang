@@ -1,0 +1,175 @@
+<%if(obj["type"] == "alert"){%>    <!-- 弹出提示框 -->
+   <div id="FPrompt" class="ub-b-border" >
+      <!-- 开始 -->
+      <!-- 设置标题区 -->
+      <%if(obj["displaySure"]=='no'){%>
+	          <div class="pop1_title pd-t-15 Ftitle fn-s-15 rad-t" style="background:#fff;">
+	        <%}else{%>
+	           <div class="pop1_title pd-t-15 Ftitle fn-s-15 rad-t" style="background:#fff;">
+	        <%}%>
+      
+        <%=obj["title"]%>
+      </div>  
+      <!--设置内容区-->
+   	  <div class="rad-b" style="background:#fff;">
+      	<div class="pop1_word Fcontent">
+      	   <%if(obj["displaySure"]!='no'){%>
+	           <p class="fn-s-125 t-6 tx-c">
+	        <%}else{%>
+	           <p class="fn-s-125 tx-c t-oran">
+	        <%}%>
+	        	<!--内容信息-->
+	        	<%if(obj["content"].indexOf("<i>")!=-1&&obj["content"].indexOf("</i>")!=-1){%>
+	        		<%=obj["content"]%>
+	        	<%}else{%>
+		        	<span >
+		        		<%=obj["content"]%>
+		        	</span>
+	        	<%}%>
+	        	<!--内容信息-->
+	        </p>
+        </div>
+        <%if(obj["displaySure"]!='no'){%>
+        <div class="ub ub-pc address-keep-af pd-t-20 pd-b-30">
+                <!--按钮区-->
+	        	<input type="button" action="FBntAlert" class="dsb btn-address-keep-af tx-ac tx-c" value="<%=obj['btnName']%>"></input>
+	        	<!--按钮区-->
+	     </div>
+        <%}%>
+        
+        
+        
+      </div>
+   	  <!--设置内容区-->
+   
+   </div>
+   <%}else if(obj["type"] == "confirm"){%>   <!-- 弹出确认框 -->
+   <div id="FPrompt"   >
+      <!-- 开始 -->
+      <!-- 设置标题区 -->
+      <p class="pop1_title pd-t-15 Ftitle fn-s-15 rad-t" style="background:#fff;">  <%=obj["title"]%>  </p>
+ 
+      <div class="pop1_content rad-b" style="background:#fff;">
+      	<div class="pop1_word">
+      		 <!-- 设置内容区 -->
+      		 <%if(obj["content"].indexOf("</div>")!=-1){%>
+      		 	<div class="Fcontent" >
+      		 		<%=obj["content"]%>
+      		 	</div>
+      		 <%}else{%>
+	        <p class="Fcontent">
+	        	<%if(obj["content"].indexOf("<i>")!=-1&&obj["content"].indexOf("</i>")!=-1){%>
+	        		<%=obj["content"]%>
+	        	<%}else{%>
+		        	<span class="fn-s-125 tx-c">
+		        		<%=obj["content"]%>
+		        	</span>
+	        	<%}%>
+	        </p>
+	        <%}%>
+	         <!-- 设置内容区 -->
+        </div>
+        <div class="pop1_btn">
+        	 <!-- 设置按钮区 -->
+	    	 <input type="button" action="FBntconfirm" 
+	           class="width40 mg-l-10 fl FBntconfirm <%=obj['FBntConfirmColor']%>"  
+	           value='<%=obj["FBntconfirm"]%>'>
+	         </input>
+	         <input type="button" action="FBntcancel"
+	           class="width40 mg-l-10 fr FBntcancel <%=obj['FBntCancelColor']%>" 
+	           value='<%=obj["FBntcancel"]%>'>
+	         </input>
+          	 <!-- 设置按钮区 -->
+        </div>
+      </div>
+   
+   </div>
+   <%}else if(obj["type"] == "Flayer"){%>   <!-- 弹出吐丝框 -->
+      <!-- 设置内容区 -->
+      <div class="blackblub_wrap">
+         <p class="blackblub wordbreak tac"> 
+         	<span>
+           		<%=obj["content"]%>
+            </span>
+         </p>
+      </div>
+   <%}else if(obj["type"] == "Loading"){%>  <!-- 加载 -->
+      <!-- 设置内容区 -->
+      <div class="blackblub_wrap Loading">
+         <p class="blackblub wordbreak tac"> 
+         	<span>
+	          <span class="loading_01"></span>
+	          <%=obj["content"]%>
+         	</span>
+         </p>
+      </div>
+      
+   <%} else if(obj["type"] == "Tip"){%>  <!-- 加载 -->
+      <!-- 设置内容区 -->
+      <div class="blackblub_wrap Loading">
+         <p class="blackblub wordbreak tac"> 
+         	<span>
+	          <%=obj["content"]%>
+         	</span>
+         </p>
+      </div>
+      
+   <%}else if(obj["type"] == "promptComment"){%>
+   	 <div id="FPrompt" style="background-color: #F6F6F6;">
+      <!-- 开始 -->
+      <!-- 设置标题区 -->
+      <div class="ub fn-s-14 lpd-all-10"> 
+      	<div class="ub ub-ac ub-pc"> 
+      	  <span type="button" action="FBntcancel" class="hei-30 fn-s-13 tx-al-l fn-c line-h-30"  style="width:4rem;background-color: #F6F6F6;border:none"><%=obj["FBntcancel"]%></span>
+      	</div>
+  		<div class="fn-s-15 fn-c uinn80-1  ub-f1 ub ub-ac ub-pc" style="font-weight: bold;"><%=obj["title"]%></div> 
+  		<div class="ub ub-ac ub-pc">
+      	  <span type="button" action="FBntconfirm" class="hei-30 fn-s-13 tx-al-r fn-c line-h-30" style="width:4rem;background-color: #F6F6F6;border:none"><%=obj["FBntconfirm"]%></span>
+      	</div>
+      </div>
+ 
+      <div class="pop1_content pd-all-10 pd-t-none">
+          <div class="pd-all-10 bg-c-white">
+             <%=obj["content"]%>
+          </div> 
+      </div>
+   
+   </div>
+   
+   
+   <%}else if(obj["type"] == "promptShare"){%>
+    <!-- start [分享button] -->
+    <div class=" modal-share share-min in" id="project-share">
+        <div class="modal-direction">
+            <div class="ub ub-pe mg-t-10 mg-r-20"><i class="icon-direction"></i></div>
+            <div class="ub ub-pc ub-ac fn-s-16 fn-c-white fn-wei pd-t-20">点击“分享到朋友圈”</div>
+        </div>
+        <div class="modal-QrCode bg-c-white">
+            <p class="ub t-3 pd-all-10 bd fn-s-14 fn-wei"><%=DMJS.shareData.shareTitle%></p>
+            <div class="qrcode"><img src="<%=Config.url('imgAddress')+DMJS.shareData.qrcodeImages%>" /></div>
+        </div>     
+        <div class="modal-dialog bottom">         
+         	<div class="modal-content clearfix">             
+	         	<div class="modal-header text-center">分享给好友</div>             
+	         	<div class="modal-body">
+	             	<div class="share-row clearfix">
+	             	    <div class="item h5-share-qrcode"><i class="icon icon-share-qrcode"></i>二维码</div> 
+	             	    <%if(DMJS.CommonTools.isWeiXin()){%>
+			            <div class="item h5-share-weixin"><i class="icon icon-share-weixin"></i>微信</div>
+			            <%}%>
+			            <div class="item h5-share-weibo"><i class="icon icon-share-weibo"></i>新浪微博</div>
+					    <div class="item h5-share-qqzone"><i class="icon icon-share-qqzone"></i>QQ空间</div>
+					    <div class="item h5-share-qq"><i class="icon icon-share-qq"></i>QQ好友</div>    
+                    </div>    
+                    <div class="share-component social-share" id="shareComponent" data-mobile-sites="weibo,qq,qzone">
+                        
+                    </div>       
+             	</div>             
+            	<div id="shareCancel" class="modal-footer btn-lg btn-block">取消</div>         
+            </div>     
+         </div> 
+    </div>
+	<!-- end [分享button] -->
+   <%}%>
+
+

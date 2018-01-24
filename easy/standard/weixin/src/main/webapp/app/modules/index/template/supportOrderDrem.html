@@ -1,0 +1,91 @@
+<!--支持下单--梦想-->
+<div class="sup-order-con">
+	<!--梦想清单-->
+	<%if(type=="7"){%>
+	<div class="sup-til"><span class="t-6 fn-s-14">请选择帮助的梦想清单</span></div>
+	<div class="sup-drem-list bg-c-white">
+	<%for(var i=0;i<comment.length;i++){%>
+		<div class="drem-item bd-b ub ub-ac" dremid="<%=comment[i].id%>" action ="action:selectBack[<%=comment[i].remainingNum%>]">
+			<div class="drem-item-choice ub ub-ac mg-r-10">
+				<i class="icon-s <%=i==0?'icon-select':'icon-unselect'%> ub ub-ac"></i>
+			</div>
+			<div class="drem-item-con ub-f1">
+				<p class="ub ub-ac pd-b-5">
+					<span class="fn-s-14 t-blue fn-wei ub ub-ac"><%=comment[i].amount%>元</span>
+					<span class="fn-s-12 t-9 ub ub-f1 ub-ac ub-pe">
+						<%if("0" == comment[i].remainingNum){%>
+							已满额
+						<%}else{%>
+							剩余<%=comment[i].remainingNum%>元
+						<%}%>
+						
+					</span>
+				</p>
+				<p><span class="fn-s-14 t-6"><%=comment[i].purposeText%></span></p>
+			</div>
+		</div>
+	<%}%>
+	</div>
+	<%}%>
+	<!--支持金额-->
+	<div class="feed-email ub ub-ac bd-b report-name bg-c-white <%=type=='7'?'mg-bt-10':''%>">
+    	<div class="ub ub-ac width25 fn-s-14 hei-20 lhei-20"><span class="t-3">支持金额</span></div>
+    	<div class="ub ub-ac width75 fn-s-14">
+	    	<input type="tel" maxlength="6" name="amount"  validator="notEmpty;" class="input_non t-9 ub ub-ac hei-20 fn-s-14 lhei-20" nextfocus="" title="支持金额" placeholder="请填写支持金额"> 	
+    	</div>
+    </div>
+    <!--微信支付和收货地址-->
+    <div class="order-wx ub ub-ac bd-b">
+    	<div class="ub-f1 ub ub-ac width10">
+    		<i class="icon-wx-pay v-a"></i>
+    	</div>
+    	<div class="ub-f1 ub ub-ac width90">
+    		<span class="t-3 fn-s-14 ub ub-ac">微信支付</span>
+    		<span class="ub ub-ac ub-pe ub-f1">
+    			<i class="icon-choice v-a"></i>
+    		</span>
+    	</div>
+    </div>
+    <%if(type=="7"&&isNeddAddr=="1"){%>
+    <div class="ub ub-ac pro-or-de-place bg-c-white" action="action:selectAdd">
+		<div class="ub ub-ac width10"><i class="icon-get-place"></i></div>
+		<div id="address" class="ub-f1 width85">
+			<%if(address.length>=1){%>
+				<p class="or-user-info t-3 fn-s-14">
+				   <span class="pd-r-5"><%=address[0].userName%></span>
+				   <span class="pd-r-10">（<%=address[0].phoneNumber%>）</span>
+			    </p>
+			    <p class="or-place-info t-9 fn-s-12"><%=address[0].area+address[0].detaileAddress%></p>
+			<%}else{%>
+			    <p class="or-place-info t-9 fn-s-12">暂无收货地址</p>
+			<%}%>
+		</div>
+		<div class="ub ub-f1 ub-ac ub-pe width5"><i class="icon-right"></i></div>
+	</div>
+	<%}%>
+	<!--支持留言-->
+	<div class="feed-text bg-c-white mg-t-10">
+		<textarea name="message" class="ub w100 radius fn-s-14 control-input con-bd-no" maxlength="50" title="项目支持" placeholder="给您支持的项目留个言吧！默认：支持"></textarea>
+	</div>
+	
+	<!--服务条款-->
+	<div class="uinput lpd-all-10 m-bg-c">
+		<div class="ub ub-ac fn-s-12">
+			<input type="checkbox" class="uhide" title="平台服务条款" validator="checked;" id="autid" checked="true">
+			<div action="action:turnRememberRido" class="che-icon ub-img-s12 service-icon mg-r-5"></div>
+			<div class="check_act uhide"></div>
+			<div class="pd-bt-10">
+				<span action="action:turnRememberRido">我已阅读并同意</span><span action="action:agreement" class="fn-c-blue"><span class="protocal">帮你筹平台服务条款</span></span>
+			</div>
+		</div>
+		<div class="service-tips">
+			<p class="t-9 fn-s-12">请您特别关注协议中的有关风险提示，一旦选择支持即表示您已确知并完全同意相关协议内容</p>
+		</div>
+	</div>
+	
+	<!--确认支付-->
+	<div class="address-keep report-btn" action="action:weixinPay">
+    	<p class="btn-address-keep ub ub-ac ub-pc">确认支付</p>
+    </div>
+    
+</div>

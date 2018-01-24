@@ -1,0 +1,54 @@
+<div class="fn-s-14">
+	<div id='sliderAddWrapper' class='background_noData uh-ele1 ub-fh t-bla uof  lu-height085 pos-relative' >
+    	<ul id='sliderAdd' class='ub-con ub ub-fh lu-height085 lIndexAdv'>
+		        							
+    	</ul>
+		<div class="ub ub-ae ub-pe ub-fh" style="position:absolute; right:0;bottom:3.8rem;">
+			<div class="ub pd-r-10" id="proint">
+			</div>
+		</div>									
+
+	</div>
+	
+	 <div class="notice-con ub ix-msg Jnotice mg-t-035">
+			   <div class="notice-til ub ub-ac"><i class="img-notice ub ub-ac"></i></div> 
+			   <ul class="ub-f1 fn-s-12 fn-c-white noticelist" id='noticeL'></ul>
+		    </div>
+	
+	<!--统计总数-->
+	<div class="ub ub-pc ub-pj hei-60 bc-white ub-ac mg-b-10">
+		<div class="ub-f1 bd-r hei-40  ">
+			<div class="fn-s-17  pd-l-5 line-h-25 fn-c-blue tx-al-c" ><span id='cjze'></span><span class="fn-s-11 fn-c-gray">元</span></div>
+			<div class="fn-s-12 tx-al-c fn-c-lightgray">
+				<div class=""><span>筹集总额</span></div>
+			</div>
+		</div>
+		<div class="ub-f1 bd-r hei-40  ">
+			<div class="fn-s-17  pd-l-5 line-h-25 fn-c-blue tx-al-c" ><span id='xuzs'></span><span class="fn-s-11 fn-c-gray">个</span></div>
+			<div class="fn-s-12 tx-al-c fn-c-lightgray">
+				<div class=""><span>项目总数</span></div>
+			</div>
+		</div>
+		<div class="ub-f1 hei-40  ">
+			<div class="fn-s-17  pd-l-5 line-h-25 fn-c-blue tx-al-c" ><span id='zcrs'></span><span class="fn-s-11 fn-c-gray">次</span></div>
+			<div class="fn-s-12 tx-al-c fn-c-lightgray">
+				<div class=""><span>支持总人次</span></div>
+			</div>
+		</div>
+	</div>
+	<!--项目列表-->
+	<div class="ub bc-white b-bottom">
+		<!--<div class="width10 pd-lr-10 line-h-35 fn-c-blue">推荐</div>-->
+		<li class="width5"></li>
+		<ul class=" ub list-msg width80" id="listTitle">
+			<%for(var i=0;i<labelList.length;i++){%>
+			<li class="width30" dataID ="<%=labelList[i].projecttype%>" labelTypeId="<%=labelList[i].labelTypeId%>"><%=labelList[i].labelname%></li>
+			<%}%>
+		</ul>
+		<!--<div class="img-plus bg-c-blue" action="index/index/myLabel"></div>-->
+	</div>
+	
+	
+	<div id='indexList'></div>
+	
+</div>

@@ -1,0 +1,101 @@
+<!--交易详情-->
+<div>
+	<div class="pro-order-detail-head user-head">
+		<div class="ub ub-pc ub-ac t-wh fn-s-14"><span class="fn-s-25"><%=amount%></span>元</div>
+		<%if(tradeType == "1"||tradeType == "3"){%>
+		  <div class="ub ub-pc ub-ac t-wh fn-s-12">支持金额</div>
+		<%}else{%> 
+		  <div class="ub ub-pc ub-ac t-wh fn-s-12">收入金额</div>
+		<%}%> 
+	</div>
+	
+    <!--订单支付1、提现2、提现手续费3、订单退款5-->
+    
+	<!--订单支付1、订单退款5-->
+	<%if(tradeType == "1"||tradeType == "5" ){%> 
+	<div class="pro-order-item ub ub-ac" action = "index/index/projectDetails/<%=projectId%>">
+		<div class="order-img"><img src="<%=Config.url('imgAddress')+projectImgUrl%>" /></div>
+		<div class="order-con ub-f1">
+			<div class="til ub ub-ac">
+				<span class="t-3 fn-s-14 ub-f1 ub-ac"><%=projectTile%></span>
+				<span class="ub-f1 ub ub-ac ub-pe"><i class="icon-right"></i></span>
+			</div>
+		</div>
+	</div>
+	<%}%>
+	
+	<div class="pro-order-detail-con">
+		
+		<!--订单支付和订单退款-->
+		<%if(tradeType == "1" || tradeType == "5"){%>  
+			<div class="or-de-number ub or-de-item">
+				<span class="til ub ub-f1 width40">订单编号</span>
+				<span class="con t-9 ub ub-f1 width60"><%=orderNo%></span>
+			</div>
+		<%}%>
+		
+		<div class="or-de-time ub or-de-item">
+			<span class="til ub ub-f1 width40">交易时间</span>
+			<span class="con t-9 ub ub-f1 width60"><%=supportTime%></span>
+		</div>
+		<div class="or-de-trans-mode ub or-de-item">
+			<span class="til ub ub-f1 width40">交易方式</span>
+			<%if(tradeType == "1"||tradeType == "5"){%>
+			   <span class="con t-9 ub ub-f1 width60">微信支付</span>
+			<%}else{%>
+			   <span class="con t-9 ub ub-f1 width60">线下转账</span>
+			<%}%>
+		</div>
+		
+		<!--回报项目的订单支付和订单退款-->
+		<%if(tradeType == "1" || tradeType == "5"){%>  
+		    <%if(projectType == "6"){%>
+				<div class="or-de-pro-return ub or-de-item">
+					<span class="til ub ub-f1 width40">产品回报</span>
+					<span class="con t-3 ub ub-f1 width60">
+						<span class="t-red"><%=returnAmount%>元</span>&nbsp;X&nbsp;<span><%=returnNumber%>份</span>
+					</span>
+				</div>
+				<div class="ub re-message">
+			        <p class="t-9 fn-s-12 ub ub-ac"><%=purposeText%></span>
+		        </div>
+			<%}%>
+	    <%}%>
+	    
+	    <!--梦想项目的订单支付和订单退款-->
+	    <%if(tradeType == "1" || tradeType == "5"){%>  
+	        <%if(projectType == "7"){%> 
+	           <div class="or-de-trans-mode ub or-de-item">
+					<span class="til ub ub-f1 width40">帮助梦想</span>
+					<span class="con t-9 ub ub-f1 width60"><%=purposeText%></span>
+		       </div>
+	        <%}%>
+	    <%}%>
+	    
+	    <!--回报项目的订单支付和订单退款-->
+		<%if(tradeType == "1" || tradeType == "5"){%>  
+			<div class="or-de-message ub or-de-item">
+				<span class="til ub ub-f1 width40">留言</span>
+				<span class="con t-9 ub ub-f1 width60"><%=message%></span>
+		    </div>
+	    <%}%>
+	</div>
+	
+	<!--回报项目的订单支付和订单退款-->
+	<%if(tradeType == "1" || tradeType == "5"){%>  
+	  
+	  <%if(projectType == "6"){%>
+		<!--地址信息-->
+		<div class="ub ub-ac pro-or-de-place bd-b mg-t-10">
+			<div class="ub ub-ac width10"><i class="icon-get-place"></i></div>
+			<div class="ub-f1 width90">
+				<p class="or-user-info t-3 fn-s-14">
+				   <span class="pd-r-5"><%=receiverName%></span>
+				   <span class="pd-r-10">（<%=receiverPhone%>）</span>
+			    </p>
+			    <p class="or-place-info t-9 fn-s-12"><%=receiverAddr%><%=receiverDetailAddr%></p>
+			</div>
+		</div>
+		
+		<%}%>
+	<%}%>

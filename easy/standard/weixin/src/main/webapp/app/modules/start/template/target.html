@@ -1,0 +1,31 @@
+<div class="bg-c-white">
+	<div class="ub ub-ac uinput lpd-all-10">
+		<div class="width25 fn-s-12 line-h-15 lblack">目标金额</div>
+		<div class="ub-f1">
+			<input type="tel" name="supportAmount"  validator="notEmpty;" maxlength="6" title="目标金额" placeholder="请填写目标金额" value="<%=data.supportAmount%>">
+		</div>
+		<span class="fn-s-12 line-h-15 lblack">元</span>
+	</div>
+	<div class="ub uinput pd-b-30">
+		<div class="ub-f1 mg-lr-10 hei-150 border-all">
+			<textarea class="fn-s-12" name="returnDescribe" validator="notEmpty;" maxlength="500" title="资金用途" style="padding: 1rem;" placeholder="请填写资金用途" style="border: none;"><%=data.returnDescribe%></textarea>
+		</div>
+	</div>
+	
+	<div class="lpd-all-10 m-bg-c">
+		<div class="address-keep" action="action:returnList">
+			<div class="btn-address-keep tx-ac">
+				保存
+			</div>
+		</div>
+	</div>
+	<%if(returnId){%>
+	<div class="lpd-all-10 m-bg-c">
+		<div class="address-keep address-del" action="action:delRetuan">
+			<div class="btn-address-del tx-ac">
+				删除
+			</div>
+		</div>
+	</div>
+	<%}%>
+</div>

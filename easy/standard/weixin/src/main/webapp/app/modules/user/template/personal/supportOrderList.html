@@ -1,0 +1,35 @@
+<!--订单支持列表-->
+	<div class="order-list-con">
+		<!--支持项-->
+		<%if(list.length > 0){%>
+		    <%for(var i=0;i < list.length; i++){%> 
+				<div class="ub ub-ac order-item bd-b" action="user/personal/orderDetails/<%=list[i].orderId%>/<%=list[i].orderNo%>">
+					<div class="order-head"><img src="<%=(list[i].imageUrl.indexOf('http://')==-1?Config.url('imgAddress'):'')+list[i].imageUrl%>" /></div>
+					<div class="order-item-con ub-f1">
+						<div class="ub pd-b-4">
+							<p class="ub ub-f1 ub-ac"><span class="t-3 fn-s-14"><%=list[i].nickName%></span></p>
+							<p class="ub-f1 ub ub-ac ub-pe">
+							    <%switch(list[i].status){ 
+							        case '1':%><span class="order-type type-yzf">待支付</span><%;break;
+							        case '2':%><span class="order-type type-yzf">已取消</span><%;break;
+				         			case '3':%><span class="order-type type-yzf">已支付</span><%;break;
+				         			case '4':%><span class="order-type type-yzf">待发货</span><%;break;
+				         		    case '5':%><span class="order-type type-yzf">待收货</span><%;break;
+				         			case '6':%><span class="order-type type-yzf">已收货</span><%;break;
+				         			case '7':%><span class="order-type type-dtk">待退款</span><%;break;
+				         			case '8':%><span class="order-type type-dtk">已退款</span><%;break;
+				         			case '9':%><span class="order-type type-dtk">已失败</span><%;break;
+				         			case '10':%><span class="order-type type-dtk">退款中</span><%;break;
+			         			}%>
+								
+							</p>
+						</div>
+						<div class="ub">
+							<p class="fn-s-13 t-9 ub ub-f1 ub-ac">支持了<em class="t-red"><%=list[i].supportAmount%></em>元</p>
+							<p class="ub-f1 ub ub-ac ub-pe"><span class="t-9 fn-s-13"><%=list[i].supportTime%></span></p>
+						</div>
+					</div>
+				</div>
+			<%}%>	
+		<%}%>
+	</div>

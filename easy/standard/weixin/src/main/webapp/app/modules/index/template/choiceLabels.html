@@ -1,0 +1,19 @@
+<!--我选择的标签-->
+<ul class="my-label-list bg-c-white clearfix b-all-shadow l-con-list">
+     <%if(storageList.length > 0){%>
+        <%for(var i=0;i< storageList.length;i++){%>
+            <%if(i<9){%>
+	            <li class="my-label-item" 
+	            id="newLabelItem" 
+	            labelTypeId="<%=storageList[i].labelTypeId%>" 
+	   		    projectType="<%=storageList[i].projecttype%>"
+	   		    labelName="<%=storageList[i].labelname%>">
+	               <span class="my-label-item-con ub ub-ac ub-pc">#<%=storageList[i].labelname%></span>
+	            </li>
+            <%}%>
+        <%}%>
+     <%}%>	
+     <%if(storageList.length < 9){%>	
+	 	<li class="my-label-item"><span class="my-label-item-con ub ub-ac ub-pc btn-add-label"></span></li>
+	 <%}%>
+</ul>
