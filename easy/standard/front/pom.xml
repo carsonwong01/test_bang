@@ -146,7 +146,7 @@
 	<repositories>
 		<repository>
 			<id>DiMeng-Platform-snapshots</id>
-			<url>http://122.114.59.17:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
+			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-snapshots/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>false</enabled>
@@ -162,7 +162,7 @@
 		</repository>
 		<repository>
 			<id>DiMeng-Platform-releases</id>
-			<url>http://122.114.59.17:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
+			<url>http://localhost:8081/nexus/content/repositories/DiMeng-Platform-releases/</url>
 			<layout>default</layout>
 			<releases>
 				<enabled>true</enabled>

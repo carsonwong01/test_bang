@@ -35,90 +35,27 @@
 			    /system/basicInfoSet/*/projectBaseConfigName=anon
 			    <!-- app查询启动页设置放开 -->
 			    /system/appIndexSet/*/getAppIndexSet=anon
-			    /system/versionManage/*/appVersionFirst=anon
 				<!-- 后台登录 -->
 				/home/consoleLogin/*/consoleLoginCheck = anon
-				/site/helpCenter/*/helpCenterList = anon
-				/site/helpCenter/*/aboutUsTitle = anon
-				/site/helpCenter/*/aboutUsTitleEnable = anon
-				/product/common/*/industryList = anon
-				/common/*/cpFronTotalMessage = anon
-				
-		
+
 				/wechat/callback/chargeNotify.do=anon
 				/wechat/callback/chargeResp.do=anon
 			
 				<!-- 平台公告和新闻资讯 -->
 		        /site/media/*/reportList= anon
-		        /site/media/*/reportDetail= anon 
-				/home/frontLogin/*/*=anon
-				/home/frontRegister/*/frontUserInfo=anon
-				/home/frontRegister/*/userNameUnique=anon
-				/site/totalMessage/*/fronTotalMessage=anon
                 /druid/** = anon
                 
-                /bus/project/v/muchProCity = anon
-                /user/investorManage/v/muchInvestorCity = anon
-                 
-                /bus/equityProject/*/projectList=anon
-                /bus/equityProject/*/projectDetail=anon
-				/bus/equityProject/*/projectDetails=anon
-                /bus/equityProject/*/commentList = anon
-                /bus/equityProject/*/initiatorAndLeaderIfn= anon
-                /user/investorManage/*/investorList = anon
-                /user/investorManage/*/investorDetail = anon
-                /system/basicInfoSet/*/projectBaseConfigName=anon
-                /site/siteSet/*/clauseList=anon
-                /operation/basicInfoSet/*/findImgModel=anon
-                /site/textInstruct/*/findTextInstructList=anon
-                /system/common/*/provincialLeague=anon
-                /home/appData/*/tSiteInfoForApp=anon
                 <!-- 发送验证码 -->
                 /common/message/*/* = anon
-                /home/consoleLogin/*/checkAmindUserIsExists=anon
-				/common/imageCut/*/findSlidePic = anon
-                /common/imageCut/*/checkUserIsShowPic = anon
                 <!-- 前台首页 -->
                 /home/frontInfo/*/* = anon
-                /project/query/v/commentList = anon
-                /project/query/v/dynamic = anon
-                /project/query/v/projectDetails = anon
-                /operation/basicInfoSet/v/findLabels = anon
-                /system/cache/v/findCache = anon
-				/hospital/v/findAllHospital = anon
-				/hospital/v/hospitalDetails = anon
-				/project/query/v/projectList = anon
-				/hospital/v/findHospitalProject = anon
-				/hospital/v/findHosProjectSum = anon
-				/frontHome/v/recomNewsList = anon
-				/home/frontInfo/v/frontAllProject = anon
-				/home/frontInfo/v/frontAllProList = anon
-				/home/frontInfo/v/findSiteInvestment = anon
-				/home/frontInfo/v/findHomeHosList = anon
-				/home/frontInfo/v/findPartnerList = anon
-				/home/frontInfo/v/findProLabel = anon
-
-
-				/user/userManage/v/findInitiateProList = anon
-				/hospital/v/linkMethod = anon
-				/user/userManage/v/updateHosInfo = anon
-				/user/userManage/v/insertHosUser = anon
-				/user/userManage/v/findHosUserInfo = anon
-				/user/userManage/v/updateHosRecStatus = anon
-				/user/userManage/v/findProvince = anon
-				/user/userManage/v/findCity = anon
-				/foundation/v/foundationList = anon
-				/foundation/v/foundationDetails = anon
-				/project/operate/v/selectFoundation = anon
-
-
 
                 <!-- 第三方授權 -->
                  /thirdAuthorize/*/* = anon
                  <!-- 分享 -->
                  /share/*/** = anon
                  
-				 /MP_verify_9gG5rWsB0zCedtxb.txt = anon
+				 /MP_verify_XXXXX.txt = anon
 				 
 				/**/* = authc
 			</value>
